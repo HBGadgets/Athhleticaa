@@ -1,0 +1,10 @@
+//
+//  Athhleticaa-Bridging-Header.h 
+//  Athhleticaa
+//
+//  Created by Dipanshu Kashyap on 23/10/25.
+//
+
+#import <QCBandSDK/QCSDKManager.h>
+#import <QCBandSDK/QCSDKCmdCreator.h>
+#import <QCBandSDK/QCBandSDK.h>

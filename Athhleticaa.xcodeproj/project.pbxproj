@@ -10,9 +10,22 @@
 		281D04C02EAA4FDC00FC7FF5 /* Athhleticaa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Athhleticaa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		286ACA9A2EAA8F4B00DC5CAC /* Exceptions for "Athhleticaa" folder in "Athhleticaa" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 281D04BF2EAA4FDC00FC7FF5 /* Athhleticaa */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		281D04C22EAA4FDC00FC7FF5 /* Athhleticaa */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				286ACA9A2EAA8F4B00DC5CAC /* Exceptions for "Athhleticaa" folder in "Athhleticaa" target */,
+			);
 			path = Athhleticaa;
 			sourceTree = "<group>";
 		};
@@ -255,7 +268,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HF229H6M7;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Athhleticaa",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Athhleticaa/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Athhleticaa;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs to use your bluetooth device";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App needs to use your bluetooth device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -266,9 +288,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = hbgadgets.Athhleticaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Athhleticaa-Bridging-Header.h ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -283,7 +307,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HF229H6M7;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Athhleticaa",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Athhleticaa/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Athhleticaa;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs to use your bluetooth device";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App needs to use your bluetooth device";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -294,9 +327,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = hbgadgets.Athhleticaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Athhleticaa-Bridging-Header.h ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

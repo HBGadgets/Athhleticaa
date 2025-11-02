@@ -14,71 +14,61 @@ import SwiftUI
 import CoreBluetooth
 
 struct ContentView: View {
-//    @StateObject var ringManager = QCCentralManager()
+    @Environment(\.colorScheme) var colorScheme
+    @StateObject var ringManager = QCCentralManager()
     
     var body: some View {
-        DashboardView()
-//                NavigationStack {
-//                    VStack(spacing: 20) {
-//                        Text("QRing Connector")
-//                            .font(.title)
-//        
-//                        if let device = ringManager.connectedPeripheral {
-//                            Text("Connected to: \(device.name ?? "Unknown")")
-//        
-//                            if let battery = ringManager.batteryLevel {
-//                                Text("Battery: \(battery)/8")
-//                            }
-//        
-//                            if let heartRate = ringManager.heartRate {
-//                                Text("❤️ Heart Rate: \(heartRate) bpm")
-//                                    .font(.headline)
-//                                    .foregroundColor(.red)
-//                            }
-//        
-//                            VStack {
-//                                Button("Read Battery") {
-//                                    ringManager.readBattery()
-//                                }
-//                                NavigationLink(destination: HRVScreenView(ringManager: ringManager)) {
-//                                    Text("Go to HRV Screen")
-//        //                            Button("Check HRV") {
-//        //                                ringManager.measureHRV()
-//        //                            }
-//                                }
-//        
-//                                NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
-//                                    Text("Go to Heart rate Screen")
-//                                }
-//                                Button("Read heart rate") {
-//                                    ringManager.measureHeartRate()
-//                                }
-//                                Button("Disconnect") {
-//                                    ringManager.disconnect()
-//                                }
-//                            }
-//                            .buttonStyle(.borderedProminent)
-//                            .padding(.top, 10)
-//        
-//                        } else {
-//                            Button("Scan Rings") {
-//                                ringManager.scan()
-//                            }
-//                            .buttonStyle(.borderedProminent)
-//        
-//                            if ringManager.peripherals.isEmpty {
-//                                ProgressView("Scanning...")
-//                                    .padding()
-//                            } else {
-//                                List(ringManager.peripherals, id: \.peripheral.identifier) { qcPer in
-//                                    Button(qcPer.peripheral.name ?? "Unknown") {
-//                                        ringManager.connect(to: qcPer.peripheral)
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    .padding()
-//                }
+        NavigationStack {
+            ZStack {
+                VStack {
+                    switch ringManager.selectedTab {
+                    case 0:
+                        DashboardView(ringManager: ringManager)
+                    case 1:
+                        HeartRateScreenView(ringManager: ringManager)
+                    case 2:
+                        ActivityScreenView()
+                    case 3:
+                        SleepsAnalysisScreenView()
+                    case 4:
+                        StressAnalysisScreenView()
+                    case 5:
+                        ProfileView()
+                    default:
+                        DashboardView(ringManager: ringManager)
+                    }
+                }
+                VStack {
+                    Spacer()
+                    TabBar(ringManager: ringManager)
+                        .padding(.bottom, -10)
+                }
+                if !ringManager.dataLoaded {
+                    VStack(spacing: 20) {
+                        ProgressView("Syncing data")
+                            .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
+                            .scaleEffect(1.2)
+                        Text("Please wait...")
+                    }
+                    .padding(20)
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(16)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    colorScheme == .dark ?
+                    Image(.athhleticaaLogoDarkMode)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120)
+                    :
+                    Image(.athhleticaaLogoLightMode)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120)
+                }
+            }.navigationBarTitleDisplayMode(.inline)
+        }
     }
 }

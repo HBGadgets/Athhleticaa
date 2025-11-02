@@ -12,12 +12,12 @@ import SwiftUICore
 struct BatteryCard: View {
     @Environment(\.colorScheme) var colorScheme
     var charge: Int
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.red.opacity(0.1))
+                .fill(colorScheme == .dark ? Color.red.opacity(0.1) : Color.red.opacity(0.7))
                 .overlay(
-                    // Inner edge shine (white glow around edges)
                     RoundedRectangle(cornerRadius: 20)
                         .strokeBorder(Color.white, lineWidth: 0.7)
                         .blur(radius: 1)
@@ -41,7 +41,6 @@ struct BatteryCard: View {
                         )
                 )
                 .overlay(
-                    // Soft white reflection near top
                     LinearGradient(
                         gradient: Gradient(colors: [
                             Color.white.opacity(0.15),
@@ -55,25 +54,34 @@ struct BatteryCard: View {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            // Content
-            VStack {
+            VStack(alignment: .leading, spacing: 8) {
+                // Top label (left-aligned)
+                Text("Battery")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+
+                // Centered circle + percentage
                 ZStack {
                     Circle()
                         .trim(from: 0, to: CGFloat(charge) / 100)
-                        .stroke(charge < 20 ? Color.red : Color.green, lineWidth: 10)
+                        .stroke(charge < 20 ? Color.red : Color.yellow, lineWidth: 10)
                         .rotationEffect(.degrees(-90))
+                        .scaleEffect(x: -1, y: 1, anchor: .center)
                         .frame(width: 80, height: 80)
                     Text("\(charge)%")
                         .font(.headline)
+                        .foregroundColor(.white)
                 }
-                Text("Charge")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, alignment: .center)
+                
+                Spacer()
             }
-            .frame(maxWidth: .infinity)
             .padding()
-            .cornerRadius(16)
         }
-        
+        .frame(maxWidth: .infinity)
+        .cornerRadius(20)
     }
 }

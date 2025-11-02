@@ -92,45 +92,50 @@ struct StepsCard: View {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             
-            HStack() {
-                VStack {
-                    Image(systemName: "flame")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                    Text(String(format: "%.2f", calories).prefix(2))
-                        .font(.title)
-                        .foregroundColor(.white)
-                    Text("Kcal")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.8))
-                }
-                
-                Spacer()
-                
-                VStack {
-                    Image(systemName: "figure.walk")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                    Text("\(steps)")
-                        .font(.title)
-                        .foregroundColor(.white)
-                    Text("Steps")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.8))
-                }
-                
-                Spacer()
-                
-                VStack {
-                    Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                    Text(String(format: "%.2f", distance))
-                        .font(.title)
-                        .foregroundColor(.white)
-                    Text("Km")
-                        .font(.subheadline)
-                        .foregroundColor(.white.opacity(0.8))
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Activity")
+                    .font(.headline)
+                    .foregroundColor(Color.white)
+                HStack() {
+                    VStack {
+                        Image(systemName: "flame")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                        Text(String(format: "%.2f", calories).prefix(2))
+                            .font(.title)
+                            .foregroundColor(.white)
+                        Text("Kcal")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Image(systemName: "figure.walk")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                        Text("\(steps)")
+                            .font(.title)
+                            .foregroundColor(.white)
+                        Text("Steps")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                        Text(String(format: "%.2f", distance))
+                            .font(.title)
+                            .foregroundColor(.white)
+                        Text("Km")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
                 }
             }
             .frame(maxWidth: .infinity) // ✅ full width

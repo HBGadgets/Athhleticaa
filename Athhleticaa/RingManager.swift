@@ -33,6 +33,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var currentHRV: Int = 0
     @Published var heartRateHistory: [SchedualHeartRateModel] = []
     @Published var errorMessage: String?
+    @Published var selectedTab: Int = 0
     
     @ObservedObject var heartRateManager = HeartRateManager()
     @ObservedObject var pedometerManager = PedometerManager()

@@ -17,7 +17,7 @@ struct SleepCard: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.yellow.opacity(0.1))
+                .fill(colorScheme == .dark ? Color(hex: "#b06510") : Color(hex: "#ff9214"))
                 .overlay(
                     // Inner edge shine (white glow around edges)
                     RoundedRectangle(cornerRadius: 20)
@@ -61,9 +61,11 @@ struct SleepCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Time asleep")
                     .font(.headline)
+                    .foregroundColor(Color.white)
                 Text("\(hours)h \(minutes)m")
                     .font(.title)
                     .fontWeight(.bold)
+                    .foregroundColor(Color.white)
                 Chart {
                     ForEach(0..<8, id: \.self) { i in
                         LineMark(

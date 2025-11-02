@@ -55,20 +55,21 @@ struct HeartRateCard: View {
                 )
 
             // Content
-            HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(bpm == 0 ? "..." : "\(bpm)")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.white)
-                    HStack {
-                        Text("Bpm")
-                            .font(.headline)
-                            .foregroundColor(.white.opacity(0.8))
-                        Spacer()
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.red)
-                    }
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Heart rate")
+                    .font(.headline)
+                    .foregroundColor(Color.white)
+                Text(bpm == 0 ? "..." : "\(bpm)")
+                    .font(.system(size: 48, weight: .bold))
+                    .foregroundColor(.white)
+                HStack {
+                    Text("BPM")
+                        .font(.headline)
+                        .foregroundColor(.white.opacity(0.8))
+                    Spacer()
+                    Image(systemName: "heart.fill")
+                        .font(.system(size: 30))
+                        .foregroundColor(.red)
                 }
             }
             .padding()

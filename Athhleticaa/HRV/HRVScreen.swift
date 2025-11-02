@@ -72,18 +72,6 @@ struct HRVScreenView: View {
             .padding()
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
-            
-            Button(action: {
-                ringManager.measureHRV()
-            }) {
-                Text("Start HRV Measurement")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .cornerRadius(12)
-            }
         }
         .onReceive(ringManager.$hrv) { newValue in
             guard let hr = newValue else { return }

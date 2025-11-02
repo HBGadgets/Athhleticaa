@@ -19,7 +19,7 @@ struct StressCard: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.blue.opacity(0.1))
+                .fill(colorScheme == .dark ? Color.blue.opacity(0.1) : Color(hex: "#5ddffc"))
                 .overlay(
                     // Inner edge shine (white glow around edges)
                     RoundedRectangle(cornerRadius: 20)

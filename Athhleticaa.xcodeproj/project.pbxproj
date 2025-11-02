@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		283557002EB7834A0059177E /* SleepChartKit in Frameworks */ = {isa = PBXBuildFile; productRef = 283556FF2EB7834A0059177E /* SleepChartKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		281D04C02EAA4FDC00FC7FF5 /* Athhleticaa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Athhleticaa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283557002EB7834A0059177E /* SleepChartKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = Athhleticaa;
 			packageProductDependencies = (
+				283556FF2EB7834A0059177E /* SleepChartKit */,
 			);
 			productName = Athhleticaa;
 			productReference = 281D04C02EAA4FDC00FC7FF5 /* Athhleticaa.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 281D04B72EAA4FDC00FC7FF5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				283556FE2EB7834A0059177E /* XCRemoteSwiftPackageReference "SleepChartKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 281D04C12EAA4FDC00FC7FF5 /* Products */;
 			projectDirPath = "";
@@ -359,6 +368,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		283556FE2EB7834A0059177E /* XCRemoteSwiftPackageReference "SleepChartKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DanielJamesTronca/SleepChartKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		283556FF2EB7834A0059177E /* SleepChartKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 283556FE2EB7834A0059177E /* XCRemoteSwiftPackageReference "SleepChartKit" */;
+			productName = SleepChartKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 281D04B82EAA4FDC00FC7FF5 /* Project object */;
 }

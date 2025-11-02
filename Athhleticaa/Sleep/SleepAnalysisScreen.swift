@@ -6,10 +6,15 @@
 //
 
 import SwiftUICore
+import SwiftUI
 
 struct SleepsAnalysisScreenView: View {
 
     var body: some View {
-        
+        ZStack {
+            ScrollView {
+                SleepChartViewContainer()
+            }
+        }
     }
 }

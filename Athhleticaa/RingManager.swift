@@ -38,6 +38,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @ObservedObject var heartRateManager = HeartRateManager()
     @ObservedObject var pedometerManager = PedometerManager()
     @ObservedObject var stressManager = StressManager()
+    @ObservedObject var sleepManager = SleepManager()
 
     
     // MARK: - Private core bluetooth + sdk refs
@@ -411,6 +412,11 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                 self.readBattery() {
                                     self.dataLoaded = true
                                 }
+//                                self.sleepManager.getSleepFromDay(day: 1) {
+//                                    self.readBattery() {
+//                                        self.dataLoaded = true
+//                                    }
+//                                }
                             }
                         }
                     }

@@ -14,7 +14,11 @@ struct StressCard: View {
     var averageStress: Double
     var rangeMin: Int
     var rangeMax: Int
-    var date: String = "01 Nov 2025"
+    var formattedToday: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy" // Example: 01 Nov 2025
+        return formatter.string(from: Date())
+    }
     
     var body: some View {
         ZStack {
@@ -66,7 +70,7 @@ struct StressCard: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Stress")
                             .font(.headline)
-                        Text(date)
+                        Text(formattedToday)
                             .font(.subheadline)
                     }
                     Spacer()

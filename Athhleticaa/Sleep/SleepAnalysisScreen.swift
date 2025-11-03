@@ -18,7 +18,7 @@ struct SleepStageData: Identifiable {
 
 struct SleepsAnalysisScreenView: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var sleepManager: SleepManager
+    @StateObject var sleepManager = SleepManager()
 
     var body: some View {
         ZStack {
@@ -34,11 +34,9 @@ struct SleepsAnalysisScreenView: View {
                         SleepSummaryChartView(sleepManager: sleepManager)
                         SleepChartViewContainer(sleepManager: sleepManager)
                     }
+                    .padding(.bottom, 70)
                 }
             }
-        }
-        .onAppear {
-            sleepManager.getSleepFromDay(day: 0)
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

@@ -15,7 +15,6 @@ import SwiftUI
 struct DashboardView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
-    @ObservedObject var sleepManager: SleepManager
     
     @MainActor
     func refreshDashboard() async {
@@ -28,8 +27,10 @@ struct DashboardView: View {
             ringManager.heartRateManager.fetchTodayHeartRate() {
                 ringManager.pedometerManager.getPedometerData() {
                     ringManager.stressManager.fetchStressData() {
-                        ringManager.readBattery() {
-                            ringManager.dataLoaded = true
+                        ringManager.sleepManager.getSleepFromDay(day: 0) {
+                            ringManager.readBattery() {
+                                ringManager.dataLoaded = true
+                            }
                         }
 //                                self.sleepManager.getSleepFromDay(day: 1) {
 //                                    self.readBattery() {
@@ -61,8 +62,8 @@ struct DashboardView: View {
                         distance: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000
                     )
                     
-                    NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: sleepManager)) {
-                        SleepCard(hours: 6, minutes: 38)
+                    NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)) {
+                        SleepCard(sleepManager: ringManager.sleepManager)
                     }
 
                     StressCard(

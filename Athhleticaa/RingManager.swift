@@ -409,9 +409,12 @@ extension QCCentralManager: CBCentralManagerDelegate {
                     self.heartRateManager.fetchTodayHeartRate() {
                         self.pedometerManager.getPedometerData() {
                             self.stressManager.fetchStressData() {
-                                self.readBattery() {
-                                    self.dataLoaded = true
+                                self.sleepManager.getSleepFromDay(day: 0) {
+                                    self.readBattery() {
+                                        self.dataLoaded = true
+                                    }
                                 }
+                                
 //                                self.sleepManager.getSleepFromDay(day: 1) {
 //                                    self.readBattery() {
 //                                        self.dataLoaded = true

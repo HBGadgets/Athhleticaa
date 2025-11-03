@@ -16,7 +16,6 @@ import CoreBluetooth
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var ringManager = QCCentralManager()
-    @StateObject var sleepManager = SleepManager()
     @State private var showAlert = false
     @State private var timeoutTask: Task<Void, Never>? = nil
     
@@ -44,19 +43,19 @@ struct ContentView: View {
                 VStack {
                     switch ringManager.selectedTab {
                     case 0:
-                        DashboardView(ringManager: ringManager, sleepManager: sleepManager)
+                        DashboardView(ringManager: ringManager)
                     case 1:
                         HeartRateScreenView(ringManager: ringManager)
                     case 2:
                         ActivityScreenView()
                     case 3:
-                        SleepsAnalysisScreenView(sleepManager: sleepManager)
+                        SleepsAnalysisScreenView()
                     case 4:
                         StressAnalysisScreenView()
                     case 5:
                         ProfileView(ringManager: ringManager)
                     default:
-                        DashboardView(ringManager: ringManager, sleepManager: sleepManager)
+                        DashboardView(ringManager: ringManager)
                     }
                 }
                 VStack {

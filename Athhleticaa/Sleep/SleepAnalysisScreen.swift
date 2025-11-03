@@ -7,6 +7,14 @@
 
 import SwiftUICore
 import SwiftUI
+import Charts
+
+struct SleepStageData: Identifiable {
+    let id = UUID()
+    let type: SleepType
+    let totalMinutes: Int
+}
+
 
 struct SleepsAnalysisScreenView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -23,16 +31,20 @@ struct SleepsAnalysisScreenView: View {
                 } else {
                     VStack(spacing: 20) {
                         SleepSummaryView(summary: sleepManager.summary!)
+                        SleepSummaryChartView(sleepManager: sleepManager)
+                        SleepChartViewContainer(sleepManager: sleepManager)
                     }
-                    .padding(20)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(16)
                 }
-                SleepChartViewContainer(sleepManager: sleepManager)
             }
         }
         .onAppear {
             sleepManager.getSleepFromDay(day: 0)
         }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Sleep Track").font(.headline)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -15,6 +15,7 @@ import SwiftUI
 struct DashboardView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var sleepManager: SleepManager
     
     @MainActor
     func refreshDashboard() async {
@@ -60,7 +61,9 @@ struct DashboardView: View {
                         distance: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000
                     )
                     
-                    SleepCard(hours: 6, minutes: 38)
+                    NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: sleepManager)) {
+                        SleepCard(hours: 6, minutes: 38)
+                    }
 
                     StressCard(
                         lastStress: Double(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0),

@@ -33,7 +33,6 @@ struct ContentView: View {
         }
     }
 
-
     private func cancelTimeout() {
         timeoutTask?.cancel()
         timeoutTask = nil
@@ -45,7 +44,7 @@ struct ContentView: View {
                 VStack {
                     switch ringManager.selectedTab {
                     case 0:
-                        DashboardView(ringManager: ringManager)
+                        DashboardView(ringManager: ringManager, sleepManager: sleepManager)
                     case 1:
                         HeartRateScreenView(ringManager: ringManager)
                     case 2:
@@ -57,7 +56,7 @@ struct ContentView: View {
                     case 5:
                         ProfileView(ringManager: ringManager)
                     default:
-                        DashboardView(ringManager: ringManager)
+                        DashboardView(ringManager: ringManager, sleepManager: sleepManager)
                     }
                 }
                 VStack {

@@ -29,7 +29,6 @@ struct SleepChartViewContainer: View {
             if sleepManager.sleepSegments.isEmpty {
                 Text("Loading sleep data…")
             } else {
-                // Convert your segments into SleepSample
                 let samples = sleepManager.sleepSegments.map { segment in
                     SleepSample(
                         stage: {
@@ -50,8 +49,7 @@ struct SleepChartViewContainer: View {
                 SleepChartView(
                     samples: samples,
                     colorProvider: MyColorProvider()
-                )
-                    .frame(height: 200)
+                ).frame(height: 100)
             }
         }
         .padding()
@@ -74,62 +72,65 @@ struct SleepSummaryView: View {
 
         VStack(spacing: 20) {
             // Total Duration
-            VStack(spacing: 6) {
-                Text("Total Duration")
-                    .font(.headline)
-                    .foregroundColor(.gray)
+            
+            ZStack {
+                Circle()
+                    .trim(from: 0, to: CGFloat(summary.score) / 100)
+                    .stroke(
+                        AngularGradient(
+                            gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7)]),
+                            center: .center
+                        ),
+                        style: StrokeStyle(lineWidth: 20, lineCap: .round)
+                    )
+                    .rotationEffect(.degrees(-90))
+                    .frame(width: 170, height: 170)
+                
+                
+                Circle()
+                    .stroke(Color.blue.opacity(0.2), lineWidth: 20)
+                    .frame(width: 170, height: 170)
 
-                HStack(alignment: .firstTextBaseline, spacing: 4) {
-                    Text("\(hours)")
-                        .font(.system(size: 42, weight: .bold))
-                    Text("H")
-                        .font(.title3)
-                    Text("\(minutes)")
-                        .font(.system(size: 42, weight: .bold))
-                    Text("M")
-                        .font(.title3)
+                VStack {
+                    Text("\(summary.score)")
+                        .font(.system(size: 28, weight: .bold))
+                    Text("Score")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 }
-
-                Text("\(timeFormatter.string(from: summary.startTime))-\(timeFormatter.string(from: summary.endTime))")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
             }
+            
+            HStack {
+                VStack(spacing: 6) {
+                    Text("Total Duration")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("\(hours)")
+                            .font(.system(size: 42, weight: .bold))
+                        Text("H")
+                            .font(.title3)
+                        Text("\(minutes)")
+                            .font(.system(size: 42, weight: .bold))
+                        Text("M")
+                            .font(.title3)
+                    }
+
+                    Text("\(timeFormatter.string(from: summary.startTime))-\(timeFormatter.string(from: summary.endTime))")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            
 
             // Circle + Metrics
-            HStack {
-                // Circular Score
-                ZStack {
-                    Circle()
-                        .stroke(Color.purple.opacity(0.2), lineWidth: 10)
-                        .frame(width: 100, height: 100)
-
-                    Circle()
-                        .trim(from: 0, to: CGFloat(summary.score) / 100)
-                        .stroke(
-                            AngularGradient(
-                                gradient: Gradient(colors: [Color.purple, Color.purple.opacity(0.7)]),
-                                center: .center
-                            ),
-                            style: StrokeStyle(lineWidth: 10, lineCap: .round)
-                        )
-                        .rotationEffect(.degrees(-90))
-                        .frame(width: 100, height: 100)
-
-                    VStack {
-                        Text("\(summary.score)")
-                            .font(.system(size: 28, weight: .bold))
-                        Text("Score")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                }
-
-                Spacer()
-
-                VStack(alignment: .leading, spacing: 16) {
+            ZStack {
+                GlassShape(color: Color(.systemGray6), corner: 15)
+//                    .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 4)
+                HStack(spacing: 16) {
                     HStack(spacing: 8) {
-                        Image(systemName: "rocket.fill")
-                            .foregroundColor(.black)
+                        Image(systemName: "chart.line.uptrend.xyaxis")
                         VStack(alignment: .leading, spacing: 2) {
                             Text("\(summary.efficiency)%")
                                 .font(.headline)
@@ -138,10 +139,11 @@ struct SleepSummaryView: View {
                                 .foregroundColor(.gray)
                         }
                     }
+                    
+                    Spacer()
 
                     HStack(spacing: 8) {
                         Image(systemName: "moon.fill")
-                            .foregroundColor(.black)
                         VStack(alignment: .leading, spacing: 2) {
                             Text(summary.quality)
                                 .font(.headline)
@@ -151,9 +153,8 @@ struct SleepSummaryView: View {
                         }
                     }
                 }
-                .padding(.leading, 20)
+                .padding(20)
             }
-            .padding(.horizontal)
         }
         .padding()
     }

@@ -24,9 +24,9 @@ enum SleepType: Int {
     var color: Color {
         switch self {
         case .awake: return Color.yellow
-        case .light: return Color.purple.opacity(0.6)
-        case .deep: return Color.purple
-        case .rem: return Color.purple.opacity(0.3)
+        case .light: return Color.blue
+        case .deep: return Color.indigo
+        case .rem: return Color.teal
         }
     }
 
@@ -46,51 +46,109 @@ class SleepManager: ObservableObject {
     @Published var totalSleepDurationText: String = ""
     
     struct Summary {
-            let totalMinutes: Int
-            let startTime: Date
-            let endTime: Date
-            let efficiency: Int
-            let quality: String
-            let score: Int
+        let totalMinutes: Int
+        let startTime: Date
+        let endTime: Date
+        let efficiency: Int
+        let quality: String
+        let score: Int
+    }
+
+    var summary: Summary? {
+        guard !sleepSegments.isEmpty else { return nil }
+
+        // Sort by start time
+        let sorted = sleepSegments.sorted { $0.startTime < $1.startTime }
+        let start = sorted.first!.startTime
+        let end = sorted.last!.endTime
+
+        // Total durations (in minutes)
+        let totalMinutes = sleepSegments.reduce(0) { $0 + $1.duration }
+        let totalPeriod = Int(end.timeIntervalSince(start) / 60)
+
+        // Efficiency = time asleep / total period
+        let asleepMinutes = sleepSegments.filter { $0.type != .awake }.reduce(0) { $0 + $1.duration }
+        let efficiency = min(100, Int(Double(asleepMinutes) / Double(totalPeriod) * 100))
+
+        // Stage breakdowns
+        let deepMinutes = sleepSegments.filter { $0.type == .deep }.reduce(0) { $0 + $1.duration }
+        let remMinutes = sleepSegments.filter { $0.type == .rem }.reduce(0) { $0 + $1.duration }
+        let lightMinutes = sleepSegments.filter { $0.type == .light }.reduce(0) { $0 + $1.duration }
+        let awakeMinutes = sleepSegments.filter { $0.type == .awake }.reduce(0) { $0 + $1.duration }
+
+        // Ratios
+        let deepRatio = Double(deepMinutes) / Double(totalMinutes)
+        let remRatio = Double(remMinutes) / Double(totalMinutes)
+        let lightRatio = Double(lightMinutes) / Double(totalMinutes)
+        let awakeRatio = Double(awakeMinutes) / Double(totalMinutes)
+
+        // Base weighted score
+        var weightedScore =
+            (Double(efficiency) * 0.30) +      // 30% efficiency
+            (deepRatio * 100 * 0.25) +         // 25% deep
+            (remRatio * 100 * 0.20)            // 20% REM
+
+        // Light Sleep bonus (ideal: 40–55%)
+        if lightRatio >= 0.4 && lightRatio <= 0.55 {
+            weightedScore += 10
+        } else if lightRatio >= 0.3 && lightRatio <= 0.65 {
+            weightedScore += 5
+        } else {
+            weightedScore -= 5  // too low or too high → shallow sleep
         }
 
-        var summary: Summary? {
-            guard !sleepSegments.isEmpty else { return nil }
+        // Awake penalty
+        let awakePenalty = awakeRatio * 100 * 0.10
+        weightedScore -= awakePenalty
 
-            // Sort segments by start time
-            let sorted = sleepSegments.sorted { $0.startTime < $1.startTime }
-
-            let start = sorted.first!.startTime
-            let end = sorted.last!.endTime
-
-            // Calculate total sleep duration (in minutes)
-            let totalMinutes = sleepSegments.reduce(0) { $0 + $1.duration }
-
-            // Estimate sleep efficiency (for demo)
-            // Efficiency = (Total sleep time / total period) * 100
-            let totalPeriod = Int(end.timeIntervalSince(start) / 60)
-            let efficiency = min(100, Int(Double(totalMinutes) / Double(totalPeriod) * 100))
-
-            // Score — rough example (you can replace this with actual device data)
-            let score = Int(Double(efficiency) * 0.9)
-
-            // Quality based on efficiency
-            let quality: String
-            switch efficiency {
-            case 85...100: quality = "Good"
-            case 70..<85:  quality = "Fair"
-            default:       quality = "Poor"
-            }
-
-            return Summary(
-                totalMinutes: totalMinutes,
-                startTime: start,
-                endTime: end,
-                efficiency: efficiency,
-                quality: quality,
-                score: score
-            )
+        // Duration bonus
+        if totalMinutes >= 420 { // 7h
+            weightedScore += 5
         }
+
+        // Optional: Balance bonus if all ratios are within normal sleep composition
+        if deepRatio > 0.15 && deepRatio < 0.30 && remRatio > 0.15 && remRatio < 0.25 {
+            weightedScore += 5
+        }
+
+        // Clamp 0–100
+        let score = max(0, min(100, Int(weightedScore)))
+
+        // Quality
+        let quality: String
+        switch score {
+        case 85...100: quality = "Excellent"
+        case 70..<85:  quality = "Good"
+        case 50..<70:  quality = "Fair"
+        default:       quality = "Poor"
+        }
+
+        return Summary(
+            totalMinutes: totalMinutes,
+            startTime: start,
+            endTime: end,
+            efficiency: efficiency,
+            quality: quality,
+            score: score
+        )
+    }
+    
+    var stageBreakdown: [SleepStageData] {
+        guard !sleepSegments.isEmpty else { return [] }
+
+        func total(for type: SleepType) -> Int {
+            sleepSegments.filter { $0.type == type }.reduce(0) { $0 + $1.duration }
+        }
+
+        return [
+            SleepStageData(type: .deep, totalMinutes: total(for: .deep)),
+            SleepStageData(type: .light, totalMinutes: total(for: .light)),
+            SleepStageData(type: .rem, totalMinutes: total(for: .rem)),
+            SleepStageData(type: .awake, totalMinutes: total(for: .awake))
+        ]
+    }
+
+
     
     func getSleepFromDay(day: Int, completion: (() -> Void)? = nil) {
         print("Get sleep data")

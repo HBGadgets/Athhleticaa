@@ -21,7 +21,7 @@ import SwiftUI
 import CoreBluetooth
 
 struct ProfileView: View {
-    @StateObject var ringManager = QCCentralManager()
+    @ObservedObject var ringManager = QCCentralManager()
     
     var body: some View {
                 NavigationStack {

@@ -75,6 +75,17 @@ struct DashboardView: View {
                 await refreshDashboard()
             }
         }
-        .background(Color(.systemGray6))
+        .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(hex: "#e7bd75").opacity(0.7),
+//                        Color(.purple).opacity(0.4),
+                        Color.clear
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+            )
     }
 }

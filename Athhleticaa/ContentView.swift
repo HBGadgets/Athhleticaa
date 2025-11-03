@@ -16,6 +16,28 @@ import CoreBluetooth
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var ringManager = QCCentralManager()
+    @StateObject var sleepManager = SleepManager()
+    @State private var showAlert = false
+    @State private var timeoutTask: Task<Void, Never>? = nil
+    
+    private func startTimeout() {
+        cancelTimeout()
+        timeoutTask = Task {
+            try? await Task.sleep(nanoseconds: 7 * 1_000_000_000)
+            // Only show alert if data not loaded and ring not connected
+            if !ringManager.dataLoaded && ringManager.connectedPeripheral == nil {
+                await MainActor.run {
+                    showAlert = true
+                }
+            }
+        }
+    }
+
+
+    private func cancelTimeout() {
+        timeoutTask?.cancel()
+        timeoutTask = nil
+    }
     
     var body: some View {
         NavigationStack {
@@ -29,11 +51,11 @@ struct ContentView: View {
                     case 2:
                         ActivityScreenView()
                     case 3:
-                        SleepsAnalysisScreenView()
+                        SleepsAnalysisScreenView(sleepManager: sleepManager)
                     case 4:
                         StressAnalysisScreenView()
                     case 5:
-                        ProfileView()
+                        ProfileView(ringManager: ringManager)
                     default:
                         DashboardView(ringManager: ringManager)
                     }
@@ -43,7 +65,7 @@ struct ContentView: View {
                     TabBar(ringManager: ringManager)
                         .padding(.bottom, -10)
                 }
-                if !ringManager.dataLoaded {
+                if !ringManager.dataLoaded && (ringManager.connectedPeripheral != nil) {
                     VStack(spacing: 20) {
                         ProgressView("Syncing data")
                             .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
@@ -53,6 +75,12 @@ struct ContentView: View {
                     .padding(20)
                     .background(.ultraThinMaterial)
                     .cornerRadius(16)
+                    .onAppear {
+                        startTimeout()
+                    }
+                    .onDisappear {
+                        cancelTimeout()
+                    }
                 }
             }
             .toolbar {
@@ -70,5 +98,15 @@ struct ContentView: View {
                 }
             }.navigationBarTitleDisplayMode(.inline)
         }
+        .alert(
+            "Couldn't get data",
+            isPresented: $showAlert, // must be a Binding<Bool>
+            actions: {
+                Button("OK", role: .cancel) { }
+            },
+            message: {
+                Text("Please make sure the ring is binded and accessible to the phone")
+            }
+        )
     }
 }

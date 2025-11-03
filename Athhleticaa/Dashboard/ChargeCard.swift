@@ -66,6 +66,9 @@ struct BatteryCard: View {
                 // Centered circle + percentage
                 ZStack {
                     Circle()
+                        .stroke(Color.yellow.opacity(0.5), lineWidth: 10)
+                        .frame(width: 80, height: 80)
+                    Circle()
                         .trim(from: 0, to: CGFloat(charge) / 100)
                         .stroke(charge < 20 ? Color.red : Color.yellow, lineWidth: 10)
                         .rotationEffect(.degrees(-90))

@@ -18,16 +18,23 @@ struct DashboardView: View {
     
     @MainActor
     func refreshDashboard() async {
-        print("🔄 Pull to refresh triggered")
+        print("Pull to refresh triggered")
 
         ringManager.dataLoaded = false
         
-        // Re-fetch data from your ring
-        ringManager.heartRateManager.fetchTodayHeartRate {
-            ringManager.pedometerManager.getPedometerData {
-                ringManager.stressManager.fetchStressData {
-                    ringManager.readBattery {
-                        ringManager.dataLoaded = true
+        DispatchQueue.main.async {
+            print("🚀 Device ready — starting data fetch")
+            ringManager.heartRateManager.fetchTodayHeartRate() {
+                ringManager.pedometerManager.getPedometerData() {
+                    ringManager.stressManager.fetchStressData() {
+                        ringManager.readBattery() {
+                            ringManager.dataLoaded = true
+                        }
+//                                self.sleepManager.getSleepFromDay(day: 1) {
+//                                    self.readBattery() {
+//                                        self.dataLoaded = true
+//                                    }
+//                                }
                     }
                 }
             }
@@ -65,7 +72,6 @@ struct DashboardView: View {
                 .padding()
                 .padding(.bottom, 70)
             }.refreshable {
-                /// 🔁 Refresh logic here
                 await refreshDashboard()
             }
         }

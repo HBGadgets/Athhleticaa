@@ -9,12 +9,16 @@ import SwiftUICore
 import SwiftUI
 
 struct SleepsAnalysisScreenView: View {
+    @StateObject var sleepManager = SleepManager()
 
     var body: some View {
         ZStack {
             ScrollView {
-                SleepChartViewContainer()
+                SleepChartViewContainer(sleepManager: sleepManager)
             }
+        }
+        .onAppear {
+            sleepManager.getSleepFromDay(day: 0)
         }
     }
 }

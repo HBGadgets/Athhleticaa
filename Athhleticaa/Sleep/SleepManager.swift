@@ -16,12 +16,14 @@ struct SleepSegment: Identifiable {
 }
 
 enum SleepType: Int {
+    case awake = 1
     case light = 2
     case deep = 3
     case rem = 4
 
     var color: Color {
         switch self {
+        case .awake: return Color.yellow
         case .light: return Color.purple.opacity(0.6)
         case .deep: return Color.purple
         case .rem: return Color.purple.opacity(0.3)
@@ -30,6 +32,7 @@ enum SleepType: Int {
 
     var label: String {
         switch self {
+        case .awake: return "Wake"
         case .light: return "Light Sleep"
         case .deep: return "Deep Sleep"
         case .rem: return "REM Sleep"
@@ -58,17 +61,21 @@ class SleepManager: ObservableObject {
                     // Convert to SleepSegment
                     if let startStr = sleep.happenDate,
                        let endStr = sleep.endTime,
-                       let start = Self.dateFormatter.date(from: startStr),
-                       let end = Self.dateFormatter.date(from: endStr),
-                       let type = SleepType(rawValue: sleep.type.rawValue) {
+                       let start = Self.parseDate(startStr),
+                       let end = Self.parseDate(endStr) {
                         
-                        let segment = SleepSegment(
-                            startTime: start,
-                            endTime: end,
-                            duration: sleep.total,
-                            type: type
-                        )
-                        newSegments.append(segment)
+                        let raw = (sleep.type as? Int) ?? sleep.type.rawValue
+                        if let type = SleepType(rawValue: raw) {
+                            let segment = SleepSegment(
+                                startTime: start,
+                                endTime: end,
+                                duration: sleep.total,
+                                type: type
+                            )
+                            newSegments.append(segment)
+                        } else {
+                            print("⚠️ Unknown sleep type: \(sleep.type)")
+                        }
                     }
                 }
                 
@@ -79,6 +86,7 @@ class SleepManager: ObservableObject {
             // Update UI
             DispatchQueue.main.async {
                 self.sleepSegments = newSegments
+                print("sleep segments ======>>>>> \(self.sleepSegments)")
                 completion?()
             }
         }, fail: {
@@ -87,9 +95,28 @@ class SleepManager: ObservableObject {
         })
     }
     
-    private static let dateFormatter: DateFormatter = {
+//    private static let dateFormatter: DateFormatter = {
+//        let f = DateFormatter()
+//        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        return f
+//    }()
+    
+    private static func parseDate(_ string: String) -> Date? {
+        let formats = [
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy/MM/dd HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ssZ",
+            "yyyy-MM-dd'T'HH:mm:ss"
+        ]
         let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return f
-    }()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        for format in formats {
+            f.dateFormat = format
+            if let date = f.date(from: string) {
+                return date
+            }
+        }
+        print("⚠️ Could not parse date:", string)
+        return nil
+    }
 }

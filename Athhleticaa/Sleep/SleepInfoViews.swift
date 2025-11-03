@@ -9,21 +9,19 @@ import SwiftUI
 import SleepChartKit
 
 struct SleepChartViewContainer: View {
-    @ObservedObject var sleepManager = SleepManager()
+    @ObservedObject var sleepManager: SleepManager
     
     var body: some View {
         VStack(spacing: 20) {
             if sleepManager.sleepSegments.isEmpty {
                 Text("Loading sleep data…")
-                    .onAppear {
-                        sleepManager.getSleepFromDay(day: 0)
-                    }
             } else {
                 // Convert your segments into SleepSample
                 let samples = sleepManager.sleepSegments.map { segment in
                     SleepSample(
                         stage: {
                             switch segment.type {
+                            case .awake:     return .awake
                             case .light:    return .asleepCore
                             case .deep:     return .asleepDeep
                             case .rem:      return .asleepREM

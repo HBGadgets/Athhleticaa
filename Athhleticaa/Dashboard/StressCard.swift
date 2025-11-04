@@ -82,11 +82,13 @@ struct StressCard: View {
                 // Arc + Center value
                 ZStack {
                     ArcShape(progress: 1.0)
-                        .stroke(Color.gray, style: StrokeStyle(lineWidth: 12, lineCap: .round))
+                        .stroke(
+                            Color.gray, style: StrokeStyle(lineWidth: 20, lineCap: .round)
+                        )
                         .frame(width: 160, height: 160)
                     
                     ArcShape(progress: lastStress / 100)
-                        .stroke(colorScheme == .dark ? Color.white : Color.black, style: StrokeStyle(lineWidth: 12, lineCap: .round))
+                        .stroke(colorScheme == .dark ? Color.white : Color.black, style: StrokeStyle(lineWidth: 15, lineCap: .round))
                         .frame(width: 160, height: 160)
                     
                     VStack(spacing: 6) {

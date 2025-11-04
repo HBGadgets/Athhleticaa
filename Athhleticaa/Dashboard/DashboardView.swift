@@ -29,14 +29,11 @@ struct DashboardView: View {
                     ringManager.stressManager.fetchStressData() {
                         ringManager.sleepManager.getSleepFromDay(day: 0) {
                             ringManager.readBattery() {
-                                ringManager.dataLoaded = true
+                                ringManager.bloodOxygenManager.fetchBloodOxygenData() {
+                                    ringManager.dataLoaded = true
+                                }
                             }
                         }
-//                                self.sleepManager.getSleepFromDay(day: 1) {
-//                                    self.readBattery() {
-//                                        self.dataLoaded = true
-//                                    }
-//                                }
                     }
                 }
             }
@@ -72,6 +69,8 @@ struct DashboardView: View {
                         rangeMin: ringManager.stressManager.rangeMin,
                         rangeMax: ringManager.stressManager.rangeMax
                     )
+                    
+                    BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
                 }
                 .padding()
                 .padding(.bottom, 70)
@@ -79,11 +78,24 @@ struct DashboardView: View {
                 await refreshDashboard()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                colorScheme == .dark ?
+                Image(.athhleticaaLogoDarkMode)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120)
+                :
+                Image(.athhleticaaLogoLightMode)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120)
+            }
+        }.navigationBarTitleDisplayMode(.inline)
         .background(
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(hex: "#e7bd75").opacity(0.7),
-//                        Color(.purple).opacity(0.4),
                         Color.clear
                     ]),
                     startPoint: .top,

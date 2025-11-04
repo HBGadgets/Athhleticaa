@@ -1,8 +1,8 @@
 //
-//  SleepCard.swift
+//  BloodOxygenCard.swift
 //  Athhleticaa
 //
-//  Created by Dipanshu Kashyap on 01/11/25.
+//  Created by Dipanshu Kashyap on 04/11/25.
 //
 
 import SwiftUICore
@@ -11,9 +11,9 @@ import SleepChartKit
 
 
 // MARK: - Sleep
-struct SleepCard: View {
+struct BloodOxygenCard: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var sleepManager: SleepManager
+    @ObservedObject var bloodOxygenManager: BloodOxygenManager
     
     var formattedToday: String {
         let formatter = DateFormatter()
@@ -68,90 +68,23 @@ struct SleepCard: View {
             VStack(spacing: 8) {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Sleep")
+                        Text("Blood Oxygen")
                             .font(.headline)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
                         Text(formattedToday)
                             .font(.subheadline)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
-                        .foregroundColor(Color.white)
                 }
-
-                HStack(alignment: .center) {
-                    if let summary = sleepManager.summary {
-                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Image(systemName: "moon.stars.fill")
-                            .font(.system(size: 70, weight: .semibold))
-                        Text("\(sleepManager.summary?.score ?? 0)")
-                            .font(.headline)
-                        Text("Sleep score")
-                            .font(.subheadline)
-                    }
-                    .foregroundColor(Color.white)
-                }
-                .padding(.horizontal, 40)
-                
+                BloodOxygenDotChart(data: bloodOxygenManager.readings)
             }
+            .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .padding()
             .cornerRadius(16)
         }
         
-    }
-}
-
-
-struct TotalSleepRingView: View {
-    let totalMinutes: Int
-    let targetMinutes: Int = 480 // 8 hours goal
-    
-    var progress: Double {
-        min(Double(totalMinutes) / Double(targetMinutes), 1.0)
-    }
-    
-    private func formattedDuration(_ minutes: Int) -> String {
-        let h = minutes / 60
-        let m = minutes % 60
-        return "\(h)h \(m)m"
-    }
-
-    var body: some View {
-        ZStack {
-            // Background ring
-            Circle()
-                .stroke(Color.blue.opacity(0.15), lineWidth: 20)
-                .frame(width: 120, height: 120)
-
-            // Progress ring
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(
-                    Color.white,
-                    style: StrokeStyle(lineWidth: 10, lineCap: .round)
-                )
-                .rotationEffect(.degrees(-90))
-                .frame(width: 120, height: 120)
-                .animation(.easeInOut(duration: 1.0), value: progress)
-            
-            // Center text
-            VStack(spacing: 6) {
-                Text(formattedDuration(totalMinutes))
-                    .font(.system(size: 18, weight: .bold))
-                
-                Text("Total Sleep")
-                    .font(.caption)
-            }
-            .foregroundStyle(.white)
-        }
     }
 }

@@ -18,7 +18,7 @@ struct SleepStageData: Identifiable {
 
 struct SleepsAnalysisScreenView: View {
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var sleepManager = SleepManager()
+    @ObservedObject var sleepManager: SleepManager
 
     var body: some View {
         ZStack {

@@ -49,7 +49,7 @@ struct ContentView: View {
                     case 2:
                         ActivityScreenView()
                     case 3:
-                        SleepsAnalysisScreenView()
+                        SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)
                     case 4:
                         StressAnalysisScreenView()
                     case 5:
@@ -81,20 +81,20 @@ struct ContentView: View {
                     }
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    colorScheme == .dark ?
-                    Image(.athhleticaaLogoDarkMode)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120)
-                    :
-                    Image(.athhleticaaLogoLightMode)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120)
-                }
-            }.navigationBarTitleDisplayMode(.inline)
+//            .toolbar {
+//                ToolbarItem(placement: .principal) {
+//                    colorScheme == .dark ?
+//                    Image(.athhleticaaLogoDarkMode)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 120)
+//                    :
+//                    Image(.athhleticaaLogoLightMode)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 120)
+//                }
+//            }.navigationBarTitleDisplayMode(.inline)
         }
         .alert(
             "Couldn't get data",

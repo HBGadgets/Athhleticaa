@@ -27,7 +27,7 @@ struct SleepChartViewContainer: View {
     var body: some View {
         VStack(spacing: 20) {
             if sleepManager.sleepSegments.isEmpty {
-                Text("Loading sleep data…")
+                Text("No data…")
             } else {
                 let samples = sleepManager.sleepSegments.map { segment in
                     SleepSample(
@@ -57,10 +57,10 @@ struct SleepChartViewContainer: View {
 }
 
 struct SleepSummaryView: View {
-    let summary: SleepManager.Summary
+    let summary: Summary
 
-    private var hours: Int { summary.totalMinutes / 60 }
-    private var minutes: Int { summary.totalMinutes % 60 }
+    private var hours: Int { (summary.totalMinutes ?? 0) / 60 }
+    private var minutes: Int { (summary.totalMinutes ?? 0) % 60 }
 
     private var timeFormatter: DateFormatter {
         let f = DateFormatter()
@@ -75,7 +75,7 @@ struct SleepSummaryView: View {
             
             ZStack {
                 Circle()
-                    .trim(from: 0, to: CGFloat(summary.score) / 100)
+                    .trim(from: 0, to: CGFloat(summary.score ?? 0) / 100)
                     .stroke(
                         AngularGradient(
                             gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7)]),
@@ -92,7 +92,7 @@ struct SleepSummaryView: View {
                     .frame(width: 170, height: 170)
 
                 VStack {
-                    Text("\(summary.score)")
+                    Text("\(summary.score == 0 ? "0" : "\(summary.score)")")
                         .font(.system(size: 28, weight: .bold))
                     Text("Score")
                         .font(.caption)
@@ -117,7 +117,7 @@ struct SleepSummaryView: View {
                             .font(.title3)
                     }
 
-                    Text("\(timeFormatter.string(from: summary.startTime))-\(timeFormatter.string(from: summary.endTime))")
+                    Text("\(timeFormatter.string(from: summary.startTime ?? Date()))-\(timeFormatter.string(from: summary.endTime ?? Date()))")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
@@ -132,7 +132,8 @@ struct SleepSummaryView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "chart.line.uptrend.xyaxis")
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("\(summary.efficiency)%")
+                            Text("\(summary.efficiency == 0 ? "0" : "\(summary.efficiency)")%")
+
                                 .font(.headline)
                             Text("Sleep Efficiency")
                                 .font(.caption)
@@ -145,7 +146,7 @@ struct SleepSummaryView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "moon.fill")
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(summary.quality)
+                            Text(summary.quality ?? "")
                                 .font(.headline)
                             Text("Sleep Quality")
                                 .font(.caption)

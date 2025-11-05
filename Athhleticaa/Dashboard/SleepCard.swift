@@ -52,15 +52,17 @@ struct SleepCard: View {
                 Spacer()
                 
                 HStack(alignment: .center) {
-                    if let summary = sleepManager.summary {
-                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
-
+                    if sleepManager.summary?.totalMinutes == 0 {
+                        let summary = sleepManager.summary
+                                
+                        TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
+                        
                         Spacer()
-
+                        
                         VStack {
                             Image(systemName: "moon.stars.fill")
                                 .font(.system(size: 70, weight: .semibold))
-                            Text("\(sleepManager.summary?.score ?? 0)")
+                            Text("\(summary?.score)")
                                 .font(.headline)
                             Text("Sleep score")
                                 .font(.subheadline)
@@ -70,10 +72,38 @@ struct SleepCard: View {
                         HStack {
                             Image(systemName: "moon.stars.fill")
                                 .font(.system(size: 50, weight: .semibold))
-                            Text("No Data")
-                                .font(.system(size: 20, weight: .bold))
+                            VStack {
+                                Text("No Data")
+                                    .font(.system(size: 20, weight: .bold))
+                                Text("Wear smart ring during sleep to get sleep data")
+                                    .font(.system(size: 10, weight: .semibold))
+                            }
+                            
                         }.foregroundColor(.white)
                     }
+                    
+//                    if let summary = sleepManager.summary {
+//                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
+//
+//                        Spacer()
+//
+//                        VStack {
+//                            Image(systemName: "moon.stars.fill")
+//                                .font(.system(size: 70, weight: .semibold))
+//                            Text("\(sleepManager.summary.score)")
+//                                .font(.headline)
+//                            Text("Sleep score")
+//                                .font(.subheadline)
+//                        }
+//                        .foregroundColor(.white)
+//                    } else {
+//                        HStack {
+//                            Image(systemName: "moon.stars.fill")
+//                                .font(.system(size: 50, weight: .semibold))
+//                            Text("No Data")
+//                                .font(.system(size: 20, weight: .bold))
+//                        }.foregroundColor(.white)
+//                    }
                 }
                 .padding(.horizontal, 40)
                 

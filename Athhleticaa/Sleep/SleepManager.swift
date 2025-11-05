@@ -40,19 +40,18 @@ enum SleepType: Int {
     }
 }
 
+struct Summary {
+    let totalMinutes: Int?
+    let startTime: Date?
+    let endTime: Date?
+    let efficiency: Int?
+    let quality: String?
+    let score: Int?
+}
 
 class SleepManager: ObservableObject {
     @Published var sleepSegments: [SleepSegment] = []
     @Published var totalSleepDurationText: String = ""
-    
-    struct Summary {
-        let totalMinutes: Int
-        let startTime: Date
-        let endTime: Date
-        let efficiency: Int
-        let quality: String
-        let score: Int
-    }
 
     var summary: Summary? {
         guard !sleepSegments.isEmpty else { return nil }

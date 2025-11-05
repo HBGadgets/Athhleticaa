@@ -23,19 +23,12 @@ struct SleepsAnalysisScreenView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                if sleepManager.summary == nil {
-                    ProgressView("Loading data")
-                        .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
-                        .scaleEffect(1.2)
-                    Text("Please wait...")
-                } else {
-                    VStack(spacing: 20) {
-                        SleepSummaryView(summary: sleepManager.summary!)
-                        SleepSummaryChartView(sleepManager: sleepManager)
-                        SleepChartViewContainer(sleepManager: sleepManager)
-                    }
-                    .padding(.bottom, 70)
+                VStack(spacing: 20) {
+                    SleepSummaryView(summary: sleepManager.summary ?? Summary(totalMinutes: 0, startTime: Date(), endTime: Date(), efficiency: 0, quality: "Unknown", score: 0))
+                    SleepSummaryChartView(sleepManager: sleepManager)
+                    SleepChartViewContainer(sleepManager: sleepManager)
                 }
+                .padding(.bottom, 70)
             }
         }
         .toolbar {

@@ -43,7 +43,7 @@ extension Array where Element == QCSchedualHeartRateModel {
 
 extension HeartRateData {
     var lastNonZeroHeartRate: Int {
-        heartRates.last(where: { $0 != 0 }) ?? 0
+        heartRates.first(where: { $0 != 0 }) ?? 0
     }
 }
 

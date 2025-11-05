@@ -22,90 +22,68 @@ struct SleepCard: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(colorScheme == .dark ? Color(hex: "#b06510") : Color(hex: "#ff9214"))
                 .overlay(
-                    // Inner edge shine (white glow around edges)
                     RoundedRectangle(cornerRadius: 20)
                         .strokeBorder(Color.white, lineWidth: 0.7)
                         .blur(radius: 1)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .strokeBorder(
-                                    AngularGradient(
-                                        gradient: Gradient(colors: [
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.05),
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.05),
-                                            Color.white.opacity(0.4)
-                                        ]),
-                                        center: .center
-                                    ),
-                                    lineWidth: 0.5
-                                )
-                                .blur(radius: 2)
-                                .blendMode(.screen)
-                        )
-                )
-                .overlay(
-                    // Soft white reflection near top
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color.white.opacity(0.15),
-                            Color.clear
-                        ]),
-                        startPoint: .top,
-                        endPoint: .center
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .blur(radius: 2)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            // Content
             VStack(spacing: 8) {
-                HStack {
+                HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Sleep")
                             .font(.headline)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(.white)
                         Text(formattedToday)
                             .font(.subheadline)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(.white)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
-                        .foregroundColor(Color.white)
+                        .foregroundColor(.white)
                 }
-
+                
+                Spacer()
+                
                 HStack(alignment: .center) {
                     if let summary = sleepManager.summary {
                         TotalSleepRingView(totalMinutes: summary.totalMinutes)
+
+                        Spacer()
+
+                        VStack {
+                            Image(systemName: "moon.stars.fill")
+                                .font(.system(size: 70, weight: .semibold))
+                            Text("\(sleepManager.summary?.score ?? 0)")
+                                .font(.headline)
+                            Text("Sleep score")
+                                .font(.subheadline)
+                        }
+                        .foregroundColor(.white)
+                    } else {
+                        HStack {
+                            Image(systemName: "moon.stars.fill")
+                                .font(.system(size: 50, weight: .semibold))
+                            Text("No Data")
+                                .font(.system(size: 20, weight: .bold))
+                        }.foregroundColor(.white)
                     }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Image(systemName: "moon.stars.fill")
-                            .font(.system(size: 70, weight: .semibold))
-                        Text("\(sleepManager.summary?.score ?? 0)")
-                            .font(.headline)
-                        Text("Sleep score")
-                            .font(.subheadline)
-                    }
-                    .foregroundColor(Color.white)
                 }
                 .padding(.horizontal, 40)
                 
+                Spacer()
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .cornerRadius(16)
         }
+        .frame(height: 250)
+
         
     }
 }

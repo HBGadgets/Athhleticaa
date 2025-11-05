@@ -155,6 +155,7 @@ class SleepManager: ObservableObject {
         
         QCSDKCmdCreator.getSleepDetailData(fromDay: day, sleepDatas: { sleepsDict in
             print("Get sleep data successfully")
+            print(sleepsDict)
             
             var newSegments: [SleepSegment] = []
             var totalSleepText = ""

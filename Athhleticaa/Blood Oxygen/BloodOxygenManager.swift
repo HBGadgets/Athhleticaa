@@ -102,7 +102,6 @@ class BloodOxygenManager: ObservableObject {
             self.readings = mapped.sorted(by: { $0.date > $1.date })
             self.statusMessage = "Fetched \(mapped.count) records"
             print("✅ Loaded \(mapped.count) blood oxygen entries")
-            print(dataArray)
             print(self.readings)
             completion?()
         }

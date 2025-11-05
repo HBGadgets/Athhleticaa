@@ -26,7 +26,6 @@ struct HRVChartView: View {
             return HRVPoint(time: time, value: value)
         }
         
-        // Filter out zero or invalid readings
         let validPoints = points.filter { $0.value > 0 }
         
         let firstDate = Date()
@@ -63,7 +62,6 @@ struct HRVChartView: View {
                 }
             }
             
-            // ✅ Custom Y Axis
             .chartYAxis {
                 AxisMarks() { value in
                     AxisGridLine().foregroundStyle(Color.white)

@@ -21,8 +21,6 @@ struct HeartRateScreenView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            // Example placeholder chart
-            HeartRateChart()
 //            HeartRateChartView(manager: heartRateManager)
 
             VStack(spacing: 16) {

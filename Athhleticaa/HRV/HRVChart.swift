@@ -8,207 +8,86 @@
 import SwiftUI
 import Charts
 
-struct HRVDataPoint: Identifiable {
-    let id = UUID()
-    let time: String
-    let value: Double
-}
-
 struct HRVChartView: View {
-    @State private var selectedTab = "Day"
-    @State private var selectedPoint: HRVDataPoint? = nil
-    
-    let tabs = ["Day", "Week", "Month"]
-    
-    // Different datasets for each tab
-    let dayData: [HRVDataPoint] = [
-        .init(time: "01:00", value: 35),
-        .init(time: "02:00", value: 50),
-        .init(time: "03:00", value: 42),
-        .init(time: "04:00", value: 65),
-        .init(time: "05:00", value: 80),
-        .init(time: "06:00", value: 70),
-        .init(time: "07:00", value: 55)
-    ]
-    
-    let weekData: [HRVDataPoint] = [
-        .init(time: "Mon", value: 70),
-        .init(time: "Tue", value: 65),
-        .init(time: "Wed", value: 80),
-        .init(time: "Thu", value: 76),
-        .init(time: "Fri", value: 88),
-        .init(time: "Sat", value: 73),
-        .init(time: "Sun", value: 92)
-    ]
-    
-    let monthData: [HRVDataPoint] = [
-        .init(time: "1", value: 68),
-        .init(time: "5", value: 75),
-        .init(time: "10", value: 82),
-        .init(time: "15", value: 79),
-        .init(time: "20", value: 91),
-        .init(time: "25", value: 84),
-        .init(time: "30", value: 77)
-    ]
-    
-    // Helper to get current dataset based on selected tab
-    var currentData: [HRVDataPoint] {
-        switch selectedTab {
-        case "Week": return weekData
-        case "Month": return monthData
-        default: return dayData
-        }
-    }
+    let data: HRVModel
     
     var body: some View {
-        VStack(spacing: 24) {
-            
-            // MARK: Tabs
-            HStack {
-                ForEach(tabs, id: \.self) { tab in
-                    Button(action: {
-                        withAnimation(.spring()) {
-                            selectedTab = tab
-                            selectedPoint = nil
+        // Convert HRV values into time-based data points
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let baseDate = dateFormatter.date(from: data.date) else {
+            return AnyView(Text("Invalid date"))
+        }
+        
+        // Each value corresponds to one timestamp = baseDate + (index * interval)
+        let points: [HRVPoint] = data.values.enumerated().map { index, value in
+            let time = calendar.date(byAdding: .second, value: index * data.interval, to: baseDate)!
+            return HRVPoint(time: time, value: value)
+        }
+        
+        // Filter out zero or invalid readings
+        let validPoints = points.filter { $0.value > 0 }
+        
+        let firstDate = Date()
+        
+        let startOfDay = calendar.startOfDay(for: firstDate)
+        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: firstDate)!
+        
+        return AnyView(
+            Chart(validPoints) { point in
+                LineMark(
+                    x: .value("Time", point.time),
+                    y: .value("HRV", point.value)
+                )
+                .foregroundStyle(.white)
+                .lineStyle(StrokeStyle(lineWidth: 2))
+                
+                PointMark(
+                    x: .value("Time", point.time),
+                    y: .value("HRV", point.value)
+                )
+                .foregroundStyle(.white)
+                .symbolSize(25)
+            }
+            .chartXAxis {
+                AxisMarks() { value in
+                    AxisGridLine().foregroundStyle(Color.white)
+                    AxisTick().foregroundStyle(Color.white)
+                    AxisValueLabel {
+                        if let date = value.as(Date.self) {
+                            Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
+                                .foregroundColor(.white.opacity(0.8))
                         }
-                    }) {
-                        Text(tab)
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(selectedTab == tab ? .white : .gray)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(selectedTab == tab ? Color.black : Color.clear)
-                            )
                     }
                 }
             }
             
-            // MARK: HRV Value + Time Display
-            VStack(spacing: 4) {
-                Text("\(Int(selectedPoint?.value ?? currentData.last?.value ?? 0))")
-                    .font(.system(size: 42, weight: .bold))
-                    .foregroundColor(.black)
-                
-                Text("ms")
-                    .font(.system(size: 16))
-                    .foregroundColor(.gray)
-                
-                if let selected = selectedPoint {
-                    Text(selected.time)
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                        .transition(.opacity)
-                }
-            }
-//            .animation(.easeInOut, value: selectedPoint)
-            
-            // MARK: Chart
-            Chart {
-                ForEach(currentData) { point in
-                    LineMark(
-                        x: .value("Time", point.time),
-                        y: .value("Value", point.value)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(Color.red)
-                    
-                    AreaMark(
-                        x: .value("Time", point.time),
-                        y: .value("Value", point.value)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [Color.red.opacity(0.25), .clear],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                }
-                
-                if let selected = selectedPoint {
-                    RuleMark(x: .value("Selected", selected.time))
-                        .lineStyle(StrokeStyle(lineWidth: 1))
-                        .foregroundStyle(Color.red)
-                        .annotation(position: .top) {
-                            Circle()
-                                .fill(Color.red.opacity(0.6))
-                                .frame(width: 10, height: 10)
+            // ✅ Custom Y Axis
+            .chartYAxis {
+                AxisMarks() { value in
+                    AxisGridLine().foregroundStyle(Color.white)
+                    AxisTick().foregroundStyle(Color.white)
+                    AxisValueLabel {
+                        if let yValue = value.as(Double.self) {
+                            Text("\(Int(yValue))")
+                                .foregroundColor(.white.opacity(0.8))
                         }
+                    }
                 }
             }
-            .chartYScale(domain: 0...100)
-            .frame(height: 200)
-            .padding(.horizontal)
-            .chartOverlay { proxy in
-                GeometryReader { geo in
-                    Rectangle()
-                        .fill(Color.clear)
-                        .contentShape(Rectangle())
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { value in
-                                    let xPosition = value.location.x - geo[proxy.plotAreaFrame].origin.x
-                                    if let time: String = proxy.value(atX: xPosition) {
-                                        if let nearest = currentData.min(by: {
-                                            abs(timeAsDouble($0.time) - timeAsDouble(time))
-                                            < abs(timeAsDouble($1.time) - timeAsDouble(time))
-                                        }) {
-                                            withAnimation(.easeInOut(duration: 0.1)) {
-                                                selectedPoint = nearest
-                                            }
-                                        }
-                                    }
-                                }
-                                .onEnded { _ in }
-                        )
-                }
-            }
-            
-            // MARK: Stats
-            HStack(spacing: 40) {
-                StatView(title: "Average", value: "\(Int(average(of: currentData)))")
-                StatView(title: "Minimum", value: "\(Int(minValue(of: currentData)))")
-                StatView(title: "Maximum", value: "\(Int(maxValue(of: currentData)))")
-            }
-            .padding(.bottom, 16)
-        }
-        .padding()
-    }
-    
-    // MARK: Helpers
-    private func timeAsDouble(_ time: String) -> Double {
-        if let val = Double(time) { return val } // For month labels
-        let comps = time.split(separator: ":").compactMap { Double($0) }
-        return comps.first ?? 0 + ((comps.last ?? 0) / 60)
-    }
-    
-    private func average(of data: [HRVDataPoint]) -> Double {
-        data.map(\.value).reduce(0, +) / Double(data.count)
-    }
-    
-    private func minValue(of data: [HRVDataPoint]) -> Double {
-        data.map(\.value).min() ?? 0
-    }
-    
-    private func maxValue(of data: [HRVDataPoint]) -> Double {
-        data.map(\.value).max() ?? 0
+            .chartXScale(domain: startOfDay...endOfDay)
+            .foregroundStyle(Color.white)
+            .frame(height: 250)
+            .padding()
+            .background(Color(.systemGray6).opacity(0))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        )
     }
 }
 
-struct StatView: View {
-    let title: String
-    let value: String
-    
-    var body: some View {
-        VStack(spacing: 6) {
-            Text(value)
-                .font(.system(size: 20, weight: .semibold))
-            Text(title)
-                .font(.system(size: 14))
-                .foregroundColor(.gray)
-        }
-    }
+struct HRVPoint: Identifiable {
+    let id = UUID()
+    let time: Date
+    let value: Double
 }

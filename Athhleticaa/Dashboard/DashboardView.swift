@@ -30,7 +30,9 @@ struct DashboardView: View {
                         ringManager.sleepManager.getSleepFromDay(day: 0) {
                             ringManager.readBattery() {
                                 ringManager.bloodOxygenManager.fetchBloodOxygenData() {
-                                    ringManager.dataLoaded = true
+                                    ringManager.hrvManager.fetchHRV(for: 0) {
+                                        ringManager.dataLoaded = true
+                                    }
                                 }
                             }
                         }
@@ -71,6 +73,8 @@ struct DashboardView: View {
                     )
                     
                     BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
+                    
+                    HRVCard(hrvManager: ringManager.hrvManager)
                 }
                 .padding()
                 .padding(.bottom, 70)
@@ -93,14 +97,7 @@ struct DashboardView: View {
             }
         }.navigationBarTitleDisplayMode(.inline)
         .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(hex: "#e7bd75").opacity(0.7),
-                        Color.clear
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+            Color(.systemGray6)
                 .ignoresSafeArea()
             )
     }

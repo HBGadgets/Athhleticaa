@@ -28,8 +28,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var hrv: Int?
     @Published private(set) var deviceStateRaw: Int?   // Replace with SDK enum type if you have it
     @Published  var dataLoaded: Bool = false
-    @Published private(set) var bleStateRaw: Int?      // Replace with SDK enum type if you have it
-    @Published var hrvData: [HRVDataPoint] = []
+    @Published private(set) var bleStateRaw: Int?
     @Published var currentHRV: Int = 0
     @Published var heartRateHistory: [SchedualHeartRateModel] = []
     @Published var errorMessage: String?
@@ -40,6 +39,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @ObservedObject var stressManager = StressManager()
     @ObservedObject var sleepManager = SleepManager()
     @ObservedObject var bloodOxygenManager = BloodOxygenManager()
+    @ObservedObject var hrvManager = HRVManager()
 
     
     // MARK: - Private core bluetooth + sdk refs
@@ -250,62 +250,7 @@ final class QCCentralManager: NSObject, ObservableObject {
             }
         )
     }
-    
-    func measureHRV() {
-        print("🌟 Start HRV measurement 🌟")
-        
-        QCSDKCmdCreator.setTime(Date(),
-            success: { info in
-                // Use SDK constant instead of literal string
-                if let key = QCBandFeatureAppManual as? String,
-                   let supportsManual = info[key] as? Bool, supportsManual {
-                    
-                    print("✅ Ring supports manual HRV measurement")
-                    
-                    let type = QCMeasuringType.HRV
-                    QCSDKManager.shareInstance().startToMeasuring(
-                        withOperateType: type,
-                        measuringHandle: { result in
-                            if let value = result as? NSNumber {
-                                print("Current HRV reading: \(value.intValue)")
-                                self.appendHRVValue(value.intValue)
-                            }
-                        },
-                        completedHandle: { [weak self] success, result, error in
-                            DispatchQueue.main.async {
-                                if success, let hrValue = result as? NSNumber {
-                                    self?.hrv = hrValue.intValue
-                                    print("✅ HRV Measurement Complete: \(hrValue.intValue)")
-                                } else {
-                                    print("❌ HRV measurement failed: \(error?.localizedDescription ?? "unknown error")")
-                                }
-                            }
-                        }
-                    )
-                } else {
-                    print("⚠️ This ring does not support manual HRV measurement.")
-                }
-            },
-            failed: {
-                print("❌ Failed to set time before HRV measurement")
-            }
-        )
-    }
-    
-    private func appendHRVValue(_ value: Int) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        let time = formatter.string(from: Date())
-        
-        let newPoint = HRVDataPoint(time: time, value: Double(value))
-        hrvData.append(newPoint)
-        
-        // Keep only last 30 readings
-        if hrvData.count > 30 {
-            hrvData.removeFirst()
-        }
-    }
-    
+
     // MARK: - Private helpers
     private func startScanTimeout() {
         stopTimer()
@@ -413,7 +358,9 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                 self.sleepManager.getSleepFromDay(day: 0) {
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
-                                            self.dataLoaded = true
+                                            self.hrvManager.fetchHRV(for: 0) {
+                                                self.dataLoaded = true
+                                            }
                                         }
                                     }
                                 }

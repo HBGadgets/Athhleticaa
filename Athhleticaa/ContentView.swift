@@ -53,7 +53,8 @@ struct ContentView: View {
                     case 4:
                         StressAnalysisScreenView()
                     case 5:
-                        ProfileView(ringManager: ringManager)
+                        DeviceInfoView(ringManager: ringManager)
+//                        ProfileView(ringManager: ringManager)
                     default:
                         DashboardView(ringManager: ringManager)
                     }
@@ -81,20 +82,6 @@ struct ContentView: View {
                     }
                 }
             }
-//            .toolbar {
-//                ToolbarItem(placement: .principal) {
-//                    colorScheme == .dark ?
-//                    Image(.athhleticaaLogoDarkMode)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 120)
-//                    :
-//                    Image(.athhleticaaLogoLightMode)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 120)
-//                }
-//            }.navigationBarTitleDisplayMode(.inline)
         }
         .alert(
             "Couldn't get data",

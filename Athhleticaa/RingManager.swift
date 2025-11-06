@@ -24,6 +24,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published private(set) var peripherals: [QCBlePeripheral] = []
     @Published private(set) var connectedPeripheral: CBPeripheral?
     @Published private(set) var batteryLevel: Int?
+    @Published var isCharging: Bool = false
     @Published var heartRate: Int?
     @Published var hrv: Int?
     @Published private(set) var deviceStateRaw: Int?   // Replace with SDK enum type if you have it
@@ -117,7 +118,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     }
     
     // MARK: - Connect / Disconnect
-    func connect(to peripheral: CBPeripheral, timeout: Int? = nil) {
+    func connect(to peripheral: CBPeripheral, timeout: Int? = nil, completion: (() -> Void)? = nil) {
         if let t = timeout {
             connectTimeout = TimeInterval(max(0, t))
         }
@@ -125,6 +126,7 @@ final class QCCentralManager: NSObject, ObservableObject {
         // Keep a strong delegate reference on the peripheral if needed.
         centralManager.connect(peripheral, options: [CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
         startConnectTimeout(for: peripheral)
+        completion?()
     }
     
     func disconnect() {
@@ -182,7 +184,8 @@ final class QCCentralManager: NSObject, ObservableObject {
         QCSDKCmdCreator.readBatterySuccess({ [weak self] battery, charging in
             DispatchQueue.main.async {
                 self?.batteryLevel = Int(battery)
-                print("🔋 Battery level: \(battery)/8, charging: \(charging)")
+                self?.isCharging = charging
+                print("🔋 Battery level: \(battery), charging: \(charging)")
                 completion?()
             }
         }, failed: {

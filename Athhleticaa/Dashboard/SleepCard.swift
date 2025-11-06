@@ -52,7 +52,7 @@ struct SleepCard: View {
                 Spacer()
                 
                 HStack(alignment: .center) {
-                    if sleepManager.summary?.totalMinutes == 0 {
+                    if sleepManager.summary?.score != 0 {
                         let summary = sleepManager.summary
                                 
                         TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
@@ -62,8 +62,14 @@ struct SleepCard: View {
                         VStack {
                             Image(systemName: "moon.stars.fill")
                                 .font(.system(size: 70, weight: .semibold))
-                            Text("\(summary?.score)")
-                                .font(.headline)
+                            if let summaryScore = summary?.score {
+                                Text("\(summaryScore)")
+                                    .font(.headline)
+                            } else {
+                                Text("...")
+                                    .font(.headline)
+                            }
+                            
                             Text("Sleep score")
                                 .font(.subheadline)
                         }

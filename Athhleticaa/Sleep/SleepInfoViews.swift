@@ -92,8 +92,13 @@ struct SleepSummaryView: View {
                     .frame(width: 170, height: 170)
 
                 VStack {
-                    Text("\(summary.score == 0 ? "0" : "\(summary.score)")")
-                        .font(.system(size: 28, weight: .bold))
+                    if let scoreText = summary.score {
+                            Text("\(scoreText)")
+                                .font(.system(size: 28, weight: .bold))
+                        } else {
+                            Text("0")
+                                .font(.system(size: 28, weight: .bold))
+                        }
                     Text("Score")
                         .font(.caption)
                         .foregroundColor(.gray)
@@ -132,9 +137,13 @@ struct SleepSummaryView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "chart.line.uptrend.xyaxis")
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("\(summary.efficiency == 0 ? "0" : "\(summary.efficiency)")%")
-
-                                .font(.headline)
+                            if let efficiencyScore = summary.efficiency {
+                                Text("\(efficiencyScore)%")
+                                    .font(.headline)
+                            } else {
+                                Text("0")
+                                    .font(.headline)
+                            }
                             Text("Sleep Efficiency")
                                 .font(.caption)
                                 .foregroundColor(.gray)

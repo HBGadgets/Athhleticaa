@@ -95,7 +95,8 @@ struct DashboardView: View {
                     .scaledToFit()
                     .frame(width: 120)
             }
-        }.navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitleDisplayMode(.inline)
         .background(
             Color(.systemGray6)
                 .ignoresSafeArea()

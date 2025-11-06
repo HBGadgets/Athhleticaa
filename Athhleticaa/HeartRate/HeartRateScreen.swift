@@ -52,7 +52,7 @@ struct HeartRateScreenView: View {
                         // Start measuring
                         isMeasuring = true
                         currentHeartRate = nil
-                        ringManager.measureHeartRate()
+//                        ringManager.measureHeartRate()
                         animateHeart = true
                     } else {
                         // Stop measuring

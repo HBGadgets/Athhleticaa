@@ -45,6 +45,24 @@ extension HeartRateData {
     var lastNonZeroHeartRate: Int {
         heartRates.last(where: { $0 != 0 }) ?? 0
     }
+    
+    var validHeartRates: [Int] {
+        heartRates.filter { $0 > 0 }
+    }
+
+    var minHeartRate: Int {
+        validHeartRates.min() ?? 0
+    }
+
+    var maxHeartRate: Int {
+        validHeartRates.max() ?? 0
+    }
+
+    var averageHeartRate: Int {
+        guard !validHeartRates.isEmpty else { return 0 }
+        let sum = validHeartRates.reduce(0, +)
+        return sum / validHeartRates.count
+    }
 }
 
 

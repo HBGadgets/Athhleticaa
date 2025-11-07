@@ -32,20 +32,23 @@ struct DeviceInfoView: View {
                             Text("\(device.name ?? "Unknown")")
                                 .font(.title3)
                                 .bold()
-
-                            Label("Connected", systemImage: "bolt.horizontal.circle.fill")
-                                .font(.subheadline)
-                                .foregroundColor(.blue)
-                                .labelStyle(.titleAndIcon)
-
-                            Label("\(ringManager.batteryLevel ?? 0)%)", systemImage: "\(ringManager.isCharging ? "bolt.fill" : "")")
-                                .font(.subheadline)
-                                .foregroundColor(.green)
-                                .labelStyle(.titleAndIcon)
                             
-                            Button("Disconnect") {
+                            Text("• Connected")
+                                .foregroundStyle(.green)
+                            
+                            HStack {
+                                Text("Battery: \(ringManager.batteryLevel ?? 0)%")
+                                if (ringManager.isCharging) {
+                                    Image(systemName: "bolt.fill")
+                                        .foregroundStyle(.green)
+                                }
+                            }
+                            
+                            Button("Unbind") {
                                 ringManager.disconnect()
                             }
+                            .backgroundStyle(.blue)
+                            .buttonStyle(.borderedProminent)
                         }
                         .padding(.leading, 8)
                     } else {
@@ -57,15 +60,18 @@ struct DeviceInfoView: View {
                             NavigationLink(destination: ScanningPage(ringManager: ringManager)) {
                                 Text("Scan for ring")
                             }
+                            .buttonStyle(.borderedProminent)
                         }
                         .padding(.leading, 8)
                     }
                     
+                    Spacer()
+                    
                 }
                 .padding()
-                .background(Color.white)
+                .background(colorScheme == .light ? Color.white : Color.black)
                 .cornerRadius(16)
-                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.3)
 
                 // MARK: - Gesture Control Card
                 VStack(alignment: .leading, spacing: 8) {
@@ -92,15 +98,23 @@ struct DeviceInfoView: View {
                         .lineLimit(2)
                 }
                 .padding()
-                .background(Color.white)
+                .background(colorScheme == .light ? Color.white : Color.black)
                 .cornerRadius(16)
-                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
 
                 // MARK: - Menu Buttons
                 VStack(spacing: 12) {
                     DeviceMenuItem(icon: "dot.radiowaves.left.and.right", color: .mint, title: "Find Device")
                     DeviceMenuItem(icon: "brain.head.profile", color: .blue, title: "AI Analysis")
-                    DeviceMenuItem(icon: "heart.fill", color: .green, title: "Health Monitoring")
+                    DeviceMenuItem(icon: "heart.fill", color: .pink, title: "Health Monitoring")
+                    DeviceMenuItem(icon: "camera", color: .teal, title: "Take Picture")
+                    DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")
+                    DeviceMenuItem(icon: "tshirt", color: .purple, title: "App Theme")
+                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
+                    DeviceMenuItem(icon: "battery.100percent", color: .red, title: "Low Battery Prompt")
+                    DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")
+                    DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
+                    DeviceMenuItem(icon: "gear", color: .gray, title: "System Settings")
                 }
             }
             .padding(.horizontal)
@@ -121,107 +135,39 @@ struct DeviceInfoView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .background(Color(.systemGray6))
         .ignoresSafeArea(edges: .bottom)
     }
 }
 
 // MARK: - Subview for Menu Items
 struct DeviceMenuItem: View {
+    @Environment(\.colorScheme) var colorScheme
     var icon: String
     var color: Color
     var title: String
 
     var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 24, height: 24)
-                .foregroundColor(color)
-                .padding(8)
-                .background(color.opacity(0.1))
-                .clipShape(Circle())
+        ZStack {
+            HStack {
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(color)
+                    .padding(8)
+                    .background(color.opacity(0.1))
+                    .clipShape(Circle())
 
-            Text(title)
-                .font(.headline)
-                .foregroundColor(.black)
+                Text(title)
+                    .font(.headline)
 
-            Spacer()
+                Spacer()
+            }
+            .padding()
+            .background(Color(colorScheme == .light ? .white : .black))
+            .cornerRadius(16)
+            .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+        
     }
 }
-//
-//struct ProfileView: View {
-////    @ObservedObject var ringManager = QCCentralManager
-//    @ObservedObject var ringManager: QCCentralManager
-//    
-//    var body: some View {
-//                NavigationStack {
-//                    VStack(spacing: 20) {
-//                        Text("QRing Connector")
-//                            .font(.title)
-//
-//                        if let device = ringManager.connectedPeripheral {
-//                            Text("Connected to: \(device.name ?? "Unknown")")
-//
-//                            if let battery = ringManager.batteryLevel {
-//                                Text("Battery: \(battery)/8")
-//                            }
-//
-//                            if let heartRate = ringManager.heartRate {
-//                                Text("❤️ Heart Rate: \(heartRate) bpm")
-//                                    .font(.headline)
-//                                    .foregroundColor(.red)
-//                            }
-//
-//                            VStack {
-//                                Button("Read Battery") {
-//                                    ringManager.readBattery()
-//                                }
-//                                NavigationLink(destination: HRVScreenView(ringManager: ringManager)) {
-//                                    Text("Go to HRV Screen")
-//        //                            Button("Check HRV") {
-//        //                                ringManager.measureHRV()
-//        //                            }
-//                                }
-//
-//                                NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
-//                                    Text("Go to Heart rate Screen")
-//                                }
-//                                Button("Read heart rate") {
-//                                    ringManager.measureHeartRate()
-//                                }
-//                                Button("Disconnect") {
-//                                    ringManager.disconnect()
-//                                }
-//                            }
-//                            .buttonStyle(.borderedProminent)
-//                            .padding(.top, 10)
-//
-//                        } else {
-//                            Button("Scan Rings") {
-//                                ringManager.scan()
-//                            }
-//                            .buttonStyle(.borderedProminent)
-//
-//                            if ringManager.peripherals.isEmpty {
-//                                ProgressView("Scanning...")
-//                                    .padding()
-//                            } else {
-//                                List(ringManager.peripherals, id: \.peripheral.identifier) { qcPer in
-//                                    Button(qcPer.peripheral.name ?? "Unknown") {
-//                                        ringManager.connect(to: qcPer.peripheral)
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                    .padding()
-//                }
-//    }
-//}

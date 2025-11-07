@@ -74,6 +74,15 @@ final class QCCentralManager: NSObject, ObservableObject {
             CBConnectPeripheralOptionNotifyOnConnectionKey: true
         ]
         centralManager = CBCentralManager(delegate: self, queue: .main, options: options)
+        
+        // 💡 Set up real-time battery monitoring
+        QCSDKManager.shareInstance().currentBatteryInfo = { [weak self] battery, charging in
+            DispatchQueue.main.async {
+                self?.batteryLevel = Int(battery)
+                self?.isCharging = charging
+                print("🔋 Live battery update: \(battery)% — charging: \(charging)")
+            }
+        }
     }
     
     deinit {

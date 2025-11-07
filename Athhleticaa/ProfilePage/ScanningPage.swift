@@ -20,8 +20,24 @@ struct ScanningPage: View {
                 List(ringManager.peripherals, id: \.peripheral.identifier) { qcPer in
                     Button(qcPer.peripheral.name ?? "Unknown") {
                         ringManager.connect(to: qcPer.peripheral) {
+                            ringManager.stopScan()
                             ringManager.selectedTab = 0
                             dismiss()
+                            ringManager.heartRateManager.fetchTodayHeartRate() {
+                                ringManager.pedometerManager.getPedometerData() {
+                                    ringManager.stressManager.fetchStressData() {
+                                        ringManager.sleepManager.getSleepFromDay(day: 0) {
+                                            ringManager.readBattery() {
+                                                ringManager.bloodOxygenManager.fetchBloodOxygenData() {
+                                                    ringManager.hrvManager.fetchHRV(for: 0) {
+                                                        ringManager.dataLoaded = true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

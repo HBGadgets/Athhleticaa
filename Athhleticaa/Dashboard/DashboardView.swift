@@ -48,7 +48,7 @@ struct DashboardView: View {
                 VStack(spacing: 16) {
                     // MARK: - Heart Rate
                     HStack {
-                        NavigationLink(destination: HRVScreenView(ringManager: ringManager)) {
+                        NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
                             HeartRateCard(bpm: ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)
                         }
                         BatteryCard(charge: ringManager.batteryLevel ?? 0)

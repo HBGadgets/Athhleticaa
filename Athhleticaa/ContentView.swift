@@ -65,9 +65,6 @@ struct ContentView: View {
                         .padding(.bottom, -10)
                 }
                 if !ringManager.dataLoaded && (ringManager.connectedPeripheral != nil) {
-                    Color.black.opacity(0.3)
-                        .ignoresSafeArea()
-                        .allowsHitTesting(true)
                     VStack(spacing: 20) {
                         ProgressView("Syncing data")
                             .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
@@ -83,6 +80,9 @@ struct ContentView: View {
                     .onDisappear {
                         cancelTimeout()
                     }
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                        .allowsHitTesting(true)
                 }
             }
         }

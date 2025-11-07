@@ -5,89 +5,79 @@
 //  Created by Dipanshu Kashyap on 27/10/25.
 //
 
-import SwiftUICore
-import SwiftUI
-
-import SwiftUI
-
 import SwiftUI
 
 struct HeartRateScreenView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
-    @StateObject var heartRateManager = HeartRateManager()
-    @State private var isMeasuring = false
-    @State private var currentHeartRate: Int? = nil
-    @State private var animateHeart = false
-
+    
     var body: some View {
-        VStack(spacing: 20) {
-//            HeartRateChartView(manager: heartRateManager)
+        ScrollView {
+            VStack(spacing: 20) {
+                // MARK: - Heart Rate Section
+                VStack(spacing: 16) {
+//                    Image("HeartRateIcon")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 200, height: 200)
+                    Image(systemName: "waveform.path.ecg")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 120)
+                        .foregroundColor(.red)
+                        .shadow(color: .red.opacity(0.5), radius: 15, x: 0, y: 0)
 
-            VStack(spacing: 16) {
-                HStack {
-                    Text("Real-time heart rate")
-                        .font(.headline)
-                    Spacer()
-                    ZStack {
-                        Image(systemName: "heart.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 28, height: 28)
-                            .foregroundColor(.red)
-                            .scaleEffect(animateHeart ? 1.3 : 1.0)
-                            .animation(
-                                isMeasuring
-                                ? .easeInOut(duration: 0.6).repeatForever(autoreverses: true)
-                                : .default,
-                                value: animateHeart
-                            )
-                    }
-                    Text(currentHeartRate != nil ? "\(currentHeartRate!) bpm" : "-- bpm")
-                        .font(.headline)
-                        .foregroundColor(.gray)
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 38, height: 38)
+                        .foregroundColor(.red)
+
+                    Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
+                        .font(.system(size: 44, weight: .bold))
+
+                    Text("BPM")
+                        .font(.subheadline)
                 }
 
-                Button(action: {
-                    if !isMeasuring {
-                        // Start measuring
-                        isMeasuring = true
-                        currentHeartRate = nil
-//                        ringManager.measureHeartRate()
-                        animateHeart = true
-                    } else {
-                        // Stop measuring
-                        isMeasuring = false
-                        currentHeartRate = nil
-                        animateHeart = false
-                    }
-                }) {
-                    Text(isMeasuring ? "Measuring..." : "Click to start measurement")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
-                        .cornerRadius(8)
+                // MARK: - Average / Min / Max
+                HStack(spacing: 0) {
+                    StatItem(title: "Average", value: "78")
+                    Divider().frame(height: 40)
+                    StatItem(title: "Minimum", value: "69")
+                    Divider().frame(height: 40)
+                    StatItem(title: "Maximum", value: "69")
                 }
-                .disabled(isMeasuring) // prevent rapid taps
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background(Color(colorScheme == .light ? .white : .black))
+                .cornerRadius(16)
+                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
             }
             .padding()
-            .cornerRadius(12)
-            .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
         }
-        .onReceive(ringManager.$heartRate) { newValue in
-            guard let hr = newValue else { return }
-            currentHeartRate = hr
-            isMeasuring = false
-            animateHeart = false
-        }
-        .onChange(of: isMeasuring) { measuring in
-            if measuring {
-                withAnimation {
-                    animateHeart = true
-                }
-            } else {
-                animateHeart = false
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Heart rate").font(.headline)
             }
         }
-        .padding()
+        .navigationBarTitleDisplayMode(.inline)
+        
+    }
+}
+
+// MARK: - Reusable Components
+struct StatItem: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(value)
+                .font(.headline)
+            Text(title)
+                .font(.footnote)
+        }
+        .frame(maxWidth: .infinity)
     }
 }

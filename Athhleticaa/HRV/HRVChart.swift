@@ -39,15 +39,23 @@ struct HRVChartView: View {
                     x: .value("Time", point.time),
                     y: .value("HRV", point.value)
                 )
-                .foregroundStyle(.white)
+//                .foregroundStyle(.white)
                 .lineStyle(StrokeStyle(lineWidth: 2))
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(.red)
                 
-                PointMark(
+                AreaMark(
                     x: .value("Time", point.time),
                     y: .value("HRV", point.value)
                 )
-                .foregroundStyle(.white)
-                .symbolSize(25)
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.red.opacity(0.25), .clear],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
             }
             .chartXAxis {
                 AxisMarks() { value in

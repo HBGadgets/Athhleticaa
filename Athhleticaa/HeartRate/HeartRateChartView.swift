@@ -36,6 +36,19 @@ struct HeartRateChartView: View {
                     )
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(.red)
+                    
+                    AreaMark(
+                        x: .value("Time", point.time),
+                        y: .value("BPM", point.bpm)
+                    )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [Color.red.opacity(0.25), .clear],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                 }
                 
                 if let selectedIndex,
@@ -73,7 +86,7 @@ struct HeartRateChartView: View {
                 AxisMarks(position: .leading)
             }
             .chartXAxis {
-                let tickValues = Array(stride(from: 0, through: totalSecondsInDay, by: 3 * 60 * 60)).map(Double.init)
+                let tickValues = Array(stride(from: 0, through: totalSecondsInDay, by: 6 * 60 * 60)).map(Double.init)
                 
                 AxisMarks(values: tickValues) { value in
                     AxisGridLine()

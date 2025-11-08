@@ -84,7 +84,7 @@ struct DeviceInfoView: View {
                 }
                 .clipped()
 //                .padding()
-                .background(colorScheme == .light ? Color.white : Color.black)
+                .background(colorScheme == .light ? Color.white : Color(.systemGray6))
                 .cornerRadius(16)
                 .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.3)
 
@@ -113,7 +113,7 @@ struct DeviceInfoView: View {
                         .lineLimit(2)
                 }
                 .padding()
-                .background(colorScheme == .light ? Color.white : Color.black)
+                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
                 .cornerRadius(16)
                 .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
 
@@ -179,7 +179,7 @@ struct DeviceMenuItem: View {
                 Spacer()
             }
             .padding()
-            .background(Color(colorScheme == .light ? .white : .black))
+            .background(colorScheme == .light ? Color.white : Color(.systemGray6))
             .cornerRadius(16)
             .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
         }

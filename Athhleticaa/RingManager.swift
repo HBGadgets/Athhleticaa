@@ -371,6 +371,12 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
                                             self.hrvManager.fetchHRV(for: 0) {
+                                                if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
+                                                ) {
+                                                    let formatter = DateFormatter()
+                                                    formatter.dateFormat = "h:mm a"
+                                                    print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
+                                                }
                                                 self.dataLoaded = true
                                             }
                                         }

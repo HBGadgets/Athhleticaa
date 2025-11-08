@@ -54,7 +54,7 @@ struct HeartRateScreenView: View {
                     }
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)
-                    .background(Color(colorScheme == .light ? .white : .black))
+                    .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 } else {
@@ -67,10 +67,38 @@ struct HeartRateScreenView: View {
                     }
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)
-                    .background(Color(colorScheme == .light ? .white : .black))
+                    .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
+                
+                
+                
+                HStack {
+                    Text("Data details")
+                    Spacer()
+                    HStack(spacing: 4) {
+                        Text({
+                            if let data = ringManager.heartRateManager.dayData.first,
+                               let index = data.lastNonZeroHeartRateIndex,
+                               let date = data.timeForHeartRate(at: index) {
+                                let formatter = DateFormatter()
+                                formatter.dateFormat = "h:mm a"
+                                return formatter.string(from: date)
+                            } else {
+                                return "--:--"
+                            }
+                        }())
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundStyle(.gray)
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                .cornerRadius(16)
+                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                
                 VStack(spacing: 16) {
                     HStack {
                         Text("Real-time heart rate")
@@ -119,11 +147,19 @@ struct HeartRateScreenView: View {
                     .disabled(isMeasuring) // prevent rapid taps
                 }
                 .padding()
-                .cornerRadius(12)
-                .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
+                .frame(maxWidth: .infinity)
+                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                .cornerRadius(16)
+                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                
                 
                 if let day = ringManager.heartRateManager.dayData.first {
                     HeartRateChartView(heartRateData: day)
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                        .cornerRadius(16)
+                        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 } else {
                     Text("No data")
                 }

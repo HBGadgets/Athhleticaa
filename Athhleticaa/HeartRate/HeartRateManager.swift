@@ -63,8 +63,28 @@ extension HeartRateData {
         let sum = validHeartRates.reduce(0, +)
         return sum / validHeartRates.count
     }
+    
+    var lastNonZeroHeartRateIndex: Int? {
+        heartRates.lastIndex(where: { $0 != 0 })
+    }
 }
 
+extension HeartRateData {
+    /// Returns a Date for a given heart rate index
+    func timeForHeartRate(at index: Int) -> Date? {
+        guard index >= 0 && index < heartRates.count else { return nil }
+        
+        // Combine the date string with 00:00:00 as start of day
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let baseDate = formatter.date(from: date) else { return nil }
+        
+        // Offset in seconds = index * secondInterval
+        let offsetSeconds = Double(index * secondInterval)
+        return baseDate.addingTimeInterval(offsetSeconds)
+    }
+}
 
 // MARK: - HeartRateManager
 class HeartRateManager: ObservableObject {

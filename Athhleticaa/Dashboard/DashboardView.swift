@@ -25,7 +25,7 @@ struct DashboardView: View {
         DispatchQueue.main.async {
             print("🚀 Device ready — starting data fetch")
             ringManager.heartRateManager.fetchTodayHeartRate() {
-                ringManager.pedometerManager.getPedometerData() {
+                ringManager.pedometerManager.getPedometerData(day: 0) {
                     ringManager.stressManager.fetchStressData() {
                         ringManager.sleepManager.getSleepFromDay(day: 0) {
                             ringManager.readBattery() {
@@ -55,11 +55,13 @@ struct DashboardView: View {
                     }
 
                     // MARK: - Steps
-                    StepsCard(
-                        calories: ringManager.pedometerManager.stepsData?.calories ?? 0,
-                        steps: ringManager.pedometerManager.stepsData?.totalSteps ?? 0,
-                        distance: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000
-                    )
+                    NavigationLink(destination: ActivityScreenView(ringManager: ringManager)) {
+                        StepsCard(
+                            calories: ringManager.pedometerManager.stepsData?.calories ?? 0,
+                            steps: ringManager.pedometerManager.stepsData?.totalSteps ?? 0,
+                            distance: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000
+                        )
+                    }
                     
                     NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)) {
                         SleepCard(sleepManager: ringManager.sleepManager)

@@ -49,6 +49,12 @@ struct StepsCard: View {
     var steps: Int
     var distance: Double
     
+    var formattedToday: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: Date())
+    }
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
@@ -92,10 +98,23 @@ struct StepsCard: View {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             
+            
             VStack(alignment: .leading, spacing: 8) {
-                Text("Activity")
-                    .font(.headline)
-                    .foregroundColor(Color.white)
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Activity")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        Text(formattedToday)
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.white)
+                }
                 HStack() {
                     VStack {
                         Image(systemName: "flame")
@@ -137,12 +156,12 @@ struct StepsCard: View {
                             .foregroundColor(.white.opacity(0.8))
                     }
                 }
+//                .padding(.vertical, 20)
+                .padding(.horizontal, 20)
             }
-            .frame(maxWidth: .infinity) // ✅ full width
-            .padding(.vertical, 20)
-            .padding(.horizontal, 30)
+            .padding()
             .cornerRadius(16)
         }
-        
+        .frame(maxWidth: .infinity)
     }
 }

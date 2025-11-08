@@ -32,88 +32,88 @@ struct SleepCard: View {
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            VStack(spacing: 8) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Sleep")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        Text(formattedToday)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                }
-                
-                Spacer()
-                
-                HStack(alignment: .center) {
-                    if sleepManager.summary?.score != 0 {
-                        let summary = sleepManager.summary
-                                
-                        TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
-                        
-                        Spacer()
-                        
-                        VStack {
-                            Image(systemName: "moon.stars.fill")
-                                .font(.system(size: 70, weight: .semibold))
-                            if let summaryScore = summary?.score {
-                                Text("\(summaryScore)")
-                                    .font(.headline)
-                            } else {
-                                Text("...")
-                                    .font(.headline)
-                            }
-                            
-                            Text("Sleep score")
+            VStack {
+                VStack(spacing: 8) {
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Sleep")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            Text(formattedToday)
                                 .font(.subheadline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
                         }
-                        .foregroundColor(.white)
-                    } else {
-                        HStack {
-                            Image(systemName: "moon.stars.fill")
-                                .font(.system(size: 50, weight: .semibold))
-                            VStack {
-                                Text("No Data")
-                                    .font(.system(size: 20, weight: .bold))
-                                Text("Wear smart ring during sleep to get sleep data")
-                                    .font(.system(size: 10, weight: .semibold))
-                            }
-                            
-                        }.foregroundColor(.white)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.white)
                     }
                     
-//                    if let summary = sleepManager.summary {
-//                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
-//
-//                        Spacer()
-//
-//                        VStack {
-//                            Image(systemName: "moon.stars.fill")
-//                                .font(.system(size: 70, weight: .semibold))
-//                            Text("\(sleepManager.summary.score)")
-//                                .font(.headline)
-//                            Text("Sleep score")
-//                                .font(.subheadline)
-//                        }
-//                        .foregroundColor(.white)
-//                    } else {
-//                        HStack {
-//                            Image(systemName: "moon.stars.fill")
-//                                .font(.system(size: 50, weight: .semibold))
-//                            Text("No Data")
-//                                .font(.system(size: 20, weight: .bold))
-//                        }.foregroundColor(.white)
-//                    }
+                    HStack(alignment: .center) {
+                        if sleepManager.summary?.score != 0 {
+                            let summary = sleepManager.summary
+                                    
+                            TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
+                            
+                            Spacer()
+                            
+                            VStack {
+                                Image(systemName: "moon.stars.fill")
+                                    .font(.system(size: 70, weight: .semibold))
+                                if let summaryScore = summary?.score {
+                                    Text("\(summaryScore)")
+                                        .font(.headline)
+                                } else {
+                                    Text("...")
+                                        .font(.headline)
+                                }
+                                
+                                Text("Sleep score")
+                                    .font(.subheadline)
+                            }
+                            .foregroundColor(.white)
+                        } else {
+                            HStack {
+                                Image(systemName: "moon.stars.fill")
+                                    .font(.system(size: 50, weight: .semibold))
+                                VStack {
+                                    Text("No Data")
+                                        .font(.system(size: 20, weight: .bold))
+                                    Text("Wear smart ring during sleep to get sleep data")
+                                        .font(.system(size: 10, weight: .semibold))
+                                }
+                                
+                            }.foregroundColor(.white)
+                        }
+                        
+    //                    if let summary = sleepManager.summary {
+    //                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
+    //
+    //                        Spacer()
+    //
+    //                        VStack {
+    //                            Image(systemName: "moon.stars.fill")
+    //                                .font(.system(size: 70, weight: .semibold))
+    //                            Text("\(sleepManager.summary.score)")
+    //                                .font(.headline)
+    //                            Text("Sleep score")
+    //                                .font(.subheadline)
+    //                        }
+    //                        .foregroundColor(.white)
+    //                    } else {
+    //                        HStack {
+    //                            Image(systemName: "moon.stars.fill")
+    //                                .font(.system(size: 50, weight: .semibold))
+    //                            Text("No Data")
+    //                                .font(.system(size: 20, weight: .bold))
+    //                        }.foregroundColor(.white)
+    //                    }
+                    }
+                    .padding(.horizontal, 40)
+                    
+                    Spacer()
                 }
-                .padding(.horizontal, 40)
-                
-                Spacer()
             }
             .frame(maxWidth: .infinity)
             .padding()

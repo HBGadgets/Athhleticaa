@@ -365,7 +365,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                 DispatchQueue.main.async {
                     print("🚀 Device ready — starting data fetch")
                     self.heartRateManager.fetchTodayHeartRate() {
-                        self.pedometerManager.getPedometerData() {
+                        self.pedometerManager.getPedometerData(day: 0) {
                             self.stressManager.fetchStressData() {
                                 self.sleepManager.getSleepFromDay(day: 0) {
                                     self.readBattery() {

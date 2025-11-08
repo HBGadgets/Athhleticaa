@@ -73,31 +73,33 @@ struct HeartRateScreenView: View {
                 }
                 
                 
-                
-                HStack {
-                    Text("Data details")
-                    Spacer()
-                    HStack(spacing: 4) {
-                        Text({
-                            if let data = ringManager.heartRateManager.dayData.first,
-                               let index = data.lastNonZeroHeartRateIndex,
-                               let date = data.timeForHeartRate(at: index) {
-                                let formatter = DateFormatter()
-                                formatter.dateFormat = "h:mm a"
-                                return formatter.string(from: date)
-                            } else {
-                                return "--:--"
-                            }
-                        }())
-                        Image(systemName: "chevron.right")
+                NavigationLink(destination: HeartRateDataDetailScreenView(ringManager: ringManager)) {
+                    HStack {
+                        Text("Data details")
+                        Spacer()
+                        HStack(spacing: 4) {
+                            Text({
+                                if let data = ringManager.heartRateManager.dayData.first,
+                                   let index = data.lastNonZeroHeartRateIndex,
+                                   let date = data.timeForHeartRate(at: index) {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "h:mm a"
+                                    return formatter.string(from: date)
+                                } else {
+                                    return "--:--"
+                                }
+                            }())
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundStyle(.gray)
                     }
-                    .foregroundStyle(.gray)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                    .cornerRadius(16)
+                    .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
-                .cornerRadius(16)
-                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                
                 
                 VStack(spacing: 16) {
                     HStack {

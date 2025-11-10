@@ -41,12 +41,12 @@ struct BloodOxygenDotChart: View {
 
                         .chartYAxis {
                             AxisMarks { value in
-                                AxisGridLine().foregroundStyle(Color.white.opacity(0.2))
-                                AxisTick().foregroundStyle(Color.white.opacity(0.5))
+                                AxisGridLine().foregroundStyle(Color.gray)
+                                AxisTick().foregroundStyle(Color.gray)
                                 AxisValueLabel {
                                     if let yValue = value.as(Double.self) {
                                         Text("\(Int(yValue))%")
-                                            .foregroundColor(.white.opacity(0.8))
+//                                            .foregroundColor(.white.opacity(0.8))
                                     }
                                 }
                             }
@@ -54,12 +54,12 @@ struct BloodOxygenDotChart: View {
 
                         .chartXAxis {
                             AxisMarks { value in
-                                AxisGridLine().foregroundStyle(Color.white.opacity(0.2))
-                                AxisTick().foregroundStyle(Color.white.opacity(0.5))
+                                AxisGridLine().foregroundStyle(Color.gray)
+                                AxisTick().foregroundStyle(Color.gray)
                                 AxisValueLabel {
                                     if let date = value.as(Date.self) {
                                         Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
-                                            .foregroundColor(.white.opacity(0.8))
+//                                            .foregroundColor(.white.opacity(0.8))
                                     }
                                 }
                             }

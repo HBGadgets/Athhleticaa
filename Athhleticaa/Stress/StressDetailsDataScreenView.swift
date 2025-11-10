@@ -19,7 +19,7 @@ struct StressDataDetailScreenView: View {
                     LazyVStack(spacing: 10) {
                         ForEach(Array(data.stresses.enumerated().reversed()), id: \.offset) { index, bpm in
                             if bpm > 0, let time = data.timeForStressRate(at: index) {
-                                HeartRateCardView(bpm: bpm, time: time)
+                                StressCardView(bpm: bpm, time: time)
                             }
                         }
                     }

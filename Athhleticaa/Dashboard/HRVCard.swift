@@ -78,7 +78,7 @@ struct HRVCard: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
-                HRVChartView(data: hrvManager.hrvData ?? HRVModel(date: "0", values: [0.0], interval: 0))
+                HRVChartView(data: hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)

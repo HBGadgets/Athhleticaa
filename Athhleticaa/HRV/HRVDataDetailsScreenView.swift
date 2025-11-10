@@ -1,5 +1,5 @@
 //
-//  BloodOxygenDataDetailScreenView.swift
+//  HRVDataDetailsScreenView.swift
 //  Athhleticaa
 //
 //  Created by Dipanshu Kashyap on 10/11/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BloodOxygenDataDetailScreenView: View {
+struct HRVDataDetailScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var isSyncing = false
@@ -15,21 +15,17 @@ struct BloodOxygenDataDetailScreenView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                if !ringManager.bloodOxygenManager.readings.isEmpty {
+                if let data = ringManager.hrvManager.hrvData {
                     LazyVStack(spacing: 10) {
-                        ForEach(ringManager.bloodOxygenManager.validBloodOxygenModels) { reading in
-                            BloodOxygenCardView(
-                                soa2: reading.soa2,
-                                max: reading.maxSoa2,
-                                min: reading.minSoa2,
-                                type: reading.soa2Type,
-                                time: reading.date
-                            )
+                        ForEach(Array(data.values.enumerated().reversed()), id: \.offset) { index, ms in
+                            if ms > 0, let time = data.timeForHRVRate(at: index) {
+                                HRVCardView(ms: ms, time: time)
+                            }
                         }
                     }
                     .padding()
                 } else {
-                    Text("No Stress data available")
+                    Text("No HRV data available")
                         .foregroundStyle(.gray)
                         .padding()
                 }
@@ -57,7 +53,7 @@ struct BloodOxygenDataDetailScreenView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     isSyncing = true
-                    ringManager.bloodOxygenManager.fetchBloodOxygenData() {
+                    ringManager.hrvManager.fetchHRV() {
                         isSyncing = false
                     }
                 }) {
@@ -71,29 +67,37 @@ struct BloodOxygenDataDetailScreenView: View {
 }
 
 // MARK: - Card View
-struct BloodOxygenCardView: View {
-    var soa2: Double
-    var max: Double
-    var min: Double
-    var type: BloodOxygenType
-    var time: Date
-
+struct HRVCardView: View {
+    @Environment(\.colorScheme) var colorScheme
+    let ms: Int
+    let time: Date
+    
+    // Define the formatter once
+    private static let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "h:mm a"
+        return f
+    }()
+    
     var body: some View {
         HStack {
-            Image(systemName: "drop.oxygen.fill")
-                .foregroundColor(.blue)
-            Text("Max: \(Int(max)) | Min: \(Int(min))")
+            HStack() {
+                Image(systemName: "waveform.path.ecg.heart.fill")
+                    .foregroundColor(.red)
+                Text("\(ms) ms")
+                    .font(.headline)
+            }
+            
+            Spacer()
+            
+            Text(Self.formatter.string(from: time))
                 .font(.subheadline)
                 .foregroundColor(.gray)
-
-            Spacer()
-
-            Text(time.formatted(date: .omitted, time: .shortened))
-                .font(.subheadline)
-                .foregroundColor(.secondary)
         }
         .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .frame(maxWidth: .infinity)
+        .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+        .cornerRadius(16)
+        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
     }
 }

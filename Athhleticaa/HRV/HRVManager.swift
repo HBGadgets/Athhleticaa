@@ -11,9 +11,53 @@ import Combine
 struct HRVModel: Identifiable, Hashable {
     let id = UUID()
     let date: String
-    let values: [Double]
+    let values: [Int]
     let interval: Int  // seconds between samples
 }
+
+extension HRVModel {
+    
+    var lastNonZeroHRV: Int {
+        values.last(where: { $0 != 0 }) ?? 0
+    }
+    
+    var validHRV: [Int] {
+        values.filter { $0 > 0 }
+    }
+
+    var minHRV: Int {
+        validHRV.min() ?? 0
+    }
+
+    var maxHRV: Int {
+        validHRV.max() ?? 0
+    }
+
+    var averageHRV: Int {
+        guard !validHRV.isEmpty else { return 0 }
+        let sum = validHRV.reduce(0, +)
+        return sum / validHRV.count
+    }
+    
+    var lastNonZeroHRVIndex: Int? {
+        validHRV.lastIndex(where: { $0 != 0 })
+    }
+    
+    func timeForHRVRate(at index: Int) -> Date? {
+        guard index >= 0 && index < values.count else { return nil }
+        
+        // Combine the date string with 00:00:00 as start of day
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let baseDate = formatter.date(from: date) else { return nil }
+        
+        // Offset in seconds = index * secondInterval
+        let offsetSeconds = Double(index * interval)
+        return baseDate.addingTimeInterval(offsetSeconds)
+    }
+}
+
 
 //@MainActor
 class HRVManager: ObservableObject {
@@ -22,7 +66,7 @@ class HRVManager: ObservableObject {
     @Published var errorMessage: String?
     
     /// Fetch HRV data for a specific day (0 = today, 1 = yesterday, ..., 6 = 6 days ago)
-    func fetchHRV(for day: Int, completion: (() -> Void)? = nil) {
+    func fetchHRV(for day: Int = 0, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
         
@@ -64,7 +108,7 @@ class HRVManager: ObservableObject {
                     
                     self.hrvData = HRVModel(
                         date: model.date,
-                        values: model.hrv.map { $0.doubleValue },
+                        values: model.hrv.map { $0.intValue },
                         interval: model.secondInterval
                     )
                     

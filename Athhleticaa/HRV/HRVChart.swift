@@ -39,7 +39,7 @@ struct HRVChartView: View {
                     x: .value("Time", point.time),
                     y: .value("HRV", point.value)
                 )
-                .foregroundStyle(.white)
+                .foregroundStyle(.red)
                 
                 PointMark(
                     x: .value("Time", point.time),
@@ -48,17 +48,17 @@ struct HRVChartView: View {
                 .symbol(Circle())
                 .symbolSize(40)
                 .foregroundStyle(
-                    Color.white
+                    Color.red
                 )
             }
             .chartXAxis {
                 AxisMarks() { value in
-                    AxisGridLine().foregroundStyle(Color.white)
-                    AxisTick().foregroundStyle(Color.white)
+                    AxisGridLine().foregroundStyle(Color.gray)
+                    AxisTick().foregroundStyle(Color.gray)
                     AxisValueLabel {
                         if let date = value.as(Date.self) {
                             Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
-                                .foregroundColor(.white.opacity(0.8))
+//                                .foregroundColor(.gray.opacity(0.8))
                         }
                     }
                 }
@@ -66,18 +66,18 @@ struct HRVChartView: View {
             
             .chartYAxis {
                 AxisMarks() { value in
-                    AxisGridLine().foregroundStyle(Color.white)
-                    AxisTick().foregroundStyle(Color.white)
+                    AxisGridLine().foregroundStyle(Color.gray)
+                    AxisTick().foregroundStyle(Color.gray)
                     AxisValueLabel {
                         if let yValue = value.as(Double.self) {
                             Text("\(Int(yValue))")
-                                .foregroundColor(.white.opacity(0.8))
+//                                .foregroundColor(.gray.opacity(0.8))
                         }
                     }
                 }
             }
             .chartXScale(domain: startOfDay...endOfDay)
-            .foregroundStyle(Color.white)
+            .foregroundStyle(Color.gray)
             .frame(height: 250)
             .padding()
             .background(Color(.systemGray6).opacity(0))
@@ -89,5 +89,5 @@ struct HRVChartView: View {
 struct HRVPoint: Identifiable {
     let id = UUID()
     let time: Date
-    let value: Double
+    let value: Int
 }

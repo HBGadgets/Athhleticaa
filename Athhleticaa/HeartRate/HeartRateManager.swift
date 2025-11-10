@@ -137,8 +137,8 @@ class HeartRateManager: ObservableObject {
     }
 
     // MARK: - Public API
-    func fetchTodayHeartRate(completion: (() -> Void)? = nil) {
-        fetchHeartRateData(forDays: [0], type: .day) {
+    func fetchTodayHeartRate(dayIndex: Int = 0, completion: (() -> Void)? = nil) {
+        fetchHeartRateData(forDays: [dayIndex], type: .day) {
             completion?()
         }
     }

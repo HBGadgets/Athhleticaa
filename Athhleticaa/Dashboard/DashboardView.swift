@@ -83,7 +83,9 @@ struct DashboardView: View {
                         BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
                     }
                     
-                    HRVCard(hrvManager: ringManager.hrvManager)
+                    NavigationLink(destination: HRVScreenView(ringManager: ringManager)) {
+                        HRVCard(hrvManager: ringManager.hrvManager)
+                    }
                 }
                 .padding()
                 .padding(.bottom, 70)

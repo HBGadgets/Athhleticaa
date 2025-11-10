@@ -47,11 +47,11 @@ struct BloodOxygenScreenView: View {
                 // MARK: - Average / Min / Max
                 if let day = ringManager.bloodOxygenManager.readings.first {
                     HStack(spacing: 0) {
-                        StatItem(title: "Average", value: "\(ringManager.bloodOxygenManager.averageBloodOxygen)")
+                        StatItem(title: "Average", value: "\(Int(ringManager.bloodOxygenManager.averageBloodOxygen))")
                         Divider().frame(height: 40)
-                        StatItem(title: "Minimum", value: "\(ringManager.bloodOxygenManager.minBloodOxygen)")
+                        StatItem(title: "Minimum", value: "\(Int(ringManager.bloodOxygenManager.minBloodOxygen))")
                         Divider().frame(height: 40)
-                        StatItem(title: "Maximum", value: "\(ringManager.bloodOxygenManager.maxBloodOxygen)")
+                        StatItem(title: "Maximum", value: "\(Int(ringManager.bloodOxygenManager.maxBloodOxygen))")
                     }
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)
@@ -74,7 +74,7 @@ struct BloodOxygenScreenView: View {
                 }
                 
                 
-                NavigationLink(destination: StressDataDetailScreenView(ringManager: ringManager)) {
+                NavigationLink(destination: BloodOxygenDataDetailScreenView(ringManager: ringManager)) {
                     HStack {
                         Text("Data details")
                         Spacer()

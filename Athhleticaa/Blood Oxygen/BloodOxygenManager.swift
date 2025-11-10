@@ -76,6 +76,10 @@ class BloodOxygenManager: ObservableObject {
     var validBloodOxygenRates: [Double] {
         readings.map { $0.soa2 }.filter { $0 > 0 }
     }
+    
+    var validBloodOxygenModels: [BloodOxygenModel] {
+        readings.filter { $0.soa2 > 0 }
+    }
 
     /// Minimum SpO₂
     var minBloodOxygen: Double {

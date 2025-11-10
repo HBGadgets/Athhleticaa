@@ -17,7 +17,7 @@ struct BloodOxygenDataDetailScreenView: View {
             ScrollView {
                 if !ringManager.bloodOxygenManager.readings.isEmpty {
                     LazyVStack(spacing: 10) {
-                        ForEach(ringManager.bloodOxygenManager.readings.reversed()) { reading in
+                        ForEach(ringManager.bloodOxygenManager.validBloodOxygenModels) { reading in
                             BloodOxygenCardView(
                                 soa2: reading.soa2,
                                 max: reading.maxSoa2,
@@ -80,14 +80,9 @@ struct BloodOxygenCardView: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text("SO₂: \(String(format: "%.1f", soa2))%")
-                    .font(.headline)
-                    .foregroundColor(type.color)
-                Text("Max: \(Int(max)) | Min: \(Int(min))")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-            }
+            Text("Max: \(Int(max)) | Min: \(Int(min))")
+                .font(.subheadline)
+                .foregroundColor(.gray)
 
             Spacer()
 

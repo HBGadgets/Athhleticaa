@@ -51,7 +51,7 @@ struct ContentView: View {
                     case 3:
                         SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)
                     case 4:
-                        StressAnalysisScreenView()
+                        StressAnalysisScreenView(ringManager: ringManager)
                     case 5:
                         DeviceInfoView(ringManager: ringManager)
 //                        ProfileView(ringManager: ringManager)

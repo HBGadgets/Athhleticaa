@@ -35,12 +35,12 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedTab: Int = 0
     
-    @ObservedObject var heartRateManager = HeartRateManager()
-    @ObservedObject var pedometerManager = PedometerManager()
-    @ObservedObject var stressManager = StressManager()
-    @ObservedObject var sleepManager = SleepManager()
-    @ObservedObject var bloodOxygenManager = BloodOxygenManager()
-    @ObservedObject var hrvManager = HRVManager()
+    @Published var heartRateManager = HeartRateManager()
+    @Published var pedometerManager = PedometerManager()
+    @Published var stressManager = StressManager()
+    @Published var sleepManager = SleepManager()
+    @Published var bloodOxygenManager = BloodOxygenManager()
+    @Published var hrvManager = HRVManager()
 
     
     // MARK: - Private core bluetooth + sdk refs

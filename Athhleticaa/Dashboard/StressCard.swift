@@ -125,6 +125,7 @@ struct StressCard: View {
             .padding()
 //            .background(Color.blue.opacity(0.1))
             .cornerRadius(16)
+            .foregroundColor(.white)
         }
         
     }

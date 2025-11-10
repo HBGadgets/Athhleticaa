@@ -84,7 +84,44 @@ class StressManager: ObservableObject {
 }
 
 extension StressModel {
+    
     var lastNonZeroStress: Int {
         stresses.last(where: { $0 != 0 }) ?? 0
+    }
+    
+    var validStress: [Int] {
+        stresses.filter { $0 > 0 }
+    }
+
+    var minStress: Int {
+        validStress.min() ?? 0
+    }
+
+    var maxStress: Int {
+        validStress.max() ?? 0
+    }
+
+    var averageStress: Int {
+        guard !validStress.isEmpty else { return 0 }
+        let sum = validStress.reduce(0, +)
+        return sum / validStress.count
+    }
+    
+    var lastNonZeroStressIndex: Int? {
+        validStress.lastIndex(where: { $0 != 0 })
+    }
+    
+    func timeForStressRate(at index: Int) -> Date? {
+        guard index >= 0 && index < stresses.count else { return nil }
+        
+        // Combine the date string with 00:00:00 as start of day
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let baseDate = formatter.date(from: date) else { return nil }
+        
+        // Offset in seconds = index * secondInterval
+        let offsetSeconds = Double(index * secondInterval)
+        return baseDate.addingTimeInterval(offsetSeconds)
     }
 }

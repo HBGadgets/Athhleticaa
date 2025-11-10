@@ -1,31 +1,35 @@
 //
-//  DataDetailsScreen.swift
+//  BloodOxygenDataDetailScreenView.swift
 //  Athhleticaa
 //
-//  Created by Dipanshu Kashyap on 08/11/25.
+//  Created by Dipanshu Kashyap on 10/11/25.
 //
 
 import SwiftUI
 
-struct HeartRateDataDetailScreenView: View {
+struct BloodOxygenDataDetailScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var isSyncing = false
     
     var body: some View {
-        ZStack { 
+        ZStack {
             ScrollView {
-                if let data = ringManager.heartRateManager.dayData.first {
+                if !ringManager.bloodOxygenManager.readings.isEmpty {
                     LazyVStack(spacing: 10) {
-                        ForEach(Array(data.heartRates.enumerated().reversed()), id: \.offset) { index, bpm in
-                            if bpm > 0, let time = data.timeForHeartRate(at: index) {
-                                HeartRateCardView(bpm: bpm, time: time)
-                            }
+                        ForEach(ringManager.bloodOxygenManager.readings.reversed()) { reading in
+                            BloodOxygenCardView(
+                                soa2: reading.soa2,
+                                max: reading.maxSoa2,
+                                min: reading.minSoa2,
+                                type: reading.soa2Type,
+                                time: reading.date
+                            )
                         }
                     }
                     .padding()
                 } else {
-                    Text("No heart rate data available")
+                    Text("No Stress data available")
                         .foregroundStyle(.gray)
                         .padding()
                 }
@@ -53,7 +57,7 @@ struct HeartRateDataDetailScreenView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     isSyncing = true
-                    ringManager.heartRateManager.fetchTodayHeartRate() {
+                    ringManager.stressManager.fetchStressData() {
                         isSyncing = false
                     }
                 }) {
@@ -67,37 +71,32 @@ struct HeartRateDataDetailScreenView: View {
 }
 
 // MARK: - Card View
-struct HeartRateCardView: View {
-    @Environment(\.colorScheme) var colorScheme
-    let bpm: Int
-    let time: Date
-    
-    // Define the formatter once
-    private static let formatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateFormat = "h:mm a"
-        return f
-    }()
-    
+struct BloodOxygenCardView: View {
+    var soa2: Double
+    var max: Double
+    var min: Double
+    var type: BloodOxygenType
+    var time: Date
+
     var body: some View {
         HStack {
-            HStack() {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.red)
-                Text("\(bpm) BPM")
+            VStack(alignment: .leading) {
+                Text("SO₂: \(String(format: "%.1f", soa2))%")
                     .font(.headline)
+                    .foregroundColor(type.color)
+                Text("Max: \(Int(max)) | Min: \(Int(min))")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
             }
-            
+
             Spacer()
-            
-            Text(Self.formatter.string(from: time))
+
+            Text(time.formatted(date: .omitted, time: .shortened))
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(.secondary)
         }
         .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
-        .cornerRadius(16)
-        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+        .background(Color(.systemGray6))
+        .cornerRadius(12)
     }
 }

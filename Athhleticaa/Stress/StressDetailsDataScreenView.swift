@@ -1,31 +1,31 @@
 //
-//  DataDetailsScreen.swift
+//  Untitled.swift
 //  Athhleticaa
 //
-//  Created by Dipanshu Kashyap on 08/11/25.
+//  Created by Dipanshu Kashyap on 10/11/25.
 //
 
 import SwiftUI
 
-struct HeartRateDataDetailScreenView: View {
+struct StressDataDetailScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var isSyncing = false
     
     var body: some View {
-        ZStack { 
+        ZStack {
             ScrollView {
-                if let data = ringManager.heartRateManager.dayData.first {
+                if let data = ringManager.stressManager.stressData.first {
                     LazyVStack(spacing: 10) {
-                        ForEach(Array(data.heartRates.enumerated().reversed()), id: \.offset) { index, bpm in
-                            if bpm > 0, let time = data.timeForHeartRate(at: index) {
+                        ForEach(Array(data.stresses.enumerated().reversed()), id: \.offset) { index, bpm in
+                            if bpm > 0, let time = data.timeForStressRate(at: index) {
                                 HeartRateCardView(bpm: bpm, time: time)
                             }
                         }
                     }
                     .padding()
                 } else {
-                    Text("No heart rate data available")
+                    Text("No Stress data available")
                         .foregroundStyle(.gray)
                         .padding()
                 }
@@ -53,7 +53,7 @@ struct HeartRateDataDetailScreenView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     isSyncing = true
-                    ringManager.heartRateManager.fetchTodayHeartRate() {
+                    ringManager.stressManager.fetchStressData() {
                         isSyncing = false
                     }
                 }) {
@@ -67,7 +67,7 @@ struct HeartRateDataDetailScreenView: View {
 }
 
 // MARK: - Card View
-struct HeartRateCardView: View {
+struct StressCardView: View {
     @Environment(\.colorScheme) var colorScheme
     let bpm: Int
     let time: Date
@@ -79,12 +79,25 @@ struct HeartRateCardView: View {
         return f
     }()
     
+    private var levelString: String {
+        switch bpm {
+        case 0..<29:
+            return "Low"
+        case 30..<59:
+            return "Normal"
+        case 60..<79:
+            return "Normal"
+        default:
+            return "High"
+        }
+    }
+    
     var body: some View {
         HStack {
             HStack() {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.red)
-                Text("\(bpm) BPM")
+                Image(systemName: "leaf.fill")
+                    .foregroundColor(.green)
+                Text("\(levelString)")
                     .font(.headline)
             }
             

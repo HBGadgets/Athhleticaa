@@ -61,14 +61,49 @@ struct BloodOxygenModel: Identifiable, Codable {
         self.isSubmit = isSubmit
 //        self.device = device
     }
-
 }
 
-@MainActor
+//@MainActor
 class BloodOxygenManager: ObservableObject {
     @Published var readings: [BloodOxygenModel] = []
     @Published var statusMessage: String = ""
+    
+    var lastNonZeroBloodOxygenValue: Double {
+        readings.last(where: { $0.soa2 > 0 })?.soa2 ?? 0
+    }
+    
+    /// All valid (non-zero) SpO₂ values
+    var validBloodOxygenRates: [Double] {
+        readings.map { $0.soa2 }.filter { $0 > 0 }
+    }
 
+    /// Minimum SpO₂
+    var minBloodOxygen: Double {
+        validBloodOxygenRates.min() ?? 0
+    }
+
+    /// Maximum SpO₂
+    var maxBloodOxygen: Double {
+        validBloodOxygenRates.max() ?? 0
+    }
+
+    /// Average SpO₂
+    var averageBloodOxygen: Double {
+        guard !validBloodOxygenRates.isEmpty else { return 0 }
+        let sum = validBloodOxygenRates.reduce(0, +)
+        return sum / Double(validBloodOxygenRates.count)
+    }
+    
+    var lastNonZeroBloodOxygenIndex: Int? {
+        readings.firstIndex(where: { $0.soa2 > 0 })
+    }
+    
+    /// The most recent non-zero blood oxygen model
+    var lastNonZeroBloodOxygenReading: BloodOxygenModel? {
+        readings.first(where: { $0.soa2 > 0 })
+    }
+
+    
     func fetchBloodOxygenData(dayIndex: Int = 0, completion: (() -> Void)? = nil) {
         QCSDKCmdCreator.getBloodOxygenData(byDayIndex: dayIndex) { data, error in
             if let error = error {

@@ -15,7 +15,7 @@ struct HRVModel: Identifiable, Hashable {
     let interval: Int  // seconds between samples
 }
 
-@MainActor
+//@MainActor
 class HRVManager: ObservableObject {
     @Published var hrvData: HRVModel?
     @Published var isLoading = false

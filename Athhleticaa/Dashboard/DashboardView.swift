@@ -47,11 +47,14 @@ struct DashboardView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     // MARK: - Heart Rate
-                    HStack {
-                        NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
-                            HeartRateCard(bpm: ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)
-                        }
-                        BatteryCard(charge: ringManager.batteryLevel ?? 0)
+//                    HStack {
+//                        NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
+//                            HeartRateCard(bpm: ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)
+//                        }
+//                        BatteryCard(charge: ringManager.batteryLevel ?? 0)
+//                    }
+                    NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
+                        HeartRateCard(bpm: ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)
                     }
 
                     // MARK: - Steps
@@ -67,14 +70,18 @@ struct DashboardView: View {
                         SleepCard(sleepManager: ringManager.sleepManager)
                     }
 
-                    StressCard(
-                        lastStress: Double(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0),
-                        averageStress: ringManager.stressManager.averageStress,
-                        rangeMin: ringManager.stressManager.rangeMin,
-                        rangeMax: ringManager.stressManager.rangeMax
-                    )
+                    NavigationLink(destination: StressAnalysisScreenView(ringManager: ringManager)) {
+                        StressCard(
+                            lastStress: Double(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0),
+                            averageStress: ringManager.stressManager.averageStress,
+                            rangeMin: ringManager.stressManager.rangeMin,
+                            rangeMax: ringManager.stressManager.rangeMax
+                        )
+                    }
                     
-                    BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
+                    NavigationLink(destination: BloodOxygenScreenView(ringManager: ringManager)) {
+                        BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
+                    }
                     
                     HRVCard(hrvManager: ringManager.hrvManager)
                 }

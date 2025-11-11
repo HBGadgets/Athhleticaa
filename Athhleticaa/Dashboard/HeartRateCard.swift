@@ -9,7 +9,7 @@ import SwiftUICore
 
 // MARK: - Heart Rate
 struct HeartRateCard: View {
-    var bpm: Int
+    @ObservedObject var ringManager: QCCentralManager
 
     var body: some View {
         ZStack {
@@ -59,20 +59,34 @@ struct HeartRateCard: View {
                 Text("Heart rate")
                     .font(.headline)
                     .foregroundColor(Color.white)
-                Text(bpm == 0 ? "..." : "\(bpm)")
-                    .font(.system(size: 48, weight: .bold))
-                    .foregroundColor(.white)
-                HStack {
-                    Text("BPM")
-                        .font(.headline)
-                        .foregroundColor(.white.opacity(0.8))
-                    Spacer()
-                    Image(systemName: "heart.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.red)
+                    
+                if let day = ringManager.dashboardHeartRateData.first {
+                    HStack {
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Text("\(ringManager.dashboardHeartRateData.last?.lastNonZeroHeartRate ?? 0) BPM")
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        Text("Range \(day.minHeartRate)-\(day.maxHeartRate)")
+                    }
+                }
+                
+                if let day = ringManager.dashboardHeartRateData.first {
+                    HeartRateChartView(heartRateData: day)
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .cornerRadius(16)
+                        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                } else {
+                    Text("No data")
                 }
             }
             .padding()
+            .foregroundColor(.white)
         }
         .frame(maxWidth: .infinity)
         .cornerRadius(20)

@@ -13,7 +13,7 @@ import SleepChartKit
 // MARK: - Sleep
 struct SleepCard: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var sleepManager: SleepManager
+    @ObservedObject var ringManager: QCCentralManager
     
     var formattedToday: String {
         let formatter = DateFormatter()
@@ -51,8 +51,8 @@ struct SleepCard: View {
                     }
                     
                     HStack(alignment: .center) {
-                        if sleepManager.summary?.score != 0 {
-                            let summary = sleepManager.summary
+                        if ringManager.dashboardSleepSummary?.score != 0 {
+                            let summary = ringManager.dashboardSleepSummary
                                     
                             TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
                             
@@ -104,7 +104,7 @@ struct SleepCard: View {
 
 struct TotalSleepRingView: View {
     let totalMinutes: Int
-    let targetMinutes: Int = 480 // 8 hours goal
+    var targetMinutes: Int = 480 // 8 hours goal
     
     var progress: Double {
         min(Double(totalMinutes) / Double(targetMinutes), 1.0)

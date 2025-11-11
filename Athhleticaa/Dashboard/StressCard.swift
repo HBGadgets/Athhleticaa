@@ -10,10 +10,12 @@ import SwiftUICore
 
 struct StressCard: View {
     @Environment(\.colorScheme) var colorScheme
-    var lastStress: Double
+//    var lastStress: Double
     var averageStress: Double
     var rangeMin: Int
     var rangeMax: Int
+    @ObservedObject var ringManager: QCCentralManager
+    
     var formattedToday: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy" // Example: 01 Nov 2025
@@ -77,49 +79,40 @@ struct StressCard: View {
                     Image(systemName: "chevron.right")
                 }
                 
-                Spacer()
+//                Spacer()
                 
-                // Arc + Center value
-                ZStack {
-                    ArcShape(progress: 1.0)
-                        .stroke(
-                            Color.gray, style: StrokeStyle(lineWidth: 20, lineCap: .round)
-                        )
-                        .frame(width: 160, height: 160)
+                HStack {
+                    Spacer()
                     
-                    ArcShape(progress: lastStress / 100)
-                        .stroke(colorScheme == .dark ? Color.white : Color.black, style: StrokeStyle(lineWidth: 15, lineCap: .round))
-                        .frame(width: 160, height: 160)
+                    StressRingView(stress: ringManager.dashboardStressData.first?.lastNonZeroStress ?? 0)
                     
-                    VStack(spacing: 6) {
-                        Text("\(Int(lastStress))")
-                            .font(.system(size: 48, weight: .bold))
-                        Text(stressLevelText(for: averageStress))
-                                                    .font(.headline)
+                    Spacer()
+                    
+                    VStack {
+                        VStack(spacing: 4) {
+                            Text("Daily Average")
+                                .font(.subheadline)
+                            Text("\(Int(averageStress))")
+                                .font(.title3.bold())
+                            Text(stressLevelText(for: averageStress))
+                                .font(.footnote)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack(spacing: 4) {
+                            Text("Daily Range")
+                                .font(.subheadline)
+                            Text("\(rangeMin)-\(rangeMax)")
+                                .font(.title3.bold())
+                            Text(stressLevelText(for: averageStress))
+                                .font(.footnote)
+                        }
                     }
+                    Spacer()
                 }
                 
                 Spacer()
-                
-                // Bottom details
-                HStack(spacing: 40) {
-                    VStack(spacing: 4) {
-                        Text("Daily Average")
-                            .font(.subheadline)
-                        Text("\(Int(averageStress))")
-                            .font(.title3.bold())
-                        Text(stressLevelText(for: averageStress))
-                            .font(.footnote)
-                    }
-                    VStack(spacing: 4) {
-                        Text("Daily Range")
-                            .font(.subheadline)
-                        Text("\(rangeMin)-\(rangeMax)")
-                            .font(.title3.bold())
-                        Text(stressLevelText(for: averageStress))
-                            .font(.footnote)
-                    }
-                }
             }
             .frame(maxWidth: .infinity)
             .padding()
@@ -155,5 +148,51 @@ struct ArcShape: Shape {
             clockwise: false
         )
         return path.trimmedPath(from: 0, to: progress)
+    }
+}
+
+struct StressRingView: View {
+    let stress: Int
+    
+    var progress: Double {
+        min(Double(stress) / 100.0, 1.0)
+    }
+    
+    private var levelString: String {
+        switch stress {
+        case 0...29: return "Low"
+        case 30...59: return "Normal"
+        default: return "High"
+        }
+    }
+
+    var body: some View {
+        ZStack {
+            // Background ring
+            Circle()
+                .stroke(Color.blue.opacity(0.15), lineWidth: 20)
+                .frame(width: 150, height: 150)
+
+            // Progress ring
+            Circle()
+                .trim(from: 0, to: progress)
+                .stroke(
+                    Color.white,
+                    style: StrokeStyle(lineWidth: 10, lineCap: .round)
+                )
+                .rotationEffect(.degrees(-90))
+                .frame(width: 150, height: 150)
+                .animation(.easeInOut(duration: 1.0), value: progress)
+            
+            // Center text
+            VStack(spacing: 6) {
+                Text("\(stress)")
+                    .font(.system(size: 28, weight: .bold))
+                
+                Text(levelString)
+                    .font(.system(size: 28, weight: .bold))
+            }
+            .foregroundStyle(.white)
+        }
     }
 }

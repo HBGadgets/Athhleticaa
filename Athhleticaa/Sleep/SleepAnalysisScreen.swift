@@ -60,6 +60,9 @@ struct SleepsAnalysisScreenView: View {
                 Text("Sleep Track").font(.headline)
             }
         }
+        .onAppear() {
+            ringManager.sleepManager.getSleep()
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }

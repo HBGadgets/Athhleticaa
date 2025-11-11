@@ -133,6 +133,9 @@ struct BloodOxygenScreenView: View {
                 Text("Blood Oxygen").font(.headline)
             }
         }
+        .onAppear() {
+            ringManager.bloodOxygenManager.fetchBloodOxygenData()
+        }
         .navigationBarTitleDisplayMode(.inline)
         
     }

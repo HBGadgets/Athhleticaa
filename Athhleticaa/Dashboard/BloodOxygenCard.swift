@@ -13,7 +13,7 @@ import SleepChartKit
 // MARK: - Sleep
 struct BloodOxygenCard: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var bloodOxygenManager: BloodOxygenManager
+    @ObservedObject var ringManager: QCCentralManager
     
     var formattedToday: String {
         let formatter = DateFormatter()
@@ -78,7 +78,7 @@ struct BloodOxygenCard: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
-                BloodOxygenDotChart(data: bloodOxygenManager.readings)
+                BloodOxygenDotChart(data: ringManager.dashboardBloodOxygenData)
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)

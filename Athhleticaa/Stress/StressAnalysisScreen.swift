@@ -141,6 +141,9 @@ struct StressAnalysisScreenView: View {
                 Text("Stress").font(.headline)
             }
         }
+        .onAppear() {
+            ringManager.stressManager.fetchStressData()
+        }
         .navigationBarTitleDisplayMode(.inline)
         
     }

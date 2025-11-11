@@ -13,7 +13,7 @@ import SleepChartKit
 // MARK: - Sleep
 struct HRVCard: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var hrvManager: HRVManager
+    @ObservedObject var ringManager: QCCentralManager
     
     var formattedToday: String {
         let formatter = DateFormatter()
@@ -78,7 +78,7 @@ struct HRVCard: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
-                HRVChartView(data: hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
+                HRVChartView(data: ringManager.dashboardHRVData ?? HRVModel(date: "0", values: [0], interval: 0))
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)

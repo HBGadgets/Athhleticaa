@@ -44,8 +44,13 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var selectedDayOffset: Int = 0
     @Published var selectedDate = Date()
     
-    
+    // MARK: - dashboard variables
     @Published var dashboardStepsData: StepsData?
+    @Published var dashboardHeartRateData: [HeartRateData] = []
+    @Published var dashboardSleepSummary: Summary?
+    @Published var dashboardStressData: [StressModel] = []
+    @Published var dashboardBloodOxygenData: [BloodOxygenModel] = []
+    @Published var dashboardHRVData: HRVModel?
 
     
     // MARK: - Private core bluetooth + sdk refs
@@ -351,6 +356,8 @@ extension QCCentralManager: CBCentralManagerDelegate {
         peripherals.append(qc)
     }
     
+    // MARK: - Central Manager
+    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected: \(peripheral.name ?? "Unknown")")
         connectedPeripheral = peripheral
@@ -370,13 +377,18 @@ extension QCCentralManager: CBCentralManagerDelegate {
                 DispatchQueue.main.async {
                     print("🚀 Device ready — starting data fetch")
                     self.heartRateManager.fetchTodayHeartRate() {
+                        self.dashboardHeartRateData = self.heartRateManager.dayData
                         self.pedometerManager.getPedometerData() {
                             self.dashboardStepsData = self.pedometerManager.stepsData
                             self.stressManager.fetchStressData() {
+                                self.dashboardStressData = self.stressManager.stressData
                                 self.sleepManager.getSleep() {
+                                    self.dashboardSleepSummary = self.sleepManager.summary
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
+                                            self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
                                             self.hrvManager.fetchHRV(day: 0) {
+                                                self.dashboardHRVData = self.hrvManager.hrvData
                                                 if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
                                                 ) {
                                                     let formatter = DateFormatter()

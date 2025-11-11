@@ -82,7 +82,7 @@ struct HRVCardView: View {
     var body: some View {
         HStack {
             HStack() {
-                Image(systemName: "waveform.path.ecg.heart.fill")
+                Image(systemName: "waveform.path.ecg")
                     .foregroundColor(.red)
                 Text("\(ms) ms")
                     .font(.headline)

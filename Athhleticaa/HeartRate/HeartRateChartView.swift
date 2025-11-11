@@ -25,8 +25,6 @@ struct HeartRateChartView: View {
             .filter { $0.time <= Double(totalSecondsInDay) } // just in case
         
         VStack(alignment: .leading, spacing: 16) {
-            Text("Heart Rate Chart")
-                .font(.headline)
             
             Chart {
                 ForEach(validRates, id: \.time) { point in
@@ -96,29 +94,9 @@ struct HeartRateChartView: View {
                     }
                 }
             }
-            .chartOverlay { proxy in
-                GeometryReader { geo in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    let location = value.location
-                                    if let time: Double = proxy.value(atX: location.x) {
-                                        let index = Int(time / Double(heartRateData.secondInterval))
-                                        if index >= 0 && index < validRates.count {
-                                            selectedIndex = index
-                                        }
-                                    }
-                                }
-                                .onEnded { _ in
-                                    selectedIndex = nil
-                                }
-                        )
-                }
-            }
-            .frame(height: 250)
+//            .frame(height: 250)
         }
-        .padding()
+//        .padding()
     }
     
     // MARK: - Helpers

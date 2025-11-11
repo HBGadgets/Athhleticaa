@@ -111,6 +111,9 @@ struct HRVScreenView: View {
                 Text("HRV").font(.headline)
             }
         }
+        .onAppear() {
+            ringManager.hrvManager.fetchHRV()
+        }
         .navigationBarTitleDisplayMode(.inline)
         
     }

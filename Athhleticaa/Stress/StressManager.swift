@@ -29,10 +29,10 @@ class StressManager: ObservableObject {
     @Published var rangeMax: Int = 0
     @Published var rangeMin: Int = 0
 
-    func fetchStressData(completion: (() -> Void)? = nil) {
+    func fetchStressData(day: Int = 0, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
-        
+
         QCSDKCmdCreator.getSchedualStressStatus { isOn, error in
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -42,7 +42,9 @@ class StressManager: ObservableObject {
                 return
             }
 
-            let days: [NSNumber] = [0, 1, 2, 3, 4, 5, 6].map { NSNumber(value: $0) }
+            // ✅ Fetch only one specific day instead of all 7
+            let days: [NSNumber] = [NSNumber(value: day)]
+
             QCSDKCmdCreator.getSchedualStressData(withDates: days) { models, err in
                 DispatchQueue.main.async {
                     self.isLoading = false
@@ -52,30 +54,28 @@ class StressManager: ObservableObject {
                         return
                     }
 
-                    guard let models = models as? [QCStressModel] else {
-                        self.errorMessage = "Failed to parse stress data"
+                    guard let models = models as? [QCStressModel], let model = models.first else {
+                        self.errorMessage = "No stress data found for day \(day)"
                         completion?()
                         return
                     }
 
-                    self.stressData = models.map { model in
-                        StressModel(
-                            date: model.date,
-                            stresses: model.stresses.map { $0.intValue },
-                            secondInterval: model.secondInterval
-                        )
-                    }
-                    
-                    // ✅ Get today’s average (latest date)
-                    if let today = self.stressData.last {
-                        let nonZeroValues = today.stresses.filter { $0 > 0 }
+                    // ✅ Parse stress data for this specific day
+                    let stressModel = StressModel(
+                        date: model.date,
+                        stresses: model.stresses.map { $0.intValue },
+                        secondInterval: model.secondInterval
+                    )
 
-                        self.averageStress = today.average
-                        self.rangeMax = self.stressData.first?.stresses.max() ?? 0
-                        self.rangeMin = nonZeroValues.min() ?? 0
-                    }
+                    self.stressData = [stressModel]  // only one day's data
                     
-                    print("✅ Stress data fetched:", self.stressData)
+                    // ✅ Compute average and range
+                    let nonZeroValues = stressModel.stresses.filter { $0 > 0 }
+                    self.averageStress = stressModel.average
+                    self.rangeMax = stressModel.stresses.max() ?? 0
+                    self.rangeMin = nonZeroValues.min() ?? 0
+
+                    print("✅ Stress data for day \(day):", stressModel)
                     completion?()
                 }
             }

@@ -11,9 +11,17 @@ struct StressAnalysisScreenView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var stressManager: StressManager
     @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
+    @State private var showCalendar = false
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, dd MMMM yyyy"
+        return formatter
+    }
     
     private func levelString(stress: Int) -> String {
         switch stress {
@@ -27,24 +35,30 @@ struct StressAnalysisScreenView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                HStack {
+                    Button(action: {
+                        showCalendar.toggle()
+                    }) {
+                        Text(ringManager.selectedDate, formatter: dateFormatter)
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showCalendar) {
+                        WeeklyCalendarView(ringManager: ringManager, fromScreen: "StressAnalysisScreen")
+                            .presentationDetents([.height(500)]) // Only as tall as needed
+                            .presentationDragIndicator(.visible)
+                    }
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(.blue)
+                }
                 // MARK: - Heart Rate Section
                 VStack(spacing: 16) {
-//                    Image("HeartRateIcon")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 200, height: 200)
                     Image(systemName: "leaf.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 120)
                         .foregroundColor(.green)
 //                        .shadow(color: .red.opacity(0.5), radius: 15, x: 0, y: 0)
-
-//                    Image(systemName: "heart.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 38, height: 38)
-//                        .foregroundColor(.red)
 
                     Text("\(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)")
                         .font(.system(size: 44, weight: .bold))
@@ -109,61 +123,6 @@ struct StressAnalysisScreenView: View {
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
-                
-                
-//                VStack(spacing: 16) {
-//                    HStack {
-//                        Text("Real-time stress")
-//                            .font(.headline)
-//                        Spacer()
-//                        ZStack {
-//                            Image(systemName: "leaf.fill")
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 28, height: 28)
-//                                .foregroundColor(.green)
-//                                .scaleEffect(animateHeart ? 1.3 : 1.0)
-//                                .animation(
-//                                    isMeasuring
-//                                    ? .easeInOut(duration: 0.6).repeatForever(autoreverses: true)
-//                                    : .default,
-//                                    value: animateHeart
-//                                )
-//                        }
-//                        Text(currentHeartRate != nil ? "\(currentHeartRate!) bpm" : "-- bpm")
-//                            .font(.headline)
-//                            .foregroundColor(.gray)
-//                    }
-//
-//                    Button(action: {
-//                        if !isMeasuring {
-//                            // Start measuring
-//                            isMeasuring = true
-//                            currentHeartRate = nil
-//                            ringManager.measureHeartRate()
-//                            animateHeart = true
-//                        } else {
-//                            // Stop measuring
-//                            isMeasuring = false
-//                            currentHeartRate = nil
-//                            animateHeart = false
-//                        }
-//                    }) {
-//                        Text(isMeasuring ? "Measuring..." : "Click to start measurement")
-//                            .frame(maxWidth: .infinity)
-//                            .padding()
-//                            .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
-//                            .cornerRadius(8)
-//                    }
-//                    .disabled(isMeasuring) // prevent rapid taps
-//                }
-//                .padding()
-//                .frame(maxWidth: .infinity)
-//                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
-//                .cornerRadius(16)
-//                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
-                
-                
                 if let day = ringManager.stressManager.stressData.first {
                     StressChartView(stressData: day)
                         .padding(10)

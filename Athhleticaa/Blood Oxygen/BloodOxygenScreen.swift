@@ -11,9 +11,18 @@ struct BloodOxygenScreenView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var bloodOxygenManager: BloodOxygenManager
     @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
+    @State private var showCalendar = false
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, dd MMMM yyyy"
+        return formatter
+    }
+    
     
     private func levelString(stress: Int) -> String {
         switch stress {
@@ -32,6 +41,22 @@ struct BloodOxygenScreenView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                HStack {
+                    Button(action: {
+                        showCalendar.toggle()
+                    }) {
+                        Text(ringManager.selectedDate, formatter: dateFormatter)
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showCalendar) {
+                        WeeklyCalendarView(ringManager: ringManager, fromScreen: "BloodOxygenScreen")
+                            .presentationDetents([.height(500)]) // Only as tall as needed
+                            .presentationDragIndicator(.visible)
+                    }
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(.blue)
+                }
                 // MARK: - Heart Rate Section
                 if let day = ringManager.bloodOxygenManager.readings.first {
                     BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings)

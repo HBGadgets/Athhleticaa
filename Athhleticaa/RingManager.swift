@@ -507,6 +507,12 @@ struct WeeklyCalendarView: View {
                     ringManager.sleepManager.sleepSegments.removeAll()
                     ringManager.sleepManager.getSleep(day: dayOffset)
                     dismiss()
+                } else if fromScreen == "StressAnalysisScreen" {
+                    ringManager.stressManager.fetchStressData(day: dayOffset)
+                    dismiss()
+                } else if fromScreen == "BloodOxygenScreen" {
+                    ringManager.bloodOxygenManager.fetchBloodOxygenData(dayIndex: dayOffset)
+                    dismiss()
                 }
             }) {
                 Text("Confirm")

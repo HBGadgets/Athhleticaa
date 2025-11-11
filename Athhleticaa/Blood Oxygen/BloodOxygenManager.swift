@@ -133,14 +133,24 @@ class BloodOxygenManager: ObservableObject {
                     date: item.date,
                     soa2Type: BloodOxygenType(rawValue: Int(item.soa2Type.rawValue)) ?? .normal,
                     sourceType: item.sourceType,
-                    isSubmit: item.isSubmit,
-//                    device: item.device
+                    isSubmit: item.isSubmit
                 )
             }
 
-            self.readings = mapped.sorted(by: { $0.date > $1.date })
-            self.statusMessage = "Fetched \(mapped.count) records"
-            print("✅ Loaded \(mapped.count) blood oxygen entries")
+            // ✅ Filter only for the target day (based on `dayIndex`)
+            let calendar = Calendar.current
+            let today = Date()
+            if let targetDate = calendar.date(byAdding: .day, value: -dayIndex, to: today) {
+                self.readings = mapped.filter { model in
+                    calendar.isDate(model.date, inSameDayAs: targetDate)
+                }
+            } else {
+                self.readings = mapped
+            }
+
+            self.readings.sort(by: { $0.date > $1.date })
+            self.statusMessage = "Fetched \(self.readings.count) records"
+            print("✅ Filtered \(self.readings.count) entries for dayIndex \(dayIndex)")
             print(self.readings)
             completion?()
         }

@@ -70,7 +70,7 @@ struct DashboardView: View {
                         SleepCard(sleepManager: ringManager.sleepManager)
                     }
 
-                    NavigationLink(destination: StressAnalysisScreenView(ringManager: ringManager)) {
+                    NavigationLink(destination: StressAnalysisScreenView(ringManager: ringManager, stressManager: ringManager.stressManager)) {
                         StressCard(
                             lastStress: Double(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0),
                             averageStress: ringManager.stressManager.averageStress,
@@ -79,7 +79,7 @@ struct DashboardView: View {
                         )
                     }
                     
-                    NavigationLink(destination: BloodOxygenScreenView(ringManager: ringManager)) {
+                    NavigationLink(destination: BloodOxygenScreenView(ringManager: ringManager, bloodOxygenManager: ringManager.bloodOxygenManager)) {
                         BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
                     }
                     

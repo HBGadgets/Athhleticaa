@@ -27,7 +27,7 @@ struct DashboardView: View {
             ringManager.heartRateManager.fetchTodayHeartRate() {
                 ringManager.pedometerManager.getPedometerData() {
                     ringManager.stressManager.fetchStressData() {
-                        ringManager.sleepManager.getSleepFromDay(day: 0) {
+                        ringManager.sleepManager.getSleep() {
                             ringManager.readBattery() {
                                 ringManager.bloodOxygenManager.fetchBloodOxygenData() {
                                     ringManager.hrvManager.fetchHRV(for: 0) {

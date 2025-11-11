@@ -373,7 +373,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                         self.pedometerManager.getPedometerData() {
                             self.dashboardStepsData = self.pedometerManager.stepsData
                             self.stressManager.fetchStressData() {
-                                self.sleepManager.getSleepFromDay(day: 0) {
+                                self.sleepManager.getSleep() {
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
                                             self.hrvManager.fetchHRV(for: 0) {
@@ -505,7 +505,7 @@ struct WeeklyCalendarView: View {
                     dismiss()
                 } else if fromScreen == "SleepAnalysisScreen" {
                     ringManager.sleepManager.sleepSegments.removeAll()
-                    ringManager.sleepManager.getSleepFromDay(day: dayOffset)
+                    ringManager.sleepManager.getSleep(day: dayOffset)
                     dismiss()
                 }
             }) {

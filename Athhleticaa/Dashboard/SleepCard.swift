@@ -86,29 +86,6 @@ struct SleepCard: View {
                                 
                             }.foregroundColor(.white)
                         }
-                        
-    //                    if let summary = sleepManager.summary {
-    //                        TotalSleepRingView(totalMinutes: summary.totalMinutes)
-    //
-    //                        Spacer()
-    //
-    //                        VStack {
-    //                            Image(systemName: "moon.stars.fill")
-    //                                .font(.system(size: 70, weight: .semibold))
-    //                            Text("\(sleepManager.summary.score)")
-    //                                .font(.headline)
-    //                            Text("Sleep score")
-    //                                .font(.subheadline)
-    //                        }
-    //                        .foregroundColor(.white)
-    //                    } else {
-    //                        HStack {
-    //                            Image(systemName: "moon.stars.fill")
-    //                                .font(.system(size: 50, weight: .semibold))
-    //                            Text("No Data")
-    //                                .font(.system(size: 20, weight: .bold))
-    //                        }.foregroundColor(.white)
-    //                    }
                     }
                     .padding(.horizontal, 40)
                     

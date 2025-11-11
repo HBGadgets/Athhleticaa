@@ -147,30 +147,23 @@ class SleepManager: ObservableObject {
         ]
     }
 
+    func getSleep(day: Int = 0, completion: (() -> Void)? = nil) {
+        print("🛌 Get sleep data")
 
-    
-    func getSleepFromDay(day: Int, completion: (() -> Void)? = nil) {
-        print("Get sleep data")
-        
-        QCSDKCmdCreator.getSleepDetailData(fromDay: day, sleepDatas: { sleepsDict in
-            print("Get sleep data successfully")
-            print(sleepsDict)
-            
+        QCSDKCmdCreator.getFulldaySleepDetailData(byDay: day) { sleeps, naps in
+            print("✅ Got full-day sleep data")
+
             var newSegments: [SleepSegment] = []
-            var totalSleepText = ""
-            
-            for (dayText, daySleeps) in sleepsDict {
-                print("Sleep date: \(dayText)")
-                
-                for sleep in daySleeps {
-                    print("Start Time: \(sleep.happenDate ?? ""), End Time: \(sleep.endTime ?? ""), Duration: \(sleep.total), Type: \(sleep.type)")
-                    
-                    // Convert to SleepSegment
+
+            // MARK: - Night sleep
+            if let sleeps = sleeps {
+                for sleep in sleeps {
+                    print("Start Time: \(sleep.happenDate ?? ""), End Time: \(sleep.endTime ?? ""), Duration: \(sleep.total), Type: \(sleep.type.rawValue)")
                     if let startStr = sleep.happenDate,
                        let endStr = sleep.endTime,
                        let start = Self.parseDate(startStr),
                        let end = Self.parseDate(endStr) {
-                        
+
                         let raw = (sleep.type as? Int) ?? sleep.type.rawValue
                         if let type = SleepType(rawValue: raw) {
                             let segment = SleepSegment(
@@ -185,28 +178,51 @@ class SleepManager: ObservableObject {
                         }
                     }
                 }
-                
-                let total = QCSleepModel.sleepDuration(daySleeps)
-                totalSleepText = "\(total / 60)h \(total % 60)m"
-                print(totalSleepText)
             }
-            
-            // Update UI
+
+            // MARK: - Naps
+            if let naps = naps {
+                for nap in naps {
+                    if let startStr = nap.happenDate,
+                       let endStr = nap.endTime,
+                       let start = Self.parseDate(startStr),
+                       let end = Self.parseDate(endStr) {
+
+                        let raw = (nap.type as? Int) ?? nap.type.rawValue
+                        if let type = SleepType(rawValue: raw) {
+                            let segment = SleepSegment(
+                                startTime: start,
+                                endTime: end,
+                                duration: nap.total,
+                                type: type
+                            )
+                            newSegments.append(segment)
+                        }
+                    }
+                }
+            }
+
+            let fallAsleepDuration = QCSleepModel.fallAsleepDuration(sleeps)
+            let totalSleep = QCSleepModel.sleepDuration(sleeps)
+            let totalNaps = QCSleepModel.sleepDuration(naps)
+
+            print("Fall Asleep Duration: \(fallAsleepDuration) minutes")
+            print("Total Sleep Duration: \(totalSleep / 60)h \(totalSleep % 60)m")
+            print("Total Nap Duration: \(totalNaps / 60)h \(totalNaps % 60)m")
+
+            // ✅ Update Published Properties on Main Thread
             DispatchQueue.main.async {
                 self.sleepSegments = newSegments
+                self.totalSleepDurationText = "\(totalSleep / 60)h \(totalSleep % 60)m"
                 completion?()
             }
-        }, fail: {
-            print("Failed to get sleep")
+
+        } fail: {
+            print("❌ Failed to get sleep data")
             completion?()
-        })
+        }
     }
-    
-//    private static let dateFormatter: DateFormatter = {
-//        let f = DateFormatter()
-//        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        return f
-//    }()
+
     
     private static func parseDate(_ string: String) -> Date? {
         let formats = [

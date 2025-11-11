@@ -58,6 +58,7 @@ struct SleepChartViewContainer: View {
 
 struct SleepSummaryView: View {
     let summary: Summary
+    @Environment(\.colorScheme) var colorScheme
 
     private var hours: Int { (summary.totalMinutes ?? 0) / 60 }
     private var minutes: Int { (summary.totalMinutes ?? 0) % 60 }
@@ -130,41 +131,41 @@ struct SleepSummaryView: View {
             
 
             // Circle + Metrics
-            ZStack {
-                GlassShape(color: Color(.systemGray6), corner: 15)
-//                    .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 4)
-                HStack(spacing: 16) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                        VStack(alignment: .leading, spacing: 2) {
-                            if let efficiencyScore = summary.efficiency {
-                                Text("\(efficiencyScore)%")
-                                    .font(.headline)
-                            } else {
-                                Text("0")
-                                    .font(.headline)
-                            }
-                            Text("Sleep Efficiency")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    
-                    Spacer()
-
-                    HStack(spacing: 8) {
-                        Image(systemName: "moon.fill")
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(summary.quality ?? "")
+            HStack(spacing: 16) {
+                HStack(spacing: 8) {
+                    Image(systemName: "chart.line.uptrend.xyaxis")
+                    VStack(alignment: .leading, spacing: 2) {
+                        if let efficiencyScore = summary.efficiency {
+                            Text("\(efficiencyScore)%")
                                 .font(.headline)
-                            Text("Sleep Quality")
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                        } else {
+                            Text("0")
+                                .font(.headline)
                         }
+                        Text("Sleep Efficiency")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                     }
                 }
-                .padding(20)
+                
+                Spacer()
+
+                HStack(spacing: 8) {
+                    Image(systemName: "moon.fill")
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(summary.quality ?? "")
+                            .font(.headline)
+                        Text("Sleep Quality")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
             }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+            .cornerRadius(16)
+            .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
         }
         .padding()
     }

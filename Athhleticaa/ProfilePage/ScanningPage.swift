@@ -26,7 +26,7 @@ struct ScanningPage: View {
                             ringManager.heartRateManager.fetchTodayHeartRate() {
                                 ringManager.pedometerManager.getPedometerData() {
                                     ringManager.stressManager.fetchStressData() {
-                                        ringManager.sleepManager.getSleepFromDay(day: 0) {
+                                        ringManager.sleepManager.getSleep(day: 0) {
                                             ringManager.readBattery() {
                                                 ringManager.bloodOxygenManager.fetchBloodOxygenData() {
                                                     ringManager.hrvManager.fetchHRV(for: 0) {

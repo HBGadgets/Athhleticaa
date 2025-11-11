@@ -13,13 +13,37 @@ import Charts
 struct HRVScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var hrvManager: HRVManager
     @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
+    @State private var showCalendar = false
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, dd MMMM yyyy"
+        return formatter
+    }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                HStack {
+                    Button(action: {
+                        showCalendar.toggle()
+                    }) {
+                        Text(ringManager.selectedDate, formatter: dateFormatter)
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showCalendar) {
+                        WeeklyCalendarView(ringManager: ringManager, fromScreen: "HRVScreen")
+                            .presentationDetents([.height(500)]) // Only as tall as needed
+                            .presentationDragIndicator(.visible)
+                    }
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(.blue)
+                }
                 // MARK: - Heart Rate Section
                 HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
 
@@ -59,9 +83,9 @@ struct HRVScreenView: View {
                         Spacer()
                         HStack(spacing: 4) {
                             Text({
-                                if let data = ringManager.stressManager.stressData.first,
-                                   let index = data.lastNonZeroStressIndex,
-                                   let date = data.timeForStressRate(at: index) {
+                                if let data = ringManager.hrvManager.hrvData?.validHRV,
+                                   let index = hrvManager.hrvData?.lastNonZeroHRVIndex,
+                                   let date = hrvManager.hrvData?.timeForHRVRate(at: index) {
                                     let formatter = DateFormatter()
                                     formatter.dateFormat = "h:mm a"
                                     return formatter.string(from: date)

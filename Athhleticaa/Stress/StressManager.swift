@@ -108,7 +108,7 @@ extension StressModel {
     }
     
     var lastNonZeroStressIndex: Int? {
-        validStress.lastIndex(where: { $0 != 0 })
+        stresses.lastIndex(where: { $0 != 0 })
     }
     
     func timeForStressRate(at index: Int) -> Date? {

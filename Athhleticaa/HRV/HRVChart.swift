@@ -12,6 +12,7 @@ struct HRVChartView: View {
     let data: HRVModel
     
     var body: some View {
+        let totalSecondsInDay = 24 * 60 * 60
         // Convert HRV values into time-based data points
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
@@ -28,10 +29,6 @@ struct HRVChartView: View {
         
         let validPoints = points.filter { $0.value > 0 }
         
-        let firstDate = Date()
-        
-        let startOfDay = calendar.startOfDay(for: firstDate)
-        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: firstDate)!
         
         return AnyView(
             Chart(validPoints) { point in
@@ -76,7 +73,7 @@ struct HRVChartView: View {
                     }
                 }
             }
-            .chartXScale(domain: startOfDay...endOfDay)
+            .chartXScale(domain: baseDate...(calendar.date(byAdding: .day, value: 1, to: baseDate)!))
             .foregroundStyle(Color.gray)
             .frame(height: 250)
             .padding()

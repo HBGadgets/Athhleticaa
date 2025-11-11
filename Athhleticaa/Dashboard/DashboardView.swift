@@ -30,7 +30,7 @@ struct DashboardView: View {
                         ringManager.sleepManager.getSleep() {
                             ringManager.readBattery() {
                                 ringManager.bloodOxygenManager.fetchBloodOxygenData() {
-                                    ringManager.hrvManager.fetchHRV(for: 0) {
+                                    ringManager.hrvManager.fetchHRV() {
                                         ringManager.dataLoaded = true
                                     }
                                 }
@@ -53,7 +53,7 @@ struct DashboardView: View {
 //                        }
 //                        BatteryCard(charge: ringManager.batteryLevel ?? 0)
 //                    }
-                    NavigationLink(destination: HeartRateScreenView(ringManager: ringManager)) {
+                    NavigationLink(destination: HeartRateScreenView(ringManager: ringManager, heartRateManager: ringManager.heartRateManager)) {
                         HeartRateCard(bpm: ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)
                     }
 
@@ -83,7 +83,7 @@ struct DashboardView: View {
                         BloodOxygenCard(bloodOxygenManager: ringManager.bloodOxygenManager)
                     }
                     
-                    NavigationLink(destination: HRVScreenView(ringManager: ringManager)) {
+                    NavigationLink(destination: HRVScreenView(ringManager: ringManager, hrvManager: ringManager.hrvManager)) {
                         HRVCard(hrvManager: ringManager.hrvManager)
                     }
                 }

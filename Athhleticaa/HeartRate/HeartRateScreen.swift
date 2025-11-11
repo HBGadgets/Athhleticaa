@@ -10,6 +10,7 @@ import SwiftUI
 struct HeartRateScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var heartRateManager: HeartRateManager
     @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false

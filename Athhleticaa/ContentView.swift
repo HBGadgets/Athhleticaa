@@ -45,7 +45,7 @@ struct ContentView: View {
                     case 0:
                         DashboardView(ringManager: ringManager)
                     case 1:
-                        HeartRateScreenView(ringManager: ringManager)
+                        HeartRateScreenView(ringManager: ringManager, heartRateManager: ringManager.heartRateManager)
                     case 2:
                         ActivityScreenView(ringManager: ringManager, pedometerManager: ringManager.pedometerManager)
                     case 3:

@@ -40,7 +40,7 @@ extension HRVModel {
     }
     
     var lastNonZeroHRVIndex: Int? {
-        validHRV.lastIndex(where: { $0 != 0 })
+        values.lastIndex(where: { $0 != 0 })
     }
     
     func timeForHRVRate(at index: Int) -> Date? {
@@ -66,7 +66,7 @@ class HRVManager: ObservableObject {
     @Published var errorMessage: String?
     
     /// Fetch HRV data for a specific day (0 = today, 1 = yesterday, ..., 6 = 6 days ago)
-    func fetchHRV(for day: Int = 0, completion: (() -> Void)? = nil) {
+    func fetchHRV(day: Int = 0, completion: (() -> Void)? = nil) {
         isLoading = true
         errorMessage = nil
         

@@ -376,7 +376,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                 self.sleepManager.getSleep() {
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
-                                            self.hrvManager.fetchHRV(for: 0) {
+                                            self.hrvManager.fetchHRV(day: 0) {
                                                 if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
                                                 ) {
                                                     let formatter = DateFormatter()
@@ -512,6 +512,9 @@ struct WeeklyCalendarView: View {
                     dismiss()
                 } else if fromScreen == "BloodOxygenScreen" {
                     ringManager.bloodOxygenManager.fetchBloodOxygenData(dayIndex: dayOffset)
+                    dismiss()
+                } else if fromScreen == "HRVScreen" {
+                    ringManager.hrvManager.fetchHRV(day: dayOffset)
                     dismiss()
                 }
             }) {

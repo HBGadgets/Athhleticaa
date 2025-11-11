@@ -29,7 +29,7 @@ struct ScanningPage: View {
                                         ringManager.sleepManager.getSleep(day: 0) {
                                             ringManager.readBattery() {
                                                 ringManager.bloodOxygenManager.fetchBloodOxygenData() {
-                                                    ringManager.hrvManager.fetchHRV(for: 0) {
+                                                    ringManager.hrvManager.fetchHRV() {
                                                         ringManager.dataLoaded = true
                                                     }
                                                 }

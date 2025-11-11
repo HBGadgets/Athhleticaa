@@ -27,18 +27,32 @@ struct ActivityScreenView: View {
     @ObservedObject var ringManager: QCCentralManager
     @ObservedObject var pedometerManager: PedometerManager
     @State private var showCalendar = false
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, dd MMMM yyyy"
+        return formatter
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 
-                HStack(alignment: .center) {
-                    Button("Show Calendar") {
+                HStack {
+                    Button(action: {
                         showCalendar.toggle()
+                    }) {
+                        Text(ringManager.selectedDate, formatter: dateFormatter)
+                            .font(.headline)
+                            .foregroundColor(.blue)
                     }
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "ActivityScreen")
+                            .presentationDetents([.height(500)]) // Only as tall as needed
+                            .presentationDragIndicator(.visible)
                     }
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(.blue)
                 }
 
                 
@@ -46,7 +60,7 @@ struct ActivityScreenView: View {
                 HStack {
                     VStack {
                         HStack(alignment: .firstTextBaseline) {
-                            Text("\(pedometerManager.stepsData?.totalSteps ?? 0)")
+                            Text("\(ringManager.pedometerManager.stepsDataDetails?.totalSteps ?? 0)")
                                 .font(.system(size: 36, weight: .bold))
     //                        Text("↑ 6%")
     //                            .font(.system(size: 16, weight: .medium))
@@ -71,17 +85,17 @@ struct ActivityScreenView: View {
                 // MARK: - Daily Activity Rings
                 HStack {
                     VStack(alignment: .leading, spacing: 12) {
-                        ActivityRow(title: "Steps", value: Double(pedometerManager.stepsData?.totalSteps ?? 0), goal: 8000, color: .orange)
-                        ActivityRow(title: "Distance (Km)", value: Double(pedometerManager.stepsData?.distance ?? 0) / 1000, goal: 6.0, color: .blue)
-                        ActivityRow(title: "Calories (Kcal)", value: pedometerManager.stepsData?.calories ?? 0, goal: 3000, color: .red)
+                        ActivityRow(title: "Steps", value: Double(pedometerManager.stepsDataDetails?.totalSteps ?? 0), goal: 8000, color: .orange)
+                        ActivityRow(title: "Distance (Km)", value: Double(pedometerManager.stepsDataDetails?.distance ?? 0) / 1000, goal: 6.0, color: .blue)
+                        ActivityRow(title: "Calories (Kcal)", value: pedometerManager.stepsDataDetails?.calories ?? 0, goal: 3000, color: .red)
                     }
                     Spacer()
                     ZStack {
-                        ProgressRing(progress: (pedometerManager.stepsData?.calories ?? 0) / 3000, color: .red)
+                        ProgressRing(progress: (Double(pedometerManager.stepsDataDetails?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
                             .frame(width: 120, height: 120)
-                        ProgressRing(progress: (Double(pedometerManager.stepsData?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
+                        ProgressRing(progress: Double(pedometerManager.stepsDataDetails?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
                             .frame(width: 100, height: 100)
-                        ProgressRing(progress: Double(pedometerManager.stepsData?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
+                        ProgressRing(progress: (pedometerManager.stepsDataDetails?.calories ?? 0) / 3000, color: .red)
                             .frame(width: 80, height: 80)
                     }
                 }
@@ -94,6 +108,11 @@ struct ActivityScreenView: View {
                 PedometerChartsView(pedometerManager: ringManager.pedometerManager)
             }
             .padding()
+        }
+        .onAppear() {
+            pedometerManager.getPedometerDataDetails(day: 0) {
+                    print("✅ Steps data loaded:", pedometerManager.stepsDataDetails ?? StepsData(totalSteps: 0, calories: 0, distance: 0))
+                }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

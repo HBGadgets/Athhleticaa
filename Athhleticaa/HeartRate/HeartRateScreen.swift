@@ -13,11 +13,34 @@ struct HeartRateScreenView: View {
     @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
+    @State private var showCalendar = false
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, dd MMMM yyyy"
+        return formatter
+    }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // MARK: - Heart Rate Section
+                HStack {
+                    Button(action: {
+                        showCalendar.toggle()
+                    }) {
+                        Text(ringManager.selectedDate, formatter: dateFormatter)
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showCalendar) {
+                        WeeklyCalendarView(ringManager: ringManager, fromScreen: "HeartRateScreen")
+                            .presentationDetents([.height(500)]) // Only as tall as needed
+                            .presentationDragIndicator(.visible)
+                    }
+                    Image(systemName: "chevron.down")
+                        .foregroundColor(.blue)
+                }
                 VStack(spacing: 16) {
 //                    Image("HeartRateIcon")
 //                        .resizable()
@@ -174,6 +197,5 @@ struct HeartRateScreenView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        
     }
 }

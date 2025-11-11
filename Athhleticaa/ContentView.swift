@@ -49,7 +49,7 @@ struct ContentView: View {
                     case 2:
                         ActivityScreenView(ringManager: ringManager, pedometerManager: ringManager.pedometerManager)
                     case 3:
-                        SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)
+                        SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager, ringManager: ringManager)
                     case 4:
                         StressAnalysisScreenView(ringManager: ringManager)
                     case 5:

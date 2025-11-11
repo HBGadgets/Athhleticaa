@@ -24,7 +24,7 @@ struct ScanningPage: View {
                             ringManager.selectedTab = 0
                             dismiss()
                             ringManager.heartRateManager.fetchTodayHeartRate() {
-                                ringManager.pedometerManager.getPedometerData(day: 0) {
+                                ringManager.pedometerManager.getPedometerData() {
                                     ringManager.stressManager.fetchStressData() {
                                         ringManager.sleepManager.getSleepFromDay(day: 0) {
                                             ringManager.readBattery() {

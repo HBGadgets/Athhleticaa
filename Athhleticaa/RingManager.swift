@@ -42,6 +42,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
     @Published var selectedDayOffset: Int = 0
+    @Published var selectedDate = Date()
     
     
     @Published var dashboardStepsData: StepsData?
@@ -369,7 +370,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                 DispatchQueue.main.async {
                     print("🚀 Device ready — starting data fetch")
                     self.heartRateManager.fetchTodayHeartRate() {
-                        self.pedometerManager.getPedometerData(day: 0) {
+                        self.pedometerManager.getPedometerData() {
                             self.dashboardStepsData = self.pedometerManager.stepsData
                             self.stressManager.fetchStressData() {
                                 self.sleepManager.getSleepFromDay(day: 0) {
@@ -464,64 +465,79 @@ struct WeeklyCalendarView: View {
     @ObservedObject var ringManager: QCCentralManager
     var fromScreen: String
     @Environment(\.dismiss) private var dismiss
-    
-    private let calendar = Calendar.current
-    private let today = Date()
-    
-    private var last7Days: [Date] {
-        (0..<7).map { calendar.date(byAdding: .day, value: -$0, to: today)! }.reversed()
+
+
+    // MARK: - Limit range: last 7 days including today
+    private var dateRange: ClosedRange<Date> {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: today)! // include today
+        return sevenDaysAgo...today
     }
-    
+
     var body: some View {
-        VStack(spacing: 16) {
-            Text("Select a Date")
+        VStack(spacing: 24) {
+            Text("Select Date")
                 .font(.headline)
-            
-            HStack(spacing: 12) {
-                ForEach(Array(last7Days.enumerated()), id: \.offset) { index, date in
-                    let isSelected = ringManager.selectedDayOffset == (6 - index)
-                    let isToday = calendar.isDateInToday(date)
-                    
-                    Button(action: {
-                        ringManager.selectedDayOffset = 6 - index
-                        if (fromScreen == "ActivityScreen") {
-                            ringManager.pedometerManager.stepsData = nil
-                            ringManager.pedometerManager.getPedometerData(day: ringManager.selectedDayOffset)
-                            dismiss()
-                        }
-                    }) {
-                        VStack(spacing: 4) {
-                            Text(shortWeekday(for: date))
-                                .font(.caption)
-                            Text(dayNumber(for: date))
-                                .font(.headline)
-                        }
-                        .frame(width: 50, height: 60)
-                        .background(isSelected ? Color.blue : Color.gray.opacity(0.2))
-                        .cornerRadius(12)
-                        .foregroundColor(isSelected ? .white : (isToday ? .blue : .primary))
-                    }
-                    .disabled(date > today)
-                    .opacity(date > today ? 0.3 : 1.0)
+                .padding(.top)
+
+            // MARK: - Native DatePicker
+            DatePicker(
+                "Choose Date",
+                selection: $ringManager.selectedDate,
+                in: dateRange,
+                displayedComponents: .date
+            )
+            .datePickerStyle(GraphicalDatePickerStyle())
+            .accentColor(.orange)
+
+            // MARK: - Confirm Button
+            Button(action: {
+                let dayOffset = calculateDayOffset(from: ringManager.selectedDate)
+                ringManager.selectedDayOffset = dayOffset
+
+                if fromScreen == "ActivityScreen" {
+                    ringManager.pedometerManager.stepsDataDetails = nil
+                    ringManager.pedometerManager.getPedometerDataDetails(day: dayOffset)
+                    dismiss()
+                } else if fromScreen == "HeartRateScreen" {
+                    ringManager.heartRateManager.fetchTodayHeartRate(dayIndex: dayOffset)
+                    dismiss()
+                } else if fromScreen == "SleepAnalysisScreen" {
+                    ringManager.sleepManager.sleepSegments.removeAll()
+                    ringManager.sleepManager.getSleepFromDay(day: dayOffset)
+                    dismiss()
                 }
+            }) {
+                Text("Confirm")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
             }
-            
-            Text("Selected day offset: \(ringManager.selectedDayOffset)")
-                .font(.subheadline)
-                .foregroundColor(.gray)
         }
         .padding()
+        .onAppear {
+            // Preselect currently selected offset or today if invalid
+            let calendar = Calendar.current
+            let today = calendar.startOfDay(for: Date())
+            let preselected = calendar.date(byAdding: .day, value: -ringManager.selectedDayOffset, to: today) ?? today
+            if dateRange.contains(preselected) {
+                ringManager.selectedDate = preselected
+            } else {
+                ringManager.selectedDate = today
+            }
+        }
     }
-    
-    private func shortWeekday(for date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE"
-        return formatter.string(from: date)
-    }
-    
-    private func dayNumber(for date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter.string(from: date)
+
+    // MARK: - Helper: Calculate offset between today and selected date
+    private func calculateDayOffset(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let selected = calendar.startOfDay(for: date)
+        let diff = calendar.dateComponents([.day], from: selected, to: today).day ?? 0
+        return max(diff, 0)
     }
 }

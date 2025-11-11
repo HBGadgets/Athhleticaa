@@ -26,10 +26,28 @@ class PedometerManager: ObservableObject {
     }
 
     @Published var stepsData: StepsData?
+    @Published var stepsDataDetails: StepsData?
     @Published var hourlyData: [HourlyData] = []
     @Published var hourlyDataSpecifiedDay: [HourlyData] = []
-
-    func getPedometerData(day: Int = 0, completion: (() -> Void)? = nil) {
+    
+    func getPedometerData(completion: (() -> Void)? = nil) {
+        print("🌟 Get pedometer data 🌟")
+        QCSDKCmdCreator.getCurrentSportSucess({ sport in
+            DispatchQueue.main.async {
+                self.stepsData = StepsData(
+                    totalSteps: sport.totalStepCount,
+                    calories: sport.calories / 1000,
+                    distance: sport.distance
+                )
+                completion?()
+            }
+        }, failed: {
+            print("❌ Failed to get current sport summary")
+            completion?()
+        })
+    }
+    
+    func getPedometerDataDetails(day: Int = 0, completion: (() -> Void)? = nil) {
         print("🌟 Get pedometer data 🌟")
 
         QCSDKCmdCreator.getSportDetailData(byDay: day, sportDatas: { sports in
@@ -61,23 +79,17 @@ class PedometerManager: ObservableObject {
                 print("Pedometer data: \(model.happenDate ?? ""), steps: \(model.totalStepCount), calories: \(model.calories), distance: \(model.distance)")
             }
             
+            print("Total Pedometer data: steps: \(totalSteps), calories: \(calories), distance: \(distance)")
+            
             DispatchQueue.main.async {
+                self.stepsDataDetails = StepsData(
+                    totalSteps: totalSteps,
+                    calories: calories / 1000, // convert to kcal
+                    distance: distance
+                )
                 self.hourlyData = hourly
-            }
-
-            QCSDKCmdCreator.getCurrentSportSucess({ sport in
-                DispatchQueue.main.async {
-                    self.stepsData = StepsData(
-                        totalSteps: sport.totalStepCount,
-                        calories: sport.calories / 1000,
-                        distance: sport.distance
-                    )
-                    completion?()
-                }
-            }, failed: {
-                print("❌ Failed to get current sport summary")
                 completion?()
-            })
+            }
             
         }, fail: {
             print("❌ Failed to get pedometer data")

@@ -25,7 +25,7 @@ struct DashboardView: View {
         DispatchQueue.main.async {
             print("🚀 Device ready — starting data fetch")
             ringManager.heartRateManager.fetchTodayHeartRate() {
-                ringManager.pedometerManager.getPedometerData(day: 0) {
+                ringManager.pedometerManager.getPedometerData() {
                     ringManager.stressManager.fetchStressData() {
                         ringManager.sleepManager.getSleepFromDay(day: 0) {
                             ringManager.readBattery() {
@@ -66,7 +66,7 @@ struct DashboardView: View {
                         )
                     }
                     
-                    NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager)) {
+                    NavigationLink(destination: SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager, ringManager: ringManager)) {
                         SleepCard(sleepManager: ringManager.sleepManager)
                     }
 
@@ -106,6 +106,9 @@ struct DashboardView: View {
                     .scaledToFit()
                     .frame(width: 120)
             }
+        }
+        .onAppear() {
+            ringManager.selectedDate = Date()
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(

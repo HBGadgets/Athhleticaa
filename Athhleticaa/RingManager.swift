@@ -41,6 +41,10 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var sleepManager = SleepManager()
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
+    @Published var selectedDayOffset: Int = 0
+    
+    
+    @Published var dashboardStepsData: StepsData?
 
     
     // MARK: - Private core bluetooth + sdk refs
@@ -366,6 +370,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                     print("🚀 Device ready — starting data fetch")
                     self.heartRateManager.fetchTodayHeartRate() {
                         self.pedometerManager.getPedometerData(day: 0) {
+                            self.dashboardStepsData = self.pedometerManager.stepsData
                             self.stressManager.fetchStressData() {
                                 self.sleepManager.getSleepFromDay(day: 0) {
                                     self.readBattery() {
@@ -449,5 +454,74 @@ private extension QCCentralManager {
         }
         let bytes = [UInt8](data)
         return bytes.map { String(format: "%02x", $0) }.joined(separator: ":")
+    }
+}
+
+import SwiftUI
+
+struct WeeklyCalendarView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var ringManager: QCCentralManager
+    var fromScreen: String
+    @Environment(\.dismiss) private var dismiss
+    
+    private let calendar = Calendar.current
+    private let today = Date()
+    
+    private var last7Days: [Date] {
+        (0..<7).map { calendar.date(byAdding: .day, value: -$0, to: today)! }.reversed()
+    }
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Select a Date")
+                .font(.headline)
+            
+            HStack(spacing: 12) {
+                ForEach(Array(last7Days.enumerated()), id: \.offset) { index, date in
+                    let isSelected = ringManager.selectedDayOffset == (6 - index)
+                    let isToday = calendar.isDateInToday(date)
+                    
+                    Button(action: {
+                        ringManager.selectedDayOffset = 6 - index
+                        if (fromScreen == "ActivityScreen") {
+                            ringManager.pedometerManager.stepsData = nil
+                            ringManager.pedometerManager.getPedometerData(day: ringManager.selectedDayOffset)
+                            dismiss()
+                        }
+                    }) {
+                        VStack(spacing: 4) {
+                            Text(shortWeekday(for: date))
+                                .font(.caption)
+                            Text(dayNumber(for: date))
+                                .font(.headline)
+                        }
+                        .frame(width: 50, height: 60)
+                        .background(isSelected ? Color.blue : Color.gray.opacity(0.2))
+                        .cornerRadius(12)
+                        .foregroundColor(isSelected ? .white : (isToday ? .blue : .primary))
+                    }
+                    .disabled(date > today)
+                    .opacity(date > today ? 0.3 : 1.0)
+                }
+            }
+            
+            Text("Selected day offset: \(ringManager.selectedDayOffset)")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
+        .padding()
+    }
+    
+    private func shortWeekday(for date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE"
+        return formatter.string(from: date)
+    }
+    
+    private func dayNumber(for date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter.string(from: date)
     }
 }

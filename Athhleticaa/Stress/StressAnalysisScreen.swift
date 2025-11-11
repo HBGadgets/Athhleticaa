@@ -17,14 +17,9 @@ struct StressAnalysisScreenView: View {
     
     private func levelString(stress: Int) -> String {
         switch stress {
-        case 0..<29:
-            return "Low"
-        case 30..<59:
-            return "Normal"
-        case 60..<79:
-            return "Normal"
-        default:
-            return "High"
+        case 0...29: return "Low"
+        case 30...59: return "Normal"
+        default: return "High"
         }
     }
     

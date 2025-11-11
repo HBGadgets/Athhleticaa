@@ -8,12 +8,14 @@
 import SwiftUI
 import Charts
 
+
+struct StepsData {
+    let totalSteps: Int
+    let calories: Double
+    let distance: Int
+}
+
 class PedometerManager: ObservableObject {
-    struct StepsData {
-        let totalSteps: Int
-        let calories: Double
-        let distance: Int
-    }
 
     struct HourlyData: Identifiable {
         let id = UUID()
@@ -24,9 +26,10 @@ class PedometerManager: ObservableObject {
     }
 
     @Published var stepsData: StepsData?
-    @Published var hourlyData: [HourlyData] = []  // ✅ New for chart data
+    @Published var hourlyData: [HourlyData] = []
+    @Published var hourlyDataSpecifiedDay: [HourlyData] = []
 
-    func getPedometerData(day: Int, completion: (() -> Void)? = nil) {
+    func getPedometerData(day: Int = 0, completion: (() -> Void)? = nil) {
         print("🌟 Get pedometer data 🌟")
 
         QCSDKCmdCreator.getSportDetailData(byDay: day, sportDatas: { sports in

@@ -72,6 +72,7 @@ struct BloodOxygenDataDetailScreenView: View {
 
 // MARK: - Card View
 struct BloodOxygenCardView: View {
+    @Environment(\.colorScheme) var colorScheme
     var soa2: Double
     var max: Double
     var min: Double
@@ -80,20 +81,21 @@ struct BloodOxygenCardView: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "drop.oxygen.fill")
+            Image(systemName: "lungs.fill")
                 .foregroundColor(.blue)
             Text("Max: \(Int(max)) | Min: \(Int(min))")
-                .font(.subheadline)
-                .foregroundColor(.gray)
+                .font(.headline)
 
             Spacer()
 
             Text(time.formatted(date: .omitted, time: .shortened))
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(.gray)
         }
         .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .frame(maxWidth: .infinity)
+        .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+        .cornerRadius(16)
+        .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
     }
 }

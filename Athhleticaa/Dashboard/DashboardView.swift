@@ -58,11 +58,11 @@ struct DashboardView: View {
                     }
 
                     // MARK: - Steps
-                    NavigationLink(destination: ActivityScreenView(ringManager: ringManager)) {
+                    NavigationLink(destination: ActivityScreenView(ringManager: ringManager, pedometerManager: ringManager.pedometerManager)) {
                         StepsCard(
-                            calories: ringManager.pedometerManager.stepsData?.calories ?? 0,
-                            steps: ringManager.pedometerManager.stepsData?.totalSteps ?? 0,
-                            distance: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000
+                            calories: ringManager.dashboardStepsData?.calories ?? 0,
+                            steps: ringManager.dashboardStepsData?.totalSteps ?? 0,
+                            distance: Double(ringManager.dashboardStepsData?.distance ?? 0) / 1000
                         )
                     }
                     

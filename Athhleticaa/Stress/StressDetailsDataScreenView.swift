@@ -81,14 +81,9 @@ struct StressCardView: View {
     
     private var levelString: String {
         switch bpm {
-        case 0..<29:
-            return "Low"
-        case 30..<59:
-            return "Normal"
-        case 60..<79:
-            return "Normal"
-        default:
-            return "High"
+        case 0...29: return "Low"
+        case 30...59: return "Normal"
+        default: return "High"
         }
     }
     
@@ -97,6 +92,7 @@ struct StressCardView: View {
             HStack() {
                 Image(systemName: "leaf.fill")
                     .foregroundColor(.green)
+                Text("\(bpm)")
                 Text("\(levelString)")
                     .font(.headline)
             }

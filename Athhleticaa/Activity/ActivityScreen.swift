@@ -25,22 +25,34 @@ struct ProgressRing: View {
 struct ActivityScreenView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @ObservedObject var pedometerManager: PedometerManager
+    @State private var showCalendar = false
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 
+                HStack(alignment: .center) {
+                    Button("Show Calendar") {
+                        showCalendar.toggle()
+                    }
+                    .sheet(isPresented: $showCalendar) {
+                        WeeklyCalendarView(ringManager: ringManager, fromScreen: "ActivityScreen")
+                    }
+                }
+
+                
                 // MARK: - Steps Today
                 HStack {
                     VStack {
                         HStack(alignment: .firstTextBaseline) {
-                            Text("\(ringManager.pedometerManager.stepsData?.totalSteps ?? 0)")
+                            Text("\(pedometerManager.stepsData?.totalSteps ?? 0)")
                                 .font(.system(size: 36, weight: .bold))
     //                        Text("↑ 6%")
     //                            .font(.system(size: 16, weight: .medium))
     //                            .foregroundColor(.green)
                         }
-                        Text("Steps Today")
+                        Text("Steps")
                             .font(.subheadline)
                             .foregroundColor(.gray)
                     }
@@ -59,17 +71,17 @@ struct ActivityScreenView: View {
                 // MARK: - Daily Activity Rings
                 HStack {
                     VStack(alignment: .leading, spacing: 12) {
-                        ActivityRow(title: "Steps", value: Double(ringManager.pedometerManager.stepsData?.totalSteps ?? 0), goal: 8000, color: .orange)
-                        ActivityRow(title: "Distance (Km)", value: Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000, goal: 6.0, color: .blue)
-                        ActivityRow(title: "Calories (Kcal)", value: ringManager.pedometerManager.stepsData?.calories ?? 0, goal: 3000, color: .red)
+                        ActivityRow(title: "Steps", value: Double(pedometerManager.stepsData?.totalSteps ?? 0), goal: 8000, color: .orange)
+                        ActivityRow(title: "Distance (Km)", value: Double(pedometerManager.stepsData?.distance ?? 0) / 1000, goal: 6.0, color: .blue)
+                        ActivityRow(title: "Calories (Kcal)", value: pedometerManager.stepsData?.calories ?? 0, goal: 3000, color: .red)
                     }
                     Spacer()
                     ZStack {
-                        ProgressRing(progress: (ringManager.pedometerManager.stepsData?.calories ?? 0) / 3000, color: .red)
+                        ProgressRing(progress: (pedometerManager.stepsData?.calories ?? 0) / 3000, color: .red)
                             .frame(width: 120, height: 120)
-                        ProgressRing(progress: (Double(ringManager.pedometerManager.stepsData?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
+                        ProgressRing(progress: (Double(pedometerManager.stepsData?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
                             .frame(width: 100, height: 100)
-                        ProgressRing(progress: Double(ringManager.pedometerManager.stepsData?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
+                        ProgressRing(progress: Double(pedometerManager.stepsData?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
                             .frame(width: 80, height: 80)
                     }
                 }

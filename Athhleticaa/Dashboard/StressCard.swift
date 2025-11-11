@@ -132,8 +132,8 @@ struct StressCard: View {
     
     private func stressLevelText(for value: Double) -> String {
         switch value {
-        case ..<30: return "Low"
-        case 30..<70: return "Normal"
+        case 0...29: return "Low"
+        case 30...59: return "Normal"
         default: return "High"
         }
     }

@@ -24,47 +24,19 @@ struct StressCard: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(colorScheme == .dark ? Color.blue.opacity(0.1) : Color(hex: "#5ddffc"))
-                .overlay(
-                    // Inner edge shine (white glow around edges)
-                    RoundedRectangle(cornerRadius: 20)
-                        .strokeBorder(Color.white, lineWidth: 0.7)
-                        .blur(radius: 1)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .strokeBorder(
-                                    AngularGradient(
-                                        gradient: Gradient(colors: [
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.05),
-                                            Color.white.opacity(0.4),
-                                            Color.white.opacity(0.05),
-                                            Color.white.opacity(0.4)
-                                        ]),
-                                        center: .center
-                                    ),
-                                    lineWidth: 0.5
-                                )
-                                .blur(radius: 2)
-                                .blendMode(.screen)
-                        )
-                )
-                .overlay(
-                    // Soft white reflection near top
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color.white.opacity(0.15),
-                            Color.clear
-                        ]),
-                        startPoint: .top,
-                        endPoint: .center
+            GeometryReader { geo in
+                Image("StressCardImage")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped() // ✅ crops inside bounds
+                    .overlay(
+                        Color.black.opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .blur(radius: 2)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .allowsHitTesting(false) // so image doesn’t block taps
             // Content
             VStack(spacing: 10) {
                 // Top labels

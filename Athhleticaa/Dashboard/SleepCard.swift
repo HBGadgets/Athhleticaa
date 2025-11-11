@@ -23,14 +23,19 @@ struct SleepCard: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(colorScheme == .dark ? Color(hex: "#b06510") : Color(hex: "#ff9214"))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .strokeBorder(Color.white, lineWidth: 0.7)
-                        .blur(radius: 1)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+            GeometryReader { geo in
+                Image("SleepCardImage")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped() // ✅ crops inside bounds
+                    .overlay(
+                        Color.black.opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    )
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .allowsHitTesting(false) // so image doesn’t block taps
 
             VStack {
                 VStack(spacing: 8) {

@@ -52,7 +52,8 @@ struct SleepsAnalysisScreenView: View {
                     SleepSummaryChartView(sleepManager: sleepManager)
                     SleepChartViewContainer(sleepManager: sleepManager)
                 }
-                .padding(.bottom, 70)
+                .padding()
+                .padding(.bottom, 100)
             }
         }
         .toolbar {

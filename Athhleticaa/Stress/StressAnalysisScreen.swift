@@ -135,6 +135,7 @@ struct StressAnalysisScreenView: View {
                 }
             }
             .padding()
+            .padding(.bottom, 100)
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

@@ -105,6 +105,7 @@ struct HRVScreenView: View {
                 }
             }
             .padding()
+            .padding(.bottom, 100)
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -115,6 +116,5 @@ struct HRVScreenView: View {
             ringManager.hrvManager.fetchHRV()
         }
         .navigationBarTitleDisplayMode(.inline)
-        
     }
 }

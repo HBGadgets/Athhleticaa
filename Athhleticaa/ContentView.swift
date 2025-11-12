@@ -86,6 +86,9 @@ struct ContentView: View {
                 }
             }
         }
+        .onAppear {
+            ringManager.selectedTheme = (colorScheme == .dark) ? .dark : .light
+         }
         .alert(
             "Couldn't get data",
             isPresented: $showAlert, // must be a Binding<Bool>

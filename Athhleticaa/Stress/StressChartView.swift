@@ -96,26 +96,6 @@ struct StressChartView: View {
                     }
                 }
             }
-            .chartOverlay { proxy in
-                GeometryReader { geo in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    let location = value.location
-                                    if let time: Double = proxy.value(atX: location.x) {
-                                        let index = Int(time / Double(stressData.secondInterval))
-                                        if index >= 0 && index < validRates.count {
-                                            selectedIndex = index
-                                        }
-                                    }
-                                }
-                                .onEnded { _ in
-                                    selectedIndex = nil
-                                }
-                        )
-                }
-            }
             .frame(height: 250)
         }
         .padding()

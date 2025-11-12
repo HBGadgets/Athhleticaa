@@ -127,6 +127,7 @@ struct BloodOxygenScreenView: View {
                 }
             }
             .padding()
+            .padding(.bottom, 100)
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -137,6 +138,5 @@ struct BloodOxygenScreenView: View {
             ringManager.bloodOxygenManager.fetchBloodOxygenData()
         }
         .navigationBarTitleDisplayMode(.inline)
-        
     }
 }

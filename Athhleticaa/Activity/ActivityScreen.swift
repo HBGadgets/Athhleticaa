@@ -108,6 +108,7 @@ struct ActivityScreenView: View {
                 PedometerChartsView(pedometerManager: ringManager.pedometerManager)
             }
             .padding()
+            .padding(.bottom, 100)
         }
         .onAppear() {
             pedometerManager.getPedometerDataDetails(day: 0) {

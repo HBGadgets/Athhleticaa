@@ -11,6 +11,7 @@ import CoreBluetooth
 
 struct DeviceInfoView: View {
     @State private var gestureControlEnabled = true
+    @State private var showSheet = false
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
 
@@ -120,11 +121,33 @@ struct DeviceInfoView: View {
                 // MARK: - Menu Buttons
                 VStack(spacing: 12) {
                     DeviceMenuItem(icon: "dot.radiowaves.left.and.right", color: .mint, title: "Find Device")
-                    DeviceMenuItem(icon: "brain.head.profile", color: .blue, title: "AI Analysis")
-                    DeviceMenuItem(icon: "heart.fill", color: .pink, title: "Health Monitoring")
-                    DeviceMenuItem(icon: "camera", color: .teal, title: "Take Picture")
+                    .onTapGesture {
+                        for i in 0..<4 { // 3 times
+                            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                                QCSDKCmdCreator.alertBindingSuccess({
+                                    print("✅ [\(i + 1)] Set the binding vibration successfully")
+                                }, fail: {
+                                    print("❌ [\(i + 1)] Failed to set binding vibration")
+                                })
+                            }
+                        }
+                    }
+//                    DeviceMenuItem(icon: "brain.head.profile", color: .blue, title: "AI Analysis")
+                    NavigationLink(destination: HealthMonitoringScreen(ringManager: ringManager)) {
+                        DeviceMenuItem(icon: "heart.fill", color: .pink, title: "Health Monitoring")
+                    }
+                    NavigationLink(destination: CameraView(ringManager: ringManager)) {
+                        DeviceMenuItem(icon: "camera", color: .teal, title: "Take Picture")
+//                            .onTapGesture {
+//                                ringManager.switchToPhotoUI()
+//                            }
+                    }
+                    
                     DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")
                     DeviceMenuItem(icon: "tshirt", color: .purple, title: "App Theme")
+                        .onTapGesture {
+                            showSheet = true
+                        }
                     DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
                     DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
                     DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")
@@ -134,6 +157,9 @@ struct DeviceInfoView: View {
             }
             .padding(.bottom, 100)
             .padding(.horizontal)
+            .sheet(isPresented: $showSheet) {
+                ThemeBottomSheet(selectedTheme: $ringManager.selectedTheme)
+            }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -175,6 +201,7 @@ struct DeviceMenuItem: View {
 
                 Text(title)
                     .font(.headline)
+                    .foregroundStyle(colorScheme == .light ? Color.black : Color.white)
 
                 Spacer()
             }

@@ -76,21 +76,21 @@ struct SleepSummaryView: View {
             
             ZStack {
                 Circle()
+                    .stroke(Color.blue.opacity(0.15), lineWidth: 20)
+                    .frame(width: 170, height: 170)
+                
+                Circle()
                     .trim(from: 0, to: CGFloat(summary.score ?? 0) / 100)
                     .stroke(
                         AngularGradient(
                             gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7)]),
                             center: .center
                         ),
-                        style: StrokeStyle(lineWidth: 20, lineCap: .round)
+                        style: StrokeStyle(lineWidth: 10, lineCap: .round)
                     )
                     .rotationEffect(.degrees(-90))
                     .frame(width: 170, height: 170)
-                
-                
-                Circle()
-                    .stroke(Color.blue.opacity(0.2), lineWidth: 20)
-                    .frame(width: 170, height: 170)
+                    .animation(.easeInOut(duration: 1.0), value: CGFloat(summary.score ?? 0))
 
                 VStack {
                     if let scoreText = summary.score {

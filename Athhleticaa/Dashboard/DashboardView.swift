@@ -111,9 +111,9 @@ struct DashboardView: View {
             ringManager.selectedDate = Date()
         }
         .navigationBarTitleDisplayMode(.inline)
-        .background(
-            Color(.systemGray6)
-                .ignoresSafeArea()
-            )
+//        .background(
+//            Color(.systemGray6)
+//                .ignoresSafeArea()
+//            )
     }
 }

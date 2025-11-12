@@ -28,7 +28,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var heartRate: Int?
     @Published var hrv: Int?
     @Published private(set) var deviceStateRaw: Int?   // Replace with SDK enum type if you have it
-    @Published  var dataLoaded: Bool = false
+    @Published var dataLoaded: Bool = false
     @Published private(set) var bleStateRaw: Int?
     @Published var currentHRV: Int = 0
     @Published var heartRateHistory: [SchedualHeartRateModel] = []
@@ -51,6 +51,15 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var dashboardStressData: [StressModel] = []
     @Published var dashboardBloodOxygenData: [BloodOxygenModel] = []
     @Published var dashboardHRVData: HRVModel?
+    
+    @Published var spo2Monitoring: Bool = true
+    @Published var stressMonitoring: Bool = true
+    @Published var HRVMonitoring: Bool = true
+    @Published var heartRateMonitoring: Bool = true
+    
+    
+    @State var isShowingCamera = false
+    @Published var selectedTheme: AppTheme = .dark
 
     
     // MARK: - Private core bluetooth + sdk refs
@@ -357,6 +366,155 @@ extension QCCentralManager: CBCentralManagerDelegate {
     }
     
     // MARK: - Central Manager
+    func getBloodOxygenScheduleStatus(completion: (() -> Void)? = nil) {
+        QCSDKCmdCreator.getSchedualBOInfoSuccess({ [weak self] featureOn in
+            DispatchQueue.main.async {
+                self?.spo2Monitoring = featureOn
+                print("🩸 Scheduled Blood Oxygen is \(featureOn ? "ON" : "OFF")")
+                completion?()
+            }
+        }, fail: {
+            DispatchQueue.main.async {
+                print("❌ Failed to get Scheduled Blood Oxygen state")
+                completion?()
+            }
+        })
+    }
+    
+    func getStressScheduleStatus(completion: (() -> Void)? = nil) {
+        QCSDKCmdCreator.getSchedualStressStatus { isOn, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("❌ Failed to get stress schedule status: \(error.localizedDescription)")
+                    completion?()
+                    return
+                }
+                
+                if isOn {
+                    print("😤 Scheduled stress monitor is ON")
+                    completion?()
+                    self.stressMonitoring = true
+                } else {
+                    print("😤 Scheduled stress monitor is OFF")
+                    completion?()
+                    self.stressMonitoring = false
+                }
+            }
+        }
+    }
+
+    
+    func getHRVScheduleStatus(completion: (() -> Void)? = nil) {
+        QCSDKCmdCreator.getSchedualHRV(finshed: { isOn, error  in
+            if isOn {
+                print("🩸 Scheduled hrv monitor is ON")
+                self.HRVMonitoring = true
+                completion?()
+            } else {
+                print("🩸 Scheduled hrv monitor is OFF")
+                self.HRVMonitoring = false
+                completion?()
+            }
+        })
+    }
+    
+    func getHeartRateScheduleStatus(completion: (() -> Void)? = nil) {
+        QCSDKCmdCreator.getSchedualHeartRateStatus(withCurrentState: true, success: { isOn in
+            DispatchQueue.main.async {
+                if isOn {
+                    print("❤️ Scheduled Heart Rate monitoring is ON")
+                    self.heartRateMonitoring = true
+                    completion?()
+                } else {
+                    print("❤️ Scheduled Heart Rate monitoring is OFF")
+                    self.heartRateMonitoring = false
+                    completion?()
+                }
+            }
+        }, fail: {
+            DispatchQueue.main.async {
+                print("❌ Failed to get Heart Rate schedule status")
+                self.heartRateMonitoring = false
+                completion?()
+            }
+        })
+    }
+
+    
+    func setBloodOxygenSchedule(enabled: Bool) {
+        QCSDKCmdCreator.setSchedualBOInfoOn(enabled, success: { featureOn in
+            DispatchQueue.main.async {
+                self.spo2Monitoring = featureOn
+                print("🩸 Blood Oxygen scheduling set to \(featureOn ? "ON" : "OFF")")
+            }
+        }, fail: {
+            DispatchQueue.main.async {
+                self.spo2Monitoring.toggle() // revert toggle if failed
+                print("❌ Failed to change Blood Oxygen scheduling")
+            }
+        })
+    }
+    
+    func setHeartRateSchedule(enabled: Bool) {
+        QCSDKCmdCreator.setSchedualHeartRateStatus(
+            enabled,
+            success: { featureOn in
+                DispatchQueue.main.async {
+                    self.heartRateMonitoring = featureOn
+                    print("❤️ Heart Rate scheduling set to \(featureOn ? "ON" : "OFF")")
+                }
+            },
+            fail: {
+                DispatchQueue.main.async {
+                    self.heartRateMonitoring.toggle()
+                    print("❌ Failed to change Heart Rate scheduling")
+                }
+            }
+        )
+    }
+
+    func setStressSchedule(enabled: Bool) {
+        QCSDKCmdCreator.setSchedualStressStatus(enabled) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("❌ Failed to change Stress monitoring: \(error.localizedDescription)")
+                    self.stressMonitoring.toggle() // revert UI change
+                } else {
+                    print("😤 Stress monitoring set to \(enabled ? "ON" : "OFF")")
+                    self.stressMonitoring = enabled
+                }
+            }
+        }
+    }
+
+    func setHRVSchedule(enabled: Bool) {
+        QCSDKCmdCreator.setSchedualHRVStatus(enabled) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("❌ Failed to change hrv monitoring: \(error.localizedDescription)")
+                    self.HRVMonitoring.toggle() // revert UI change
+                } else {
+                    print("hrv monitoring set to \(enabled ? "ON" : "OFF")")
+                    self.HRVMonitoring = enabled
+                }
+            }
+        }
+    }
+    
+    func switchToPhotoUI() {
+        QCSDKCmdCreator.switch(toPhotoUISuccess: {
+            print("📸 Ring is now in photo control mode")
+
+            // Now show your app’s camera screen
+            DispatchQueue.main.async {
+                self.isShowingCamera = true
+            }
+
+        }, fail: {
+            print("❌ Failed to switch ring to photo mode")
+        })
+    }
+
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected: \(peripheral.name ?? "Unknown")")
@@ -394,6 +552,13 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                                     let formatter = DateFormatter()
                                                     formatter.dateFormat = "h:mm a"
                                                     print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
+                                                    self.getBloodOxygenScheduleStatus() {
+                                                        self.getStressScheduleStatus() {
+                                                            self.getHRVScheduleStatus() {
+                                                                self.getHeartRateScheduleStatus()
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                                 self.dataLoaded = true
                                             }
@@ -404,7 +569,6 @@ extension QCCentralManager: CBCentralManagerDelegate {
                         }
                     }
                 }
-
             } else {
                 print("❌ Failed to add peripheral")
             }
@@ -540,17 +704,17 @@ struct WeeklyCalendarView: View {
             }
         }
         .padding()
-        .onAppear {
-            // Preselect currently selected offset or today if invalid
-            let calendar = Calendar.current
-            let today = calendar.startOfDay(for: Date())
-            let preselected = calendar.date(byAdding: .day, value: -ringManager.selectedDayOffset, to: today) ?? today
-            if dateRange.contains(preselected) {
-                ringManager.selectedDate = preselected
-            } else {
-                ringManager.selectedDate = today
-            }
-        }
+//        .onAppear {
+//            // Preselect currently selected offset or today if invalid
+//            let calendar = Calendar.current
+//            let today = calendar.startOfDay(for: Date())
+//            let preselected = calendar.date(byAdding: .day, value: -ringManager.selectedDayOffset, to: today) ?? today
+//            if dateRange.contains(preselected) {
+//                ringManager.selectedDate = preselected
+//            } else {
+//                ringManager.selectedDate = today
+//            }
+//        }
     }
 
     // MARK: - Helper: Calculate offset between today and selected date

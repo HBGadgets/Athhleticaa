@@ -6,5 +6,9 @@
 	<array>
 		<string>bluetooth-central</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Athhleticaa needs camera permission to take pictures remotely with bluetooth devices</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Athhleticaa needs to access your photo album to save remote camera pictures from bluetooth devices</string>
 </dict>
 </plist>

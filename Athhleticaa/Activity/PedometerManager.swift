@@ -43,9 +43,9 @@ class PedometerManager: ObservableObject {
                 
                 let now = Date()
                 let startOfDay = Calendar.current.startOfDay(for: now)
-                HealthKitManager.shared.saveSteps(count: data.totalSteps, start: startOfDay, end: now)
-                HealthKitManager.shared.saveCalories(data.calories, start: startOfDay, end: now)
-                HealthKitManager.shared.saveDistance(Double(data.distance), start: startOfDay, end: now)
+//                HealthKitManager.shared.saveSteps(count: data.totalSteps, start: startOfDay, end: now)
+//                HealthKitManager.shared.saveCalories(data.calories, start: startOfDay, end: now)
+//                HealthKitManager.shared.saveDistance(Double(data.distance), start: startOfDay, end: now)
                 
                 completion?()
             }

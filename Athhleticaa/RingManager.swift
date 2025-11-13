@@ -41,7 +41,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var sleepManager = SleepManager()
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
-    @Published var healthManager = HealthManager()
+    @Published var healthManager = HealthKitManager()
     @Published var selectedDayOffset: Int = 0
     @Published var selectedDate = Date()
     
@@ -119,7 +119,7 @@ final class QCCentralManager: NSObject, ObservableObject {
         for entry in self.heartRateManager.dayData {
             for (index, bpm) in entry.heartRates.enumerated() where bpm > 0 {
                 if let date = entry.timeForHeartRate(at: index) {
-                    HealthKitManager.shared.saveHeartRate(bpm: bpm, date: date)
+                    HealthKitManager.shared.saveHeartRate(bpm, date: date)
                 }
             }
         }

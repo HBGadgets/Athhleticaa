@@ -14,6 +14,7 @@ struct DeviceInfoView: View {
     @State private var showSheet = false
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @State private var showAuthSuccessAlert = false
 
     var body: some View {
         ScrollView {
@@ -152,20 +153,8 @@ struct DeviceInfoView: View {
 //                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
                     DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")
                         .onTapGesture {
-                            HealthManager.shared.requestAuthorization { success in
-                                if success {
-                                    HealthManager.shared.getTodaySteps { value in
-                                        DispatchQueue.main.async {
-                                            steps = value
-                                        }
-                                    }
-                                    HealthManager.shared.getSleepData { samples in
-                                        DispatchQueue.main.async {
-                                            sleepSamples = samples
-                                            printSleepData(samples)
-                                        }
-                                    }
-                                }
+                            HealthKitManager.shared.requestAuthorization { success in
+                                showAuthSuccessAlert = true
                             }
                         }
                     DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
@@ -176,6 +165,13 @@ struct DeviceInfoView: View {
             .padding(.horizontal)
             .sheet(isPresented: $showSheet) {
                 ThemeBottomSheet(selectedTheme: $ringManager.selectedTheme)
+            }
+            .alert("Confirmation", isPresented: $showAuthSuccessAlert) {
+                Button("Okay", role: .destructive) {
+                    
+                }
+            } message: {
+                Text("Ring data will be synced to Apple Health")
             }
         }
         .toolbar {

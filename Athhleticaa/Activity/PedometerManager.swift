@@ -34,11 +34,19 @@ class PedometerManager: ObservableObject {
         print("🌟 Get pedometer data 🌟")
         QCSDKCmdCreator.getCurrentSportSucess({ sport in
             DispatchQueue.main.async {
-                self.stepsData = StepsData(
+                let data = StepsData(
                     totalSteps: sport.totalStepCount,
                     calories: sport.calories / 1000,
                     distance: sport.distance
                 )
+                self.stepsData = data
+                
+                let now = Date()
+                let startOfDay = Calendar.current.startOfDay(for: now)
+                HealthKitManager.shared.saveSteps(count: data.totalSteps, start: startOfDay, end: now)
+                HealthKitManager.shared.saveCalories(data.calories, start: startOfDay, end: now)
+                HealthKitManager.shared.saveDistance(Double(data.distance), start: startOfDay, end: now)
+                
                 completion?()
             }
         }, failed: {

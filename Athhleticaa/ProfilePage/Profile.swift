@@ -148,9 +148,26 @@ struct DeviceInfoView: View {
                         .onTapGesture {
                             showSheet = true
                         }
-                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
-                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
+//                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
+//                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
                     DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")
+                        .onTapGesture {
+                            HealthManager.shared.requestAuthorization { success in
+                                if success {
+                                    HealthManager.shared.getTodaySteps { value in
+                                        DispatchQueue.main.async {
+                                            steps = value
+                                        }
+                                    }
+                                    HealthManager.shared.getSleepData { samples in
+                                        DispatchQueue.main.async {
+                                            sleepSamples = samples
+                                            printSleepData(samples)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
                     DeviceMenuItem(icon: "gear", color: .gray, title: "System Settings")
                 }

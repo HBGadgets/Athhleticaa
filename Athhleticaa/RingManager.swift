@@ -41,6 +41,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var sleepManager = SleepManager()
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
+    @Published var healthManager = HealthManager()
     @Published var selectedDayOffset: Int = 0
     @Published var selectedDate = Date()
     
@@ -112,6 +113,16 @@ final class QCCentralManager: NSObject, ObservableObject {
     // MARK: - Public scan API
     func scan() {
         scan(withTimeout: Int(scanTimeout))
+    }
+    
+    func syncHeartRateToHealthKit() {
+        for entry in self.heartRateManager.dayData {
+            for (index, bpm) in entry.heartRates.enumerated() where bpm > 0 {
+                if let date = entry.timeForHeartRate(at: index) {
+                    HealthKitManager.shared.saveHeartRate(bpm: bpm, date: date)
+                }
+            }
+        }
     }
     
     func scan(withTimeout timeout: Int) {
@@ -514,7 +525,13 @@ extension QCCentralManager: CBCentralManagerDelegate {
             print("❌ Failed to switch ring to photo mode")
         })
     }
-
+    
+    func syncSleepToHealthKit() {
+        for segment in self.sleepManager.sleepSegments {
+            let asleep = segment.type != .awake
+            HealthKitManager.shared.saveSleep(start: segment.startTime, end: segment.endTime, asleep: asleep)
+        }
+    }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected: \(peripheral.name ?? "Unknown")")
@@ -536,12 +553,14 @@ extension QCCentralManager: CBCentralManagerDelegate {
                     print("🚀 Device ready — starting data fetch")
                     self.heartRateManager.fetchTodayHeartRate() {
                         self.dashboardHeartRateData = self.heartRateManager.dayData
+                        self.syncHeartRateToHealthKit()
                         self.pedometerManager.getPedometerData() {
                             self.dashboardStepsData = self.pedometerManager.stepsData
                             self.stressManager.fetchStressData() {
                                 self.dashboardStressData = self.stressManager.stressData
                                 self.sleepManager.getSleep() {
                                     self.dashboardSleepSummary = self.sleepManager.summary
+                                    self.syncSleepToHealthKit()
                                     self.readBattery() {
                                         self.bloodOxygenManager.fetchBloodOxygenData() {
                                             self.dashboardBloodOxygenData = self.bloodOxygenManager.readings

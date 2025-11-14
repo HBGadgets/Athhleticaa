@@ -465,10 +465,20 @@ extension QCCentralManager: CBCentralManagerDelegate {
         })
     }
     
+    // MARK: Syncing to Apple Health Kit
+    
     func syncSleepToHealthKit() {
         for segment in self.sleepManager.sleepSegments {
             let asleep = segment.type != .awake
             HealthKitManager.shared.saveSleep(start: segment.startTime, end: segment.endTime, asleep: asleep)
+        }
+    }
+    
+    func syncHRVToHealthKit(hrv: HRVModel) {
+        for (index, value) in hrv.values.enumerated() {
+            if value > 0, let date = hrv.timeForHRVRate(at: index) {
+                HealthKitManager.shared.saveHRV(Double(value), date: date)
+            }
         }
     }
     
@@ -514,6 +524,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                     self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
                                     self.hrvManager.fetchHRV(day: 0) {
                                         self.dashboardHRVData = self.hrvManager.hrvData
+                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
                                         if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
                                         ) {
                                             let formatter = DateFormatter()

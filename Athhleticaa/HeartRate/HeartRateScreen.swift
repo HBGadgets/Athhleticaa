@@ -12,7 +12,6 @@ struct HeartRateScreenView: View {
     @ObservedObject var ringManager: QCCentralManager
     @ObservedObject var heartRateManager: HeartRateManager
     @State private var isMeasuring = false
-    @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
     @State private var showCalendar = false
     
@@ -144,7 +143,7 @@ struct HeartRateScreenView: View {
                                     value: animateHeart
                                 )
                         }
-                        Text(currentHeartRate != nil ? "\(currentHeartRate!) bpm" : "-- bpm")
+                        Text(ringManager.heartRateManager.heartRate != nil ? "\(ringManager.heartRateManager.heartRate!) bpm" : "-- bpm")
                             .font(.headline)
                             .foregroundColor(.gray)
                     }
@@ -153,14 +152,17 @@ struct HeartRateScreenView: View {
                         if !isMeasuring {
                             // Start measuring
                             isMeasuring = true
-                            currentHeartRate = nil
-                            ringManager.measureHeartRate()
+                            ringManager.heartRateManager.heartRate = nil
+                            ringManager.heartRateManager.measureHeartRate() {
+                                isMeasuring = false
+                                animateHeart = false
+                            }
     //                        ringManager.measureHeartRate()
                             animateHeart = true
                         } else {
                             // Stop measuring
                             isMeasuring = false
-                            currentHeartRate = nil
+                            ringManager.heartRateManager.heartRate = nil
                             animateHeart = false
                         }
                     }) {

@@ -25,7 +25,6 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published private(set) var connectedPeripheral: CBPeripheral?
     @Published private(set) var batteryLevel: Int?
     @Published var isCharging: Bool = false
-    @Published var heartRate: Int?
     @Published var hrv: Int?
     @Published private(set) var deviceStateRaw: Int?   // Replace with SDK enum type if you have it
     @Published var dataLoaded: Bool = false
@@ -109,7 +108,7 @@ final class QCCentralManager: NSObject, ObservableObject {
         stopScan()
         stopTimer()
     }
-    
+        
     // MARK: - Public scan API
     func scan() {
         scan(withTimeout: Int(scanTimeout))
@@ -231,66 +230,6 @@ final class QCCentralManager: NSObject, ObservableObject {
             print("❌ Failed to read battery")
             completion?()
         })
-    }
-    
-    func getSteps() {
-        QCSDKCmdCreator.getSportDetailData(byDay: 0, sportDatas: { [weak self] sports in
-            var totalStepCount = 0
-            var totalCalories: Double = 0
-            var totalDistance = 0
-            for case let model as QCSportModel in sports {
-                totalStepCount += Int(model.totalStepCount)
-                totalCalories += model.calories
-                totalDistance += Int(model.distance)
-                print("Pedometer item: date:\(String(describing: model.happenDate)), steps:\(model.totalStepCount), calories:\(model.calories), distance:\(model.distance)")
-            }
-            DispatchQueue.main.async {
-                // you can publish aggregated results or handle as needed
-                print("Total steps: \(totalStepCount), calories: \(totalCalories), distance: \(totalDistance)")
-            }
-            
-            QCSDKCmdCreator.getCurrentSportSucess({ sport in
-                print("Current sport summary steps:\(sport.totalStepCount), calories:\(sport.calories), distance:\(sport.distance)")
-            }, failed: {
-                print("Failed to get current sport summary")
-            })
-            
-        }, fail: {
-            print("❌ getSportDetailData fail")
-        })
-    }
-    
-    func measureHeartRate() {
-        print("🌟 Start Heart Rate measurement 🌟")
-        
-        QCSDKCmdCreator.setTime(Date(),
-            success: { _ in
-                // Use QCMeasuringTypeHR for heart rate
-            let type = QCMeasuringType.heartRate
-                
-                QCSDKManager.shareInstance().startToMeasuring(
-                    withOperateType: type,
-                    measuringHandle: { result in
-                        if let value = result as? NSNumber {
-                            print("💓 Current Heart Rate: \(value.intValue) BPM")
-                        }
-                    },
-                    completedHandle: { [weak self] success, result, error in
-                        DispatchQueue.main.async {
-                            if success, let hrValue = result as? NSNumber {
-                                self?.heartRate = hrValue.intValue
-                                print("✅ Heart Rate Measurement Complete: \(hrValue.intValue) BPM")
-                            } else {
-                                print("❌ Heart Rate measurement failed: \(error?.localizedDescription ?? "unknown error")")
-                            }
-                        }
-                    }
-                )
-            },
-            failed: {
-                print("❌ Failed to set time before Heart Rate measurement")
-            }
-        )
     }
 
     // MARK: - Private helpers
@@ -549,49 +488,55 @@ extension QCCentralManager: CBCentralManagerDelegate {
                 print("✅ Peripheral added successfully")
 
                 // 💡 Add delay to let SDK fully initialize before fetching data
-                DispatchQueue.main.async {
-                    print("🚀 Device ready — starting data fetch")
-                    self.heartRateManager.fetchTodayHeartRate() {
-                        self.dashboardHeartRateData = self.heartRateManager.dayData
-                        self.syncHeartRateToHealthKit()
-                        self.pedometerManager.getPedometerData() {
-                            self.dashboardStepsData = self.pedometerManager.stepsData
-                            self.stressManager.fetchStressData() {
-                                self.dashboardStressData = self.stressManager.stressData
-                                self.sleepManager.getSleep() {
-                                    self.dashboardSleepSummary = self.sleepManager.summary
-                                    self.syncSleepToHealthKit()
-                                    self.readBattery() {
-                                        self.bloodOxygenManager.fetchBloodOxygenData() {
-                                            self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
-                                            self.hrvManager.fetchHRV(day: 0) {
-                                                self.dashboardHRVData = self.hrvManager.hrvData
-                                                if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
-                                                ) {
-                                                    let formatter = DateFormatter()
-                                                    formatter.dateFormat = "h:mm a"
-                                                    print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
-                                                    self.getBloodOxygenScheduleStatus() {
-                                                        self.getStressScheduleStatus() {
-                                                            self.getHRVScheduleStatus() {
-                                                                self.getHeartRateScheduleStatus()
-                                                            }
-                                                        }
+                callAllFunctions()
+            } else {
+                print("❌ Failed to add peripheral")
+            }
+        })
+    }
+    
+    func callAllFunctions (completion: (() -> Void)? = nil) {
+        self.dataLoaded = false
+        DispatchQueue.main.async {
+            print("🚀 Device ready — starting data fetch")
+            self.heartRateManager.fetchTodayHeartRate() {
+                self.dashboardHeartRateData = self.heartRateManager.dayData
+                self.syncHeartRateToHealthKit()
+                self.pedometerManager.getPedometerData() {
+                    self.dashboardStepsData = self.pedometerManager.stepsData
+                    self.stressManager.fetchStressData() {
+                        self.dashboardStressData = self.stressManager.stressData
+                        self.sleepManager.getSleep() {
+                            self.dashboardSleepSummary = self.sleepManager.summary
+                            self.syncSleepToHealthKit()
+                            self.readBattery() {
+                                self.bloodOxygenManager.fetchBloodOxygenData() {
+                                    self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
+                                    self.hrvManager.fetchHRV(day: 0) {
+                                        self.dashboardHRVData = self.hrvManager.hrvData
+                                        if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
+                                        ) {
+                                            let formatter = DateFormatter()
+                                            formatter.dateFormat = "h:mm a"
+                                            print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
+                                            self.getBloodOxygenScheduleStatus() {
+                                                self.getStressScheduleStatus() {
+                                                    self.getHRVScheduleStatus() {
+                                                        self.getHeartRateScheduleStatus()
                                                     }
                                                 }
-                                                self.dataLoaded = true
                                             }
                                         }
+                                        self.dataLoaded = true
+                                        completion?()
                                     }
                                 }
                             }
                         }
                     }
                 }
-            } else {
-                print("❌ Failed to add peripheral")
             }
-        })
+        }
     }
 
     

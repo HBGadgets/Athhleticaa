@@ -15,31 +15,12 @@ import SwiftUI
 struct DashboardView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
+    @State private var isSyncing = false
     
     @MainActor
     func refreshDashboard() async {
         print("Pull to refresh triggered")
-
-        ringManager.dataLoaded = false
-        
-        DispatchQueue.main.async {
-            print("🚀 Device ready — starting data fetch")
-            ringManager.heartRateManager.fetchTodayHeartRate() {
-                ringManager.pedometerManager.getPedometerData() {
-                    ringManager.stressManager.fetchStressData() {
-                        ringManager.sleepManager.getSleep() {
-                            ringManager.readBattery() {
-                                ringManager.bloodOxygenManager.fetchBloodOxygenData() {
-                                    ringManager.hrvManager.fetchHRV() {
-                                        ringManager.dataLoaded = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        ringManager.callAllFunctions()
     }
     
     var body: some View {
@@ -105,6 +86,17 @@ struct DashboardView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isSyncing = true
+                    ringManager.callAllFunctions() {
+                        isSyncing = false
+                    }
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.title2)
+                }
             }
         }
         .onAppear() {

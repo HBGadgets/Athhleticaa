@@ -93,6 +93,7 @@ class HeartRateManager: ObservableObject {
     @Published var monthData: [HeartRateData] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var heartRate: Int?
 
     enum DataType {
         case day
@@ -134,6 +135,42 @@ class HeartRateManager: ObservableObject {
                 completion?()
             }
         })
+    }
+    
+    func measureHeartRate(completion: (() -> Void)? = nil) {
+        print("🌟 Start Heart Rate measurement 🌟")
+        
+        QCSDKCmdCreator.setTime(Date(),
+            success: { _ in
+                // Use QCMeasuringTypeHR for heart rate
+            let type = QCMeasuringType.heartRate
+                
+                QCSDKManager.shareInstance().startToMeasuring(
+                    withOperateType: type,
+                    measuringHandle: { result in
+                        if let value = result as? NSNumber {
+                            print("💓 Current Heart Rate: \(value.intValue) BPM")
+                        }
+                    },
+                    completedHandle: { [weak self] success, result, error in
+                        DispatchQueue.main.async {
+                            if success, let hrValue = result as? NSNumber {
+                                self?.heartRate = hrValue.intValue
+                                print("✅ Heart Rate Measurement Complete: \(hrValue.intValue) BPM")
+                                completion?()
+                            } else {
+                                print("❌ Heart Rate measurement failed: \(error?.localizedDescription ?? "unknown error")")
+                                completion?()
+                            }
+                        }
+                    }
+                )
+            },
+            failed: {
+                print("❌ Failed to set time before Heart Rate measurement")
+                completion?()
+            }
+        )
     }
 
     // MARK: - Public API

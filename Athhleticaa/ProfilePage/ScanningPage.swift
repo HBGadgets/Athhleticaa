@@ -23,21 +23,7 @@ struct ScanningPage: View {
                             ringManager.stopScan()
                             ringManager.selectedTab = 0
                             dismiss()
-                            ringManager.heartRateManager.fetchTodayHeartRate() {
-                                ringManager.pedometerManager.getPedometerData() {
-                                    ringManager.stressManager.fetchStressData() {
-                                        ringManager.sleepManager.getSleep(day: 0) {
-                                            ringManager.readBattery() {
-                                                ringManager.bloodOxygenManager.fetchBloodOxygenData() {
-                                                    ringManager.hrvManager.fetchHRV() {
-                                                        ringManager.dataLoaded = true
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            ringManager.callAllFunctions()
                         }
                     }
                 }

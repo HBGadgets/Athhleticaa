@@ -40,9 +40,9 @@ struct HeartRateDataDetailScreenView: View {
                 .padding(20)
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
-                    .allowsHitTesting(true)
+//                Color.black.opacity(0.3)
+//                    .ignoresSafeArea()
+//                    .allowsHitTesting(true)
             }
         }
         .toolbar {

@@ -47,7 +47,7 @@ struct BloodOxygenScreenView: View {
                     }) {
                         Text(ringManager.selectedDate, formatter: dateFormatter)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "BloodOxygenScreen")
@@ -55,7 +55,7 @@ struct BloodOxygenScreenView: View {
                             .presentationDragIndicator(.visible)
                     }
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
                 // MARK: - Heart Rate Section
                 if let day = ringManager.bloodOxygenManager.readings.first {
@@ -103,6 +103,7 @@ struct BloodOxygenScreenView: View {
                 NavigationLink(destination: BloodOxygenDataDetailScreenView(ringManager: ringManager)) {
                     HStack {
                         Text("Data details")
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                         Spacer()
                         HStack(spacing: 4) {
                             Text({

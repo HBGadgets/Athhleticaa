@@ -44,6 +44,7 @@ struct HRVCard: View {
                         Text("HRV")
                             .font(.headline)
                             .fontWeight(.bold)
+                            .fontWidth(.expanded)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")

@@ -34,7 +34,7 @@ struct HRVScreenView: View {
                     }) {
                         Text(ringManager.selectedDate, formatter: dateFormatter)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "HRVScreen")
@@ -42,7 +42,7 @@ struct HRVScreenView: View {
                             .presentationDragIndicator(.visible)
                     }
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
                 // MARK: - Heart Rate Section
                 HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
@@ -81,6 +81,7 @@ struct HRVScreenView: View {
                 NavigationLink(destination: HRVDataDetailScreenView(ringManager: ringManager)) {
                     HStack {
                         Text("Data details")
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                         Spacer()
                         HStack(spacing: 4) {
                             Text({

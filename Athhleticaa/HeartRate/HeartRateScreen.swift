@@ -31,15 +31,16 @@ struct HeartRateScreenView: View {
                     }) {
                         Text(ringManager.selectedDate, formatter: dateFormatter)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
+                    .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "HeartRateScreen")
                             .presentationDetents([.height(500)]) // Only as tall as needed
                             .presentationDragIndicator(.visible)
                     }
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
                 VStack(spacing: 16) {
 //                    Image("HeartRateIcon")
@@ -61,6 +62,7 @@ struct HeartRateScreenView: View {
 
                     Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
                         .font(.system(size: 44, weight: .bold))
+                        .fontWidth(.expanded)
 
                     Text("BPM")
                         .font(.subheadline)
@@ -99,6 +101,7 @@ struct HeartRateScreenView: View {
                 NavigationLink(destination: HeartRateDataDetailScreenView(ringManager: ringManager)) {
                     HStack {
                         Text("Data details")
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                         Spacer()
                         HStack(spacing: 4) {
                             Text({
@@ -167,6 +170,7 @@ struct HeartRateScreenView: View {
                         }
                     }) {
                         Text(isMeasuring ? "Measuring..." : "Click to start measurement")
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))

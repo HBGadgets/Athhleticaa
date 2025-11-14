@@ -41,7 +41,7 @@ struct StressAnalysisScreenView: View {
                     }) {
                         Text(ringManager.selectedDate, formatter: dateFormatter)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "StressAnalysisScreen")
@@ -49,7 +49,7 @@ struct StressAnalysisScreenView: View {
                             .presentationDragIndicator(.visible)
                     }
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
                 // MARK: - Heart Rate Section
                 VStack(spacing: 16) {
@@ -62,6 +62,7 @@ struct StressAnalysisScreenView: View {
 
                     Text("\(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)")
                         .font(.system(size: 44, weight: .bold))
+                        .fontWidth(.expanded)
 
                     Text("\(String(describing: levelString(stress: ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)))")
                         .font(.subheadline)
@@ -100,6 +101,7 @@ struct StressAnalysisScreenView: View {
                 NavigationLink(destination: StressDataDetailScreenView(ringManager: ringManager)) {
                     HStack {
                         Text("Data details")
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                         Spacer()
                         HStack(spacing: 4) {
                             Text({
@@ -159,6 +161,7 @@ struct StatItem: View {
         VStack(spacing: 4) {
             Text(value)
                 .font(.headline)
+                .fontWidth(.expanded)
             Text(title)
                 .font(.footnote)
         }

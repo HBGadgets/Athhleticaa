@@ -37,14 +37,13 @@ struct ActivityScreenView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                
                 HStack {
                     Button(action: {
                         showCalendar.toggle()
                     }) {
                         Text(ringManager.selectedDate, formatter: dateFormatter)
                             .font(.headline)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
                     .sheet(isPresented: $showCalendar) {
                         WeeklyCalendarView(ringManager: ringManager, fromScreen: "ActivityScreen")
@@ -52,7 +51,7 @@ struct ActivityScreenView: View {
                             .presentationDragIndicator(.visible)
                     }
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.blue)
+                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
 
                 

@@ -96,6 +96,7 @@ struct SleepSummaryView: View {
                     if let scoreText = summary.score {
                             Text("\(scoreText)")
                                 .font(.system(size: 28, weight: .bold))
+                                .fontWidth(.expanded)
                         } else {
                             Text("0")
                                 .font(.system(size: 28, weight: .bold))
@@ -113,12 +114,14 @@ struct SleepSummaryView: View {
                         .foregroundColor(.gray)
 
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
-                        Text("\(hours)")
+                        Text(String(format: "%02d", hours))
                             .font(.system(size: 42, weight: .bold))
+                            .fontWidth(.expanded)
                         Text("H")
                             .font(.title3)
-                        Text("\(minutes)")
+                        Text(String(format: "%02d", minutes))
                             .font(.system(size: 42, weight: .bold))
+                            .fontWidth(.expanded)
                         Text("M")
                             .font(.title3)
                     }
@@ -138,6 +141,7 @@ struct SleepSummaryView: View {
                         if let efficiencyScore = summary.efficiency {
                             Text("\(efficiencyScore)%")
                                 .font(.headline)
+                                .fontWidth(.expanded)
                         } else {
                             Text("0")
                                 .font(.headline)
@@ -147,6 +151,7 @@ struct SleepSummaryView: View {
                             .foregroundColor(.gray)
                     }
                 }
+                .padding()
                 
                 Spacer()
 
@@ -155,18 +160,18 @@ struct SleepSummaryView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(summary.quality ?? "")
                             .font(.headline)
+                            .fontWidth(.expanded)
                         Text("Sleep Quality")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
                 }
+                .padding()
             }
-            .padding()
             .frame(maxWidth: .infinity)
             .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
             .cornerRadius(16)
             .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
         }
-        .padding()
     }
 }

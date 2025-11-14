@@ -38,7 +38,7 @@ struct SleepsAnalysisScreenView: View {
                         }) {
                             Text(ringManager.selectedDate, formatter: dateFormatter)
                                 .font(.headline)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                         }
                         .sheet(isPresented: $showCalendar) {
                             WeeklyCalendarView(ringManager: ringManager, fromScreen: "SleepAnalysisScreen")
@@ -46,7 +46,7 @@ struct SleepsAnalysisScreenView: View {
                                 .presentationDragIndicator(.visible)
                         }
                         Image(systemName: "chevron.down")
-                            .foregroundColor(.blue)
+                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     }
                     SleepSummaryView(summary: sleepManager.summary ?? Summary(totalMinutes: 0, startTime: Date(), endTime: Date(), efficiency: 0, quality: "Unknown", score: 0))
                     SleepSummaryChartView(sleepManager: sleepManager)

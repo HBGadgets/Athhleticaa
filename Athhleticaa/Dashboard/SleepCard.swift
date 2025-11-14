@@ -45,10 +45,7 @@ struct SleepCard: View {
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                            Text(formattedToday)
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                                .fontWidth(.expanded)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -69,6 +66,7 @@ struct SleepCard: View {
                                 if let summaryScore = summary?.score {
                                     Text("\(summaryScore)")
                                         .font(.headline)
+                                        .fontWidth(.expanded)
                                 } else {
                                     Text("...")
                                         .font(.headline)
@@ -100,9 +98,7 @@ struct SleepCard: View {
             .frame(maxWidth: .infinity)
             .padding()
         }
-        .frame(height: 250)
-
-        
+        .frame(height: 230)
     }
 }
 
@@ -132,7 +128,7 @@ struct TotalSleepRingView: View {
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    Color.white,
+                    Color.indigo,
                     style: StrokeStyle(lineWidth: 10, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
@@ -143,6 +139,7 @@ struct TotalSleepRingView: View {
             VStack(spacing: 6) {
                 Text(formattedDuration(totalMinutes))
                     .font(.system(size: 18, weight: .bold))
+                    .fontWidth(.expanded)
                 
                 Text("Total Sleep")
                     .font(.caption)

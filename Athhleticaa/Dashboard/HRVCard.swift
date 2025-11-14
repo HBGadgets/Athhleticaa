@@ -44,9 +44,6 @@ struct HRVCard: View {
                         Text("HRV")
                             .font(.headline)
                             .fontWeight(.bold)
-                        Text(formattedToday)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -58,6 +55,7 @@ struct HRVCard: View {
             .padding()
             .cornerRadius(16)
         }
+        .frame(height: 250)
         
     }
 }

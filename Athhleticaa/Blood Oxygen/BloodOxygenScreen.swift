@@ -65,6 +65,7 @@ struct BloodOxygenScreenView: View {
                         .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
                         .cornerRadius(16)
                         .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                        .frame(height: 250)
                 } else {
                     Text("No data")
                 }

@@ -75,7 +75,6 @@ struct HRVChartView: View {
             }
             .chartXScale(domain: baseDate...(calendar.date(byAdding: .day, value: 1, to: baseDate)!))
             .foregroundStyle(Color.gray)
-            .frame(height: 250)
             .padding()
             .background(Color(.systemGray6).opacity(0))
             .clipShape(RoundedRectangle(cornerRadius: 12))

@@ -44,8 +44,7 @@ struct StressCard: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Stress")
                             .font(.headline)
-                        Text(formattedToday)
-                            .font(.subheadline)
+                            .fontWidth(.expanded)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -66,6 +65,7 @@ struct StressCard: View {
                                 .font(.subheadline)
                             Text("\(Int(averageStress))")
                                 .font(.title3.bold())
+                                .fontWidth(.expanded)
                             Text(stressLevelText(for: averageStress))
                                 .font(.footnote)
                         }
@@ -77,6 +77,7 @@ struct StressCard: View {
                                 .font(.subheadline)
                             Text("\(rangeMin)-\(rangeMax)")
                                 .font(.title3.bold())
+                                .fontWidth(.expanded)
                             Text(stressLevelText(for: averageStress))
                                 .font(.footnote)
                         }
@@ -87,6 +88,7 @@ struct StressCard: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
+            .frame(height: 250)
             .padding()
 //            .background(Color.blue.opacity(0.1))
             .cornerRadius(16)
@@ -143,26 +145,26 @@ struct StressRingView: View {
             // Background ring
             Circle()
                 .stroke(Color.blue.opacity(0.15), lineWidth: 20)
-                .frame(width: 150, height: 150)
+                .frame(width: 140, height: 140)
 
             // Progress ring
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
-                    Color.white,
+                    Color.green,
                     style: StrokeStyle(lineWidth: 10, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .frame(width: 150, height: 150)
+                .frame(width: 140, height: 140)
                 .animation(.easeInOut(duration: 1.0), value: progress)
             
             // Center text
             VStack(spacing: 6) {
                 Text("\(stress)")
                     .font(.system(size: 28, weight: .bold))
+                    .fontWidth(.expanded)
                 
                 Text(levelString)
-                    .font(.system(size: 28, weight: .bold))
             }
             .foregroundStyle(.white)
         }

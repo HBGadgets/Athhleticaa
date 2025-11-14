@@ -43,20 +43,32 @@ struct BloodOxygenCard: View {
                         Text("Blood Oxygen")
                             .font(.headline)
                             .fontWeight(.bold)
-                        Text(formattedToday)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
+                            .fontWidth(.expanded)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
                 BloodOxygenDotChart(data: ringManager.dashboardBloodOxygenData)
+                if let bloodOxygenLevel = ringManager.dashboardBloodOxygenData.last {
+                    HStack {
+                        Image(systemName: "lungs.fill")
+                            .foregroundColor(.blue)
+                        Text("\(Int(bloodOxygenLevel.soa2))%")
+                            .fontWidth(.expanded)
+                            .fontWeight(.bold)
+                        Spacer()
+                        Text("Range")
+                        Text("\(Int(bloodOxygenLevel.minSoa2))% - \(Int(bloodOxygenLevel.maxSoa2))%")
+                            .fontWidth(.expanded)
+                            .fontWeight(.bold)
+                    }
+                }
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .padding()
             .cornerRadius(16)
         }
-        
+        .frame(height: 250)
     }
 }

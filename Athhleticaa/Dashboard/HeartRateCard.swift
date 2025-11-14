@@ -30,9 +30,10 @@ struct HeartRateCard: View {
 
             // Content
             VStack(alignment: .leading, spacing: 8) {
-                Text("Heart rate")
+                Text("Heart Rate")
                     .font(.headline)
                     .foregroundColor(Color.white)
+                    .fontWidth(.expanded)
                     
                 if let day = ringManager.dashboardHeartRateData.first {
                     HStack {
@@ -42,10 +43,12 @@ struct HeartRateCard: View {
                             .frame(width: 18, height: 18)
                         Text("\(ringManager.dashboardHeartRateData.last?.lastNonZeroHeartRate ?? 0) BPM")
                             .font(.headline)
+                            .fontWidth(.expanded)
                         
                         Spacer()
                         
                         Text("Range \(day.minHeartRate)-\(day.maxHeartRate)")
+                            .fontWidth(.expanded)
                     }
                 }
                 

@@ -46,6 +46,7 @@ struct HRVScreenView: View {
                 }
                 // MARK: - Heart Rate Section
                 HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
+                    .frame(height: 250)
 
                 // MARK: - Average / Min / Max
                 if let day = ringManager.hrvManager.hrvData {

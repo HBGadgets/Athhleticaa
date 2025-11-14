@@ -78,10 +78,7 @@ struct StepsCard: View {
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
-                        Text(formattedToday)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .fontWidth(.expanded)
                     }
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -95,9 +92,11 @@ struct StepsCard: View {
                         Text(String(format: "%.2f", calories).prefix(2))
                             .font(.title)
                             .foregroundColor(.white)
+                            .fontWidth(.expanded)
                         Text("Kcal")
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
+                            .fontWidth(.expanded)
                     }
                     
                     Spacer()
@@ -109,9 +108,11 @@ struct StepsCard: View {
                         Text("\(steps)")
                             .font(.title)
                             .foregroundColor(.white)
+                            .fontWidth(.expanded)
                         Text("Steps")
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
+                            .fontWidth(.expanded)
                     }
                     
                     Spacer()
@@ -123,9 +124,11 @@ struct StepsCard: View {
                         Text(String(format: "%.2f", distance))
                             .font(.title)
                             .foregroundColor(.white)
+                            .fontWidth(.expanded)
                         Text("Km")
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
+                            .fontWidth(.expanded)
                     }
                 }
 //                .padding(.vertical, 20)

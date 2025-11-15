@@ -80,9 +80,9 @@ struct ContentView: View {
                     .onDisappear {
                         cancelTimeout()
                     }
-//                    Color.black.opacity(0.3)
-//                        .ignoresSafeArea()
-//                        .allowsHitTesting(true)
+                    Color.black.opacity(0.1)
+                        .ignoresSafeArea()
+                        .allowsHitTesting(true)
                 }
             }
         }

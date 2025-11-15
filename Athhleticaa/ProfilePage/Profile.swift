@@ -11,7 +11,8 @@ import CoreBluetooth
 
 struct DeviceInfoView: View {
     @State private var gestureControlEnabled = true
-    @State private var showSheet = false
+    @State private var showThemeSheet = false
+    @State private var showFindDeviceSheet = false
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var showAuthSuccessAlert = false
@@ -123,6 +124,7 @@ struct DeviceInfoView: View {
                 VStack(spacing: 12) {
                     DeviceMenuItem(icon: "dot.radiowaves.left.and.right", color: .mint, title: "Find Device")
                     .onTapGesture {
+                        showFindDeviceSheet = true
                         for i in 0..<4 { // 3 times
                             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
                                 QCSDKCmdCreator.alertBindingSuccess({
@@ -147,7 +149,7 @@ struct DeviceInfoView: View {
                     DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")
                     DeviceMenuItem(icon: "tshirt", color: .purple, title: "App Theme")
                         .onTapGesture {
-                            showSheet = true
+                            showThemeSheet = true
                         }
 //                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
 //                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
@@ -157,19 +159,23 @@ struct DeviceInfoView: View {
                                 showAuthSuccessAlert = true
                             }
                         }
-                    DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
-                    DeviceMenuItem(icon: "gear", color: .gray, title: "System Settings")
+//                    DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
+                    NavigationLink(destination: SystemSettingScreen(ringManager: ringManager)) {
+                        DeviceMenuItem(icon: "gear", color: .gray, title: "System Setting")
+                    }
                 }
             }
-            .padding(.bottom, 100)
+            .padding(.bottom, 150)
             .padding(.horizontal)
-            .sheet(isPresented: $showSheet) {
+            .sheet(isPresented: $showThemeSheet) {
                 ThemeBottomSheet(selectedTheme: $ringManager.selectedTheme)
             }
+            .sheet(isPresented: $showFindDeviceSheet) {
+                Text("Ring is glowing green")
+                    .font(.headline)
+                    .presentationDetents([.fraction(0.3)])
+            }
             .alert("Confirmation", isPresented: $showAuthSuccessAlert) {
-                Button("Okay", role: .destructive) {
-                    
-                }
             } message: {
                 Text("Ring data will be synced to Apple Health")
             }

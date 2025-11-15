@@ -38,17 +38,23 @@ struct SystemSettingScreen: View {
                 SettingItem(
                     title: "Restart",
                 )
+                .onTapGesture {
+                    showRestartAlert = true
+                }
                 
                 SettingItem(
                     title: "Reset",
                 )
+                .onTapGesture {
+                    showResetAlert = true
+                }
             }
             .padding()
             .padding(.bottom, 100)
         }
         // restart alert
         .alert("Confirmation", isPresented: $showRestartAlert) {
-            Button("Cancel", role: .destructive) {}
+            Button("Cancel", role: .cancel) {}
             Button("Okay") {
                 restartRing()
             }
@@ -58,12 +64,12 @@ struct SystemSettingScreen: View {
         
         // reset alert
         .alert("Confirmation", isPresented: $showResetAlert) {
-            Button("Cancel", role: .destructive) {}
+            Button("Cancel", role: .cancel) {}
             Button("Okay") {
                 resetRingToFactory()
             }
         } message: {
-            Text("Ring data will be synced to Apple Health")
+            Text("It will delete your data in the device, including:\n\n- Steps, calories, distance data\n- Sleep monitoring data")
         }
         
         // error alert

@@ -57,7 +57,20 @@ struct BloodOxygenScreenView: View {
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
-                // MARK: - Heart Rate Section
+                MonitoringItem(
+                    title: "SPO2 Detection",
+                    subtitle: "Monitor once every hour",
+                    isEnabled: $ringManager.spo2Monitoring
+                ) {
+                    ringManager.setBloodOxygenSchedule(enabled: ringManager.spo2Monitoring)
+                }
+                Image(systemName: "lungs.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 120)
+                    .foregroundColor(.blue)
+                    .shadow(color: .blue.opacity(0.5), radius: 15, x: 0, y: 0)
+                // MARK: - Blood Oxygen Rate Section
                 if let day = ringManager.bloodOxygenManager.readings.first {
                     BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings)
                         .padding(10)

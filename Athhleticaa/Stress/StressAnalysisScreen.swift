@@ -51,7 +51,14 @@ struct StressAnalysisScreenView: View {
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
-                // MARK: - Heart Rate Section
+                MonitoringItem(
+                    title: "Full day stress Monitoring",
+                    subtitle: "Monitor every 30 minutes",
+                    isEnabled: $ringManager.stressMonitoring
+                ) {
+                    ringManager.setStressSchedule(enabled: ringManager.stressMonitoring)
+                }
+                // MARK: - Stress Section
                 VStack(spacing: 16) {
                     Image(systemName: "leaf.fill")
                         .resizable()

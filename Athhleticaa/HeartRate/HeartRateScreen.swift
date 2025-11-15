@@ -42,6 +42,13 @@ struct HeartRateScreenView: View {
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
+                MonitoringItem(
+                    title: "Full day Heart Rate",
+                    subtitle: "Monitor once every hour",
+                    isEnabled: $ringManager.heartRateMonitoring
+                ) {
+                    ringManager.setHeartRateSchedule(enabled: ringManager.heartRateMonitoring)
+                }
                 VStack(spacing: 16) {
 //                    Image("HeartRateIcon")
 //                        .resizable()

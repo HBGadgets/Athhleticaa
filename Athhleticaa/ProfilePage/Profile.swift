@@ -146,7 +146,7 @@ struct DeviceInfoView: View {
 //                            }
                     }
                     
-                    DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")
+//                    DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")
                     DeviceMenuItem(icon: "tshirt", color: .purple, title: "App Theme")
                         .onTapGesture {
                             showThemeSheet = true

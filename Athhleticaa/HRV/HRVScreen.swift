@@ -44,7 +44,20 @@ struct HRVScreenView: View {
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                 }
-                // MARK: - Heart Rate Section
+                MonitoringItem(
+                    title: "Scheduled HRV monitoring",
+                    subtitle: "Monitor once every hour",
+                    isEnabled: $ringManager.HRVMonitoring
+                ) {
+                    ringManager.setHRVSchedule(enabled: ringManager.HRVMonitoring)
+                }
+                // MARK: - HRV Rate Section
+                Image(systemName: "waveform.path.ecg.heart.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 120)
+                    .foregroundColor(.red)
+                    .shadow(color: .red.opacity(0.5), radius: 15, x: 0, y: 0)
                 HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
                     .frame(height: 250)
 

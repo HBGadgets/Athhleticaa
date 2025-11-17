@@ -1,0 +1,48 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Couldn't get data",
+        "location": {
+          "startingColumn": 13,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please wait...",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 72
+        }
+      },
+      {
+        "comment": "",
+        "key": "Syncing data",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 96
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please make sure the ring is binded and accessible to the phone",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 99
+        }
+      }
+    ]
+  },
+  "version": 1
+}

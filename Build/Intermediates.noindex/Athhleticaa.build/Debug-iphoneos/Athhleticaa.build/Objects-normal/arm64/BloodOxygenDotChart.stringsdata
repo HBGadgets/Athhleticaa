@@ -1,0 +1,40 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Blood Oxygen/BloodOxygenDotChart.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No data available",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "SpO₂",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 54
+        }
+      }
+    ]
+  },
+  "version": 1
+}

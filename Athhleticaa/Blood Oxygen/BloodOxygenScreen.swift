@@ -71,8 +71,15 @@ struct BloodOxygenScreenView: View {
                     .foregroundColor(.blue)
                     .shadow(color: .blue.opacity(0.5), radius: 15, x: 0, y: 0)
                 // MARK: - Blood Oxygen Rate Section
-                if let day = ringManager.bloodOxygenManager.readings.first {
-                    BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings)
+                if let lastNonZeroBO = ringManager.bloodOxygenManager.lastNonZeroBloodOxygenReading {
+                    if let time = ringManager.timeChart {
+                        Text("\(ringManager.spo2ValueChart)")
+                        Text("\(time)")
+                    } else {
+                        Text("\(lastNonZeroBO.minSoa2) - \(lastNonZeroBO.maxSoa2)")
+                        Text("\(lastNonZeroBO.date)")
+                    }
+                    BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings, ringManager: ringManager)
                         .padding(10)
                         .frame(maxWidth: .infinity)
                         .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))

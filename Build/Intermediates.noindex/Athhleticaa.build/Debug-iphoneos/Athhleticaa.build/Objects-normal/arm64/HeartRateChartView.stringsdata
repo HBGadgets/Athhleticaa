@@ -1,0 +1,72 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateChartView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 58
+        }
+      },
+      {
+        "comment": "",
+        "key": "Selected Time",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 33
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld bpm",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 68
+        }
+      }
+    ]
+  },
+  "version": 1
+}

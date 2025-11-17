@@ -1,0 +1,24 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HRV/HRVScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Data details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 96
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 127
+        }
+      }
+    ]
+  },
+  "version": 1
+}

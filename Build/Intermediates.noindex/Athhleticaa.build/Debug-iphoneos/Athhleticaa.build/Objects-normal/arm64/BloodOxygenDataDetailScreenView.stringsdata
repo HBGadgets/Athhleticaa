@@ -1,0 +1,48 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Blood Oxygen/BloodOxygenDataDetailScreenView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No Stress data available",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please wait...",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "Syncing data",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data Details",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Max: %lld | Min: %lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 86
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,200 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityCharts.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Hour",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Steps",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 33
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hour",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Distance",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hour",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "Calories",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 86
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 96
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 AM",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 97
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 98
+        }
+      },
+      {
+        "comment": "",
+        "key": "6 PM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 99
+        }
+      },
+      {
+        "comment": "",
+        "key": "12 AM",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 101
+        }
+      }
+    ]
+  },
+  "version": 1
+}

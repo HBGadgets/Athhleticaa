@@ -60,6 +60,10 @@ final class QCCentralManager: NSObject, ObservableObject {
     
     @State var isShowingCamera = false
     @Published var selectedTheme: AppTheme = .dark
+    
+    //MARK: - interactive chart variables
+    @Published var spo2ValueChart: Double? = nil
+    @Published var timeChart: Date? = nil
 
     
     // MARK: - Private core bluetooth + sdk refs

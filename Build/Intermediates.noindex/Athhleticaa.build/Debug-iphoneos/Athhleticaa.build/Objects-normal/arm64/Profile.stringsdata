@@ -1,0 +1,104 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/Profile.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Confirmation",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 178
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "• Connected",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unbind",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Battery: %lld%%",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "Device not connected",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 72
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Gesture control will increase power consumption, please turn it off when not in use",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 112
+        }
+      },
+      {
+        "comment": "",
+        "key": "Gesture Control",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 102
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 108
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ring is glowing green",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 174
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ring data will be synced to Apple Health",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 180
+        }
+      }
+    ]
+  },
+  "version": 1
+}

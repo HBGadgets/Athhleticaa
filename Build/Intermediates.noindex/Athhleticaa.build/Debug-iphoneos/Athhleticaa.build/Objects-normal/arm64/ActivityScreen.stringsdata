@@ -1,0 +1,48 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Steps",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Activity Track",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 119
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 134
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ / %@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 141
+        }
+      }
+    ]
+  },
+  "version": 1
+}

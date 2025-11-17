@@ -1,0 +1,56 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HRV/HRVChart.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Invalid date",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 70
+        }
+      }
+    ]
+  },
+  "version": 1
+}

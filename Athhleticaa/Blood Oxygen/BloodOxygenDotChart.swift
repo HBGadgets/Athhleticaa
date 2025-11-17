@@ -5,67 +5,77 @@
 //  Created by Dipanshu Kashyap on 04/11/25.
 //
 
-import SwiftUI
 import Charts
+import SwiftUI
 
 struct BloodOxygenDotChart: View {
     let data: [BloodOxygenModel]
+    @ObservedObject var ringManager: QCCentralManager
+    var selectedViewSpo2: BloodOxygenModel? {
+        guard let selected = ringManager.timeChart else { return nil }
+        return ringManager.bloodOxygenManager.readings.min {
+            abs($0.date.timeIntervalSince(selected)) < abs($1.date.timeIntervalSince(selected))
+        }
+    }
     
     var body: some View {
         let validData = data.filter { $0.soa2 > 0 }
 
         VStack(alignment: .leading, spacing: 16) {
+            if validData.isEmpty {
+                Text("No data available")
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                let firstDate = validData.first!.date
+                let calendar = Calendar.current
+                let startOfDay = calendar.startOfDay(for: firstDate)
+                let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: firstDate)!
 
-                    if validData.isEmpty {
-                        Text("No data available")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
-                        let firstDate = validData.first!.date
-                        let calendar = Calendar.current
-                        let startOfDay = calendar.startOfDay(for: firstDate)
-                        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: firstDate)!
-
-                        Chart {
-                            ForEach(validData, id: \.date) { item in
-                                LineMark(
-                                    x: .value("Time", item.date),
-                                    y: .value("SpO₂", item.soa2)
-                                )
-                                .interpolationMethod(.catmullRom)
-                                .foregroundStyle(.blue)
-                            }
-                        }
-                        .chartXScale(domain: startOfDay...endOfDay)
-                        .chartYScale(domain: 80...100)
-
-                        .chartYAxis {
-                            AxisMarks { value in
-                                AxisGridLine().foregroundStyle(Color.gray)
-                                AxisTick().foregroundStyle(Color.gray)
-                                AxisValueLabel {
-                                    if let yValue = value.as(Double.self) {
-                                        Text("\(Int(yValue))%")
-//                                            .foregroundColor(.white.opacity(0.8))
-                                    }
-                                }
-                            }
-                        }
-
-                        .chartXAxis {
-                            AxisMarks { value in
-                                AxisGridLine().foregroundStyle(Color.gray)
-                                AxisTick().foregroundStyle(Color.gray)
-                                AxisValueLabel {
-                                    if let date = value.as(Date.self) {
-                                        Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
-//                                            .foregroundColor(.white.opacity(0.8))
-                                    }
-                                }
-                            }
-                        }
-//                        .frame(height: 250)
+                Chart {
+                    ForEach(validData, id: \.date) { item in
+                        PointMark(
+                            x: .value("Time", item.date),
+                            y: .value("SpO₂", item.soa2)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .foregroundStyle(.blue)
                     }
                 }
+                .chartXScale(domain: startOfDay...endOfDay)
+                .chartYScale(domain: 80...100)
+
+                .chartYAxis {
+                    AxisMarks { value in
+                        AxisGridLine().foregroundStyle(Color.gray)
+                        AxisTick().foregroundStyle(Color.gray)
+                        AxisValueLabel {
+                            if let yValue = value.as(Double.self) {
+                                Text("\(Int(yValue))%")
+                            }
+                        }
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks { value in
+                        AxisGridLine().foregroundStyle(Color.gray)
+                        AxisTick().foregroundStyle(Color.gray)
+                        AxisValueLabel {
+                            if let date = value.as(Date.self) {
+                                Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
+                            }
+                        }
+                    }
+                }
+                .chartXSelection(value: $ringManager.timeChart)
+                .onChange(of: ringManager.timeChart) { _, newValue in
+                    if let selected = selectedViewSpo2 {
+                        ringManager.spo2ValueChart = selected.soa2
+                        ringManager.timeChart = selected.date
+                    }
+                    print("something")
+                }
+            }
+        }
     }
 }

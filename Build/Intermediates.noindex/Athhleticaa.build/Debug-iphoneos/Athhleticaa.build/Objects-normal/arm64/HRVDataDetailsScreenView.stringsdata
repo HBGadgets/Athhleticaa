@@ -1,0 +1,48 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HRV/HRVDataDetailsScreenView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No HRV data available",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please wait...",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Syncing data",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data Details",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 50
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld ms",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 87
+        }
+      }
+    ]
+  },
+  "version": 1
+}

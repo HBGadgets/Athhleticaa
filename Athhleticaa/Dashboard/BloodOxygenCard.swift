@@ -48,7 +48,7 @@ struct BloodOxygenCard: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
-                BloodOxygenDotChart(data: ringManager.dashboardBloodOxygenData)
+                BloodOxygenDotChart(data: ringManager.dashboardBloodOxygenData, ringManager: ringManager)
                 if let bloodOxygenLevel = ringManager.dashboardBloodOxygenData.last {
                     HStack {
                         Image(systemName: "lungs.fill")

@@ -1,0 +1,18 @@
+"/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimeAxisView.swift":
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.o"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.d"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.swiftconstvalues"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.swiftdeps"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.dia"
+"/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimelineGraph.swift":
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.d"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.swiftconstvalues"
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.o"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.swiftdeps"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.dia"
+"/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Examples/CircularChartExample.swift":
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.o"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.dia"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.d"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.swiftdeps"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Debug-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.swiftconstvalues"

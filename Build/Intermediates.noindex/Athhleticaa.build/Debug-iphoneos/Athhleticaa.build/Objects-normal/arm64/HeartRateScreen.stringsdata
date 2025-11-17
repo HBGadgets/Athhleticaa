@@ -1,0 +1,88 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 204
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 110
+        }
+      },
+      {
+        "comment": "",
+        "key": "Real-time heart rate",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 139
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld bpm",
+        "location": {
+          "startingColumn": 78,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "-- bpm",
+        "location": {
+          "startingColumn": 129,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Measuring...",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Click to start measurement",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heart rate",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 212
+        }
+      }
+    ]
+  },
+  "version": 1
+}

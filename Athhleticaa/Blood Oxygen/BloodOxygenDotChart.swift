@@ -70,10 +70,9 @@ struct BloodOxygenDotChart: View {
                 .chartXSelection(value: $ringManager.timeChart)
                 .onChange(of: ringManager.timeChart) { _, newValue in
                     if let selected = selectedViewSpo2 {
-                        ringManager.spo2ValueChart = selected.soa2
+                        ringManager.spo2ValueChart = "\(String(format: "%.0f", selected.minSoa2)) - \(String(format: "%.0f", selected.maxSoa2))"
                         ringManager.timeChart = selected.date
                     }
-                    print("something")
                 }
             }
         }

@@ -12,7 +12,7 @@
       },
       {
         "comment": "",
-        "key": "%lf - %lf",
+        "key": "%@ - %@",
         "location": {
           "startingColumn": 30,
           "startingLine": 79
@@ -23,15 +23,7 @@
         "key": "%@",
         "location": {
           "startingColumn": 30,
-          "startingLine": 80
-        }
-      },
-      {
-        "comment": "",
-        "key": "%@",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 77
+          "startingLine": 76
         }
       },
       {

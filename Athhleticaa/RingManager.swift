@@ -62,7 +62,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var selectedTheme: AppTheme = .dark
     
     //MARK: - interactive chart variables
-    @Published var spo2ValueChart: Double? = nil
+    @Published var spo2ValueChart: String? = nil
     @Published var timeChart: Date? = nil
 
     

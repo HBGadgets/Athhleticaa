@@ -10,6 +10,7 @@ import Charts
 
 struct HeartRateChartView: View {
     let heartRateData: HeartRateData
+    @ObservedObject var ringManager: QCCentralManager
     @State private var selectedIndex: Int? = nil
     
     var body: some View {
@@ -47,6 +48,12 @@ struct HeartRateChartView: View {
                             endPoint: .bottom
                         )
                     )
+                }
+                if let selected = ringManager.timeChart {
+                    // 1. Full-height thin line
+                    RuleMark(x: .value("Selected", selected))
+                        .foregroundStyle(.yellow)
+                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
                 
                 if let selectedIndex,
@@ -94,9 +101,18 @@ struct HeartRateChartView: View {
                     }
                 }
             }
-//            .frame(height: 250)
+            .chartXSelection(value: $ringManager.timeChart)
+            .onChange(of: ringManager.timeChart) { _, newValue in
+                if let selectedIndex,
+                   selectedIndex < validRates.count {
+                    let selected = validRates[selectedIndex]
+                    
+                    ringManager.heartRateAtSelectedTime = selected.bpm
+                    print(selected)
+                }
+            }
+
         }
-//        .padding()
     }
     
     // MARK: - Helpers

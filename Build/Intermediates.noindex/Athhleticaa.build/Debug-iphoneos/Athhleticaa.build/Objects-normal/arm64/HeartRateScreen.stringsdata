@@ -7,7 +7,7 @@
         "key": "No data",
         "location": {
           "startingColumn": 26,
-          "startingLine": 204
+          "startingLine": 219
         }
       },
       {
@@ -76,10 +76,18 @@
       },
       {
         "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 198
+        }
+      },
+      {
+        "comment": "",
         "key": "Heart rate",
         "location": {
           "startingColumn": 22,
-          "startingLine": 212
+          "startingLine": 227
         }
       }
     ]

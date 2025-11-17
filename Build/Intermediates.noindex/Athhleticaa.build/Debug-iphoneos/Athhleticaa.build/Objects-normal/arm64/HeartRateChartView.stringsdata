@@ -4,10 +4,18 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Selected",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
         "key": "Time",
         "location": {
           "startingColumn": 35,
-          "startingLine": 57
+          "startingLine": 64
         }
       },
       {
@@ -15,7 +23,7 @@
         "key": "BPM",
         "location": {
           "startingColumn": 35,
-          "startingLine": 58
+          "startingLine": 65
         }
       },
       {
@@ -23,20 +31,12 @@
         "key": "Selected Time",
         "location": {
           "startingColumn": 40,
-          "startingLine": 63
+          "startingLine": 70
         }
       },
       {
         "comment": "",
         "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 32
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
         "location": {
           "startingColumn": 35,
           "startingLine": 33
@@ -44,15 +44,15 @@
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "BPM",
         "location": {
           "startingColumn": 35,
-          "startingLine": 39
+          "startingLine": 34
         }
       },
       {
         "comment": "",
-        "key": "BPM",
+        "key": "Time",
         "location": {
           "startingColumn": 35,
           "startingLine": 40
@@ -60,10 +60,18 @@
       },
       {
         "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
         "key": "%lld bpm",
         "location": {
           "startingColumn": 38,
-          "startingLine": 68
+          "startingLine": 75
         }
       }
     ]

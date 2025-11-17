@@ -53,7 +53,7 @@ struct HeartRateCard: View {
                 }
                 
                 if let day = ringManager.dashboardHeartRateData.first {
-                    HeartRateChartView(heartRateData: day)
+                    HeartRateChartView(heartRateData: day, ringManager: ringManager)
                         .padding(10)
                         .frame(maxWidth: .infinity)
                         .cornerRadius(16)

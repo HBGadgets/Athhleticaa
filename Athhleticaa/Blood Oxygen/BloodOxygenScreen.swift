@@ -77,11 +77,15 @@ struct BloodOxygenScreenView: View {
                             Text("\(String(ringManager.spo2ValueChart ?? "__ - __"))")
                             Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
                         }
+                        .font(.headline)
+                        .fontWeight(.bold)
                     } else {
                         HStack {
                             Text("\(String(format: "%.0f", lastNonZeroBO.minSoa2))% - \(String(format: "%.0f", lastNonZeroBO.maxSoa2))%")
                             Text(lastNonZeroBO.date, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
                         }
+                        .font(.headline)
+                        .fontWeight(.bold)
                     }
                     BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings, ringManager: ringManager)
                         .padding(10)

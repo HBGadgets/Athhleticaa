@@ -7,23 +7,23 @@
         "key": "No data",
         "location": {
           "startingColumn": 26,
-          "startingLine": 90
-        }
-      },
-      {
-        "comment": "",
-        "key": "%@ - %@",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 79
+          "startingLine": 94
         }
       },
       {
         "comment": "",
         "key": "%@",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 76
+          "startingColumn": 34,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@%% - %@%%",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 82
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Data details",
         "location": {
           "startingColumn": 30,
-          "startingLine": 125
+          "startingLine": 129
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Blood Oxygen",
         "location": {
           "startingColumn": 22,
-          "startingLine": 156
+          "startingLine": 160
         }
       }
     ]

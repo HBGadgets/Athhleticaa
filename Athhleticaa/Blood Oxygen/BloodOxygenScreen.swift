@@ -73,11 +73,15 @@ struct BloodOxygenScreenView: View {
                 // MARK: - Blood Oxygen Rate Section
                 if let lastNonZeroBO = ringManager.bloodOxygenManager.lastNonZeroBloodOxygenReading {
                     if let time = ringManager.timeChart {
-                        Text("\(String(ringManager.spo2ValueChart ?? "__ - __"))")
-                        Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        HStack {
+                            Text("\(String(ringManager.spo2ValueChart ?? "__ - __"))")
+                            Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        }
                     } else {
-                        Text("\(String(format: "%.0f", lastNonZeroBO.minSoa2)) - \(String(format: "%.0f", lastNonZeroBO.maxSoa2))")
-                        Text(lastNonZeroBO.date, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        HStack {
+                            Text("\(String(format: "%.0f", lastNonZeroBO.minSoa2))% - \(String(format: "%.0f", lastNonZeroBO.maxSoa2))%")
+                            Text(lastNonZeroBO.date, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        }
                     }
                     BloodOxygenDotChart(data: ringManager.bloodOxygenManager.readings, ringManager: ringManager)
                         .padding(10)

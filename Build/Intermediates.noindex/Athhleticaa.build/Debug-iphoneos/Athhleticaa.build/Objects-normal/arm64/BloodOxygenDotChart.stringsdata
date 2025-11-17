@@ -12,6 +12,14 @@
       },
       {
         "comment": "",
+        "key": "Selected",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
         "key": "Time",
         "location": {
           "startingColumn": 39,
@@ -31,7 +39,7 @@
         "key": "%lld%%",
         "location": {
           "startingColumn": 38,
-          "startingLine": 54
+          "startingLine": 60
         }
       }
     ]

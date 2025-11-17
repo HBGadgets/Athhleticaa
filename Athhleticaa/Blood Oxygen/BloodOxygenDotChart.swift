@@ -41,6 +41,12 @@ struct BloodOxygenDotChart: View {
                         .interpolationMethod(.catmullRom)
                         .foregroundStyle(.blue)
                     }
+                    if let selected = ringManager.timeChart {
+                        // 1. Full-height thin line
+                        RuleMark(x: .value("Selected", selected))
+                            .foregroundStyle(.yellow)
+                            .lineStyle(StrokeStyle(lineWidth: 1))
+                    }
                 }
                 .chartXScale(domain: startOfDay...endOfDay)
                 .chartYScale(domain: 80...100)
@@ -70,7 +76,15 @@ struct BloodOxygenDotChart: View {
                 .chartXSelection(value: $ringManager.timeChart)
                 .onChange(of: ringManager.timeChart) { _, newValue in
                     if let selected = selectedViewSpo2 {
-                        ringManager.spo2ValueChart = "\(String(format: "%.0f", selected.minSoa2)) - \(String(format: "%.0f", selected.maxSoa2))"
+                        if selectedViewSpo2?.minSoa2 != 0 {
+                            if ringManager.lastHapticDate != selected.date {
+                                let generator = UIImpactFeedbackGenerator(style: .rigid)
+                                generator.prepare()
+                                generator.impactOccurred()
+                                ringManager.lastHapticDate = selected.date
+                            }
+                        }
+                        ringManager.spo2ValueChart = "\(String(format: "%.0f", selected.minSoa2))% - \(String(format: "%.0f", selected.maxSoa2))%"
                         ringManager.timeChart = selected.date
                     }
                 }

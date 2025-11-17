@@ -62,8 +62,10 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var selectedTheme: AppTheme = .dark
     
     //MARK: - interactive chart variables
-    @Published var spo2ValueChart: String? = nil
+    @Published var lastHapticDate: Date? = nil
     @Published var timeChart: Date? = nil
+    @Published var spo2ValueChart: String? = nil
+    @Published var heartRateValueChart: String? = nil
 
     
     // MARK: - Private core bluetooth + sdk refs

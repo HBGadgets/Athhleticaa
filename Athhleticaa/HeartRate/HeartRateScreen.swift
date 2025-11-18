@@ -44,16 +44,12 @@ struct HeartRateScreenView: View {
                 }
                 MonitoringItem(
                     title: "Full day Heart Rate",
-                    subtitle: "Monitor once every hour",
+                    subtitle: "Monitor once every 10 minutes",
                     isEnabled: $ringManager.heartRateMonitoring
                 ) {
                     ringManager.setHeartRateSchedule(enabled: ringManager.heartRateMonitoring)
                 }
                 VStack(spacing: 16) {
-//                    Image("HeartRateIcon")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 200, height: 200)
                     Image(systemName: "waveform.path.ecg")
                         .resizable()
                         .scaledToFit()
@@ -193,7 +189,7 @@ struct HeartRateScreenView: View {
                 
                 
                 if let day = ringManager.heartRateManager.dayData.first {
-                    if let time = ringManager.timeChart {
+                    if let time = ringManager.timeChartHeartRate {
                         HStack {
                             if let hb = ringManager.heartRateValueChart {
                                 Text("\(hb)")
@@ -204,7 +200,7 @@ struct HeartRateScreenView: View {
                         .fontWeight(.bold)
                     } else {
                         HStack {
-                            Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
+                            Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0) BPM")
                             Text({
                                 if let data = ringManager.heartRateManager.dayData.first,
                                    let index = data.lastNonZeroHeartRateIndex,

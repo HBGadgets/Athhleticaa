@@ -63,7 +63,8 @@ final class QCCentralManager: NSObject, ObservableObject {
     
     //MARK: - interactive chart variables
     @Published var lastHapticDate: Date? = nil
-    @Published var timeChart: Date? = nil
+    @Published var timeChartBloodOxygen: Date? = nil
+    @Published var timeChartHeartRate: Date? = nil
     @Published var spo2ValueChart: String? = nil
     @Published var heartRateValueChart: String? = nil
 

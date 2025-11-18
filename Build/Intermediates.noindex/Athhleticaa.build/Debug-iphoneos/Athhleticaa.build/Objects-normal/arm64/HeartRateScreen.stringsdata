@@ -7,7 +7,7 @@
         "key": "No data",
         "location": {
           "startingColumn": 26,
-          "startingLine": 231
+          "startingLine": 227
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 26,
-          "startingLine": 70
+          "startingLine": 66
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "BPM",
         "location": {
           "startingColumn": 26,
-          "startingLine": 74
+          "startingLine": 70
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Data details",
         "location": {
           "startingColumn": 30,
-          "startingLine": 110
+          "startingLine": 106
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Real-time heart rate",
         "location": {
           "startingColumn": 30,
-          "startingLine": 139
+          "startingLine": 135
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "%lld bpm",
         "location": {
           "startingColumn": 78,
-          "startingLine": 156
+          "startingLine": 152
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "-- bpm",
         "location": {
           "startingColumn": 129,
-          "startingLine": 156
+          "startingLine": 152
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Measuring...",
         "location": {
           "startingColumn": 44,
-          "startingLine": 179
+          "startingLine": 175
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Click to start measurement",
         "location": {
           "startingColumn": 61,
-          "startingLine": 179
+          "startingLine": 175
         }
       },
       {
@@ -79,15 +79,15 @@
         "key": "%@",
         "location": {
           "startingColumn": 38,
-          "startingLine": 199
+          "startingLine": 195
         }
       },
       {
         "comment": "",
-        "key": "%lld",
+        "key": "%lld BPM",
         "location": {
           "startingColumn": 34,
-          "startingLine": 207
+          "startingLine": 203
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "Heart rate",
         "location": {
           "startingColumn": 22,
-          "startingLine": 239
+          "startingLine": 235
         }
       }
     ]

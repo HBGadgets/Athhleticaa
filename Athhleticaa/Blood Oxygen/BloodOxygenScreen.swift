@@ -72,7 +72,7 @@ struct BloodOxygenScreenView: View {
                     .shadow(color: .blue.opacity(0.5), radius: 15, x: 0, y: 0)
                 // MARK: - Blood Oxygen Rate Section
                 if let lastNonZeroBO = ringManager.bloodOxygenManager.lastNonZeroBloodOxygenReading {
-                    if let time = ringManager.timeChart {
+                    if let time = ringManager.timeChartBloodOxygen {
                         HStack {
                             Text("\(String(ringManager.spo2ValueChart ?? "__ - __"))")
                             Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))

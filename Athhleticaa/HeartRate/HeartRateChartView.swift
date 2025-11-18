@@ -97,10 +97,14 @@ struct HeartRateChartView: View {
                 }
             }
             .onChange(of: selectedIndex) { _, newIndex in
-                if let index = newIndex, index < validRates.count {
+//                if let index = newIndex, index < validRates.count {
+                if let index = newIndex {
                     let selected = validRates[index]
                     ringManager.heartRateValueChart = "\(selected.bpm) bpm"
-                    ringManager.timeChart = dateFromSecondsSinceMidnight(selected.time)
+                    ringManager.timeChartHeartRate = dateFromSecondsSinceMidnight(selected.time)
+                    let generator = UIImpactFeedbackGenerator(style: .rigid)
+                    generator.prepare()
+                    generator.impactOccurred()
                 }
             }
 

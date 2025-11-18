@@ -12,7 +12,7 @@ struct BloodOxygenDotChart: View {
     let data: [BloodOxygenModel]
     @ObservedObject var ringManager: QCCentralManager
     var selectedViewSpo2: BloodOxygenModel? {
-        guard let selected = ringManager.timeChart else { return nil }
+        guard let selected = ringManager.timeChartBloodOxygen else { return nil }
         return ringManager.bloodOxygenManager.readings.min {
             abs($0.date.timeIntervalSince(selected)) < abs($1.date.timeIntervalSince(selected))
         }
@@ -41,7 +41,7 @@ struct BloodOxygenDotChart: View {
                         .interpolationMethod(.catmullRom)
                         .foregroundStyle(.blue)
                     }
-                    if let selected = ringManager.timeChart {
+                    if let selected = ringManager.timeChartBloodOxygen {
                         // 1. Full-height thin line
                         RuleMark(x: .value("Selected", selected))
                             .foregroundStyle(.yellow)
@@ -73,8 +73,8 @@ struct BloodOxygenDotChart: View {
                         }
                     }
                 }
-                .chartXSelection(value: $ringManager.timeChart)
-                .onChange(of: ringManager.timeChart) { _, newValue in
+                .chartXSelection(value: $ringManager.timeChartBloodOxygen)
+                .onChange(of: ringManager.timeChartBloodOxygen) { _, newValue in
                     if let selected = selectedViewSpo2 {
                         if selectedViewSpo2?.minSoa2 != 0 {
                             if ringManager.lastHapticDate != selected.date {
@@ -85,7 +85,7 @@ struct BloodOxygenDotChart: View {
                             }
                         }
                         ringManager.spo2ValueChart = "\(String(format: "%.0f", selected.minSoa2))% - \(String(format: "%.0f", selected.maxSoa2))%"
-                        ringManager.timeChart = selected.date
+                        ringManager.timeChartBloodOxygen = selected.date
                     }
                 }
             }

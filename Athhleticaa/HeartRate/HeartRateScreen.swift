@@ -195,15 +195,27 @@ struct HeartRateScreenView: View {
                 if let day = ringManager.heartRateManager.dayData.first {
                     if let time = ringManager.timeChart {
                         HStack {
-                            Text("\(ringManager.heartRateAtSelectedTime)")
+                            if let hb = ringManager.heartRateValueChart {
+                                Text("\(hb)")
+                            }
                             Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
                         }
                         .font(.headline)
                         .fontWeight(.bold)
                     } else {
                         HStack {
-                            Text("\(ringManager.heartRateManager.heartRate)")
-                            Text(Date(), format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                            Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
+                            Text({
+                                if let data = ringManager.heartRateManager.dayData.first,
+                                   let index = data.lastNonZeroHeartRateIndex,
+                                   let date = data.timeForHeartRate(at: index) {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "h:mm a"
+                                    return formatter.string(from: date)
+                                } else {
+                                    return "--:--"
+                                }
+                            }())
                         }
                         .font(.headline)
                         .fontWeight(.bold)

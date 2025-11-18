@@ -12,6 +12,7 @@ struct HeartRateChartView: View {
     let heartRateData: HeartRateData
     @ObservedObject var ringManager: QCCentralManager
     @State private var selectedIndex: Int? = nil
+    @State private var selectedHeartRate: Int? = nil
     
     var body: some View {
         // total seconds in a day
@@ -49,40 +50,14 @@ struct HeartRateChartView: View {
                         )
                     )
                 }
-                if let selected = ringManager.timeChart {
-                    // 1. Full-height thin line
-                    RuleMark(x: .value("Selected", selected))
-                        .foregroundStyle(.yellow)
-                        .lineStyle(StrokeStyle(lineWidth: 1))
-                }
                 
                 if let selectedIndex,
                    selectedIndex < validRates.count {
                     let selected = validRates[selectedIndex]
                     
-                    PointMark(
-                        x: .value("Time", selected.time),
-                        y: .value("BPM", selected.bpm)
-                    )
-                    .symbolSize(100)
-                    .foregroundStyle(.blue)
-                    
                     RuleMark(x: .value("Selected Time", selected.time))
-                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                        .foregroundStyle(.gray.opacity(0.6))
-                        .annotation(position: .top, spacing: 0) {
-                            VStack {
-                                Text("\(Int(selected.bpm)) bpm")
-                                    .font(.caption)
-                                    .fontWeight(.bold)
-                                Text(formattedTime(from: selected.time))
-                                    .font(.caption2)
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(6)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(8)
-                        }
+                        .foregroundStyle(.yellow)
+                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
             }
             // ✅ Fix x-axis to show full day (12 AM to 12 AM)
@@ -101,14 +76,31 @@ struct HeartRateChartView: View {
                     }
                 }
             }
-            .chartXSelection(value: $ringManager.timeChart)
-            .onChange(of: ringManager.timeChart) { _, newValue in
-                if let selectedIndex,
-                   selectedIndex < validRates.count {
-                    let selected = validRates[selectedIndex]
-                    
-                    ringManager.heartRateAtSelectedTime = selected.bpm
-                    print(selected)
+            .chartOverlay { proxy in
+                GeometryReader { geo in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    let location = value.location
+                                    if let time: Double = proxy.value(atX: location.x) {
+                                        let index = Int(time / Double(heartRateData.secondInterval))
+                                        if index >= 0 && index < validRates.count {
+                                            selectedIndex = index
+                                        }
+                                    }
+                                }
+                                .onEnded { _ in
+                                    selectedIndex = nil
+                                }
+                        )
+                }
+            }
+            .onChange(of: selectedIndex) { _, newIndex in
+                if let index = newIndex, index < validRates.count {
+                    let selected = validRates[index]
+                    ringManager.heartRateValueChart = "\(selected.bpm) bpm"
+                    ringManager.timeChart = dateFromSecondsSinceMidnight(selected.time)
                 }
             }
 
@@ -132,4 +124,11 @@ struct HeartRateChartView: View {
         formatter.dateFormat = "h a"
         return formatter.string(from: date)
     }
+    
+    func dateFromSecondsSinceMidnight(_ seconds: Double) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date()) // today at 12 AM
+        return startOfDay.addingTimeInterval(seconds)
+    }
+
 }

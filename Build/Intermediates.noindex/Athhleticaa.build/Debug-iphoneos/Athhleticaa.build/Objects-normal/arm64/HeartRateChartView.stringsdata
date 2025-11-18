@@ -4,47 +4,15 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Selected",
-        "location": {
-          "startingColumn": 40,
-          "startingLine": 54
-        }
-      },
-      {
-        "comment": "",
-        "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 64
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 65
-        }
-      },
-      {
-        "comment": "",
         "key": "Selected Time",
         "location": {
           "startingColumn": 40,
-          "startingLine": 70
+          "startingLine": 58
         }
       },
       {
         "comment": "",
         "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 33
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
         "location": {
           "startingColumn": 35,
           "startingLine": 34
@@ -52,15 +20,15 @@
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "BPM",
         "location": {
           "startingColumn": 35,
-          "startingLine": 40
+          "startingLine": 35
         }
       },
       {
         "comment": "",
-        "key": "BPM",
+        "key": "Time",
         "location": {
           "startingColumn": 35,
           "startingLine": 41
@@ -68,10 +36,10 @@
       },
       {
         "comment": "",
-        "key": "%lld bpm",
+        "key": "BPM",
         "location": {
-          "startingColumn": 38,
-          "startingLine": 75
+          "startingColumn": 35,
+          "startingLine": 42
         }
       }
     ]

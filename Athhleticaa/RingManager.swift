@@ -66,8 +66,6 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var timeChart: Date? = nil
     @Published var spo2ValueChart: String? = nil
     @Published var heartRateValueChart: String? = nil
-    @Published var heartRateAtSelectedTime: Int = 0
-    @Published var selectedHeartRateTimeString: String = ""
 
 
     

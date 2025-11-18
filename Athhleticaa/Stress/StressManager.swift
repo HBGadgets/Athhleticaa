@@ -9,7 +9,7 @@
 struct StressModel: Identifiable, Codable {
     var id = UUID()
     let date: String              // "yyyy-MM-dd"
-    let stresses: [Int]        // Stress values array
+    let stresses: [Int]
     let secondInterval: Int       // Interval between data points (seconds)
     
     var average: Double {

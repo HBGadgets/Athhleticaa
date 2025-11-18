@@ -198,6 +198,7 @@ struct HeartRateScreenView: View {
                         }
                         .font(.headline)
                         .fontWeight(.bold)
+                        .padding(.top)
                     } else {
                         HStack {
                             Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0) BPM")
@@ -215,6 +216,7 @@ struct HeartRateScreenView: View {
                         }
                         .font(.headline)
                         .fontWeight(.bold)
+                        .padding(.top)
                     }
                     HeartRateChartView(heartRateData: day, ringManager: ringManager)
                         .padding(10)

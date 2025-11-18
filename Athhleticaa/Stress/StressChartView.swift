@@ -10,6 +10,7 @@ import Charts
 
 struct StressChartView: View {
     let stressData: StressModel
+    @ObservedObject var ringManager: QCCentralManager
     @State private var selectedIndex: Int? = nil
     
     var body: some View {
@@ -20,7 +21,7 @@ struct StressChartView: View {
         let validRates = stressData.stresses.enumerated()
             .filter { $0.element > 0 }
             .map { (index, value) in
-                (time: Double(index * stressData.secondInterval), bpm: value)
+                (time: Double(index * stressData.secondInterval), stress: value)
             }
             .filter { $0.time <= Double(totalSecondsInDay) } // just in case
         
@@ -32,14 +33,14 @@ struct StressChartView: View {
                 ForEach(validRates, id: \.time) { point in
                     LineMark(
                         x: .value("Time", point.time),
-                        y: .value("BPM", point.bpm)
+                        y: .value("Stress", point.stress)
                     )
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(.red)
                     
                     AreaMark(
                         x: .value("Time", point.time),
-                        y: .value("BPM", point.bpm)
+                        y: .value("Stress", point.stress)
                     )
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(
@@ -55,29 +56,9 @@ struct StressChartView: View {
                    selectedIndex < validRates.count {
                     let selected = validRates[selectedIndex]
                     
-                    PointMark(
-                        x: .value("Time", selected.time),
-                        y: .value("BPM", selected.bpm)
-                    )
-                    .symbolSize(100)
-                    .foregroundStyle(.blue)
-                    
                     RuleMark(x: .value("Selected Time", selected.time))
-                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                        .foregroundStyle(.gray.opacity(0.6))
-                        .annotation(position: .top, spacing: 0) {
-                            VStack {
-                                Text("\(Int(selected.bpm)) bpm")
-                                    .font(.caption)
-                                    .fontWeight(.bold)
-                                Text(formattedTime(from: selected.time))
-                                    .font(.caption2)
-                                    .foregroundColor(.gray)
-                            }
-                            .padding(6)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(8)
-                        }
+                        .foregroundStyle(.yellow)
+                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
             }
             // ✅ Fix x-axis to show full day (12 AM to 12 AM)
@@ -94,6 +75,39 @@ struct StressChartView: View {
                     if let time = value.as(Double.self) {
                         AxisValueLabel(formattedShortTime(from: time))
                     }
+                }
+            }
+            .chartOverlay { proxy in
+                GeometryReader { geo in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    let location = value.location
+                                    if let time: Double = proxy.value(atX: location.x) {
+                                        let index = Int(time / Double(stressData.secondInterval))
+                                        if index >= 0 && index < validRates.count {
+                                            selectedIndex = index
+                                        }
+                                    }
+                                }
+                                .onEnded { _ in
+                                    selectedIndex = nil
+                                    ringManager.stressValueChart = nil
+                                    ringManager.timeChartStress = nil
+                                }
+                        )
+                }
+            }
+            .onChange(of: selectedIndex) { _, newIndex in
+//                if let index = newIndex, index < validRates.count {
+                if let index = newIndex {
+                    let selected = validRates[index]
+                    ringManager.stressValueChart = "\(selected.stress)"
+                    ringManager.timeChartStress = dateFromSecondsSinceMidnight(selected.time)
+                    let generator = UIImpactFeedbackGenerator(style: .rigid)
+                    generator.prepare()
+                    generator.impactOccurred()
                 }
             }
             .frame(height: 250)
@@ -117,5 +131,11 @@ struct StressChartView: View {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "h a"
         return formatter.string(from: date)
+    }
+    
+    func dateFromSecondsSinceMidnight(_ seconds: Double) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date()) // today at 12 AM
+        return startOfDay.addingTimeInterval(seconds)
     }
 }

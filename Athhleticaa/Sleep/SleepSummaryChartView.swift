@@ -61,10 +61,10 @@ struct RuleChartView: View {
             }
         }
         .chartXAxis {
-                    AxisMarks(position: .bottom) {
-                        AxisTick()
-                    }
-                }
+            AxisMarks(position: .bottom) {
+                AxisTick()
+            }
+        }
         .frame(height: 200)
         .padding(.horizontal)
     }

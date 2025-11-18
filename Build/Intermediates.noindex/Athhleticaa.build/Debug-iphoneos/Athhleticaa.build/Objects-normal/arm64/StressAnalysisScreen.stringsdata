@@ -7,7 +7,7 @@
         "key": "No data",
         "location": {
           "startingColumn": 26,
-          "startingLine": 143
+          "startingLine": 174
         }
       },
       {
@@ -36,10 +36,42 @@
       },
       {
         "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 139
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 140
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
         "key": "Stress",
         "location": {
           "startingColumn": 22,
-          "startingLine": 151
+          "startingLine": 182
         }
       }
     ]

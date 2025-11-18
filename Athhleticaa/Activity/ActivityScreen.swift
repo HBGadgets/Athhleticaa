@@ -77,6 +77,7 @@ struct ActivityScreenView: View {
                         .resizable()
                         .frame(width: 48, height: 48)
                         .foregroundColor(.green)
+                        .shadow(color: .green.opacity(0.5), radius: 15, x: 0, y: 0)
                     
                 }
                 .padding(.horizontal)

@@ -7,23 +7,7 @@
         "key": "Stress Chart",
         "location": {
           "startingColumn": 18,
-          "startingLine": 28
-        }
-      },
-      {
-        "comment": "",
-        "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 59
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 60
+          "startingLine": 29
         }
       },
       {
@@ -31,20 +15,12 @@
         "key": "Selected Time",
         "location": {
           "startingColumn": 40,
-          "startingLine": 65
+          "startingLine": 59
         }
       },
       {
         "comment": "",
         "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 34
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
         "location": {
           "startingColumn": 35,
           "startingLine": 35
@@ -52,15 +28,15 @@
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "Stress",
         "location": {
           "startingColumn": 35,
-          "startingLine": 41
+          "startingLine": 36
         }
       },
       {
         "comment": "",
-        "key": "BPM",
+        "key": "Time",
         "location": {
           "startingColumn": 35,
           "startingLine": 42
@@ -68,10 +44,10 @@
       },
       {
         "comment": "",
-        "key": "%lld bpm",
+        "key": "Stress",
         "location": {
-          "startingColumn": 38,
-          "startingLine": 70
+          "startingColumn": 35,
+          "startingLine": 43
         }
       }
     ]

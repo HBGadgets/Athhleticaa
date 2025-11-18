@@ -65,7 +65,7 @@ struct StressAnalysisScreenView: View {
                         .scaledToFit()
                         .frame(width: 200, height: 120)
                         .foregroundColor(.green)
-//                        .shadow(color: .red.opacity(0.5), radius: 15, x: 0, y: 0)
+                        .shadow(color: .green.opacity(0.5), radius: 15, x: 0, y: 0)
 
                     Text("\(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)")
                         .font(.system(size: 44, weight: .bold))
@@ -133,7 +133,38 @@ struct StressAnalysisScreenView: View {
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
                 if let day = ringManager.stressManager.stressData.first {
-                    StressChartView(stressData: day)
+                    if let time = ringManager.timeChartStress {
+                        HStack {
+                            if let hb = ringManager.stressValueChart {
+                                Text("\(hb)")
+                                Text("\(levelString(stress: Int(hb) ?? 0))")
+                            }
+                            Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    } else {
+                        HStack {
+                            Text("\(ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)")
+                            Text("\(String(describing: levelString(stress: ringManager.stressManager.stressData.first?.lastNonZeroStress ?? 0)))")
+                            Text({
+                                if let data = ringManager.stressManager.stressData.first,
+                                   let index = data.lastNonZeroStressIndex,
+                                   let date = data.timeForStressRate(at: index) {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "h:mm a"
+                                    return formatter.string(from: date)
+                                } else {
+                                    return "--:--"
+                                }
+                            }())
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    }
+                    StressChartView(stressData: day, ringManager: ringManager)
                         .padding(10)
                         .frame(maxWidth: .infinity)
                         .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))

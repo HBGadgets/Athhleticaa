@@ -4,10 +4,26 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "%@ HRV",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld HRV",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
         "key": "Data details",
         "location": {
           "startingColumn": 30,
-          "startingLine": 96
+          "startingLine": 129
         }
       },
       {
@@ -15,7 +31,7 @@
         "key": "HRV",
         "location": {
           "startingColumn": 22,
-          "startingLine": 127
+          "startingLine": 160
         }
       }
     ]

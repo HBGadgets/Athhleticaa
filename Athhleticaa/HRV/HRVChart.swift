@@ -10,6 +10,8 @@ import Charts
 
 struct HRVChartView: View {
     let data: HRVModel
+    @State private var selectedIndex: Int? = nil
+    @ObservedObject var ringManager: QCCentralManager
     
     var body: some View {
         let totalSecondsInDay = 24 * 60 * 60
@@ -47,6 +49,14 @@ struct HRVChartView: View {
                 .foregroundStyle(
                     Color.red
                 )
+                if let selectedIndex,
+                   selectedIndex < points.count {
+                    let selected = points[selectedIndex]
+                    
+                    RuleMark(x: .value("Selected Time", selected.time))
+                        .foregroundStyle(.yellow)
+                        .lineStyle(StrokeStyle(lineWidth: 1))
+                }
             }
             .chartXAxis {
                 AxisMarks() { value in
@@ -78,7 +88,56 @@ struct HRVChartView: View {
             .padding()
             .background(Color(.systemGray6).opacity(0))
             .clipShape(RoundedRectangle(cornerRadius: 12))
+            .chartOverlay { proxy in
+                GeometryReader { geo in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    let location = value.location
+
+                                    // 1. Read Date from chart
+                                    if let time: Date = proxy.value(atX: location.x) {
+
+                                        // 2. Convert Date → index
+                                        let secondsSinceStart = time.timeIntervalSince(baseDate)
+                                        let index = Int(secondsSinceStart / Double(data.interval))
+
+                                        // 3. Validate and update
+                                        if index >= 0 && index < points.count {
+                                            selectedIndex = index
+                                        }
+                                    }
+                                }
+                                .onEnded { _ in
+                                    selectedIndex = nil
+                                    ringManager.hrvValueChart = nil
+                                    ringManager.timeChartHrv = nil
+                                }
+                        )
+                }
+            }
+            .onChange(of: selectedIndex) { _, newIndex in
+                if let index = newIndex, index < points.count {
+                    let selected = points[index]
+                    
+                    ringManager.hrvValueChart = "\(selected.value)"
+                    ringManager.timeChartHrv = selected.time
+                    
+                    let generator = UIImpactFeedbackGenerator(style: .rigid)
+                    generator.prepare()
+                    generator.impactOccurred()
+                }
+            }
+
         )
+    }
+    
+    
+    func dateFromSecondsSinceMidnight(_ seconds: Double) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date()) // today at 12 AM
+        return startOfDay.addingTimeInterval(seconds)
     }
 }
 

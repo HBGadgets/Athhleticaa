@@ -58,8 +58,41 @@ struct HRVScreenView: View {
                     .frame(width: 200, height: 120)
                     .foregroundColor(.red)
                     .shadow(color: .red.opacity(0.5), radius: 15, x: 0, y: 0)
-                HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
-                    .frame(height: 250)
+                VStack {
+                    if let time = ringManager.timeChartHrv {
+                        HStack {
+                            if let hrvChart = ringManager.hrvValueChart {
+                                Text("\(hrvChart == "0" ? "--" : hrvChart) HRV")
+                            }
+                            
+                            Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    } else {
+                        HStack {
+                            if let lastHRV = hrvManager.hrvData?.lastNonZeroHRV {
+                                Text("\(lastHRV) HRV")
+                            }
+                            Text({
+                                if let data = ringManager.hrvManager.hrvData?.validHRV,
+                                   let index = hrvManager.hrvData?.lastNonZeroHRVIndex,
+                                   let date = hrvManager.hrvData?.timeForHRVRate(at: index) {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "h:mm a"
+                                    return formatter.string(from: date)
+                                } else {
+                                    return "--:--"
+                                }
+                            }())
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    }
+                    HRVChartView(data: ringManager.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0), ringManager: ringManager)
+                        .frame(height: 250)
+                }
+                
 
                 // MARK: - Average / Min / Max
                 if let day = ringManager.hrvManager.hrvData {

@@ -49,7 +49,7 @@ struct HRVCard: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
-                HRVChartView(data: ringManager.dashboardHRVData ?? HRVModel(date: "0", values: [0], interval: 0))
+                HRVChartView(data: ringManager.dashboardHRVData ?? HRVModel(date: "0", values: [0], interval: 0), ringManager: ringManager)
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)

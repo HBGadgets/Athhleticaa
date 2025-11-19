@@ -52,14 +52,13 @@ struct StressChartView: View {
                     )
                 }
                 
-                if let selectedIndex,
-                   selectedIndex < validRates.count {
-                    let selected = validRates[selectedIndex]
-                    
-                    RuleMark(x: .value("Selected Time", selected.time))
+                if let selectedIndex {
+                    let time = Double(selectedIndex * stressData.secondInterval)
+
+                    RuleMark(x: .value("Selected Time", time))
                         .foregroundStyle(.yellow)
-                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
+
             }
             // ✅ Fix x-axis to show full day (12 AM to 12 AM)
             .chartXScale(domain: 0...Double(totalSecondsInDay))
@@ -79,37 +78,45 @@ struct StressChartView: View {
             }
             .chartOverlay { proxy in
                 GeometryReader { geo in
+                    let origin = geo[proxy.plotAreaFrame].origin
                     Rectangle().fill(.clear).contentShape(Rectangle())
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    let location = value.location
-                                    if let time: Double = proxy.value(atX: location.x) {
-                                        let index = Int(time / Double(stressData.secondInterval))
-                                        if index >= 0 && index < validRates.count {
-                                            selectedIndex = index
-                                        }
+                                    let xInPlot = value.location.x - origin.x
+                                    if let time: Double = proxy.value(atX: xInPlot) {
+                                        let clamped = min(max(time, 0), Double(totalSecondsInDay))
+
+                                        // find nearest validRates point by time
+                                        let rawIndex = Int(clamped / Double(stressData.secondInterval))
+
+                                        selectedIndex = min(max(rawIndex, 0), stressData.stresses.count - 1)
                                     }
                                 }
-                                .onEnded { _ in
-                                    selectedIndex = nil
-                                    ringManager.stressValueChart = nil
-                                    ringManager.timeChartStress = nil
-                                }
+
                         )
                 }
             }
             .onChange(of: selectedIndex) { _, newIndex in
-//                if let index = newIndex, index < validRates.count {
                 if let index = newIndex {
-                    let selected = validRates[index]
-                    ringManager.stressValueChart = "\(selected.stress)"
-                    ringManager.timeChartStress = dateFromSecondsSinceMidnight(selected.time)
+                    let stress = stressData.stresses[index]
+                    let time = Double(index * stressData.secondInterval)
+
+                    // only update label if stress > 0
+                    if stress > 0 {
+                        ringManager.stressValueChart = "\(stress)"
+                    } else {
+                        ringManager.stressValueChart = "—"
+                    }
+
+                    ringManager.timeChartStress = dateFromSecondsSinceMidnight(time)
+
                     let generator = UIImpactFeedbackGenerator(style: .rigid)
                     generator.prepare()
                     generator.impactOccurred()
                 }
             }
+
             .frame(height: 250)
         }
         .padding()

@@ -105,7 +105,7 @@ struct ActivityScreenView: View {
                 .cornerRadius(16)
                 .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 
-                PedometerChartsView(pedometerManager: ringManager.pedometerManager)
+                PedometerChartsView(pedometerManager: ringManager.pedometerManager, ringManager: ringManager)
             }
             .padding()
             .padding(.bottom, 100)

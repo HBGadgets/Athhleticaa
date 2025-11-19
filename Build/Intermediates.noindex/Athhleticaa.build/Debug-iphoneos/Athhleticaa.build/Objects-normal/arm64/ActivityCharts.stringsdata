@@ -4,10 +4,18 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Selected",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 33
+        }
+      },
+      {
+        "comment": "",
         "key": "Hour",
         "location": {
           "startingColumn": 39,
-          "startingLine": 21
+          "startingLine": 25
         }
       },
       {
@@ -15,7 +23,7 @@
         "key": "Steps",
         "location": {
           "startingColumn": 39,
-          "startingLine": 22
+          "startingLine": 26
         }
       },
       {
@@ -23,7 +31,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 32
+          "startingLine": 43
         }
       },
       {
@@ -31,7 +39,7 @@
         "key": "6 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 33
+          "startingLine": 44
         }
       },
       {
@@ -39,7 +47,7 @@
         "key": "12 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 34
+          "startingLine": 45
         }
       },
       {
@@ -47,7 +55,7 @@
         "key": "6 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 35
+          "startingLine": 46
         }
       },
       {
@@ -55,7 +63,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 36
+          "startingLine": 47
         }
       },
       {
@@ -63,7 +71,7 @@
         "key": "",
         "location": {
           "startingColumn": 53,
-          "startingLine": 37
+          "startingLine": 48
         }
       },
       {
@@ -71,7 +79,7 @@
         "key": "Hour",
         "location": {
           "startingColumn": 39,
-          "startingLine": 53
+          "startingLine": 102
         }
       },
       {
@@ -79,7 +87,7 @@
         "key": "Distance",
         "location": {
           "startingColumn": 39,
-          "startingLine": 54
+          "startingLine": 103
         }
       },
       {
@@ -87,7 +95,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 64
+          "startingLine": 113
         }
       },
       {
@@ -95,7 +103,7 @@
         "key": "6 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 65
+          "startingLine": 114
         }
       },
       {
@@ -103,7 +111,7 @@
         "key": "12 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 66
+          "startingLine": 115
         }
       },
       {
@@ -111,7 +119,7 @@
         "key": "6 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 67
+          "startingLine": 116
         }
       },
       {
@@ -119,7 +127,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 68
+          "startingLine": 117
         }
       },
       {
@@ -127,7 +135,7 @@
         "key": "",
         "location": {
           "startingColumn": 53,
-          "startingLine": 69
+          "startingLine": 118
         }
       },
       {
@@ -135,7 +143,7 @@
         "key": "Hour",
         "location": {
           "startingColumn": 39,
-          "startingLine": 85
+          "startingLine": 134
         }
       },
       {
@@ -143,7 +151,7 @@
         "key": "Calories",
         "location": {
           "startingColumn": 39,
-          "startingLine": 86
+          "startingLine": 135
         }
       },
       {
@@ -151,7 +159,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 96
+          "startingLine": 145
         }
       },
       {
@@ -159,7 +167,7 @@
         "key": "6 AM",
         "location": {
           "startingColumn": 52,
-          "startingLine": 97
+          "startingLine": 146
         }
       },
       {
@@ -167,7 +175,7 @@
         "key": "12 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 98
+          "startingLine": 147
         }
       },
       {
@@ -175,7 +183,7 @@
         "key": "6 PM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 99
+          "startingLine": 148
         }
       },
       {
@@ -183,7 +191,7 @@
         "key": "12 AM",
         "location": {
           "startingColumn": 53,
-          "startingLine": 100
+          "startingLine": 149
         }
       },
       {
@@ -191,7 +199,7 @@
         "key": "",
         "location": {
           "startingColumn": 53,
-          "startingLine": 101
+          "startingLine": 150
         }
       }
     ]

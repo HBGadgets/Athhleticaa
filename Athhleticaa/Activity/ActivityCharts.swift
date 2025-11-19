@@ -10,11 +10,15 @@ import Charts
 
 struct PedometerChartsView: View {
     @ObservedObject var pedometerManager: PedometerManager
+    @ObservedObject var ringManager: QCCentralManager
+    @State private var selectedIndex: Int? = nil
+    @State private var selectedHour: Int? = nil
 
     var body: some View {
         VStack(spacing: 24) {
             
             ChartBox(title: "Steps", color: .orange) {
+
                 Chart {
                     ForEach(pedometerManager.hourlyData) { data in
                         BarMark(
@@ -24,7 +28,14 @@ struct PedometerChartsView: View {
                         .foregroundStyle(.orange.gradient)
                         .cornerRadius(4)
                     }
+
+                    if let selectedHour {
+                        RuleMark(x: .value("Selected", selectedHour))
+                            .foregroundStyle(.yellow)
+                            .lineStyle(StrokeStyle(lineWidth: 1))
+                    }
                 }
+                .chartXScale(domain: 0...24)
                 .chartXAxis {
                     AxisMarks(values: [0, 6, 12, 18, 24]) { value in
                         if let hour = value.as(Int.self) {
@@ -37,6 +48,44 @@ struct PedometerChartsView: View {
                             default: AxisValueLabel("")
                             }
                         }
+                    }
+                }
+                .chartOverlay { proxy in
+                    GeometryReader { geo in
+                        let plotFrame = geo[proxy.plotAreaFrame]
+
+                        Rectangle().fill(.clear).contentShape(Rectangle())
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { value in
+                                        let xInPlot = value.location.x - plotFrame.origin.x
+                                        if let hour: Int = proxy.value(atX: xInPlot) {
+                                            // allow dragging across whole x axis
+                                            selectedHour = min(max(hour, 0), 23)
+                                        }
+                                    }
+                                    .onEnded { _ in
+                                        selectedHour = nil
+                                        ringManager.stepsValueChart = nil
+                                        ringManager.timeChartSteps = nil
+                                    }
+                            )
+                    }
+                }
+                .onChange(of: selectedHour) { _, newHour in
+                    guard let hour = newHour else { return }
+
+                    // Look up data *if it exists* for that hour
+                    if let selected = pedometerManager.hourlyData.first(where: { $0.hour == hour }) {
+                        ringManager.stepsValueChart = "\(selected.steps)"
+                        ringManager.timeChartSteps = dateFromSecondsSinceMidnight(Double(hour) * 3600)
+                        let generator = UIImpactFeedbackGenerator(style: .rigid)
+                        generator.prepare()
+                        generator.impactOccurred()
+                    } else {
+                        // No data at this hour – optional placeholder handling
+                        ringManager.stepsValueChart = "0"
+                        ringManager.timeChartSteps = dateFromSecondsSinceMidnight(Double(hour) * 3600)
                     }
                 }
                 .chartXScale(domain: 0...24)
@@ -112,6 +161,12 @@ struct PedometerChartsView: View {
 
             
         }
+    }
+    
+    func dateFromSecondsSinceMidnight(_ seconds: Double) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date())
+        return startOfDay.addingTimeInterval(seconds)
     }
 }
 

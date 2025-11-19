@@ -67,11 +67,17 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var timeChartHeartRate: Date? = nil
     @Published var timeChartStress: Date? = nil
     @Published var timeChartHrv: Date? = nil
+    @Published var timeChartSteps: Date? = nil
+    @Published var timeChartDistance: Date? = nil
+    @Published var timeChartCalories: Date? = nil
     
     @Published var spo2ValueChart: String? = nil
     @Published var heartRateValueChart: String? = nil
     @Published var stressValueChart: String? = nil
     @Published var hrvValueChart: String? = nil
+    @Published var stepsValueChart: String? = nil
+    @Published var distanceValueChart: String? = nil
+    @Published var caloriesValueChart: String? = nil
     
     // MARK: - Private core bluetooth + sdk refs
     private var centralManager: CBCentralManager!

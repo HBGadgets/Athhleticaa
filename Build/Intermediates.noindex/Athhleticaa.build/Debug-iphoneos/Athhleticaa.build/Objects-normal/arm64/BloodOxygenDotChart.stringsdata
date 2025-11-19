@@ -7,39 +7,39 @@
         "key": "No data available",
         "location": {
           "startingColumn": 22,
-          "startingLine": 26
+          "startingLine": 23
         }
       },
       {
         "comment": "",
         "key": "Selected",
         "location": {
-          "startingColumn": 44,
-          "startingLine": 46
+          "startingColumn": 40,
+          "startingLine": 45
         }
       },
       {
         "comment": "",
         "key": "Time",
         "location": {
-          "startingColumn": 39,
-          "startingLine": 38
+          "startingColumn": 35,
+          "startingLine": 37
         }
       },
       {
         "comment": "",
         "key": "SpO₂",
         "location": {
-          "startingColumn": 39,
-          "startingLine": 39
+          "startingColumn": 35,
+          "startingLine": 38
         }
       },
       {
         "comment": "",
         "key": "%lld%%",
         "location": {
-          "startingColumn": 38,
-          "startingLine": 60
+          "startingColumn": 34,
+          "startingLine": 58
         }
       }
     ]

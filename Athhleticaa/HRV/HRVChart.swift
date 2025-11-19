@@ -55,7 +55,6 @@ struct HRVChartView: View {
                     
                     RuleMark(x: .value("Selected Time", selected.time))
                         .foregroundStyle(.yellow)
-                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
             }
             .chartXAxis {
@@ -108,11 +107,6 @@ struct HRVChartView: View {
                                             selectedIndex = index
                                         }
                                     }
-                                }
-                                .onEnded { _ in
-                                    selectedIndex = nil
-                                    ringManager.hrvValueChart = nil
-                                    ringManager.timeChartHrv = nil
                                 }
                         )
                 }

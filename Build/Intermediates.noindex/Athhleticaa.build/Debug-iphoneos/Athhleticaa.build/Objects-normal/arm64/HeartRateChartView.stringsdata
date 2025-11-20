@@ -4,42 +4,58 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Invalid date",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
         "key": "Selected Time",
         "location": {
           "startingColumn": 40,
-          "startingLine": 58
+          "startingLine": 60
         }
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "%lld",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 34
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 35
-        }
-      },
-      {
-        "comment": "",
-        "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 41
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 42
+          "startingColumn": 34,
+          "startingLine": 83
         }
       }
     ]

@@ -12,70 +12,85 @@ struct HeartRateChartView: View {
     let heartRateData: HeartRateData
     @ObservedObject var ringManager: QCCentralManager
     @State private var selectedIndex: Int? = nil
-    @State private var selectedHeartRate: Int? = nil
     
     var body: some View {
-        // total seconds in a day
-        let totalSecondsInDay = 24 * 60 * 60
+        // Convert HRV heartRates into time-based heartRateData points
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let baseDate = dateFormatter.date(from: heartRateData.date) else {
+            return AnyView(Text("Invalid date"))
+        }
         
-        // compute valid heart rate points (exclude zeros)
-        let validRates = heartRateData.heartRates.enumerated()
-            .filter { $0.element > 0 }
-            .map { (index, value) in
-                (time: Double(index * heartRateData.secondInterval), bpm: value)
-            }
-            .filter { $0.time <= Double(totalSecondsInDay) } // just in case
+        // Each value corresponds to one timestamp = baseDate + (index * secondInterval)
+        let points: [HeartRatePoint] = heartRateData.heartRates.enumerated().map { index, value in
+            let time = calendar.date(byAdding: .second, value: index * heartRateData.secondInterval, to: baseDate)!
+            return HeartRatePoint(time: time, value: value)
+        }
         
-        VStack(alignment: .leading, spacing: 16) {
-            
-            Chart {
-                ForEach(validRates, id: \.time) { point in
-                    LineMark(
-                        x: .value("Time", point.time),
-                        y: .value("BPM", point.bpm)
+        let validPoints = points.filter { $0.value > 0 }
+        
+        
+        return AnyView(
+            Chart(validPoints) { point in
+                LineMark(
+                    x: .value("Time", point.time),
+                    y: .value("BPM", point.value)
+                )
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(.red)
+                
+                AreaMark(
+                    x: .value("Time", point.time),
+                    y: .value("BPM", point.value)
+                )
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.red.opacity(0.25), .clear],
+                        startPoint: .top,
+                        endPoint: .bottom
                     )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(.red)
-                    
-                    AreaMark(
-                        x: .value("Time", point.time),
-                        y: .value("BPM", point.bpm)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [Color.red.opacity(0.25), .clear],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                }
+                )
                 
                 if let selectedIndex,
-                   selectedIndex < validRates.count {
-                    let selected = validRates[selectedIndex]
+                   selectedIndex < points.count {
+                    let selected = points[selectedIndex]
                     
                     RuleMark(x: .value("Selected Time", selected.time))
                         .foregroundStyle(.yellow)
-                        .lineStyle(StrokeStyle(lineWidth: 1))
                 }
             }
-            // ✅ Fix x-axis to show full day (12 AM to 12 AM)
-            .chartXScale(domain: 0...Double(totalSecondsInDay))
-            .chartYAxis {
-                AxisMarks(position: .leading)
-            }
             .chartXAxis {
-                let tickValues = Array(stride(from: 0, through: totalSecondsInDay, by: 6 * 60 * 60)).map(Double.init)
-                
-                AxisMarks(values: tickValues) { value in
-                    AxisGridLine()
-                    AxisTick()
-                    if let time = value.as(Double.self) {
-                        AxisValueLabel(formattedShortTime(from: time))
+                AxisMarks() { value in
+                    AxisGridLine().foregroundStyle(Color.gray)
+                    AxisTick().foregroundStyle(Color.gray)
+                    AxisValueLabel {
+                        if let date = value.as(Date.self) {
+                            Text(date, format: .dateTime.hour(.defaultDigits(amPM: .abbreviated)))
+//                                .foregroundColor(.gray.opacity(0.8))
+                        }
                     }
                 }
             }
+            
+            .chartYAxis {
+                AxisMarks() { value in
+                    AxisGridLine().foregroundStyle(Color.gray)
+                    AxisTick().foregroundStyle(Color.gray)
+                    AxisValueLabel {
+                        if let yValue = value.as(Double.self) {
+                            Text("\(Int(yValue))")
+//                                .foregroundColor(.gray.opacity(0.8))
+                        }
+                    }
+                }
+            }
+            .chartXScale(domain: baseDate...(calendar.date(byAdding: .day, value: 1, to: baseDate)!))
+            .foregroundStyle(Color.gray)
+            .padding()
+            .background(Color(.systemGray6).opacity(0))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .chartOverlay { proxy in
                 GeometryReader { geo in
                     Rectangle().fill(.clear).contentShape(Rectangle())
@@ -83,52 +98,49 @@ struct HeartRateChartView: View {
                             DragGesture()
                                 .onChanged { value in
                                     let location = value.location
-                                    if let time: Double = proxy.value(atX: location.x) {
-                                        let index = Int(time / Double(heartRateData.secondInterval))
-                                        if index >= 0 && index < validRates.count {
+
+                                    // 1. Read Date from chart
+                                    if let time: Date = proxy.value(atX: location.x) {
+
+                                        // 2. Convert Date → index
+                                        let secondsSinceStart = time.timeIntervalSince(baseDate)
+                                        let index = Int(secondsSinceStart / Double(heartRateData.secondInterval))
+
+                                        // 3. Validate and update
+                                        if index >= 0 && index < points.count {
                                             selectedIndex = index
                                         }
                                     }
-                                }
-                                .onEnded { _ in
-                                    selectedIndex = nil
-                                    ringManager.heartRateValueChart = nil
-                                    ringManager.timeChartHeartRate = nil
                                 }
                         )
                 }
             }
             .onChange(of: selectedIndex) { _, newIndex in
-//                if let index = newIndex, index < validRates.count {
-                if let index = newIndex {
-                    let selected = validRates[index]
-                    ringManager.heartRateValueChart = "\(selected.bpm) BPM"
-                    ringManager.timeChartHeartRate = dateFromSecondsSinceMidnight(selected.time)
-                    let generator = UIImpactFeedbackGenerator(style: .rigid)
-                    generator.prepare()
-                    generator.impactOccurred()
+                if let index = newIndex, index < points.count {
+                    let selected = points[index]
+                    
+                    if (selected.value != 0) {
+                        ringManager.heartRateValueChart = "\(selected.value)"
+                        ringManager.timeChartHeartRate = selected.time
+                        
+                        let generator = UIImpactFeedbackGenerator(style: .rigid)
+                        generator.prepare()
+                        generator.impactOccurred()
+                    }
+                } else {
+                    let selected = points[points.count - 1]
+                    ringManager.heartRateValueChart = "\(selected.value)"
+                    ringManager.timeChartHeartRate = selected.time
                 }
             }
-        }
+            .onDisappear() {
+                ringManager.heartRateValueChart = nil
+                ringManager.timeChartHeartRate = nil
+            }
+
+        )
     }
     
-    // MARK: - Helpers
-    
-    private func formattedTime(from seconds: Double) -> String {
-        let date = Date(timeIntervalSince1970: seconds)
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0) // ⏰ always start at 12 AM
-        formatter.dateFormat = "h:mm a"
-        return formatter.string(from: date)
-    }
-    
-    private func formattedShortTime(from seconds: Double) -> String {
-        let date = Date(timeIntervalSince1970: seconds)
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "h a"
-        return formatter.string(from: date)
-    }
     
     func dateFromSecondsSinceMidnight(_ seconds: Double) -> Date {
         let calendar = Calendar.current
@@ -136,4 +148,10 @@ struct HeartRateChartView: View {
         return startOfDay.addingTimeInterval(seconds)
     }
 
+}
+
+struct HeartRatePoint: Identifiable {
+    let id = UUID()
+    let time: Date
+    let value: Int
 }

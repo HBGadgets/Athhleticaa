@@ -7,12 +7,20 @@
         "key": "Invalid date",
         "location": {
           "startingColumn": 33,
-          "startingLine": 23
+          "startingLine": 22
         }
       },
       {
         "comment": "",
         "key": "Time",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV",
         "location": {
           "startingColumn": 31,
           "startingLine": 38
@@ -20,15 +28,15 @@
       },
       {
         "comment": "",
-        "key": "HRV",
+        "key": "Time",
         "location": {
           "startingColumn": 31,
-          "startingLine": 39
+          "startingLine": 43
         }
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "HRV",
         "location": {
           "startingColumn": 31,
           "startingLine": 44
@@ -36,18 +44,10 @@
       },
       {
         "comment": "",
-        "key": "HRV",
-        "location": {
-          "startingColumn": 31,
-          "startingLine": 45
-        }
-      },
-      {
-        "comment": "",
         "key": "Selected Time",
         "location": {
           "startingColumn": 40,
-          "startingLine": 56
+          "startingLine": 55
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 34,
-          "startingLine": 79
+          "startingLine": 78
         }
       }
     ]

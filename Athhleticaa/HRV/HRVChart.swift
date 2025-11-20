@@ -14,7 +14,6 @@ struct HRVChartView: View {
     @ObservedObject var ringManager: QCCentralManager
     
     var body: some View {
-        let totalSecondsInDay = 24 * 60 * 60
         // Convert HRV values into time-based data points
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
@@ -112,15 +111,17 @@ struct HRVChartView: View {
                 }
             }
             .onChange(of: selectedIndex) { _, newIndex in
-                if let index = newIndex, index < points.count {
+                if let index = newIndex {
                     let selected = points[index]
                     
-                    ringManager.hrvValueChart = "\(selected.value)"
-                    ringManager.timeChartHrv = selected.time
-                    
-                    let generator = UIImpactFeedbackGenerator(style: .rigid)
-                    generator.prepare()
-                    generator.impactOccurred()
+                    if (selected.value != 0) {
+                        ringManager.hrvValueChart = "\(selected.value)"
+                        ringManager.timeChartHrv = selected.time
+                        
+                        let generator = UIImpactFeedbackGenerator(style: .rigid)
+                        generator.prepare()
+                        generator.impactOccurred()
+                    }
                 }
             }
 

@@ -12,6 +12,8 @@ struct HRVChartView: View {
     let data: HRVModel
     @State private var selectedIndex: Int? = nil
     @ObservedObject var ringManager: QCCentralManager
+    @State private var dragTime: Date? = nil
+
     
     var body: some View {
         // Convert HRV values into time-based data points

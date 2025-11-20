@@ -102,18 +102,23 @@ struct StressChartView: View {
                     let stress = stressData.stresses[index]
                     let time = Double(index * stressData.secondInterval)
 
-                    // only update label if stress > 0
-                    if stress > 0 {
-                        ringManager.stressValueChart = "\(stress)"
-                    } else {
-                        ringManager.stressValueChart = "—"
+                    if (stress != 0) {
+                        // only update label if stress > 0
+                        if stress > 0 {
+                            ringManager.stressValueChart = "\(stress)"
+                        } else {
+                            ringManager.stressValueChart = "—"
+                        }
+
+                        ringManager.timeChartStress = dateFromSecondsSinceMidnight(time)
+                        
+                        
+
+                        let generator = UIImpactFeedbackGenerator(style: .rigid)
+                        generator.prepare()
+                        generator.impactOccurred()
                     }
-
-                    ringManager.timeChartStress = dateFromSecondsSinceMidnight(time)
-
-                    let generator = UIImpactFeedbackGenerator(style: .rigid)
-                    generator.prepare()
-                    generator.impactOccurred()
+                    
                 }
             }
 

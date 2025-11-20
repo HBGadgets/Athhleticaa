@@ -107,17 +107,16 @@ struct BloodOxygenDotChart: View {
                 guard let index = newIndex, index < data.count else { return }
 
                 let selected = data[index]
+                
+                if selected.minSoa2 != 0 {
+                    ringManager.spo2ValueChart =
+                        "\(Int(selected.minSoa2))% - \(Int(selected.maxSoa2))%"
 
-                ringManager.spo2ValueChart =
-                    "\(Int(selected.minSoa2))% - \(Int(selected.maxSoa2))%"
-
-                ringManager.timeChartBloodOxygen = selected.date
-
-                // Haptics
-                if ringManager.lastHapticDate != selected.date {
+                    ringManager.timeChartBloodOxygen = selected.date
+                    
                     let generator = UIImpactFeedbackGenerator(style: .rigid)
+                    generator.prepare()
                     generator.impactOccurred()
-                    ringManager.lastHapticDate = selected.date
                 }
             }
         }

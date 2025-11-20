@@ -91,12 +91,27 @@ struct ActivityScreenView: View {
                     }
                     Spacer()
                     ZStack {
-                        ProgressRing(progress: (Double(pedometerManager.stepsDataDetails?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
-                            .frame(width: 120, height: 120)
-                        ProgressRing(progress: Double(pedometerManager.stepsDataDetails?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
-                            .frame(width: 100, height: 100)
-                        ProgressRing(progress: (pedometerManager.stepsDataDetails?.calories ?? 0) / 3000, color: .red)
-                            .frame(width: 80, height: 80)
+                        ZStack {
+                            ProgressRing(progress: (Double(pedometerManager.stepsDataDetails?.distance ?? 0) / 1000) / 6.0, color: .blue, lineWidth: 8)
+                                .frame(width: 120, height: 120)
+                            ProgressRing(progress: 1000 / 6.0, color: .blue.opacity(0.2), lineWidth: 8)
+                                .frame(width: 120, height: 120)
+                        }
+                        
+                        ZStack {
+                            ProgressRing(progress: Double(pedometerManager.stepsDataDetails?.totalSteps ?? 0) / 8000, color: .orange, lineWidth: 6)
+                                .frame(width: 100, height: 100)
+                            ProgressRing(progress: 8000, color: .orange.opacity(0.2), lineWidth: 6)
+                                .frame(width: 100, height: 100)
+                        }
+                        
+                        ZStack {
+                            ProgressRing(progress: (pedometerManager.stepsDataDetails?.calories ?? 0) / 3000, color: .red)
+                                .frame(width: 80, height: 80)
+                            ProgressRing(progress: 3000, color: .red.opacity(0.2))
+                                .frame(width: 80, height: 80)
+                        }
+                        
                     }
                 }
                 .padding()

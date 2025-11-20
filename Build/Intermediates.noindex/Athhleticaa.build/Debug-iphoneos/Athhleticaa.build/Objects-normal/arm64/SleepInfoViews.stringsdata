@@ -15,7 +15,7 @@
         "key": "0",
         "location": {
           "startingColumn": 34,
-          "startingLine": 101
+          "startingLine": 102
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 34,
-          "startingLine": 97
+          "startingLine": 98
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Score",
         "location": {
           "startingColumn": 26,
-          "startingLine": 104
+          "startingLine": 105
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Total Duration",
         "location": {
           "startingColumn": 26,
-          "startingLine": 112
+          "startingLine": 113
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "%@-%@",
         "location": {
           "startingColumn": 26,
-          "startingLine": 129
+          "startingLine": 130
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "H",
         "location": {
           "startingColumn": 30,
-          "startingLine": 120
+          "startingLine": 121
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "M",
         "location": {
           "startingColumn": 30,
-          "startingLine": 125
+          "startingLine": 126
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "0",
         "location": {
           "startingColumn": 34,
-          "startingLine": 146
+          "startingLine": 147
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "%lld%%",
         "location": {
           "startingColumn": 34,
-          "startingLine": 142
+          "startingLine": 143
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Sleep Efficiency",
         "location": {
           "startingColumn": 30,
-          "startingLine": 149
+          "startingLine": 150
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "Sleep Quality",
         "location": {
           "startingColumn": 30,
-          "startingLine": 164
+          "startingLine": 165
         }
       }
     ]

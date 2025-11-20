@@ -52,7 +52,7 @@ struct HRVScreenView: View {
                     ringManager.setHRVSchedule(enabled: ringManager.HRVMonitoring)
                 }
                 // MARK: - HRV Rate Section
-                Image(systemName: "waveform.path.ecg.heart.fill")
+                Image(systemName: "bolt.heart.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 120)

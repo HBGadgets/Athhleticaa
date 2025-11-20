@@ -64,6 +64,9 @@ struct HeartRateCard: View {
             }
             .padding()
             .foregroundColor(.white)
+            Color.black.opacity(0.1)
+                .ignoresSafeArea()
+                .allowsHitTesting(true)
         }
         .frame(maxWidth: .infinity)
         .cornerRadius(20)

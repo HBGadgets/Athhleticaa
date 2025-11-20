@@ -23,7 +23,7 @@
         "key": "Activity Track",
         "location": {
           "startingColumn": 22,
-          "startingLine": 120
+          "startingLine": 135
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "•",
         "location": {
           "startingColumn": 18,
-          "startingLine": 135
+          "startingLine": 150
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "%@ / %@",
         "location": {
           "startingColumn": 22,
-          "startingLine": 142
+          "startingLine": 157
         }
       }
     ]

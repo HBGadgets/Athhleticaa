@@ -78,6 +78,7 @@ struct SleepSummaryView: View {
                 Circle()
                     .stroke(Color.blue.opacity(0.15), lineWidth: 20)
                     .frame(width: 170, height: 170)
+                    .shadow(color: .blue.opacity(0.8), radius: 15, x: 0, y: 0)
                 
                 Circle()
                     .trim(from: 0, to: CGFloat(summary.score ?? 0) / 100)

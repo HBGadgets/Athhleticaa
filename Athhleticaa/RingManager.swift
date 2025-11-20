@@ -38,6 +38,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var pedometerManager = PedometerManager()
     @Published var stressManager = StressManager()
     @Published var sleepManager = SleepManager()
+    @Published var sleepManagerNew = SleepManagerNew()
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
     @Published var healthManager = HealthKitManager()
@@ -406,6 +407,23 @@ extension QCCentralManager: CBCentralManagerDelegate {
             }
         })
     }
+    
+
+    
+
+    func setGestureControlSchedule(enabled: Bool) {
+        
+        let model = QCFlipWristInfoModel()
+//        model.isOn = true
+//        model.beginTime = "00:00"
+//        model.endTime = "23:59"
+//
+//        QCSDKCmdCreator.setFlipWristInfo(model) {
+//            print("Gesture control set successfully")
+//        } fail: {
+//            print("Failed to set gesture control")
+//        }
+    }
 
     
     func setBloodOxygenSchedule(enabled: Bool) {
@@ -534,6 +552,8 @@ extension QCCentralManager: CBCentralManagerDelegate {
                     self.stressManager.fetchStressData() {
                         self.dashboardStressData = self.stressManager.stressData
                         self.sleepManager.getSleep() {
+                            /////////////
+//                            self.sleepManagerNew.getSleep()
                             self.dashboardSleepSummary = self.sleepManager.summary
                             self.syncSleepToHealthKit()
                             self.readBattery() {

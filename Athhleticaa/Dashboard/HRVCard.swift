@@ -55,6 +55,9 @@ struct HRVCard: View {
             .frame(maxWidth: .infinity)
             .padding()
             .cornerRadius(16)
+            Color.black.opacity(0.1)
+                .ignoresSafeArea()
+                .allowsHitTesting(true)
         }
         .frame(height: 250)
         

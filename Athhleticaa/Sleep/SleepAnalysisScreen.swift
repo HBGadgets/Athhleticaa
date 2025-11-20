@@ -51,6 +51,9 @@ struct SleepsAnalysisScreenView: View {
                     SleepSummaryView(summary: sleepManager.summary ?? Summary(totalMinutes: 0, startTime: Date(), endTime: Date(), efficiency: 0, quality: "Unknown", score: 0))
                     SleepSummaryChartView(sleepManager: sleepManager)
                     SleepChartViewContainer(sleepManager: sleepManager)
+                    
+                    ///
+                    SleepChartViewNew(sleepManager: ringManager.sleepManager)
                 }
                 .padding()
                 .padding(.bottom, 100)

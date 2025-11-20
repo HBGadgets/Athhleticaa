@@ -1,0 +1,32 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sleep/SleepChartNew.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Start",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "End",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Stage Start",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 23
+        }
+      }
+    ]
+  },
+  "version": 1
+}

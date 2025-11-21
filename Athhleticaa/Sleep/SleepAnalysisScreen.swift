@@ -53,7 +53,7 @@ struct SleepsAnalysisScreenView: View {
                     SleepChartViewContainer(sleepManager: sleepManager)
                     
                     ///
-                    SleepChartViewNew(sleepManager: ringManager.sleepManager)
+//                    SleepChartViewNew(sleepManager: ringManager.sleepManagerNew)
                 }
                 .padding()
                 .padding(.bottom, 100)

@@ -7,7 +7,7 @@
         "key": "Start",
         "location": {
           "startingColumn": 32,
-          "startingLine": 21
+          "startingLine": 23
         }
       },
       {
@@ -15,15 +15,7 @@
         "key": "End",
         "location": {
           "startingColumn": 30,
-          "startingLine": 22
-        }
-      },
-      {
-        "comment": "",
-        "key": "Stage Start",
-        "location": {
-          "startingColumn": 27,
-          "startingLine": 23
+          "startingLine": 24
         }
       }
     ]

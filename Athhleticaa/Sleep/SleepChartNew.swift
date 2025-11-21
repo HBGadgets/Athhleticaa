@@ -8,23 +8,25 @@
 import SwiftUI
 import Charts
 
+import SwiftUI
+import Charts
+
 struct SleepChartViewNew: View {
-    @ObservedObject var sleepManager: SleepManager
+    @ObservedObject var sleepManager: SleepManagerNew
     
     var body: some View {
-        let data = self.sleepManager.sleepSegments
+        let data = self.sleepManager.parseSleepData()
         
         Chart(data) { segment in
             BarMark(
-                xStart: .value("Start", segment.startTime),
-                xEnd: .value("End", segment.endTime),
-                yStart: .value("Y Start", Double(segment.type.rawValue)),
-                yEnd: .value("Y End", Double(segment.type.rawValue) + 0.4)
+                xStart: .value("Start", segment.start),
+                xEnd: .value("End", segment.end),
+//                yStart: .value("Stage Start", yStart(for: segment.type)),
+//                yEnd: .value("Stage End", yEnd(for: segment.type))
             )
             .foregroundStyle(color(for: segment.type))
             .cornerRadius(4)
         }
-        .chartYScale(domain: 0...4)   // ⭐ REQUIRED
         .chartYAxis {
             AxisMarks(values: [0.0, 1.0, 2.0, 3.0, 4.0]) { value in
                 if let v = value.as(Double.self) {
@@ -37,12 +39,21 @@ struct SleepChartViewNew: View {
     }
     
     // MARK: - Vertical Ranges (Double to avoid compiler crash)
-    func yStart(for type: SleepType) -> Double {
+    func yStart(for type: SleepTypeNew) -> Double {
         switch type {
-        case .deep: return 0.0
-        case .light: return 1.0
-        case .rem: return 2.0
-        case .awake: return 3.0
+        case .deep: return 0
+        case .light: return 1
+        case .rem: return 2
+        case .awake: return 3
+        }
+    }
+    
+    func yEnd(for type: SleepTypeNew) -> Double {
+        switch type {
+        case .deep: return 1
+        case .light: return 2
+        case .rem: return 3
+        case .awake: return 4
         }
     }
 
@@ -58,7 +69,7 @@ struct SleepChartViewNew: View {
     }
 
     // MARK: - Colors
-    func color(for type: SleepType) -> Color {
+    func color(for type: SleepTypeNew) -> Color {
         switch type {
         case .awake: return .yellow
         case .light: return .blue.opacity(0.4)

@@ -570,7 +570,10 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                             self.getBloodOxygenScheduleStatus() {
                                                 self.getStressScheduleStatus() {
                                                     self.getHRVScheduleStatus() {
-                                                        self.getHeartRateScheduleStatus()
+                                                        self.getHeartRateScheduleStatus() {
+                                                            self.sleepManagerNew.getSleep()
+                                                        }
+                                                        
                                                     }
                                                 }
                                             }

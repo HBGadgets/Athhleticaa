@@ -174,6 +174,19 @@ struct StressAnalysisScreenView: View {
                 } else {
                     Text("No data")
                 }
+                if let stressData = ringManager.stressManager.validStressData.first {
+                    HStack {
+                        StressDonutChartView(stress: stressData)
+                            .frame(height: 100)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                            .cornerRadius(16)
+                            .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
+                        
+                    }
+                    
+                }
             }
             .padding()
             .padding(.bottom, 100)

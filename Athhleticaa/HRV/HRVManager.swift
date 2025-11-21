@@ -7,12 +7,20 @@
 
 import Foundation
 import Combine
+import SwiftUICore
 
 struct HRVModel: Identifiable, Hashable {
     let id = UUID()
     let date: String
     let values: [Int]
     let interval: Int  // seconds between samples
+}
+
+struct HRVCategory: Identifiable {
+    let id = UUID()
+    let name: String
+    let count: Int
+    let color: Color
 }
 
 extension HRVModel {
@@ -56,12 +64,29 @@ extension HRVModel {
         let offsetSeconds = Double(index * interval)
         return baseDate.addingTimeInterval(offsetSeconds)
     }
+    
+    var categoryBreakdown: [HRVCategory] {
+        let values = validHRV
+        
+        let low = values.filter { $0 < 31 }.count
+        let normal = values.filter { $0 >= 31 && $0 <= 60 }.count
+        let good = values.filter { $0 >= 61 && $0 <= 101 }.count
+        let excellent = values.filter { $0 > 101 }.count
+        
+        return [
+            HRVCategory(name: "Low",       count: low,       color: .red),
+            HRVCategory(name: "Normal",    count: normal,    color: .yellow),
+            HRVCategory(name: "Good",      count: good,      color: .green),
+            HRVCategory(name: "Excellent", count: excellent, color: .blue)
+        ]
+    }
 }
 
 
 //@MainActor
 class HRVManager: ObservableObject {
     @Published var hrvData: HRVModel?
+    @Published var validHrvData: HRVModel?
     @Published var isLoading = false
     @Published var errorMessage: String?
     
@@ -109,6 +134,12 @@ class HRVManager: ObservableObject {
                     self.hrvData = HRVModel(
                         date: model.date,
                         values: model.hrv.map { $0.intValue },
+                        interval: model.secondInterval
+                    )
+                    
+                    self.validHrvData = HRVModel(
+                        date: model.date,
+                        values: self.hrvData?.validHRV ?? [0],
                         interval: model.secondInterval
                     )
                     

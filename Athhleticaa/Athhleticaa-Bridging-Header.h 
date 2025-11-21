@@ -8,3 +8,4 @@
 #import <QCBandSDK/QCSDKManager.h>
 #import <QCBandSDK/QCSDKCmdCreator.h>
 #import <QCBandSDK/QCBandSDK.h>
+#import <QCBandSDK/QCDFU_Utils.h>

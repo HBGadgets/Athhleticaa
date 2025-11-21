@@ -151,6 +151,15 @@ struct HRVScreenView: View {
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
+                if let hrvData = ringManager.hrvManager.validHrvData {
+                    HStack {
+                        HRVDonutChartView(hrv: hrvData)
+                            .frame(height: 100)
+                        Spacer()
+                    }
+                    
+                }
+                
             }
             .padding()
             .padding(.bottom, 100)

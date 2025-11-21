@@ -1,0 +1,4 @@
+module SleepChartKit {
+header "SleepChartKit-Swift.h"
+export *
+}

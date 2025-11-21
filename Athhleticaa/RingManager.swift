@@ -504,6 +504,22 @@ extension QCCentralManager: CBCentralManagerDelegate {
         })
     }
     
+    func stopPhotoUI() {
+        QCSDKCmdCreator.stopTakingPhotoSuccess({
+            print("📸 Ring is now in photo control mode")
+
+            // Now show your app’s camera screen
+            DispatchQueue.main.async {
+                self.isGestureEnabled = true
+                self.isShowingCamera = true
+            }
+
+        }, fail: {
+            self.isGestureEnabled = false
+            print("❌ Failed to switch ring to photo mode")
+        })
+    }
+    
     // MARK: Syncing to Apple Health Kit
     
     func syncSleepToHealthKit() {

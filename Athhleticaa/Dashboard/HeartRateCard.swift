@@ -54,13 +54,26 @@ struct HeartRateCard: View {
                 
                 if let day = ringManager.dashboardHeartRateData.first {
                     HeartRateChartView(heartRateData: day, ringManager: ringManager)
-                        .padding(10)
+                        .padding(.horizontal, 10)
                         .frame(maxWidth: .infinity)
                         .cornerRadius(16)
                         .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 } else {
                     Text("No data")
                 }
+//                Text({
+//                    if let data = ringManager.heartRateManager.dayData.first,
+//                       let index = data.lastNonZeroHeartRateIndex,
+//                       let date = data.timeForHeartRate(at: index) {
+//                        let formatter = DateFormatter()
+//                        formatter.dateFormat = "h:mm a"
+//                        return formatter.string(from: date)
+//                    } else {
+//                        return "--:--"
+//                    }
+//                }())
+//                .font(.headline)
+//                .fontWidth(.expanded)
             }
             .padding()
             .foregroundColor(.white)

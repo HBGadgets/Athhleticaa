@@ -41,7 +41,7 @@ struct CameraView: View {
             }
         }
         .onDisappear {
-            stopCameraAndTimer()
+            ringManager.stopPhotoUI()
         }
     }
 

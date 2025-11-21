@@ -38,7 +38,7 @@ struct HRVCard: View {
             .allowsHitTesting(false) // so image doesn’t block taps
 
             // Content
-            VStack(spacing: 8) {
+            VStack(alignment: HorizontalAlignment.leading, spacing: 8) {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("HRV")
@@ -50,6 +50,26 @@ struct HRVCard: View {
                     Image(systemName: "chevron.right")
                 }
                 HRVChartView(data: ringManager.dashboardHRVData ?? HRVModel(date: "0", values: [0], interval: 0), ringManager: ringManager)
+                HStack {
+                    if let lastHRV = ringManager.hrvManager.hrvData?.lastNonZeroHRV {
+                        Text("\(lastHRV) HRV")
+                            .fontWidth(.expanded)
+                    }
+                    Text({
+                        if let data = ringManager.hrvManager.hrvData?.validHRV,
+                           let index = ringManager.hrvManager.hrvData?.lastNonZeroHRVIndex,
+                           let date = ringManager.hrvManager.hrvData?.timeForHRVRate(at: index) {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "h:mm a"
+                            return formatter.string(from: date)
+                        } else {
+                            return "--:--"
+                        }
+                    }())
+                    .fontWidth(.expanded)
+                }
+                .font(.headline)
+                .fontWeight(.bold)
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)

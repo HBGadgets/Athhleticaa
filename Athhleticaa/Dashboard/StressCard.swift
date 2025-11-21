@@ -38,7 +38,7 @@ struct StressCard: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .allowsHitTesting(false) // so image doesn’t block taps
             // Content
-            VStack(spacing: 10) {
+            VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
                 // Top labels
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
@@ -86,6 +86,19 @@ struct StressCard: View {
                 }
                 
                 Spacer()
+                Text({
+                    if let data = ringManager.stressManager.stressData.first,
+                       let index = data.lastNonZeroStressIndex,
+                       let date = data.timeForStressRate(at: index) {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "h:mm a"
+                        return formatter.string(from: date)
+                    } else {
+                        return "--:--"
+                    }
+                }())
+                .font(.headline)
+                .fontWidth(.expanded)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 250)

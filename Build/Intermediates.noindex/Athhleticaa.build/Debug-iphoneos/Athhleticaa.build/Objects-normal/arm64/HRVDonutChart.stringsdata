@@ -31,7 +31,7 @@
         "key": "Low <30",
         "location": {
           "startingColumn": 26,
-          "startingLine": 44
+          "startingLine": 43
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "%lld %%",
         "location": {
           "startingColumn": 26,
-          "startingLine": 47
+          "startingLine": 46
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "•",
         "location": {
           "startingColumn": 26,
-          "startingLine": 51
+          "startingLine": 50
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Normal 30-60",
         "location": {
           "startingColumn": 26,
-          "startingLine": 53
+          "startingLine": 52
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "%lld %%",
         "location": {
           "startingColumn": 26,
-          "startingLine": 56
+          "startingLine": 55
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "•",
         "location": {
           "startingColumn": 26,
-          "startingLine": 60
+          "startingLine": 59
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "Good 61-101",
         "location": {
           "startingColumn": 26,
-          "startingLine": 62
+          "startingLine": 61
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "%lld %%",
         "location": {
           "startingColumn": 26,
-          "startingLine": 65
+          "startingLine": 64
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "•",
         "location": {
           "startingColumn": 26,
-          "startingLine": 69
+          "startingLine": 68
         }
       },
       {
@@ -103,7 +103,7 @@
         "key": "Excellent >101",
         "location": {
           "startingColumn": 26,
-          "startingLine": 71
+          "startingLine": 70
         }
       },
       {
@@ -111,7 +111,7 @@
         "key": "%lld %%",
         "location": {
           "startingColumn": 26,
-          "startingLine": 74
+          "startingLine": 73
         }
       }
     ]

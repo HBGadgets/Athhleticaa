@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppIcon60x60@2x.png</key>
+		<data>
+		BfY/EMLZI2zMj9l+xQwVNT3WS/E=
+		</data>
+		<key>AppIcon76x76@2x~ipad.png</key>
+		<data>
+		j1A5OP2bVSjSvg7vSHYy87Cx3zY=
+		</data>
 		<key>Assets.car</key>
 		<data>
-		HZzAApsngNHjm0f9l0Gt9PkPqog=
+		GZInkF/BX+wCJv3wXdzxDofS3mA=
 		</data>
 		<key>Athhleticaa-Bridging-Header.h </key>
 		<data>
@@ -14,11 +22,11 @@
 		</data>
 		<key>Athhleticaa.debug.dylib</key>
 		<data>
-		Djy1dgHnrw0N4hvdn+ySX2cJlYg=
+		YhjIyTXRkCeEncKJICZ+WwjWEBI=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9OLdX9dnPeX+emUubONuEjN673s=
+		n4IEY7/AJDJp52YUbghzzjByXx4=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -26,7 +34,7 @@
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		iv1ct/449bSp/QQTRkGcLrD1CJw=
+		d4fA+xRbMS11ebecfxb+T4CURdU=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -35,11 +43,25 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppIcon60x60@2x.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			L8LaDN0SP4Jbeo1KAkOa4OTREm3tj671hsTDSyPlxLM=
+			</data>
+		</dict>
+		<key>AppIcon76x76@2x~ipad.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gJiB3s4UG/JGUgb3ToWNLtJDc1fy9M38PT7ihre2Qx4=
+			</data>
+		</dict>
 		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3qKa1bzUKyt6J6LOd1hv29aUxTiaCVNqWdvfGm0Eny8=
+			nNrnbqZdrzFoCTwKn/P8si7hbFUk6T9m2FIzc5+G8Og=
 			</data>
 		</dict>
 		<key>Athhleticaa-Bridging-Header.h </key>
@@ -53,14 +75,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RqDCKnvzC0z4XWF0x9j3bbMHgh7d5o+NL3cKSAegI1c=
+			LAtNwWLUtkt06UnsgMXRk3c6mnWwHBmxbNIK9wnkiYk=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LfefKUG2tPqe3FwYqZlsknTJMlo8QVL0O8x0P8sNGbM=
+			64hVND9/IqpoSkuMP/OnwF91vlZAs9FoIss4PXb5J24=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>

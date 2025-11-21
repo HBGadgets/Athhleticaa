@@ -19,17 +19,6 @@ struct CameraView: View {
                 .ignoresSafeArea()
 
             VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        stopCameraAndTimer()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
-                            .foregroundColor(.white)
-                            .padding()
-                    }
-                }
                 Spacer()
                 Button(action: {
                     cameraModel.takePhoto()
@@ -44,27 +33,16 @@ struct CameraView: View {
         .onAppear {
             cameraModel.configure()
             ringManager.switchToPhotoUI()
-            startGestureMonitoring()
+
+            // Register gesture callback from watch
+            QCSDKManager.shareInstance().takePicture = { [weak cameraModel] in
+                print("📸 Watch gesture detected!")
+                cameraModel?.takePhoto()
+            }
         }
         .onDisappear {
             stopCameraAndTimer()
         }
-    }
-
-    private func startGestureMonitoring() {
-//        gestureTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-//            QCSDKManager.{ type, strength, success, error in
-//                guard error == nil else {
-//                    print("❌ Error getting gesture control: \(error!)")
-//                    return
-//                }
-//
-//                if type == .takePhoto {
-//                    print("📸 Taking photo via ring gesture (strength: \(strength))")
-//                    cameraModel.takePhoto()
-//                }
-//            }
-//        }
     }
 
     private func stopCameraAndTimer() {

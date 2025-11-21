@@ -53,10 +53,12 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var dashboardBloodOxygenData: [BloodOxygenModel] = []
     @Published var dashboardHRVData: HRVModel?
     
+    // MARK: - toggle variables
     @Published var spo2Monitoring: Bool = true
     @Published var stressMonitoring: Bool = true
     @Published var HRVMonitoring: Bool = true
     @Published var heartRateMonitoring: Bool = true
+    @Published var isGestureEnabled: Bool = false
     
     
     @State var isShowingCamera = false
@@ -492,10 +494,12 @@ extension QCCentralManager: CBCentralManagerDelegate {
 
             // Now show your app’s camera screen
             DispatchQueue.main.async {
+                self.isGestureEnabled = true
                 self.isShowingCamera = true
             }
 
         }, fail: {
+            self.isGestureEnabled = false
             print("❌ Failed to switch ring to photo mode")
         })
     }

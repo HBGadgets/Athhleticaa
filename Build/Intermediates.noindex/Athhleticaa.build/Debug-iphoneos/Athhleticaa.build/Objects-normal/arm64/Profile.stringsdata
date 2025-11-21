@@ -7,7 +7,7 @@
         "key": "Confirmation",
         "location": {
           "startingColumn": 20,
-          "startingLine": 178
+          "startingLine": 177
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "%@",
         "location": {
           "startingColumn": 38,
-          "startingLine": 48
+          "startingLine": 47
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "• Connected",
         "location": {
           "startingColumn": 38,
-          "startingLine": 52
+          "startingLine": 51
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Unbind",
         "location": {
           "startingColumn": 40,
-          "startingLine": 63
+          "startingLine": 62
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Battery: %lld%%",
         "location": {
           "startingColumn": 42,
-          "startingLine": 56
+          "startingLine": 55
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Device not connected",
         "location": {
           "startingColumn": 38,
-          "startingLine": 72
+          "startingLine": 71
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 42,
-          "startingLine": 77
+          "startingLine": 76
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "Gesture control will increase power consumption, please turn it off when not in use",
         "location": {
           "startingColumn": 26,
-          "startingLine": 112
+          "startingLine": 114
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Gesture Control",
         "location": {
           "startingColumn": 30,
-          "startingLine": 102
+          "startingLine": 101
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "",
         "location": {
           "startingColumn": 32,
-          "startingLine": 108
+          "startingLine": 107
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Ring is glowing green",
         "location": {
           "startingColumn": 22,
-          "startingLine": 174
+          "startingLine": 173
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "Ring data will be synced to Apple Health",
         "location": {
           "startingColumn": 22,
-          "startingLine": 180
+          "startingLine": 179
         }
       }
     ]

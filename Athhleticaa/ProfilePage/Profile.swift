@@ -10,7 +10,6 @@ import SwiftUI
 import CoreBluetooth
 
 struct DeviceInfoView: View {
-    @State private var gestureControlEnabled = true
     @State private var showThemeSheet = false
     @State private var showFindDeviceSheet = false
     @Environment(\.colorScheme) var colorScheme
@@ -105,8 +104,11 @@ struct DeviceInfoView: View {
 
                         Spacer()
 
-                        Toggle("", isOn: $gestureControlEnabled)
+                        Toggle("", isOn: $ringManager.isGestureEnabled)
                             .labelsHidden()
+                            .onChange(of: ringManager.isGestureEnabled) {
+                                ringManager.switchToPhotoUI()
+                            }
                     }
 
                     Text("Gesture control will increase power consumption, please turn it off when not in use")
@@ -141,9 +143,6 @@ struct DeviceInfoView: View {
                     }
                     NavigationLink(destination: CameraView(ringManager: ringManager)) {
                         DeviceMenuItem(icon: "camera", color: .teal, title: "Take Picture")
-//                            .onTapGesture {
-//                                ringManager.switchToPhotoUI()
-//                            }
                     }
                     
 //                    DeviceMenuItem(icon: "gamecontroller", color: .orange, title: "Ring games")

@@ -30,6 +30,31 @@ enum BloodOxygenType: Int, Codable {
     }
 }
 
+struct SpO2Category: Identifiable {
+    let id = UUID()
+    let type: BloodOxygenType
+    let count: Int
+    let color: Color
+
+    var name: String { type.description }
+}
+
+extension BloodOxygenManager {
+    var donutCategoryBreakdown: [SpO2Category] {
+        let valid = validBloodOxygenModels
+
+        let low = valid.filter { $0.soa2 < 95 }.count
+        let normal = valid.filter { $0.soa2 > 95 && $0.soa2 < 97 }.count
+        let high = valid.filter { $0.soa2 >= 98 }.count
+
+        return [
+            SpO2Category(type: .low,    count: low,    color: .red),
+            SpO2Category(type: .normal, count: normal, color: .blue),
+            SpO2Category(type: .high,   count: high,   color: .green)
+        ]
+    }
+}
+
 struct BloodOxygenModel: Identifiable, Codable {
     let id = UUID()
     var maxSoa2: Double
@@ -67,6 +92,32 @@ struct BloodOxygenModel: Identifiable, Codable {
 class BloodOxygenManager: ObservableObject {
     @Published var readings: [BloodOxygenModel] = []
     @Published var statusMessage: String = ""
+    
+    
+    
+    var lowPercent: Int {
+        let valid = validBloodOxygenModels
+        let total = Double(valid.count)
+        let low = valid.filter { $0.soa2 < 95 }.count
+        let percent = (Double(low) / total) * 100
+        return Int(percent)
+    }
+    
+    var normalPercent: Int {
+        let valid = validBloodOxygenModels
+        let total = Double(valid.count)
+        let normal = valid.filter { $0.soa2 > 95 && $0.soa2 < 97 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
+    var highPercent: Int {
+        let valid = validBloodOxygenModels
+        let total = Double(valid.count)
+        let high = valid.filter { $0.soa2 <= 98 }.count
+        let percent = (Double(high) / total) * 100
+        return Int(percent + 1)
+    }
     
     var lastNonZeroBloodOxygenValue: Double {
         readings.last(where: { $0.soa2 > 0 })?.soa2 ?? 0

@@ -155,6 +155,12 @@ struct BloodOxygenScreenView: View {
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 }
+                BloodOxygenDonutChart(manager: bloodOxygenManager)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+                    .cornerRadius(16)
+                    .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
             }
             .padding()
             .padding(.bottom, 100)

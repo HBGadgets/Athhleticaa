@@ -91,36 +91,36 @@ struct DeviceInfoView: View {
                 .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.3)
 
                 // MARK: - Gesture Control Card
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Image(systemName: "hand.tap.fill")
-                            .resizable()
-                            .frame(width: 28, height: 28)
-                            .foregroundColor(.blue)
-
-                        Text("Gesture Control")
-                            .font(.headline)
-                            .bold()
-
-                        Spacer()
-
-                        Toggle("", isOn: $ringManager.isGestureEnabled)
-                            .labelsHidden()
-                            .onChange(of: ringManager.isGestureEnabled) {
-                                ringManager.switchToPhotoUI()
-                            }
-                    }
-
-                    Text("Gesture control will increase power consumption, please turn it off when not in use")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                        .padding(.leading, 36)
-                        .lineLimit(2)
-                }
-                .padding()
-                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
-                .cornerRadius(16)
-                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
+//                VStack(alignment: .leading, spacing: 8) {
+//                    HStack {
+//                        Image(systemName: "hand.tap.fill")
+//                            .resizable()
+//                            .frame(width: 28, height: 28)
+//                            .foregroundColor(.blue)
+//
+//                        Text("Gesture Control")
+//                            .font(.headline)
+//                            .bold()
+//
+//                        Spacer()
+//
+//                        Toggle("", isOn: $ringManager.isGestureEnabled)
+//                            .labelsHidden()
+//                            .onChange(of: ringManager.isGestureEnabled) {
+//                                ringManager.switchToPhotoUI()
+//                            }
+//                    }
+//
+//                    Text("Gesture control will increase power consumption, please turn it off when not in use")
+//                        .font(.footnote)
+//                        .foregroundColor(.gray)
+//                        .padding(.leading, 36)
+//                        .lineLimit(2)
+//                }
+//                .padding()
+//                .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
+//                .cornerRadius(16)
+//                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
 
                 // MARK: - Menu Buttons
                 VStack(spacing: 12) {

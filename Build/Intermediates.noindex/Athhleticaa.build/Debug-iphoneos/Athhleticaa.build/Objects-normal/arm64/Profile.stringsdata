@@ -60,30 +60,6 @@
       },
       {
         "comment": "",
-        "key": "Gesture control will increase power consumption, please turn it off when not in use",
-        "location": {
-          "startingColumn": 26,
-          "startingLine": 114
-        }
-      },
-      {
-        "comment": "",
-        "key": "Gesture Control",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 101
-        }
-      },
-      {
-        "comment": "",
-        "key": "",
-        "location": {
-          "startingColumn": 32,
-          "startingLine": 107
-        }
-      },
-      {
-        "comment": "",
         "key": "Ring is glowing green",
         "location": {
           "startingColumn": 22,

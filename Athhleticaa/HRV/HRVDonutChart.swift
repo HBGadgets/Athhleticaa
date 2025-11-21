@@ -15,7 +15,7 @@ struct HRVDonutChartView: View {
     var body: some View {
         let categories = hrv.categoryBreakdown
         
-        VStack {
+        HStack {
             Chart(categories) { cat in
                 SectorMark(
                     angle: .value("Count", cat.count),
@@ -24,18 +24,8 @@ struct HRVDonutChartView: View {
                 )
                 .foregroundStyle(cat.color)
                 .cornerRadius(4)
-                .opacity(selectedCategory?.id == cat.id ? 1.0 : 0.7)
-//                .scaleEffect(selectedCategory?.id == cat.id ? 1.05 : 1.0)
-//                .onTapGesture {
-//                    withAnimation {
-//                        selectedCategory = cat
-//                    }
-//                }
             }
             .chartLegend(.hidden)
-//            .frame(height: 280)
-            
-            // Dynamic label on tap
             if let selected = selectedCategory {
                 VStack(spacing: 4) {
                     Text(selected.name)
@@ -45,6 +35,44 @@ struct HRVDonutChartView: View {
                         .foregroundColor(.secondary)
                 }
                 .padding(.top, 10)
+            }
+            VStack(alignment: HorizontalAlignment.leading) {
+                HStack{
+                    Text("•")
+                        .foregroundStyle(.red)
+                    Text("Low <30")
+                        .font(.caption2)
+                    Spacer()
+                    Text("\(hrv.lowPercent) %")
+                        .font(.caption2)
+                }
+                HStack{
+                    Text("•")
+                        .foregroundStyle(.yellow)
+                    Text("Normal 30-60")
+                        .font(.caption2)
+                    Spacer()
+                    Text("\(hrv.normalPercent) %")
+                        .font(.caption2)
+                }
+                HStack{
+                    Text("•")
+                        .foregroundStyle(.green)
+                    Text("Good 61-101")
+                        .font(.caption2)
+                    Spacer()
+                    Text("\(hrv.highPercent) %")
+                        .font(.caption2)
+                }
+                HStack{
+                    Text("•")
+                        .foregroundStyle(.blue)
+                    Text("Excellent >101")
+                        .font(.caption2)
+                    Spacer()
+                    Text("\(hrv.veryHighPercent) %")
+                        .font(.caption2)
+                }
             }
         }
     }

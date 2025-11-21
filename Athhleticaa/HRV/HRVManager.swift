@@ -25,6 +25,34 @@ struct HRVCategory: Identifiable {
 
 extension HRVModel {
     
+    var lowPercent: Int {
+        let total = Double(values.count)
+        let low = values.filter { $0 < 31 }.count
+        let percent = (Double(low) / total) * 100
+        return Int(percent)
+    }
+    
+    var normalPercent: Int {
+        let total = Double(values.count)
+        let normal = values.filter { $0 >= 31 && $0 <= 60 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
+    var highPercent: Int {
+        let total = Double(values.count)
+        let high = values.filter { $0 >= 61 && $0 <= 101 }.count
+        let percent = (Double(high) / total) * 100
+        return Int(percent)
+    }
+    
+    var veryHighPercent: Int {
+        let total = Double(values.count)
+        let veryHigh = values.filter { $0 > 101 }.count
+        let percent = (Double(veryHigh) / total) * 100
+        return Int(percent)
+    }
+    
     var lastNonZeroHRV: Int {
         values.last(where: { $0 != 0 }) ?? 0
     }

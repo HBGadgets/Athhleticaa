@@ -15,7 +15,103 @@
         "key": "%lld readings",
         "location": {
           "startingColumn": 26,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Low <30",
+        "location": {
+          "startingColumn": 26,
           "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld %%",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "Normal 30-60",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld %%",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "Good 61-101",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld %%",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Excellent >101",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld %%",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 74
         }
       }
     ]

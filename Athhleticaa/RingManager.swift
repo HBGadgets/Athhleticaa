@@ -60,6 +60,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var heartRateMonitoring: Bool = true
     @Published var isGestureEnabled: Bool = false
     @Published var showCameraDeniedAlert: Bool = false
+    @Published var showBluetoothDeniedAlert: Bool = false
     
     @State var isShowingCamera = false
     @Published var selectedTheme: AppTheme = .dark

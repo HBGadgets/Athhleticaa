@@ -305,6 +305,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+@class CBCentralManager;
+SWIFT_CLASS("_TtC11Athhleticaa26BluetoothPermissionManager")
+@interface BluetoothPermissionManager : NSObject <CBCentralManagerDelegate>
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (void)centralManagerDidUpdateState:(CBCentralManager * _Nonnull)central;
+@end
+
 @class AVCapturePhotoOutput;
 @class AVCapturePhoto;
 SWIFT_CLASS("_TtC11Athhleticaa15CameraViewModel")
@@ -320,7 +327,6 @@ SWIFT_CLASS("_TtC11Athhleticaa16QCCentralManager")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class CBCentralManager;
 @class CBPeripheral;
 @class NSString;
 @class NSNumber;

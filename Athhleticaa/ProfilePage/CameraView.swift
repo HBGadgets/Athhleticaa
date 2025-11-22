@@ -12,6 +12,7 @@ struct CameraView: View {
     @StateObject private var cameraModel = CameraViewModel()
     @ObservedObject var ringManager: QCCentralManager
     @State private var gestureTimer: Timer? = nil
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -30,15 +31,39 @@ struct CameraView: View {
                 }
             }
         }
-        .onAppear {
-            cameraModel.configure()
-            ringManager.switchToPhotoUI()
+        .alert("Camera Access Needed",
+               isPresented: $ringManager.showCameraDeniedAlert) {
 
-            // Register gesture callback from watch
-            QCSDKManager.shareInstance().takePicture = { [weak cameraModel] in
-                print("📸 Watch gesture detected!")
-                cameraModel?.takePhoto()
+            Button("Cancel", role: .cancel) {
+                dismiss()
             }
+
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            .keyboardShortcut(.defaultAction)
+
+        } message: {
+            Text("Please allow camera access in Settings to take pictures using your ring.")
+        }
+
+        .onAppear {
+            cameraModel.configure() { success in
+                if success {
+                    ringManager.switchToPhotoUI()
+
+                    // Register gesture callback from watch
+                    QCSDKManager.shareInstance().takePicture = { [weak cameraModel] in
+                        print("📸 Watch gesture detected!")
+                        cameraModel?.takePhoto()
+                    }
+                } else {
+                    ringManager.showCameraDeniedAlert = true
+                }
+            }
+            
         }
         .onDisappear {
             ringManager.stopPhotoUI()
@@ -58,7 +83,7 @@ final class CameraViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDe
     private let output = AVCapturePhotoOutput()
     private var previewLayer: AVCaptureVideoPreviewLayer?
 
-    func configure() {
+    func configure(completion: @escaping (Bool) -> Void) {
         session.beginConfiguration()
 
         // Input
@@ -66,16 +91,22 @@ final class CameraViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDe
               let input = try? AVCaptureDeviceInput(device: device),
               session.canAddInput(input) else {
             print("❌ Cannot access camera")
+            completion(false)
             return
         }
         session.addInput(input)
 
         // Output
-        guard session.canAddOutput(output) else { return }
+        guard session.canAddOutput(output) else {
+            completion(false)
+            return
+        }
         session.addOutput(output)
 
         session.commitConfiguration()
         session.startRunning()
+        
+        completion(true)
     }
 
     func stopSession() {

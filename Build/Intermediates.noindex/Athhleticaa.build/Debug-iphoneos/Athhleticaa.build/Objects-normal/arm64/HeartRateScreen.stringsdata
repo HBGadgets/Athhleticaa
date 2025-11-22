@@ -4,10 +4,18 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Ring not connected",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 245
+        }
+      },
+      {
+        "comment": "",
         "key": "No data",
         "location": {
           "startingColumn": 26,
-          "startingLine": 229
+          "startingLine": 236
         }
       },
       {
@@ -15,7 +23,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 26,
-          "startingLine": 66
+          "startingLine": 68
         }
       },
       {
@@ -23,7 +31,7 @@
         "key": "BPM",
         "location": {
           "startingColumn": 26,
-          "startingLine": 70
+          "startingLine": 72
         }
       },
       {
@@ -31,7 +39,7 @@
         "key": "Data details",
         "location": {
           "startingColumn": 30,
-          "startingLine": 106
+          "startingLine": 108
         }
       },
       {
@@ -39,7 +47,7 @@
         "key": "Real-time heart rate",
         "location": {
           "startingColumn": 30,
-          "startingLine": 135
+          "startingLine": 137
         }
       },
       {
@@ -47,7 +55,7 @@
         "key": "%lld bpm",
         "location": {
           "startingColumn": 78,
-          "startingLine": 152
+          "startingLine": 154
         }
       },
       {
@@ -55,7 +63,7 @@
         "key": "-- bpm",
         "location": {
           "startingColumn": 129,
-          "startingLine": 152
+          "startingLine": 154
         }
       },
       {
@@ -63,7 +71,7 @@
         "key": "Measuring...",
         "location": {
           "startingColumn": 44,
-          "startingLine": 175
+          "startingLine": 182
         }
       },
       {
@@ -71,7 +79,7 @@
         "key": "Click to start measurement",
         "location": {
           "startingColumn": 61,
-          "startingLine": 175
+          "startingLine": 182
         }
       },
       {
@@ -79,7 +87,7 @@
         "key": "%@",
         "location": {
           "startingColumn": 38,
-          "startingLine": 195
+          "startingLine": 202
         }
       },
       {
@@ -87,7 +95,31 @@
         "key": "%lld BPM",
         "location": {
           "startingColumn": 34,
-          "startingLine": 204
+          "startingLine": 211
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 246
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 247
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connect the app with ring first",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 252
         }
       },
       {
@@ -95,7 +127,7 @@
         "key": "Heart rate",
         "location": {
           "startingColumn": 22,
-          "startingLine": 237
+          "startingLine": 256
         }
       }
     ]

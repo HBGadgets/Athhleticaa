@@ -6,11 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import Charts
-
-import SwiftUI
 
 struct DashboardView: View {
     @Environment(\.colorScheme) var colorScheme

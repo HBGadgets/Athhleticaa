@@ -1,5 +1,40 @@
 {
   "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/DashboardView.swift",
-  "tables": {},
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Ring not connected",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 107
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 108
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 109
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connect the app with ring first",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 114
+        }
+      }
+    ]
+  },
   "version": 1
 }

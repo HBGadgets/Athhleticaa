@@ -14,6 +14,8 @@ struct HeartRateScreenView: View {
     @State private var isMeasuring = false
     @State private var animateHeart = false
     @State private var showCalendar = false
+    @State private var showNavigationError = false
+    @State private var goToScanScreen = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -155,22 +157,27 @@ struct HeartRateScreenView: View {
                     }
 
                     Button(action: {
-                        if !isMeasuring {
-                            // Start measuring
-                            isMeasuring = true
-                            ringManager.heartRateManager.heartRate = nil
-                            ringManager.heartRateManager.measureHeartRate() {
+                        if (ringManager.connectedPeripheral != nil) {
+                            if !isMeasuring {
+                                // Start measuring
+                                isMeasuring = true
+                                ringManager.heartRateManager.heartRate = nil
+                                ringManager.heartRateManager.measureHeartRate() {
+                                    isMeasuring = false
+                                    animateHeart = false
+                                }
+        //                        ringManager.measureHeartRate()
+                                animateHeart = true
+                            } else {
+                                // Stop measuring
                                 isMeasuring = false
+                                ringManager.heartRateManager.heartRate = nil
                                 animateHeart = false
                             }
-    //                        ringManager.measureHeartRate()
-                            animateHeart = true
                         } else {
-                            // Stop measuring
-                            isMeasuring = false
-                            ringManager.heartRateManager.heartRate = nil
-                            animateHeart = false
+                            showNavigationError = true
                         }
+                        
                     }) {
                         Text(isMeasuring ? "Measuring..." : "Click to start measurement")
                             .foregroundStyle(Color(colorScheme == .light ? .black : .white))
@@ -231,6 +238,18 @@ struct HeartRateScreenView: View {
             }
             .padding()
             .padding(.bottom, 100)
+        }
+        .navigationDestination(isPresented: $goToScanScreen) {
+            ScanningPage(ringManager: ringManager)
+        }
+        .alert("Ring not connected", isPresented: $showNavigationError) {
+            Button("Cancel", role: .cancel) {}
+            Button("Scan for ring") {
+                goToScanScreen = true
+            }
+            .keyboardShortcut(.defaultAction)
+        } message: {
+            Text("Connect the app with ring first")
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

@@ -15,80 +15,29 @@ struct DeviceInfoView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var showAuthSuccessAlert = false
+    @State private var goToHealthScreen = false
+    @State private var showNavigationError = false
+    @State private var goToCamerView = false
+    @State private var goToSystemSettings = false
+    @State private var goToScanScreen = false
+    
+    func findDevice () {
+        showFindDeviceSheet = true
+        for i in 0..<4 { // 3 times
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                QCSDKCmdCreator.alertBindingSuccess({
+                    print("✅ [\(i + 1)] Set the binding vibration successfully")
+                }, fail: {
+                    print("❌ [\(i + 1)] Failed to set binding vibration")
+                })
+            }
+        }
+    }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                ZStack (alignment: .leading) {
-                    GeometryReader { geo in
-                        Image("RingImage")
-                            .resizable()
-                            .rotationEffect(.degrees(125))
-                            .scaledToFill()
-                            .frame(width: 180, height: 180, alignment: .leading)
-                            .clipped()
-                            .opacity(0.3)
-                            .offset(x: -geo.size.width * 0.15)
-                    }
-                    HStack {
-                        Image("RingImage")
-                            .resizable()
-                            .scaledToFit()
-                            .rotationEffect(.degrees(-75))
-                            .frame(width: 120, height: 120)
-                            .scaleEffect(x: -1, y: 1, anchor: .center)
-                            .cornerRadius(12)
-                            .padding(.leading, 20)
-                        
-                        Spacer()
-
-                        if let device = ringManager.connectedPeripheral {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("\(device.name ?? "Unknown")")
-                                    .font(.title3)
-                                    .bold()
-                                
-                                Text("• Connected")
-                                    .foregroundStyle(.green)
-                                
-                                HStack {
-                                    Text("Battery: \(ringManager.batteryLevel ?? 0)%")
-                                    if (ringManager.isCharging) {
-                                        Image(systemName: "bolt.fill")
-                                            .foregroundStyle(.green)
-                                    }
-                                }
-                                
-                                Button("Unbind") {
-                                    ringManager.disconnect()
-                                }
-                                .backgroundStyle(.blue)
-                                .buttonStyle(.borderedProminent)
-                            }
-                            .padding()
-                        } else {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Device not connected")
-                                    .font(.title3)
-                                    .bold()
-
-                                NavigationLink(destination: ScanningPage(ringManager: ringManager)) {
-                                    Text("Scan for ring")
-                                }
-                                .buttonStyle(.borderedProminent)
-                            }
-                            .padding(.leading, 8)
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                }
-                .clipped()
-//                .padding()
-                .background(colorScheme == .light ? Color.white : Color(.systemGray6))
-                .cornerRadius(16)
-                .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.3)
+                RingConnectView(ringManager: ringManager)
 
                 // MARK: - Gesture Control Card
 //                VStack(alignment: .leading, spacing: 8) {
@@ -124,24 +73,40 @@ struct DeviceInfoView: View {
 
                 // MARK: - Menu Buttons
                 VStack(spacing: 12) {
-                    DeviceMenuItem(icon: "dot.radiowaves.left.and.right", color: .mint, title: "Find Device")
-                    .onTapGesture {
-                        showFindDeviceSheet = true
-                        for i in 0..<4 { // 3 times
-                            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
-                                QCSDKCmdCreator.alertBindingSuccess({
-                                    print("✅ [\(i + 1)] Set the binding vibration successfully")
-                                }, fail: {
-                                    print("❌ [\(i + 1)] Failed to set binding vibration")
-                                })
-                            }
-                        }
-                    }
+                    
 //                    DeviceMenuItem(icon: "brain.head.profile", color: .blue, title: "AI Analysis")
-                    NavigationLink(destination: HealthMonitoringScreen(ringManager: ringManager)) {
-                        DeviceMenuItem(icon: "heart.fill", color: .pink, title: "Health Monitoring")
+//                    NavigationLink(destination: HealthMonitoringScreen(ringManager: ringManager)) {
+//                        DeviceMenuItem(icon: "heart.fill", color: .pink, title: "Health Monitoring")
+//                    }
+                    Button {
+                        if ringManager.connectedPeripheral != nil {
+                            findDevice()
+                        } else {
+                            showNavigationError = true
+                        }
+                    } label: {
+                        DeviceMenuItem(icon: "dot.radiowaves.left.and.right", color: .mint, title: "Find Device")
                     }
-                    NavigationLink(destination: CameraView(ringManager: ringManager)) {
+                    Button {
+                        if ringManager.connectedPeripheral != nil {
+                            goToHealthScreen = true
+                        } else {
+                            showNavigationError = true
+                        }
+                    } label: {
+                        DeviceMenuItem(
+                            icon: "heart.fill",
+                            color: .pink,
+                            title: "Health Monitoring"
+                        )
+                    }
+                    Button {
+                        if ringManager.connectedPeripheral != nil {
+                            goToCamerView = true
+                        } else {
+                            showNavigationError = true
+                        }
+                    } label: {
                         DeviceMenuItem(icon: "camera", color: .teal, title: "Take Picture")
                     }
                     
@@ -159,7 +124,13 @@ struct DeviceInfoView: View {
                             }
                         }
 //                    DeviceMenuItem(icon: "square.and.arrow.up", color: .brown, title: "Firmware upgrade")
-                    NavigationLink(destination: SystemSettingScreen(ringManager: ringManager)) {
+                    Button {
+                        if ringManager.connectedPeripheral != nil {
+                            goToSystemSettings = true
+                        } else {
+                            showNavigationError = true
+                        }
+                    } label: {
                         DeviceMenuItem(icon: "gear", color: .gray, title: "System Setting")
                     }
                 }
@@ -177,6 +148,29 @@ struct DeviceInfoView: View {
             .alert("Confirmation", isPresented: $showAuthSuccessAlert) {
             } message: {
                 Text("Ring data will be synced to Apple Health")
+            }
+            .alert("Ring not connected", isPresented: $showNavigationError) {
+                Button("Cancel", role: .cancel) {}
+                Button("Scan for ring") {
+                    goToScanScreen = true
+                }
+                .keyboardShortcut(.defaultAction)
+            } message: {
+                Text("Connect the app with ring first")
+            }
+            
+            // MARK: Navigations
+            .navigationDestination(isPresented: $goToHealthScreen) {
+                HealthMonitoringScreen(ringManager: ringManager)
+            }
+            .navigationDestination(isPresented: $goToCamerView) {
+                CameraView(ringManager: ringManager)
+            }
+            .navigationDestination(isPresented: $goToSystemSettings) {
+                SystemSettingScreen(ringManager: ringManager)
+            }
+            .navigationDestination(isPresented: $goToScanScreen) {
+                ScanningPage(ringManager: ringManager)
             }
         }
         .toolbar {

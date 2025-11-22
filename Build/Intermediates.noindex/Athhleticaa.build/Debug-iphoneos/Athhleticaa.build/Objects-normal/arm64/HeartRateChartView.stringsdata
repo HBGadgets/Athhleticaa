@@ -4,7 +4,7 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Invalid date",
+        "key": "--",
         "location": {
           "startingColumn": 33,
           "startingLine": 22

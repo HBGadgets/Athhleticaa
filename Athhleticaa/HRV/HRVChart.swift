@@ -21,7 +21,7 @@ struct HRVChartView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let baseDate = dateFormatter.date(from: data.date) else {
-            return AnyView(Text("Invalid date"))
+            return AnyView(Text("--"))
         }
         
         // Each value corresponds to one timestamp = baseDate + (index * interval)

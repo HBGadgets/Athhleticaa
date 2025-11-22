@@ -7,55 +7,15 @@
         "key": "Confirmation",
         "location": {
           "startingColumn": 20,
-          "startingLine": 177
+          "startingLine": 148
         }
       },
       {
         "comment": "",
-        "key": "%@",
+        "key": "Ring not connected",
         "location": {
-          "startingColumn": 38,
-          "startingLine": 47
-        }
-      },
-      {
-        "comment": "",
-        "key": "• Connected",
-        "location": {
-          "startingColumn": 38,
-          "startingLine": 51
-        }
-      },
-      {
-        "comment": "",
-        "key": "Unbind",
-        "location": {
-          "startingColumn": 40,
-          "startingLine": 62
-        }
-      },
-      {
-        "comment": "",
-        "key": "Battery: %lld%%",
-        "location": {
-          "startingColumn": 42,
-          "startingLine": 55
-        }
-      },
-      {
-        "comment": "",
-        "key": "Device not connected",
-        "location": {
-          "startingColumn": 38,
-          "startingLine": 71
-        }
-      },
-      {
-        "comment": "",
-        "key": "Scan for ring",
-        "location": {
-          "startingColumn": 42,
-          "startingLine": 76
+          "startingColumn": 20,
+          "startingLine": 152
         }
       },
       {
@@ -63,7 +23,7 @@
         "key": "Ring is glowing green",
         "location": {
           "startingColumn": 22,
-          "startingLine": 173
+          "startingLine": 144
         }
       },
       {
@@ -71,7 +31,31 @@
         "key": "Ring data will be synced to Apple Health",
         "location": {
           "startingColumn": 22,
-          "startingLine": 179
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 153
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 154
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connect the app with ring first",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 159
         }
       }
     ]

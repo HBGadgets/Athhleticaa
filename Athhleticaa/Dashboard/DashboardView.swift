@@ -16,6 +16,8 @@ struct DashboardView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManager: QCCentralManager
     @State private var isSyncing = false
+    @State private var showNavigationError = false
+    @State private var goToScanScreen = false
     
     @MainActor
     func refreshDashboard() async {
@@ -34,6 +36,9 @@ struct DashboardView: View {
 //                        }
 //                        BatteryCard(charge: ringManager.batteryLevel ?? 0)
 //                    }
+                    if ((ringManager.connectedPeripheral == nil)) {
+                        RingConnectView(ringManager: ringManager)
+                    }
                     NavigationLink(destination: HeartRateScreenView(ringManager: ringManager, heartRateManager: ringManager.heartRateManager)) {
                         HeartRateCard(ringManager: ringManager)
                     }
@@ -89,9 +94,13 @@ struct DashboardView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    isSyncing = true
-                    ringManager.callAllFunctions() {
-                        isSyncing = false
+                    if (ringManager.connectedPeripheral != nil) {
+                        isSyncing = true
+                        ringManager.callAllFunctions() {
+                            isSyncing = false
+                        }
+                    } else {
+                        showNavigationError = true
                     }
                 }) {
                     Image(systemName: "arrow.clockwise")
@@ -99,13 +108,21 @@ struct DashboardView: View {
                 }
             }
         }
+        .alert("Ring not connected", isPresented: $showNavigationError) {
+            Button("Cancel", role: .cancel) {}
+            Button("Scan for ring") {
+                goToScanScreen = true
+            }
+            .keyboardShortcut(.defaultAction)
+        } message: {
+            Text("Connect the app with ring first")
+        }
         .onAppear() {
             ringManager.selectedDate = Date()
         }
+        .navigationDestination(isPresented: $goToScanScreen) {
+            ScanningPage(ringManager: ringManager)
+        }
         .navigationBarTitleDisplayMode(.inline)
-//        .background(
-//            Color(.systemGray6)
-//                .ignoresSafeArea()
-//            )
     }
 }

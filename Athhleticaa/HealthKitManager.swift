@@ -24,7 +24,7 @@ class HealthKitManager {
             HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
             HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
             HKObjectType.quantityType(forIdentifier: .heartRate)!,
-            HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
+//            HKObjectType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
         ]
 
         healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { success, error in
@@ -69,17 +69,17 @@ class HealthKitManager {
         }
     }
     
-    func saveHRV(_ ms: Double, date: Date) {
-        guard let type = HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN) else { return }
-        
-        let quantity = HKQuantity(unit: HKUnit.secondUnit(with: .milli), doubleValue: ms)
-        
-        let sample = HKQuantitySample(type: type, quantity: quantity, start: date, end: date)
-        
-        healthStore.save(sample) { success, error in
-            print(success ? "✅ Saved HRV" : "❌ Failed to save HRV: \(error?.localizedDescription ?? "")")
-        }
-    }
+//    func saveHRV(_ ms: Double, date: Date) {
+//        guard let type = HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN) else { return }
+//        
+//        let quantity = HKQuantity(unit: HKUnit.secondUnit(with: .milli), doubleValue: ms)
+//        
+//        let sample = HKQuantitySample(type: type, quantity: quantity, start: date, end: date)
+//        
+//        healthStore.save(sample) { success, error in
+//            print(success ? "✅ Saved HRV" : "❌ Failed to save HRV: \(error?.localizedDescription ?? "")")
+//        }
+//    }
 
     private func saveSample(type: HKQuantityType, quantity: HKQuantity, start: Date, end: Date, label: String) {
         let sample = HKQuantitySample(type: type, quantity: quantity, start: start, end: end)

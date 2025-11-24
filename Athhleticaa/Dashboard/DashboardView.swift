@@ -52,21 +52,23 @@ struct DashboardView: View {
                         SleepCard(ringManager: ringManager)
                     }
 
-                    NavigationLink(destination: StressAnalysisScreenView(ringManager: ringManager, stressManager: ringManager.stressManager)) {
-                        StressCard(
-                            averageStress: ringManager.stressManager.averageStress,
-                            rangeMin: ringManager.stressManager.rangeMin,
-                            rangeMax: ringManager.stressManager.rangeMax,
-                            ringManager: ringManager
-                        )
-                    }
-                    
-                    NavigationLink(destination: BloodOxygenScreenView(ringManager: ringManager, bloodOxygenManager: ringManager.bloodOxygenManager)) {
-                        BloodOxygenCard(ringManager: ringManager)
-                    }
-                    
-                    NavigationLink(destination: HRVScreenView(ringManager: ringManager, hrvManager: ringManager.hrvManager)) {
-                        HRVCard(ringManager: ringManager)
+                    if ((ringManager.connectedPeripheral != nil)) {
+                        NavigationLink(destination: StressAnalysisScreenView(ringManager: ringManager, stressManager: ringManager.stressManager)) {
+                            StressCard(
+                                averageStress: ringManager.stressManager.averageStress,
+                                rangeMin: ringManager.stressManager.rangeMin,
+                                rangeMax: ringManager.stressManager.rangeMax,
+                                ringManager: ringManager
+                            )
+                        }
+                        
+                        NavigationLink(destination: BloodOxygenScreenView(ringManager: ringManager, bloodOxygenManager: ringManager.bloodOxygenManager)) {
+                            BloodOxygenCard(ringManager: ringManager)
+                        }
+                        
+                        NavigationLink(destination: HRVScreenView(ringManager: ringManager, hrvManager: ringManager.hrvManager)) {
+                            HRVCard(ringManager: ringManager)
+                        }
                     }
                 }
                 .padding()

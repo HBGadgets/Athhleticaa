@@ -13,7 +13,6 @@ struct ScanningPage: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var bluetoothPermission = BluetoothPermissionManager()
 
-
     var body: some View {
         VStack {
             if ringManager.peripherals.isEmpty {

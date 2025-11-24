@@ -7,7 +7,7 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 16,
-          "startingLine": 107
+          "startingLine": 109
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 108
+          "startingLine": 110
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 20,
-          "startingLine": 109
+          "startingLine": 111
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 18,
-          "startingLine": 114
+          "startingLine": 116
         }
       }
     ]

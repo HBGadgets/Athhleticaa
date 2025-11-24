@@ -51,10 +51,9 @@ struct ContentView: View {
                     case 3:
                         SleepsAnalysisScreenView(sleepManager: ringManager.sleepManager, ringManager: ringManager)
                     case 4:
-                        StressAnalysisScreenView(ringManager: ringManager, stressManager: ringManager.stressManager)
-                    case 5:
                         DeviceInfoView(ringManager: ringManager)
-//                        ProfileView(ringManager: ringManager)
+//                    case 5:
+//                        StressAnalysisScreenView(ringManager: ringManager, stressManager: ringManager.stressManager)
                     default:
                         DashboardView(ringManager: ringManager)
                     }

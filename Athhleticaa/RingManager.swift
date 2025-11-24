@@ -20,6 +20,11 @@ class SchedualHeartRateModel: NSObject, Identifiable {
 /// SwiftUI-friendly replacement of the Objective-C QCCentralManager.
 /// Not a singleton (you requested a normal class).
 final class QCCentralManager: NSObject, ObservableObject {
+    
+    
+    @Published var lastCapturedImage: UIImage? = nil
+    
+    
     // MARK: - Published properties for SwiftUI
     @Published private(set) var peripherals: [QCBlePeripheral] = []
     @Published private(set) var connectedPeripheral: CBPeripheral?
@@ -505,20 +510,28 @@ extension QCCentralManager: CBCentralManagerDelegate {
         })
     }
     
-    func stopPhotoUI() {
+    func stopPhotoUI(completion: (() -> Void)? = nil) {
         QCSDKCmdCreator.stopTakingPhotoSuccess({
-            print("📸 Ring is now in photo control mode")
+            print("📸 Stopping photo mode")
 
             // Now show your app’s camera screen
             DispatchQueue.main.async {
-                self.isGestureEnabled = true
-                self.isShowingCamera = true
+//                self.stopTakingPhoto()
+                self.isGestureEnabled = false
+                self.isShowingCamera = false
+                completion?()
             }
+            
 
         }, fail: {
             self.isGestureEnabled = false
-            print("❌ Failed to switch ring to photo mode")
+            print("❌ Failed to stop ring to photo mode")
+            completion?()
         })
+    }
+    
+    func stopTakingPhoto(completion: (() -> Void)? = nil) {
+        QCSDKManager.shareInstance().stopTakePicture()
     }
     
     // MARK: Syncing to Apple Health Kit
@@ -530,13 +543,13 @@ extension QCCentralManager: CBCentralManagerDelegate {
         }
     }
     
-    func syncHRVToHealthKit(hrv: HRVModel) {
-        for (index, value) in hrv.values.enumerated() {
-            if value > 0, let date = hrv.timeForHRVRate(at: index) {
-                HealthKitManager.shared.saveHRV(Double(value), date: date)
-            }
-        }
-    }
+//    func syncHRVToHealthKit(hrv: HRVModel) {
+//        for (index, value) in hrv.values.enumerated() {
+//            if value > 0, let date = hrv.timeForHRVRate(at: index) {
+//                HealthKitManager.shared.saveHRV(Double(value), date: date)
+//            }
+//        }
+//    }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected: \(peripheral.name ?? "Unknown")")
@@ -582,7 +595,7 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                     self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
                                     self.hrvManager.fetchHRV(day: 0) {
                                         self.dashboardHRVData = self.hrvManager.hrvData
-                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
+//                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
                                         if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
                                         ) {
                                             let formatter = DateFormatter()

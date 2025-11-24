@@ -14,7 +14,7 @@ struct TabBar: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack(spacing: 24) {
-            ForEach(0..<6) { index in
+            ForEach(0..<5) { index in
                 tabButton(for: index)
             }
         }
@@ -29,7 +29,7 @@ struct TabBar: View {
 
     @ViewBuilder
     func tabButton(for index: Int) -> some View {
-        let icons = ["house.fill", "heart.fill", "shoeprints.fill", "moon.fill", "leaf.fill", "person.crop.circle"]
+        let icons = ["house.fill", "heart.fill", "shoeprints.fill", "moon.fill", "person.crop.circle"]
         let isSelected = ringManager.selectedTab == index
 
         Button {

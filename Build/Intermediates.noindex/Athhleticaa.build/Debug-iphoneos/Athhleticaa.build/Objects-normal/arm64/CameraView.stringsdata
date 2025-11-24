@@ -7,7 +7,7 @@
         "key": "Camera Access Needed",
         "location": {
           "startingColumn": 16,
-          "startingLine": 34
+          "startingLine": 119
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 37
+          "startingLine": 122
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Open Settings",
         "location": {
           "startingColumn": 20,
-          "startingLine": 41
+          "startingLine": 126
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Please allow camera access in Settings to take pictures using your ring.",
         "location": {
           "startingColumn": 18,
-          "startingLine": 49
+          "startingLine": 134
         }
       }
     ]

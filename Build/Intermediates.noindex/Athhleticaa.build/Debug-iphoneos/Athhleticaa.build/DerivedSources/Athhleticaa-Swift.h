@@ -319,7 +319,8 @@ SWIFT_CLASS("_TtC11Athhleticaa26BluetoothPermissionManager")
 SWIFT_CLASS("_TtC11Athhleticaa15CameraViewModel")
 @interface CameraViewModel : NSObject <AVCapturePhotoCaptureDelegate>
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 /// SwiftUI-friendly replacement of the Objective-C QCCentralManager.

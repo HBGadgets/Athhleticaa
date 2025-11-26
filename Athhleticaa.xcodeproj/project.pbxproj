@@ -286,8 +286,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athhleticaa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Athhleticaa;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs to use your bluetooth device";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App needs to use your bluetooth device";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Athhleticaa needs to use bluetooth to connect with a smart ring";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Athhleticaa gets data from ring using bluetooth";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -327,8 +327,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athhleticaa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Athhleticaa;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App needs to use your bluetooth device";
-				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App needs to use your bluetooth device";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Athhleticaa needs to use bluetooth to connect with a smart ring";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Athhleticaa gets data from ring using bluetooth";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

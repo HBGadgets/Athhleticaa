@@ -267,7 +267,7 @@ final class CameraViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDe
 
     func takePhoto() {
         
-        AudioServicesPlaySystemSound(1108)
+//        AudioServicesPlaySystemSound(1108)
         let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.prepare()
             generator.impactOccurred()

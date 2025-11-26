@@ -100,6 +100,16 @@
 			<key>catalogPath</key>
 			<string>/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Assets.xcassets</string>
 			<key>objcSymbol</key>
+			<string>ACImageNameSportsCardImage</string>
+			<key>relativePath</key>
+			<string>./SportsCardImage.imageset</string>
+			<key>swiftSymbol</key>
+			<string>sportsCard</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Assets.xcassets</string>
+			<key>objcSymbol</key>
 			<string>ACImageNameStressCardImage</string>
 			<key>relativePath</key>
 			<string>./StressCardImage.imageset</string>

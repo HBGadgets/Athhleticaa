@@ -58,6 +58,9 @@ extension DeveloperToolsSupport.ImageResource {
     /// The "SleepCardImage" asset catalog image resource.
     static let sleepCard = DeveloperToolsSupport.ImageResource(name: "SleepCardImage", bundle: resourceBundle)
 
+    /// The "SportsCardImage" asset catalog image resource.
+    static let sportsCard = DeveloperToolsSupport.ImageResource(name: "SportsCardImage", bundle: resourceBundle)
+
     /// The "StressCardImage" asset catalog image resource.
     static let stressCard = DeveloperToolsSupport.ImageResource(name: "StressCardImage", bundle: resourceBundle)
 
@@ -181,6 +184,15 @@ extension AppKit.NSImage {
 #endif
     }
 
+    /// The "SportsCardImage" asset catalog image.
+    static var sportsCard: AppKit.NSImage {
+#if !targetEnvironment(macCatalyst)
+        .init(resource: .sportsCard)
+#else
+        .init()
+#endif
+    }
+
     /// The "StressCardImage" asset catalog image.
     static var stressCard: AppKit.NSImage {
 #if !targetEnvironment(macCatalyst)
@@ -274,6 +286,15 @@ extension UIKit.UIImage {
     static var sleepCard: UIKit.UIImage {
 #if !os(watchOS)
         .init(resource: .sleepCard)
+#else
+        .init()
+#endif
+    }
+
+    /// The "SportsCardImage" asset catalog image.
+    static var sportsCard: UIKit.UIImage {
+#if !os(watchOS)
+        .init(resource: .sportsCard)
 #else
         .init()
 #endif

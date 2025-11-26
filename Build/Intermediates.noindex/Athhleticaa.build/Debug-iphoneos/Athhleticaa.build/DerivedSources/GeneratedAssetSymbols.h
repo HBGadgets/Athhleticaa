@@ -33,6 +33,9 @@ static NSString * const ACImageNameRingImage AC_SWIFT_PRIVATE = @"RingImage";
 /// The "SleepCardImage" asset catalog image resource.
 static NSString * const ACImageNameSleepCardImage AC_SWIFT_PRIVATE = @"SleepCardImage";
 
+/// The "SportsCardImage" asset catalog image resource.
+static NSString * const ACImageNameSportsCardImage AC_SWIFT_PRIVATE = @"SportsCardImage";
+
 /// The "StressCardImage" asset catalog image resource.
 static NSString * const ACImageNameStressCardImage AC_SWIFT_PRIVATE = @"StressCardImage";
 

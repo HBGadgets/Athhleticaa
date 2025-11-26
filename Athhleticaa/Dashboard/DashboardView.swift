@@ -69,6 +69,10 @@ struct DashboardView: View {
                         NavigationLink(destination: HRVScreenView(ringManager: ringManager, hrvManager: ringManager.hrvManager)) {
                             HRVCard(ringManager: ringManager)
                         }
+                        
+                        NavigationLink(destination: SportsHistoryScreen(ringManager: ringManager)) {
+                            SportsCard(ringManager: ringManager)
+                        }
                     }
                 }
                 .padding()

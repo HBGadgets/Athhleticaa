@@ -47,6 +47,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var bloodOxygenManager = BloodOxygenManager()
     @Published var hrvManager = HRVManager()
     @Published var healthManager = HealthKitManager()
+    @Published var sportsManager = SportsManager()
     @Published var selectedDayOffset: Int = 0
     @Published var selectedDate = Date()
     

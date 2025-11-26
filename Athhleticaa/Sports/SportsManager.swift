@@ -30,7 +30,7 @@ class SportsManager: ObservableObject {
             if let error = error {
                 print("❌ Failed: \(error.localizedDescription)")
             } else {
-                print("✅ Sport mode started:", response ?? "nil")
+                print("✅ Sport mode paused:", response ?? "nil")
             }
         }
     }
@@ -43,7 +43,7 @@ class SportsManager: ObservableObject {
             if let error = error {
                 print("❌ Failed: \(error.localizedDescription)")
             } else {
-                print("✅ Sport mode started:", response ?? "nil")
+                print("✅ Sport mode continued:", response ?? "nil")
             }
         }
     }
@@ -56,7 +56,7 @@ class SportsManager: ObservableObject {
             if let error = error {
                 print("❌ Failed: \(error.localizedDescription)")
             } else {
-                print("✅ Sport mode started:", response ?? "nil")
+                print("✅ Sport mode stopped:", response ?? "nil")
             }
         }
     }

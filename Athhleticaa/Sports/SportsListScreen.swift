@@ -18,9 +18,9 @@ struct SportsListScreen: View {
                 SportActivityItem(title: "Bike", icon: "bicycle", sportType: .bike, ringManager: ringManager)
                 SportActivityItem(title: "Walk", icon: "figure.walk", sportType: .walk, ringManager: ringManager)
             }
+            .padding(.horizontal)
         }
         .navigationTitle(Text("Sports mode"))
-        .padding()
     }
 }
 
@@ -35,7 +35,13 @@ struct SportActivityItem: View {
         NavigationLink (destination: SportActivityScreen(sportType: sportType, ringManager: ringManager)) {
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: icon)
-                    .foregroundStyle(.blue)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.blue)
+                    .padding(8)
+                    .background(.blue.opacity(0.1))
+                    .clipShape(Circle())
 
                 Text(title)
                     .font(.headline)
@@ -44,7 +50,7 @@ struct SportActivityItem: View {
                 Image(systemName: "chevron.right")
             }
             .frame(height: 50) // <- keeps everything perfectly centered
-            .padding(.horizontal)
+            .padding()
             .background(colorScheme == .light ? Color.white : Color(.systemGray6))
             .cornerRadius(16)
             .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)

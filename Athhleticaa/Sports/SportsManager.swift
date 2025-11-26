@@ -6,30 +6,19 @@
 //
 
 class SportsManager: ObservableObject {
-//    let sportType: OdmSportPlusExerciseModelType = .gpsBike
 
-    func startSport(type: OdmSportPlusExerciseModelType) {
+    func startSport(type: OdmSportPlusExerciseModelType, completion: (() -> Void)? = nil) {
         QCSDKCmdCreator.operateSportMode(
             with: type,
             state: QCSportState.init(rawValue: 0x01),
         ) { response, error in
             if let error = error {
                 print("❌ Failed: \(error.localizedDescription)")
+                completion?()
             } else {
                 print("✅ Sport mode started:", response ?? "nil")
+                completion?()
             }
-        }
-        
-        QCSDKManager.shareInstance().currentSportInfo = { info in
-            print("---- SPORT LIVE INFO ----")
-            print("Type:", info.sportType)
-            print("State:", info.state)
-            print("Duration:", info.duration)
-            print("HR:", info.hr)
-            print("Steps:", info.step)
-            print("Calorie:", info.calorie)
-            print("Distance:", info.distance)
-            print("-------------------------")
         }
     }
 

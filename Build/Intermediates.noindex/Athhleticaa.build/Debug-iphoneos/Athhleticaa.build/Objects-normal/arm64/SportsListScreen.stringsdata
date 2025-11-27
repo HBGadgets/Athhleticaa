@@ -4,10 +4,10 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Sports mode",
+        "key": "Sports",
         "location": {
-          "startingColumn": 31,
-          "startingLine": 42
+          "startingColumn": 26,
+          "startingLine": 62
         }
       }
     ]

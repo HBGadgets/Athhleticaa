@@ -455,6 +455,16 @@
     "swift-dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepSummaryChartView.swiftdeps",
     "swiftmodule" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepSummaryChartView~partial.swiftmodule"
   },
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportActivities.swift" : {
+    "const-values" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.swiftconstvalues",
+    "dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.d",
+    "diagnostics" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.dia",
+    "index-unit-output-path" : "/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.o",
+    "swift-dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities.swiftdeps",
+    "swiftmodule" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivities~partial.swiftmodule"
+  },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportActivityScreen.swift" : {
     "const-values" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivityScreen.swiftconstvalues",
     "dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivityScreen.d",

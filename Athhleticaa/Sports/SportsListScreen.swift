@@ -111,6 +111,23 @@ struct SportsListScreen: View {
         .init(title: "Beach volleyball", icon: "", sportType: .beachVolleyball),
         .init(title: "Baseball", icon: "figure.baseball", sportType: .baseball),
         .init(title: "Softball", icon: "figure.softball", sportType: .softball),
+        .init(title: "Rugby football", icon: "figure.rugby", sportType: .newFootball),
+        .init(title: "Hockey", icon: "figure.field.hockey", sportType: .hockey),
+        .init(title: "Sqaush", icon: "figure.squash", sportType: .squash),
+        .init(title: "Cricket", icon: "figure.cricket", sportType: .cricket),
+        .init(title: "Handball", icon: "figure.handball", sportType: .handball),
+        .init(title: "Bowling ball", icon: "figure.bowling", sportType: .bowling),
+        .init(title: "Polo", icon: "", sportType: .polo),
+        .init(title: "Billiards", icon: "", sportType: .billiards),
+        .init(title: "Takraw ball", icon: "", sportType: .takraw),
+        .init(title: "Dodgeball", icon: "", sportType: .dodgeBall),
+        .init(title: "Water polo", icon: "", sportType: .waterPolo),
+        .init(title: "Shuttlecock", icon: "", sportType: .shuttlecock),
+        .init(title: "Indoor Football", icon: "", sportType: .indoorSoccer),
+        .init(title: "Sandbag", icon: "", sportType: .sandbag),
+        .init(title: "Bocce", icon: "", sportType: .bocce),
+        .init(title: "Floor ball", icon: "", sportType: .floorBall),
+        
     ]
 
     var filteredActivities: [SportActivity] {

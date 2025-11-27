@@ -11,4 +11,3 @@ struct SportActivity: Identifiable {
     let icon: String
     let sportType: OdmSportPlusExerciseModelType
 }
-

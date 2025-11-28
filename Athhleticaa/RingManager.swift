@@ -606,9 +606,10 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                                 self.getStressScheduleStatus() {
                                                     self.getHRVScheduleStatus() {
                                                         self.getHeartRateScheduleStatus() {
-                                                            self.sleepManagerNew.getSleep()
+                                                            self.sleepManagerNew.getSleep() {
+                                                                self.sportsManager.updateData()
+                                                            }
                                                         }
-                                                        
                                                     }
                                                 }
                                             }

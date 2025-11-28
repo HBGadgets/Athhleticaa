@@ -6,11 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
-import CoreBluetooth
-
-import SwiftUI
 import CoreBluetooth
 
 struct ContentView: View {

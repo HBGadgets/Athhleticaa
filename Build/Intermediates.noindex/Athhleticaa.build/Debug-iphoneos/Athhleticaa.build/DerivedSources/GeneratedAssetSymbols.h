@@ -39,4 +39,7 @@ static NSString * const ACImageNameSportsCardImage AC_SWIFT_PRIVATE = @"SportsCa
 /// The "StressCardImage" asset catalog image resource.
 static NSString * const ACImageNameStressCardImage AC_SWIFT_PRIVATE = @"StressCardImage";
 
+/// The "spinningBike" asset catalog image resource.
+static NSString * const ACImageNameSpinningBike AC_SWIFT_PRIVATE = @"spinningBike";
+
 #undef AC_SWIFT_PRIVATE

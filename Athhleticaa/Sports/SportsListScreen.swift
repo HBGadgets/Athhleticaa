@@ -18,7 +18,7 @@ struct SportsListScreen: View {
         .init(title: "Bike", icon: "bicycle", sportType: .bike),
         .init(title: "Walk", icon: "figure.walk", sportType: .walk),
         .init(title: "Hiking", icon: "figure.hiking", sportType: .hiking),
-        .init(title: "Spinning bike", icon: "", sportType: .spinningBike),
+        .init(title: "Spinning bike", icon: "spinningBike", sportType: .spinningBike),
         .init(title: "Rope skipping", icon: "figure.jumprope", sportType: .ropeSkipping),
         .init(title: "Swimming", icon: "", sportType: .swimming),
         .init(title: "Eliptical machine", icon: "", sportType: .ellipticalMachine),
@@ -127,7 +127,51 @@ struct SportsListScreen: View {
         .init(title: "Sandbag", icon: "", sportType: .sandbag),
         .init(title: "Bocce", icon: "", sportType: .bocce),
         .init(title: "Floor ball", icon: "", sportType: .floorBall),
-        
+        .init(title: "Australian rules football", icon: "figure.australian.football", sportType: .australianRulesFootball),
+        .init(title: "Outdoor rowing", icon: "figure.indoor.rowing", sportType: .rowingMachine),
+        .init(title: "Sailboat", icon: "figure.sailing", sportType: .sailing),
+        .init(title: "Dragon boat", icon: "", sportType: .dragonBoat),
+        .init(title: "Surfing", icon: "figure.surfing", sportType: .surf),
+        .init(title: "Kitesurfing", icon: "", sportType: .kitesurfing),
+        .init(title: "Paddle", icon: "", sportType: .paddling),
+        .init(title: "Paddleboard", icon: "", sportType: .paddleboard),
+        .init(title: "Indoor surf", icon: "", sportType: .indoorSurfing),
+        .init(title: "Drift", icon: "", sportType: .drifting),
+        .init(title: "Snorkel", icon: "", sportType: .snorkeling),
+        .init(title: "Skis", icon: "figure.snowboarding", sportType: .snowboard),
+        .init(title: "Alpine skiing", icon: "", sportType: .alpineSkiing),
+        .init(title: "Cross country skiing", icon: "figure.skiing.crosscountry", sportType: .crossCountrySkiing),
+        .init(title: "Outdoor skating", icon: "", sportType: .outdoorSkating),
+        .init(title: "Indoor skating", icon: "", sportType: .indoorSkating),
+        .init(title: "Curling", icon: "figure.curling", sportType: .curling),
+        .init(title: "Bobsleigh", icon: "", sportType: .bobsleigh),
+        .init(title: "Sled", icon: "", sportType: .sled),
+        .init(title: "Snowmobile", icon: "", sportType: .snowmobile),
+        .init(title: "Snowsport", icon: "", sportType: .snowboard),
+        .init(title: "Hula hoop", icon: "", sportType: .hulaHoop),
+        .init(title: "Flying disc", icon: "", sportType: .frisbee),
+        .init(title: "Darts", icon: "", sportType: .darts),
+        .init(title: "Kite flying", icon: "", sportType: .flyAKite),
+        .init(title: "Tug of war", icon: "", sportType: .tugOfWar),
+        .init(title: "E-sports", icon: "", sportType: .esports),
+        .init(title: "Swing", icon: "", sportType: .swing),
+        .init(title: "Shuffleboard", icon: "", sportType: .shuffleboard),
+        .init(title: "Table football", icon: "", sportType: .tableSoccer),
+        .init(title: "Somatosensory game", icon: "", sportType: .somatosensoryGame),
+        .init(title: "Bungee jumping", icon: "", sportType: .bungeeJumping),
+        .init(title: "Anusara", icon: "", sportType: .anusara),
+        .init(title: "Yin yoga", icon: "", sportType: .yinYoga),
+        .init(title: "Pregnancy yoga", icon: "", sportType: .pregnancyYoga),
+        .init(title: "Chess", icon: "", sportType: .internationalChess),
+        .init(title: "Go", icon: "", sportType: .go),
+        .init(title: "Checkers", icon: "", sportType: .checkers),
+        .init(title: "Board game", icon: "", sportType: .boardGame),
+        .init(title: "Bridge", icon: "", sportType: .bridge),
+        .init(title: "Triathlon", icon: "", sportType: .triathlon),
+        .init(title: "Archery", icon: "figure.archery", sportType: .archery),
+        .init(title: "Compound sport", icon: "", sportType: .compoundMovement),
+        .init(title: "Drive", icon: "", sportType: .drive),
+        .init(title: "Other sports", icon: "arrowshape.forward", sportType: .otherExtension),
     ]
 
     var filteredActivities: [SportActivity] {
@@ -165,7 +209,8 @@ struct SportActivityItem: View {
     var body: some View {
         NavigationLink (destination: SportActivityScreen(sportType: sportType, ringManager: ringManager)) {
             HStack(alignment: .center, spacing: 12) {
-                Image(systemName: icon)
+                
+                Image.safeIcon(icon)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
@@ -189,5 +234,15 @@ struct SportActivityItem: View {
 
         }
         .buttonStyle(.plain)
+    }
+}
+
+extension Image {
+    static func safeIcon(_ name: String) -> Image {
+        if UIImage(systemName: name) != nil {
+            return Image(systemName: name)
+        } else {
+            return Image(name) // uses asset image
+        }
     }
 }

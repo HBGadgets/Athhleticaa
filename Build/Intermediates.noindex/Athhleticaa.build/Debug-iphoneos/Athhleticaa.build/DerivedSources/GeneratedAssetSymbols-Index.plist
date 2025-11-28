@@ -116,6 +116,16 @@
 			<key>swiftSymbol</key>
 			<string>stressCard</string>
 		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameSpinningBike</string>
+			<key>relativePath</key>
+			<string>./SportsModeIcons 1/spinningBike.imageset</string>
+			<key>swiftSymbol</key>
+			<string>spinningBike</string>
+		</dict>
 	</array>
 	<key>symbols</key>
 	<array/>

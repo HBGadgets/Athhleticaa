@@ -64,6 +64,9 @@ extension DeveloperToolsSupport.ImageResource {
     /// The "StressCardImage" asset catalog image resource.
     static let stressCard = DeveloperToolsSupport.ImageResource(name: "StressCardImage", bundle: resourceBundle)
 
+    /// The "spinningBike" asset catalog image resource.
+    static let spinningBike = DeveloperToolsSupport.ImageResource(name: "spinningBike", bundle: resourceBundle)
+
 }
 
 // MARK: - Color Symbol Extensions -
@@ -202,6 +205,15 @@ extension AppKit.NSImage {
 #endif
     }
 
+    /// The "spinningBike" asset catalog image.
+    static var spinningBike: AppKit.NSImage {
+#if !targetEnvironment(macCatalyst)
+        .init(resource: .spinningBike)
+#else
+        .init()
+#endif
+    }
+
 }
 #endif
 
@@ -304,6 +316,15 @@ extension UIKit.UIImage {
     static var stressCard: UIKit.UIImage {
 #if !os(watchOS)
         .init(resource: .stressCard)
+#else
+        .init()
+#endif
+    }
+
+    /// The "spinningBike" asset catalog image.
+    static var spinningBike: UIKit.UIImage {
+#if !os(watchOS)
+        .init(resource: .spinningBike)
 #else
         .init()
 #endif

@@ -14,7 +14,14 @@ struct SportActivityScreen: View {
     @State var stopped: Bool = false
     @ObservedObject var ringManager: QCCentralManager
     @ObservedObject var sportsManager: SportsManager
-    @State private var goToActivityListScreen = false
+    @State private var showActivityScreen = false
+    @Environment(\.dismiss) private var dismiss
+    
+    
+    @State private var count = 3
+    @State private var scale: CGFloat = 0.1
+    @State private var opacity: Double = 1.0
+    var onFinish: (() -> Void)? = nil
 
     init(ringManager: QCCentralManager) {
         self.ringManager = ringManager
@@ -98,6 +105,12 @@ struct SportActivityScreen: View {
                         Button(action: {
                             sportsManager.stopSport(type: sportType.sportType){
 //                                goToActivityListScreen = true
+//                                dismiss()
+//
+//                                // Pop CountdownScreen (one level above)
+//                                DispatchQueue.main.async {
+//                                    dismiss()
+//                                }
                             }
                         }) {
                             Image(systemName: "stop.fill")
@@ -155,18 +168,49 @@ struct SportActivityScreen: View {
                 
             }
         }
-        .onAppear() {
-            sportsManager.startSport(type: sportType.sportType) {
-                DispatchQueue.main.async {
-                    sportsManager.updateData()
-                }
-            }
-        }
+//        .onAppear() {
+//            sportsManager.startSport(type: sportType.sportType) {
+//                DispatchQueue.main.async {
+//                    sportsManager.updateData()
+//                }
+//            }
+//        }
         .statusBar(hidden: true)
         .navigationBarBackButtonHidden(true)
         .interactiveDismissDisabled(true)
 //        .navigationDestination(isPresented: $goToActivityListScreen) {
 //            SportsListScreen(ringManager: ringManager)
 //        }
+    }
+    
+    private func startCountdown() {
+        animateNumber()
+
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if count == 1 {
+                timer.invalidate()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    onFinish?()
+                    sportsManager.startSport(type: sportType.sportType) {
+                        DispatchQueue.main.async {
+                            sportsManager.updateData()
+                        }
+                    }
+                }
+            } else {
+                count -= 1
+                animateNumber()
+            }
+        }
+    }
+
+    private func animateNumber() {
+        scale = 0.1
+        opacity = 1
+
+        withAnimation(.easeOut(duration: 0.6)) {
+            scale = 1.2
+            opacity = 0
+        }
     }
 }

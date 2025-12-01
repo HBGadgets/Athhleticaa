@@ -54,6 +54,7 @@ struct CameraView: View {
                             .background(Color.black.opacity(0.3))
                             .clipShape(Circle())
                     }
+                    .padding()
                     Spacer()
                     Button(action: {
                         cameraModel.toggleFlash()
@@ -65,6 +66,7 @@ struct CameraView: View {
                             .background(Color.black.opacity(0.3))
                             .clipShape(Circle())
                     }
+                    .padding()
                 }
                 Spacer()
                 HStack {
@@ -80,6 +82,7 @@ struct CameraView: View {
                             .background(Color.black.opacity(0.3))
                             .clipShape(Circle())
                     }
+                    .padding()
                     Spacer()
                     
                     Button(action: {
@@ -90,6 +93,7 @@ struct CameraView: View {
                             .frame(width: 80, height: 80)
                             .padding(.bottom, 20)
                     }
+                    .padding()
                     
                     Spacer()
                     
@@ -106,12 +110,14 @@ struct CameraView: View {
                                 )
                                 .padding(.leading, 20)
                         }
+                        .padding()
                     } else {
                         // Placeholder
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.black.opacity(0.3))
                             .frame(width: 60, height: 60)
                             .padding(.leading, 20)
+                            .padding()
                     }
                 }
             }
@@ -152,6 +158,7 @@ struct CameraView: View {
             }
             
         }
+        .navigationBarBackButtonHidden(true)
         .fullScreenCover(isPresented: $showPreview) {
             if let img = ringManager.lastCapturedImage {
                 ZStack {

@@ -98,26 +98,40 @@ class BloodOxygenManager: ObservableObject {
     var lowPercent: Int {
         let valid = validBloodOxygenModels
         let total = Double(valid.count)
+
+        guard total > 0 else { return 0 }   // Prevent divide-by-zero crash
+
         let low = valid.filter { $0.soa2 < 95 }.count
-        let percent = (Double(low) / total) * 100
-        return Int(percent)
+        let percent = Int((Double(low) / total) * 100)
+
+        return percent
     }
+
     
     var normalPercent: Int {
         let valid = validBloodOxygenModels
         let total = Double(valid.count)
+
+        guard total > 0 else { return 0 }     // Prevent crash
+
         let normal = valid.filter { $0.soa2 > 95 && $0.soa2 < 97 }.count
         let percent = (Double(normal) / total) * 100
+
         return Int(percent)
     }
+
     
     var highPercent: Int {
         let valid = validBloodOxygenModels
         let total = Double(valid.count)
+
+        guard total > 0 else { return 0 }   // Prevent crash
+
         let high = valid.filter { $0.soa2 <= 98 }.count
         let percent = (Double(high) / total) * 100
-        return Int(percent + 1)
+        return Int(percent)
     }
+
     
     var lastNonZeroBloodOxygenValue: Double {
         readings.last(where: { $0.soa2 > 0 })?.soa2 ?? 0

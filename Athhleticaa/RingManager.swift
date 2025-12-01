@@ -59,6 +59,8 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var dashboardBloodOxygenData: [BloodOxygenModel] = []
     @Published var dashboardHRVData: HRVModel?
     
+    @Published var startSportsActivity: Bool = false
+    
     // MARK: - toggle variables
     @Published var spo2Monitoring: Bool = true
     @Published var stressMonitoring: Bool = true
@@ -141,11 +143,12 @@ final class QCCentralManager: NSObject, ObservableObject {
         scan(withTimeout: Int(scanTimeout))
     }
     
-    func syncHeartRateToHealthKit() {
+    func syncHeartRateToHealthKit(completion: (() -> Void)? = nil) {
         for entry in self.heartRateManager.dayData {
             for (index, bpm) in entry.heartRates.enumerated() where bpm > 0 {
                 if let date = entry.timeForHeartRate(at: index) {
                     HealthKitManager.shared.saveHeartRate(bpm, date: date)
+                    completion?()
                 }
             }
         }
@@ -537,11 +540,12 @@ extension QCCentralManager: CBCentralManagerDelegate {
     
     // MARK: Syncing to Apple Health Kit
     
-    func syncSleepToHealthKit() {
+    func syncSleepToHealthKit(completion: (() -> Void)? = nil) {
         for segment in self.sleepManager.sleepSegments {
             let asleep = segment.type != .awake
             HealthKitManager.shared.saveSleep(start: segment.startTime, end: segment.endTime, asleep: asleep)
         }
+        completion?()
     }
     
 //    func syncHRVToHealthKit(hrv: HRVModel) {
@@ -581,47 +585,50 @@ extension QCCentralManager: CBCentralManagerDelegate {
             print("🚀 Device ready — starting data fetch")
             self.heartRateManager.fetchTodayHeartRate() {
                 self.dashboardHeartRateData = self.heartRateManager.dayData
-                self.syncHeartRateToHealthKit()
-                self.pedometerManager.getPedometerData() {
-                    self.dashboardStepsData = self.pedometerManager.stepsData
-                    self.stressManager.fetchStressData() {
-                        self.dashboardStressData = self.stressManager.stressData
-                        self.sleepManager.getSleep() {
-                            /////////////
-//                            self.sleepManagerNew.getSleep()
-                            self.dashboardSleepSummary = self.sleepManager.summary
-                            self.syncSleepToHealthKit()
-                            self.readBattery() {
-                                self.bloodOxygenManager.fetchBloodOxygenData() {
-                                    self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
-                                    self.hrvManager.fetchHRV(day: 0) {
-                                        self.dashboardHRVData = self.hrvManager.hrvData
-//                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
-                                        if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
-                                        ) {
-                                            let formatter = DateFormatter()
-                                            formatter.dateFormat = "h:mm a"
-                                            print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
-                                            self.getBloodOxygenScheduleStatus() {
-                                                self.getStressScheduleStatus() {
-                                                    self.getHRVScheduleStatus() {
-                                                        self.getHeartRateScheduleStatus() {
-                                                            self.sleepManagerNew.getSleep() {
-                                                                self.sportsManager.updateData()
+                self.syncHeartRateToHealthKit() {
+                    self.pedometerManager.getPedometerData() {
+                        self.dashboardStepsData = self.pedometerManager.stepsData
+                        self.stressManager.fetchStressData() {
+                            self.dashboardStressData = self.stressManager.stressData
+                            self.sleepManager.getSleep() {
+                                /////////////
+    //                            self.sleepManagerNew.getSleep()
+                                self.dashboardSleepSummary = self.sleepManager.summary
+                                self.syncSleepToHealthKit() {
+                                    self.readBattery() {
+                                        self.bloodOxygenManager.fetchBloodOxygenData() {
+                                            self.dashboardBloodOxygenData = self.bloodOxygenManager.readings
+                                            self.hrvManager.fetchHRV(day: 0) {
+                                                self.dashboardHRVData = self.hrvManager.hrvData
+        //                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
+                                                if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
+                                                ) {
+                                                    let formatter = DateFormatter()
+                                                    formatter.dateFormat = "h:mm a"
+                                                    print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
+                                                    self.getBloodOxygenScheduleStatus() {
+                                                        self.getStressScheduleStatus() {
+                                                            self.getHRVScheduleStatus() {
+                                                                self.getHeartRateScheduleStatus() {
+                                                                    self.sleepManagerNew.getSleep() {
+                                                                        self.sportsManager.updateData()
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
+                                                self.dataLoaded = true
+                                                completion?()
                                             }
                                         }
-                                        self.dataLoaded = true
-                                        completion?()
                                     }
                                 }
                             }
                         }
                     }
                 }
+                
             }
         }
     }

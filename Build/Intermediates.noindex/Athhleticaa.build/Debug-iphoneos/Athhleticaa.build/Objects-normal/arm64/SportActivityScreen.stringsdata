@@ -7,7 +7,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 26,
-          "startingLine": 55
+          "startingLine": 62
         }
       },
       {
@@ -15,23 +15,7 @@
         "key": "Steps",
         "location": {
           "startingColumn": 26,
-          "startingLine": 58
-        }
-      },
-      {
-        "comment": "",
-        "key": "%lld",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 72
-        }
-      },
-      {
-        "comment": "",
-        "key": "bpm",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 74
+          "startingLine": 65
         }
       },
       {
@@ -44,7 +28,7 @@
       },
       {
         "comment": "",
-        "key": "Km",
+        "key": "bpm",
         "location": {
           "startingColumn": 30,
           "startingLine": 81
@@ -60,10 +44,26 @@
       },
       {
         "comment": "",
-        "key": "Kcal",
+        "key": "Km",
         "location": {
           "startingColumn": 30,
           "startingLine": 88
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Kcal",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 95
         }
       }
     ]

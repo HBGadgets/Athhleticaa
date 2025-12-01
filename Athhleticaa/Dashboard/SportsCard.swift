@@ -47,12 +47,15 @@ struct SportsCard: View {
                     }
                     
                     HStack(alignment: .center) {
-                        Image(systemName: "moon.stars.fill")
+                        Image(systemName: "figure.basketball")
                             .font(.system(size: 70, weight: .semibold))
+                            .foregroundStyle(.white)
+                        Spacer()
                         NavigationLink (destination: SportsListScreen(ringManager: ringManager)) {
                             Text("GO!")
                                 .font(.headline)
                         }
+                        .foregroundStyle(.white)
                     }
                     .padding(.horizontal, 40)
                     

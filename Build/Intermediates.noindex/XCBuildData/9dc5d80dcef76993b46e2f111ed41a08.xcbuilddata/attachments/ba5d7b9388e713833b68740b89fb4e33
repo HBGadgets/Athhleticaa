@@ -2,6 +2,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/BatteryCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HRV/HRVScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityCharts.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateInfoScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportActivityScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateChartView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/RingManager.swift
@@ -38,6 +39,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/HeartRateCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/PedometerManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportsHistoryScreen.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateDonutChart.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sleep/SleepChartNew.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/HRVCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/GestureManager.swift
@@ -53,6 +55,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HealthKitManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/SystemSettingScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Blood\ Oxygen/BloodOxygenScreen.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityInfoScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HRV/HRVDataDetailsScreenView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportActivityClass.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/ThemeBottomSheet.swift

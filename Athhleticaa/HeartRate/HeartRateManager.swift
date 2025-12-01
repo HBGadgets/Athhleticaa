@@ -7,8 +7,7 @@
 
 import Foundation
 import Combine
-
-import Foundation
+import SwiftUICore
 
 // MARK: - Swift Model (Pure Swift)
 struct HeartRateData: Identifiable, Hashable {
@@ -21,6 +20,14 @@ struct HeartRateData: Identifiable, Hashable {
     let isSync: Bool
     let deviceID: String
     let deviceType: String
+}
+
+struct HeartRateCategory: Identifiable {
+    let id = UUID()
+    let name: String
+    let seconds: Int?
+    let count: Int?
+    let color: Color
 }
 
 // MARK: - Converter from ObjC → Swift
@@ -42,6 +49,41 @@ extension Array where Element == QCSchedualHeartRateModel {
 }
 
 extension HeartRateData {
+    var warmUp: Int {
+        let total = Double(heartRates.count)
+        let low = heartRates.filter { $0 >= 95 && $0 <= 114 }.count
+        let percent = (Double(low) / total) * 100
+        return Int(percent)
+    }
+    
+    var fatBurning: Int {
+        let total = Double(heartRates.count)
+        let normal = heartRates.filter { $0 >= 115 && $0 <= 133 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
+    var aerobicEndurance: Int {
+        let total = Double(heartRates.count)
+        let normal = heartRates.filter { $0 >= 134 && $0 <= 152 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
+    var anarobicEndurance: Int {
+        let total = Double(heartRates.count)
+        let normal = heartRates.filter { $0 >= 153 && $0 <= 171 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
+    var limit: Int {
+        let total = Double(heartRates.count)
+        let normal = heartRates.filter { $0 >= 172 }.count
+        let percent = (Double(normal) / total) * 100
+        return Int(percent)
+    }
+    
     var lastNonZeroHeartRate: Int {
         heartRates.last(where: { $0 != 0 }) ?? 0
     }
@@ -66,6 +108,62 @@ extension HeartRateData {
     
     var lastNonZeroHeartRateIndex: Int? {
         heartRates.lastIndex(where: { $0 != 0 })
+    }
+    
+    var warmUpSeconds: Int {
+        heartRates.filter { $0 >= 95 && $0 <= 114 }.count * secondInterval / 60
+    }
+    
+    var fatBurningSeconds: Int {
+        heartRates.filter { $0 >= 115 && $0 <= 133 }.count * secondInterval / 60
+    }
+    
+    var aerobicSeconds: Int {
+        heartRates.filter { $0 >= 134 && $0 <= 152 }.count * secondInterval / 60
+    }
+    
+    var anaerobicSeconds: Int {
+        heartRates.filter { $0 >= 153 && $0 <= 171 }.count * secondInterval / 60
+    }
+    
+    var limitSeconds: Int {
+        heartRates.filter { $0 > 172 }.count * secondInterval / 60
+    }
+    
+    var categoryBreakdown: [HeartRateCategory] {
+        let values = validHeartRates
+        
+        let warmUp = values.filter { $0 >= 95 && $0 <= 114 }.count
+        let fatBurning = values.filter { $0 >= 115 && $0 <= 133 }.count
+        let aerobicEndurance = values.filter { $0 >= 134 && $0 <= 152 }.count
+        let anarobicEndurance = values.filter { $0 >= 153 && $0 <= 171 }.count
+        let limit = values.filter { $0 > 172 }.count
+        
+        return [
+            HeartRateCategory(name: "Warm up",       seconds: nil, count: warmUp,       color: .blue),
+            HeartRateCategory(name: "Fat burning",    seconds: nil, count: fatBurning,    color: .green),
+            HeartRateCategory(name: "Aerobic endurance",      seconds: nil, count: aerobicEndurance,      color: .yellow),
+            HeartRateCategory(name: "Anaerobic endurance",      seconds: nil, count: anarobicEndurance,      color: .orange),
+            HeartRateCategory(name: "Limit",    seconds: nil,   count: limit, color: .red)
+        ]
+    }
+    
+    var categoryTimeBreakdown: [HeartRateCategory] {
+        let values = validHeartRates
+
+        let warmUpSeconds        = values.filter { $0 >= 95 && $0 <= 114 }.count * secondInterval
+        let fatBurnSeconds       = values.filter { $0 >= 115 && $0 <= 133 }.count * secondInterval
+        let aerobicSeconds       = values.filter { $0 >= 134 && $0 <= 152 }.count * secondInterval
+        let anaerobicSeconds     = values.filter { $0 >= 153 && $0 <= 171 }.count * secondInterval
+        let limitSeconds         = values.filter { $0 > 172 }.count * secondInterval
+
+        return [
+            HeartRateCategory(name: "Warm up", seconds: warmUpSeconds, count: nil, color: .blue),
+            HeartRateCategory(name: "Fat burning", seconds: fatBurnSeconds, count: nil, color: .green),
+            HeartRateCategory(name: "Aerobic endurance", seconds: aerobicSeconds, count: nil, color: .yellow),
+            HeartRateCategory(name: "Anaerobic endurance", seconds: anaerobicSeconds, count: nil, color: .orange),
+            HeartRateCategory(name: "Limit", seconds: limitSeconds, count: nil, color: .red)
+        ]
     }
 }
 

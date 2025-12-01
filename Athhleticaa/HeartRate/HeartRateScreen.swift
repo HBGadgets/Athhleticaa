@@ -233,6 +233,7 @@ struct HeartRateScreenView: View {
                         .cornerRadius(16)
                         .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                         .frame(height: 250)
+                    HeartRateDonutChartView(heartRate: day)
                 } else {
                     Text("No data")
                 }

@@ -16,6 +16,7 @@ struct HeartRateScreenView: View {
     @State private var showCalendar = false
     @State private var showNavigationError = false
     @State private var goToScanScreen = false
+    @State private var goToInfoScreen = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -255,10 +256,21 @@ struct HeartRateScreenView: View {
             ToolbarItem(placement: .principal) {
                 Text("Heart rate").font(.headline)
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    goToInfoScreen = true
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .font(.title2)
+                }
+            }
         }
         .onAppear() {
             ringManager.heartRateManager.fetchTodayHeartRate()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $goToInfoScreen) {
+            HeartRateInfoScreen()
+        }
     }
 }

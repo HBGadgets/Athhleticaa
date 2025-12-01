@@ -1,0 +1,24 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityInfoScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Total steps\nDaily steps are a measure of your daily physical activity. The optimal daily steps depend on your age, body type, fitness level, and readiness to perform.\n\nYou should ensure that you can reach a standard of more than 8,000 steps per day. If you exercise, you can reduce the number of steps appropriately. The more steps are not necessarily better, because too many steps may cause potential knee and ankle strain, so it is recommended that the number of steps should be controlled between 8,000 and 15,000.\n\nTotal calories\nTotal calories are your total daily energy expenditure, including all the calories you burn during the day. Whether you are active or resting, tracking your total calories and comparing it with your data history can help you adjust your calorie intake and maintain a healthy weight.\n\nAlthough exercise will increase your daily calorie consumption, most of your total consumption comes from the calories consumed while resting, also known as your basal metabolic rate (BMR). The device will start calculating your total burn in the early morning and record your estimated BMR.\n\nThis software and the associated smart ring device are not medical devices; the data and recommendations provided are for reference only and must not be used as basis for clinical diagnosis or treatment. Users should consult a physician before making any medical decisions.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Activity Description",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 40
+        }
+      }
+    ]
+  },
+  "version": 1
+}

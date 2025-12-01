@@ -7,7 +7,7 @@
         "key": "Steps",
         "location": {
           "startingColumn": 30,
-          "startingLine": 68
+          "startingLine": 69
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "%lld",
         "location": {
           "startingColumn": 34,
-          "startingLine": 62
+          "startingLine": 63
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Activity Track",
         "location": {
           "startingColumn": 22,
-          "startingLine": 135
+          "startingLine": 136
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "•",
         "location": {
           "startingColumn": 18,
-          "startingLine": 150
+          "startingLine": 162
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "%@ / %@",
         "location": {
           "startingColumn": 22,
-          "startingLine": 157
+          "startingLine": 169
         }
       }
     ]

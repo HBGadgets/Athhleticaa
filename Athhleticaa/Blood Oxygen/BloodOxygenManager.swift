@@ -132,7 +132,6 @@ class BloodOxygenManager: ObservableObject {
         return Int(percent)
     }
 
-    
     var lastNonZeroBloodOxygenValue: Double {
         readings.last(where: { $0.soa2 > 0 })?.soa2 ?? 0
     }

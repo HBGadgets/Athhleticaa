@@ -27,6 +27,7 @@ struct ActivityScreenView: View {
     @ObservedObject var ringManager: QCCentralManager
     @ObservedObject var pedometerManager: PedometerManager
     @State private var showCalendar = false
+    @State private var goToInfoScreen = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -134,8 +135,19 @@ struct ActivityScreenView: View {
             ToolbarItem(placement: .principal) {
                 Text("Activity Track").font(.headline)
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    goToInfoScreen = true
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .font(.title2)
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $goToInfoScreen) {
+            ActivityInfoScreen()
+        }
     }
 }
 

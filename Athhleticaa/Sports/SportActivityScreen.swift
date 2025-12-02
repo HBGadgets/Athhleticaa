@@ -105,7 +105,7 @@ struct SportActivityScreen: View {
                         Button(action: {
                             sportsManager.stopSport(type: sportType.sportType){
 //                                goToActivityListScreen = true
-//                                dismiss()
+                                dismiss()
 //
 //                                // Pop CountdownScreen (one level above)
 //                                DispatchQueue.main.async {

@@ -1,0 +1,36 @@
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sleep/SleepChartNew.swift":
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepChartNew.swiftconstvalues"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepChartNew.dia"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepChartNew.swiftdeps"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepChartNew.d"
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepChartNew.o"
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateDonutChart.swift":
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateDonutChart.swiftdeps"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateDonutChart.dia"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateDonutChart.d"
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateDonutChart.o"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateDonutChart.swiftconstvalues"
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportsListScreen.swift":
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsListScreen.o"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsListScreen.d"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsListScreen.dia"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsListScreen.swiftconstvalues"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsListScreen.swiftdeps"
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sleep/SleepManagerNew.swift":
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.o"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.swiftdeps"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.dia"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.swiftconstvalues"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.d"
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/SleepCard.swift":
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCard.d"
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCard.o"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCard.swiftdeps"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCard.swiftconstvalues"
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCard.dia"
+"/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/HRVCard.swift":
+  diagnostics: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVCard.dia"
+  object: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVCard.o"
+  dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVCard.d"
+  const-values: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVCard.swiftconstvalues"
+  swift-dependencies: "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Debug-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVCard.swiftdeps"

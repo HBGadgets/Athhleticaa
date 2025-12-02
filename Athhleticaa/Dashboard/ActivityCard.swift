@@ -5,8 +5,6 @@
 //  Created by Dipanshu Kashyap on 01/11/25.
 //
 
-import SwiftUICore
-
 import SwiftUI
 
 extension Color {
@@ -43,9 +41,9 @@ extension Color {
 }
 
 
-struct StepsCard: View {
+struct ActivityCard: View {
     @Environment(\.colorScheme) var colorScheme
-    var calories: Double
+    var calories: Int
     var steps: Int
     var distance: Double
     
@@ -89,7 +87,7 @@ struct StepsCard: View {
                         Image(systemName: "flame")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
-                        Text(String(format: "%.2f", calories).prefix(2))
+                        Text("\(calories)")
                             .font(.title)
                             .foregroundColor(.white)
                             .fontWidth(.expanded)

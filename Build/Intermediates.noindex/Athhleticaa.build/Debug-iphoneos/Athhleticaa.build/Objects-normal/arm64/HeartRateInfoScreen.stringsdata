@@ -7,7 +7,7 @@
         "key": "Heart Rate",
         "location": {
           "startingColumn": 26,
-          "startingLine": 96
+          "startingLine": 95
         }
       },
       {
@@ -32,14 +32,6 @@
         "location": {
           "startingColumn": 26,
           "startingLine": 50
-        }
-      },
-      {
-        "comment": "",
-        "key": "This software and the associated smart ring device are not medical devices; the data and recommendations provided are for reference only and must not be used as basis for clinical diagnosis or treatment. Users should consult a physician before making any medical decisions.",
-        "location": {
-          "startingColumn": 26,
-          "startingLine": 90
         }
       }
     ]

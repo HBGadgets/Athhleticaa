@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Target 'Athhleticaa' in project 'Athhleticaa'
+➜ Explicit dependency on target 'SleepChartKit' in project 'SleepChartKit'
+Target 'SleepChartKit' in project 'SleepChartKit'
+➜ Explicit dependency on target 'SleepChartKit' in project 'SleepChartKit'
+Target 'SleepChartKit' in project 'SleepChartKit' (no dependencies)

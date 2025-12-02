@@ -41,8 +41,8 @@ struct DashboardView: View {
 
                     // MARK: - Steps
                     NavigationLink(destination: ActivityScreenView(ringManager: ringManager, pedometerManager: ringManager.pedometerManager)) {
-                        StepsCard(
-                            calories: ringManager.dashboardStepsData?.calories ?? 0,
+                        ActivityCard(
+                            calories: Int(ringManager.dashboardStepsData?.calories ?? 0),
                             steps: ringManager.dashboardStepsData?.totalSteps ?? 0,
                             distance: Double(ringManager.dashboardStepsData?.distance ?? 0) / 1000
                         )
@@ -70,9 +70,9 @@ struct DashboardView: View {
                             HRVCard(ringManager: ringManager)
                         }
                         
-//                        NavigationLink(destination: SportsHistoryScreen(ringManager: ringManager)) {
-//                            SportsCard(ringManager: ringManager)
-//                        }
+                        NavigationLink(destination: SportsHistoryScreen(ringManager: ringManager)) {
+                            SportsCard(ringManager: ringManager)
+                        }
                     }
                 }
                 .padding()

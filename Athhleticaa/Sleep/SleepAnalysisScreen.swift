@@ -21,6 +21,7 @@ struct SleepsAnalysisScreenView: View {
     @ObservedObject var sleepManager: SleepManager
     @ObservedObject var ringManager: QCCentralManager
     @State private var showCalendar = false
+    @State private var goToInfoScreen = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -63,10 +64,21 @@ struct SleepsAnalysisScreenView: View {
             ToolbarItem(placement: .principal) {
                 Text("Sleep Track").font(.headline)
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    goToInfoScreen = true
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .font(.title2)
+                }
+            }
         }
         .onAppear() {
             ringManager.sleepManager.getSleep()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $goToInfoScreen) {
+            SleepInfoScreen()
+        }
     }
 }

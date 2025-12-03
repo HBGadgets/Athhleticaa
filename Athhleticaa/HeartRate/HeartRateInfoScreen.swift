@@ -14,19 +14,18 @@ struct HeartRateInfoScreen: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
                 
-                // MARK: - Heart Rate Range Title
-                Text("Heart Rate Range")
+                Text("Heart Rate Zones")
                     .font(.system(size: 28, weight: .semibold))
                     .padding(.horizontal)
                 
-                // MARK: - Colored Range Table
+                // MARK: - Colored Table
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 1) {
-                        labelRow("Limit")
-                        labelRow("Anaerobic endurance")
-                        labelRow("Aerobic endurance")
-                        labelRow("Fat burning")
-                        labelRow("Warm up")
+                        labelRow("High Intensity")
+                        labelRow("Anaerobic Training")
+                        labelRow("Aerobic Training")
+                        labelRow("Fat Burn")
+                        labelRow("Warm Up")
                     }
                     
                     Spacer()
@@ -42,12 +41,12 @@ struct HeartRateInfoScreen: View {
                 }
                 .padding(.horizontal)
                 
-                // MARK: - Note Title
+                // MARK: - Fitness Explanation
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Heart Rate Range Note")
+                    Text("About Heart Rate Zones")
                         .font(.system(size: 22, weight: .semibold))
                     
-                    Text("Heart rate range = (220 - age) * maximum heart rate percentage range")
+                    Text("Heart rate zones are commonly used in fitness to help structure workouts. Different intensity levels can support goals such as improving endurance, building stamina, or warming up safely. Values may vary between individuals.")
                         .font(.body)
                         .foregroundColor(.gray)
                     
@@ -55,38 +54,39 @@ struct HeartRateInfoScreen: View {
                 }
                 .padding(.horizontal)
                 
-                
-                // MARK: - Descriptions With Colored Dots
+                // MARK: - Zone Descriptions
                 VStack(alignment: .leading, spacing: 30) {
                     infoSection(
                         color: .blue,
-                        title: "Warm-up Heart Rate Range:",
-                        text: "50%~60%: Warm-up rate range, used to cultivate physical fitness or to warm up before exercise. Type of exercise, such as brisk walking."
+                        title: "Warm-up Zone",
+                        text: "Light-intensity effort often used to prepare the body before more intensive activity."
                     )
                     
                     infoSection(
                         color: .green,
-                        title: "Fat burning Heart Rate Range:",
-                        text: "60%~70%: The fat-burning heart rate range is used to improve basic physical fitness, increase the rate of fat release, and regulate the cardiovascular system. Type of exercise, such as jogging."
+                        title: "Fat Burn Zone",
+                        text: "Moderate-intensity training that supports general fitness and longer-duration workouts."
                     )
                     
                     infoSection(
                         color: .yellow,
-                        title: "Aerobic Endurance Heart Rate Range:",
-                        text: "70%~80%: Aerobic endurance heart rate range, used for endurance training, is beneficial to improve aerobic fitness, increase lung capacity, and control breathing rhythm. Type of exercise, such as easy running."
+                        title: "Aerobic Training Zone",
+                        text: "Steady, continuous activity that helps build cardio endurance and overall stamina."
                     )
                     
                     infoSection(
                         color: .orange,
-                        title: "Anaerobic Endurance Heart Rate Range",
-                        text: "80%-90%:The anaerobic endurance heart rate range is used for speed improvement training, which is beneficial to improve physical fitness. It is necessary to properly control the exercise time in this zone. Type of exercise, such as tempo or interval training."
+                        title: "Anaerobic Training Zone",
+                        text: "Higher-intensity efforts used to improve performance, speed, or power for short periods."
                     )
                     
                     infoSection(
                         color: .red,
-                        title: "Limit",
-                        text: "90%~100%: The limit heart rate range is used for explosive exercise. At this time, lactic acid accumulates rapidly and is prone to injury. It is necessary to strictly control the exercise time in this range. Type of exercise, such as extreme running.\nHeart rate is the frequency of the heart beating, expressed in the number of heart beats per minute, and it is usually 50 to 100 beats per minute for adults in the state of lung activity.\nThe heart provides blood circulation, oxygen and nutrients to the body, and heart rate can be regarded as an important indicator of cardiovascular health.\nHeart rate varies from person to person due to age, gender or other physiological factors. In general, the older you are, the faster your heart rate is, and women's heart rates are faster than boys of the same age. Heart rate during sleep is generally lower than when awake, and heart rate during exercise varies with exercise intensity."
+                        title: "High Intensity Zone",
+                        text: "Very intense effort typically used for short bursts during advanced training sessions."
                     )
+                    
+                    Text("This software and the associated smart ring device are not medical devices; the data and information provided are for reference only and must not be used as basis for clinical diagnosis or treatment. Users should consult a physician before making any medical decisions.")
                 }
                 .padding(.horizontal, 20)
             }
@@ -95,8 +95,6 @@ struct HeartRateInfoScreen: View {
         .navigationTitle("Heart Rate")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
-    // MARK: - Helper Views
     
     private func labelRow(_ text: String) -> some View {
         Text(text)
@@ -124,7 +122,6 @@ struct HeartRateInfoScreen: View {
                 Text(title)
                     .font(.system(size: 18, weight: .semibold))
             }
-            
             Text(text)
                 .foregroundColor(.gray)
                 .font(.body)

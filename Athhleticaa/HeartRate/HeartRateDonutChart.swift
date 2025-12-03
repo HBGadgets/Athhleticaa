@@ -40,25 +40,25 @@ struct HeartRateDonutChartView: View {
             Spacer()
             VStack(alignment: HorizontalAlignment.leading) {
                 HStack{
-                    infoSection(color: .red, title: "Limit")
+                    infoSection(color: .red, title: "High intensity")
                     Spacer()
                     Text("\(heartRate.limitSeconds) min")
                         .font(.caption2)
                 }
                 HStack{
-                    infoSection(color: .orange, title: "Anaerobic endurance")
+                    infoSection(color: .orange, title: "Anaerobic training")
                     Spacer()
                     Text("\(heartRate.anaerobicSeconds) min")
                         .font(.caption2)
                 }
                 HStack{
-                    infoSection(color: .yellow, title: "Aerobic endurance")
+                    infoSection(color: .yellow, title: "Aerobic training")
                     Spacer()
                     Text("\(heartRate.aerobicSeconds) min")
                         .font(.caption2)
                 }
                 HStack{
-                    infoSection(color: .green, title: "Fat burning")
+                    infoSection(color: .green, title: "Fat burn")
                     Spacer()
                     Text("\(heartRate.fatBurningSeconds) min")
                         .font(.caption2)

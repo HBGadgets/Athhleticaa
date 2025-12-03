@@ -12,26 +12,34 @@
       },
       {
         "comment": "",
-        "key": "Heart Rate Range",
+        "key": "Heart Rate Zones",
         "location": {
           "startingColumn": 22,
-          "startingLine": 18
+          "startingLine": 17
         }
       },
       {
         "comment": "",
-        "key": "Heart Rate Range Note",
+        "key": "About Heart Rate Zones",
         "location": {
           "startingColumn": 26,
-          "startingLine": 47
+          "startingLine": 46
         }
       },
       {
         "comment": "",
-        "key": "Heart rate range = (220 - age) * maximum heart rate percentage range",
+        "key": "Heart rate zones are commonly used in fitness to help structure workouts. Different intensity levels can support goals such as improving endurance, building stamina, or warming up safely. Values may vary between individuals.",
         "location": {
           "startingColumn": 26,
-          "startingLine": 50
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "This software and the associated smart ring device are not medical devices; the data and information provided are for reference only and must not be used as basis for clinical diagnosis or treatment. Users should consult a physician before making any medical decisions.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 89
         }
       }
     ]

@@ -1,0 +1,40 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sleep/SleepInfoScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sleep Info",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "About Sleep Tracking",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sleep tracking helps you understand patterns such as time spent sleeping, estimated sleep duration, and general rest consistency. These insights may help you maintain healthier routines, improve recovery, and recognize how daily habits affect rest.\n\nDifferent factors such as lifestyle, schedule, and environment can influence sleep patterns. Sleep data varies from person to person and should be used as a general guide to support your wellness goals.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Disclaimer:\nSleep information in this app is intended for general wellness and personal insights only. It is not intended for medical use or to diagnose, treat, or monitor any medical conditions.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 31
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,24 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Dashboard/SportsCard.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sports",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "GO!",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 55
+        }
+      }
+    ]
+  },
+  "version": 1
+}

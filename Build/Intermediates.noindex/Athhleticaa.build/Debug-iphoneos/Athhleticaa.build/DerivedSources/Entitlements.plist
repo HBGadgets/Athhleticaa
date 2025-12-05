@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>7HF229H6M7.hbgadgets.Athhleticaa</string>
+	<string>722X8GNR7M.hbgadgets.ios.Athhleticaa</string>
 	<key>com.apple.developer.healthkit</key>
 	<true/>
 	<key>com.apple.developer.team-identifier</key>
-	<string>7HF229H6M7</string>
+	<string>722X8GNR7M</string>
 	<key>get-task-allow</key>
 	<true/>
 </dict>

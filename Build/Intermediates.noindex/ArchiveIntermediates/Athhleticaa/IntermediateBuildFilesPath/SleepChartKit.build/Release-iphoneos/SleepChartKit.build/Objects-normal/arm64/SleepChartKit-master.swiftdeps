@@ -1,0 +1,43 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "0203b7dc365308cd2576d39d011ae47b55d89ccba718cf208db181bd9281e027"
+build_start_time: [1764787767, 332116000]
+build_end_time: [1764787770, 116780000]
+inputs:
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepChartView.swift"
+  : [1763357661, 469923145]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepCircularChartView.swift"
+  : [1763357661, 470152221]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepLegendView.swift"
+  : [1763357661, 470443878]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimeAxisView.swift"
+  : [1763357661, 470765618]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimelineGraph.swift"
+  : [1763357661, 470991735]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Examples/CircularChartExample.swift"
+  : [1763357661, 471248727]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Examples/HealthKitExample.swift"
+  : [1763357661, 471411430]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Extensions/SleepChartView+HealthKit.swift"
+  : [1763357661, 471604549]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Extensions/SleepCircularChartView+HealthKit.swift"
+  : [1763357661, 471725420]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepChartStyle.swift"
+  : [1763357661, 471901747]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepSample.swift"
+  : [1763357661, 472017660]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepStage.swift"
+  : [1763357661, 472141406]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/TimeSpan.swift"
+  : [1763357661, 474528954]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/AppleSleepColorProvider.swift"
+  : [1763357661, 474798153]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/DurationFormatter.swift"
+  : [1763357661, 474924691]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/SleepStageColorProvider.swift"
+  : [1763357661, 475061728]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/SleepStageDisplayNameProvider.swift"
+  : [1763357661, 475184141]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/TimeSpanGenerator.swift"
+  : [1763357661, 475480506]
+  ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Utils/SleepChartConstants.swift"
+  : [1763357661, 476328062]

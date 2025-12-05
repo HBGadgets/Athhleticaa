@@ -1,0 +1,16 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Sports/SportsHistoryScreen.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sports Record",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 48
+        }
+      }
+    ]
+  },
+  "version": 1
+}

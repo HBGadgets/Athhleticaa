@@ -65,13 +65,19 @@ struct HeartRateScreenView: View {
                         .scaledToFit()
                         .frame(width: 38, height: 38)
                         .foregroundColor(.red)
+                    
+                    if let heartRate = ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate {
+                        Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
+                            .font(.system(size: 44, weight: .bold))
+                            .fontWidth(.expanded)
 
-                    Text("\(ringManager.heartRateManager.dayData.last?.lastNonZeroHeartRate ?? 0)")
-                        .font(.system(size: 44, weight: .bold))
-                        .fontWidth(.expanded)
-
-                    Text("BPM")
-                        .font(.subheadline)
+                        Text("BPM")
+                            .font(.subheadline)
+                    } else {
+                        Text("No data yet")
+                            .fontWidth(.expanded)
+                    }
+                    
                 }
 
                 // MARK: - Average / Min / Max
@@ -90,11 +96,11 @@ struct HeartRateScreenView: View {
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)
                 } else {
                     HStack(spacing: 0) {
-                        StatItem(title: "Average", value: "0")
+                        StatItem(title: "Average", value: "--")
                         Divider().frame(height: 40)
-                        StatItem(title: "Minimum", value: "0")
+                        StatItem(title: "Minimum", value: "--")
                         Divider().frame(height: 40)
-                        StatItem(title: "Maximum", value: "0")
+                        StatItem(title: "Maximum", value: "--")
                     }
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)

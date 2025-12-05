@@ -1,0 +1,105 @@
+{
+  "" : {
+    "const-values" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master.swiftconstvalues",
+    "dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master.d",
+    "diagnostics" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master.dia",
+    "emit-module-dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master-emit-module.dia",
+    "swift-dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-master.swiftdeps"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepChartView.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepCircularChartView.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepLegendView.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepLegendView.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepLegendView.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepLegendView.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimeAxisView.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimeAxisView.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepTimelineGraph.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepTimelineGraph.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Examples/CircularChartExample.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/CircularChartExample.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Examples/HealthKitExample.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/HealthKitExample.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/HealthKitExample.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/HealthKitExample.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Extensions/SleepChartView+HealthKit.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView+HealthKit.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView+HealthKit.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartView+HealthKit.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Extensions/SleepCircularChartView+HealthKit.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView+HealthKit.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView+HealthKit.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepCircularChartView+HealthKit.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepChartStyle.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartStyle.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartStyle.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartStyle.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepSample.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepSample.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepSample.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepSample.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/SleepStage.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStage.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStage.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStage.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Models/TimeSpan.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpan.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpan.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpan.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/AppleSleepColorProvider.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/AppleSleepColorProvider.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/AppleSleepColorProvider.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/AppleSleepColorProvider.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/DurationFormatter.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/DurationFormatter.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/DurationFormatter.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/DurationFormatter.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/SleepStageColorProvider.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageColorProvider.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageColorProvider.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageColorProvider.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/SleepStageDisplayNameProvider.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageDisplayNameProvider.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageDisplayNameProvider.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepStageDisplayNameProvider.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Services/TimeSpanGenerator.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpanGenerator.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpanGenerator.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/TimeSpanGenerator.o"
+  },
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Utils/SleepChartConstants.swift" : {
+    "index-unit-output-path" : "/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartConstants.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartConstants.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartConstants.o"
+  }
+}

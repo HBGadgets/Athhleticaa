@@ -41,6 +41,22 @@
           "startingColumn": 22,
           "startingLine": 169
         }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld / %lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 191
+        }
       }
     ]
   },

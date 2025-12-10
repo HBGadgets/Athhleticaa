@@ -1,7 +1,7 @@
 version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
 options: "0203b7dc365308cd2576d39d011ae47b55d89ccba718cf208db181bd9281e027"
-build_start_time: [1764787767, 332116000]
-build_end_time: [1764787770, 116780000]
+build_start_time: [1764933510, 729656000]
+build_end_time: [1764933513, 650729000]
 inputs:
   ? "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-dzigfetojfaqihfqltefjtsicicn/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepChartView.swift"
   : [1763357661, 469923145]

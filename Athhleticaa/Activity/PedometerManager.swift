@@ -43,9 +43,6 @@ class PedometerManager: ObservableObject {
                 
                 let now = Date()
                 let startOfDay = Calendar.current.startOfDay(for: now)
-//                HealthKitManager.shared.saveSteps(count: data.totalSteps, start: startOfDay, end: now)
-//                HealthKitManager.shared.saveCalories(data.calories, start: startOfDay, end: now)
-//                HealthKitManager.shared.saveDistance(Double(data.distance), start: startOfDay, end: now)
                 
                 completion?()
             }
@@ -62,13 +59,13 @@ class PedometerManager: ObservableObject {
             print("Get step count data details")
             
             var totalSteps = 0
-            var calories: Double = 0
+            var caloriesDetails: Double = 0
             var distance = 0
             var hourly: [HourlyData] = []
 
             for model in sports {
                 totalSteps += model.totalStepCount
-                calories += model.calories
+                caloriesDetails += Double(Int(model.calories) / 1000)
                 distance += model.distance
 
                 // Parse the hour from "2025-11-08 09:00:00"
@@ -79,7 +76,7 @@ class PedometerManager: ObservableObject {
                         HourlyData(
                             hour: hour,
                             steps: model.totalStepCount,
-                            calories: model.calories / 1000,  // kcal
+                            calories: Double(Int(model.calories) / 1000),  // kcal
                             distance: model.distance
                         )
                     )
@@ -87,12 +84,12 @@ class PedometerManager: ObservableObject {
                 print("Pedometer data: \(model.happenDate ?? ""), steps: \(model.totalStepCount), calories: \(model.calories), distance: \(model.distance)")
             }
             
-            print("Total Pedometer data: steps: \(totalSteps), calories: \(calories), distance: \(distance)")
+            print("Total Pedometer data: steps: \(totalSteps), calories: \(caloriesDetails), distance: \(distance)")
             
             DispatchQueue.main.async {
                 self.stepsDataDetails = StepsData(
                     totalSteps: totalSteps,
-                    calories: calories / 1000, // convert to kcal
+                    calories: caloriesDetails, // convert to kcal
                     distance: distance
                 )
                 self.hourlyData = hourly

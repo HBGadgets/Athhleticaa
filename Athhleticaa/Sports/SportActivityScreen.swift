@@ -23,10 +23,18 @@ struct SportActivityScreen: View {
     @State private var opacity: Double = 1.0
     var onFinish: (() -> Void)? = nil
 
-    init(ringManager: QCCentralManager) {
+    init(
+        ringManager: QCCentralManager,
+        sportType: SportActivity? = nil
+    ) {
         self.ringManager = ringManager
         self.sportsManager = ringManager.sportsManager
-        self.sportType = ringManager.sportsManager.currentSportType!
+
+        if let current = ringManager.sportsManager.currentSportType {
+            self.sportType = current
+        } else {
+            self.sportType = sportType!
+        }
     }
     
     func formatSecondsToHMS(_ seconds: Int) -> String {
@@ -39,81 +47,126 @@ struct SportActivityScreen: View {
 
     var body: some View {
         ZStack {
-            VStack(alignment: .center, spacing: 40) {
-                
-                
-                // MARK: - Steps
-                VStack(spacing: 8) {
-                    // MARK: - Activity Title
-                    HStack {
-                        Image.safeIcon(sportType.icon)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.blue)
-                            .padding(8)
-                            .background(.blue.opacity(0.1))
-                            .clipShape(Circle())
+            if (ringManager.goToSportsActivityScreen == false) {
+                CountdownScreen(ringManager: ringManager)
+            } else {
+                VStack(alignment: .center, spacing: 40) {
+                    
+                    
+                    // MARK: - Steps
+                    VStack(spacing: 8) {
+                        // MARK: - Activity Title
+                        HStack {
+                            Image.safeIcon(sportType.icon)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.blue)
+                                .padding(8)
+                                .background(.blue.opacity(0.1))
+                                .clipShape(Circle())
 
-                        Text(sportType.title)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    Text("\(sportsManager.currentSteps)")
-                        .font(.system(size: 38, weight: .medium))
-                    
-                    Text("Steps")
-                        .font(.system(size: 16))
-                }
-                
-                // MARK: - Timer
-                Text(formatSecondsToHMS(sportsManager.currentSeconds))
-                    .font(.system(size: 60, weight: .heavy, design: .rounded))
-                    .padding(.top, 20)
-                
-                Spacer()
-                
-                // MARK: - Metrics Row
-                HStack(spacing: 60) {
-                    VStack {
-                        Text("\(sportsManager.currentHeartRate)")
-                            .font(.system(size: 22, weight: .medium))
-                        Text("bpm")
-                            .font(.system(size: 14))
+                            Text(sportType.title)
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        Text("\(sportsManager.currentSteps)")
+                            .font(.system(size: 38, weight: .medium))
+                        
+                        Text("Steps")
+                            .font(.system(size: 16))
                     }
                     
-                    VStack {
-                        Text("\(sportsManager.currentDistance)")
-                            .font(.system(size: 22, weight: .medium))
-                        Text("Km")
-                            .font(.system(size: 14))
+                    // MARK: - Timer
+                    Text(formatSecondsToHMS(sportsManager.currentSeconds))
+                        .font(.system(size: 60, weight: .heavy, design: .rounded))
+                        .padding(.top, 20)
+                    
+                    Spacer()
+                    
+                    // MARK: - Metrics Row
+                    HStack(spacing: 60) {
+                        VStack {
+                            Text("\(sportsManager.currentHeartRate)")
+                                .font(.system(size: 22, weight: .medium))
+                            Text("bpm")
+                                .font(.system(size: 14))
+                        }
+                        
+                        VStack {
+                            Text("\(sportsManager.currentDistance)")
+                                .font(.system(size: 22, weight: .medium))
+                            Text("Km")
+                                .font(.system(size: 14))
+                        }
+                        
+                        VStack {
+                            Text("\(sportsManager.currentCalorie)")
+                                .font(.system(size: 22, weight: .medium))
+                            Text("Kcal")
+                                .font(.system(size: 14))
+                        }
                     }
                     
-                    VStack {
-                        Text("\(sportsManager.currentCalorie)")
-                            .font(.system(size: 22, weight: .medium))
-                        Text("Kcal")
-                            .font(.system(size: 14))
-                    }
-                }
-                
-                Spacer()
-                
-                // MARK: - Bottom Section
-                if (stopped) {
-                    HStack {
+                    Spacer()
+                    
+                    // MARK: - Bottom Section
+                    if (stopped) {
+                        HStack {
+                            Button(action: {
+                                sportsManager.stopSport(type: sportType.sportType){
+    //                                goToActivityListScreen = true
+                                    dismiss()
+    //
+    //                                // Pop CountdownScreen (one level above)
+    //                                DispatchQueue.main.async {
+    //                                    dismiss()
+    //                                }
+                                }
+                            }) {
+                                Image(systemName: "stop.fill")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 40))
+                                    .frame(width: 80, height: 80)
+                                    .background(Color.blue)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 8)
+                            }
+                            .padding(.bottom, 40)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                sportsManager.resumeSport(type: sportType.sportType) {
+                                    stopped = false
+                                }
+                            }) {
+                                Image(systemName: "play.fill")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 40))
+                                    .frame(width: 80, height: 80)
+                                    .background(Color.blue)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 8)
+                            }
+                            .padding(.bottom, 40)
+                        }
+                        .padding(.horizontal, 15)
+                    } else {
+                        HStack {
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 22))
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                        
+                        // Pause Button
                         Button(action: {
-                            sportsManager.stopSport(type: sportType.sportType){
-//                                goToActivityListScreen = true
-                                dismiss()
-//
-//                                // Pop CountdownScreen (one level above)
-//                                DispatchQueue.main.async {
-//                                    dismiss()
-//                                }
+                            sportsManager.pauseSport(type: sportType.sportType) {
+                                stopped = true
                             }
                         }) {
-                            Image(systemName: "stop.fill")
+                            Image(systemName: "pause.fill")
                                 .foregroundStyle(.white)
                                 .font(.system(size: 40))
                                 .frame(width: 80, height: 80)
@@ -122,51 +175,14 @@ struct SportActivityScreen: View {
                                 .shadow(radius: 8)
                         }
                         .padding(.bottom, 40)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            sportsManager.resumeSport(type: sportType.sportType) {
-                                stopped = false
-                            }
-                        }) {
-                            Image(systemName: "play.fill")
-                                .foregroundStyle(.white)
-                                .font(.system(size: 40))
-                                .frame(width: 80, height: 80)
-                                .background(Color.blue)
-                                .clipShape(Circle())
-                                .shadow(radius: 8)
-                        }
-                        .padding(.bottom, 40)
                     }
-                    .padding(.horizontal, 15)
-                } else {
-                    HStack {
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: 22))
-                        Spacer()
-                    }
-                    .padding(.horizontal)
                     
-                    // Pause Button
-                    Button(action: {
-                        sportsManager.pauseSport(type: sportType.sportType) {
-                            stopped = true
-                        }
-                    }) {
-                        Image(systemName: "pause.fill")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 40))
-                            .frame(width: 80, height: 80)
-                            .background(Color.blue)
-                            .clipShape(Circle())
-                            .shadow(radius: 8)
-                    }
-                    .padding(.bottom, 40)
                 }
-                
+                .onAppear {
+                    startCountdown()
+                }
             }
+            
         }
 //        .onAppear() {
 //            sportsManager.startSport(type: sportType.sportType) {

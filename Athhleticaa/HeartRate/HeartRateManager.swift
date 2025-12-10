@@ -269,6 +269,7 @@ class HeartRateManager: ObservableObject {
                 completion?()
             }
         )
+        completion?()
     }
 
     // MARK: - Public API

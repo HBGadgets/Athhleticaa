@@ -32,10 +32,18 @@ struct SportsListScreen: View {
         ScrollView {
             VStack(spacing: 12) {
                 ForEach(filteredActivities) { item in
-                    Button {
-                        ringManager.sportsManager.currentSportType = item
-                        goToCountDownScreen = true
-                    } label: {
+//                    Button {
+//                        ringManager.sportsManager.currentSportType = item
+//                        goToCountDownScreen = true
+//                    } label: {
+//                        SportActivityItem(
+//                            title: item.title,
+//                            icon: item.icon,
+//                            sportType: item,
+//                            ringManager: ringManager
+//                        )
+//                    }
+                    NavigationLink(destination: SportActivityScreen(ringManager: ringManager, sportType: item)){
                         SportActivityItem(
                             title: item.title,
                             icon: item.icon,
@@ -50,9 +58,9 @@ struct SportsListScreen: View {
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .navigationTitle("Sports")
-        .navigationDestination(isPresented: $goToCountDownScreen) {
-            CountdownScreen(ringManager: ringManager)
-        }
+//        .navigationDestination(isPresented: $goToCountDownScreen) {
+//            SportActivityScreen(ringManager: ringManager, sportType: ringManager.sportsManager.currentSportType)
+//        }
     }
 }
 

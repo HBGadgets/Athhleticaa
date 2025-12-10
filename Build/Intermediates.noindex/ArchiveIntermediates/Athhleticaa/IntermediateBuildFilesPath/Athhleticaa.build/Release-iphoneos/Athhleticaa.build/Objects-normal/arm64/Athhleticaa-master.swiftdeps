@@ -1,7 +1,7 @@
 version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
 options: "f8cc9213dda7e87e184a220ca92b63cf76939fb262e94caad7b13956015ad632"
-build_start_time: [1764787771, 729643000]
-build_end_time: [1764787793, 228185000]
+build_start_time: [1764933513, 467896000]
+build_end_time: [1764933538, 212787000]
 inputs:
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityCharts.swift": [1763558456, 939398252]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/Activity/ActivityInfoScreen.swift": [1764787335, 310128337]
@@ -34,7 +34,7 @@ inputs:
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateDonutChart.swift": [1764737950, 871352467]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateInfoScreen.swift": [1764787335, 332701750]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateManager.swift": [1764587610, 315501148]
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateScreen.swift": [1764585713, 62693612]
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateScreen.swift": [1764932910, 541745052]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/CameraView.swift": [1764397267, 788909503]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/GestureManager.swift": [1763719110, 651093664]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/HealthMonitoringScreen.swift": [1762929497, 376987647]
@@ -66,4 +66,4 @@ inputs:
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/TabBar.swift": [1763984126, 861022572]
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/UIShapes/GlassShape.swift": [1762167273, 439103852]
   ? "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Build/Intermediates.noindex/ArchiveIntermediates/Athhleticaa/IntermediateBuildFilesPath/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/DerivedSources/GeneratedAssetSymbols.swift"
-  : [1764787771, 716156343]
+  : [1764933513, 443974261]

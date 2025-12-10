@@ -6,64 +6,64 @@
         "comment": "",
         "key": "%lld",
         "location": {
-          "startingColumn": 26,
-          "startingLine": 62
+          "startingColumn": 30,
+          "startingLine": 73
         }
       },
       {
         "comment": "",
         "key": "Steps",
         "location": {
-          "startingColumn": 26,
-          "startingLine": 65
+          "startingColumn": 30,
+          "startingLine": 76
         }
       },
       {
         "comment": "",
         "key": "%lld",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 79
+          "startingColumn": 34,
+          "startingLine": 90
         }
       },
       {
         "comment": "",
         "key": "bpm",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 81
+          "startingColumn": 34,
+          "startingLine": 92
         }
       },
       {
         "comment": "",
         "key": "%lld",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 86
+          "startingColumn": 34,
+          "startingLine": 97
         }
       },
       {
         "comment": "",
         "key": "Km",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 88
+          "startingColumn": 34,
+          "startingLine": 99
         }
       },
       {
         "comment": "",
         "key": "%lld",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 93
+          "startingColumn": 34,
+          "startingLine": 104
         }
       },
       {
         "comment": "",
         "key": "Kcal",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 95
+          "startingColumn": 34,
+          "startingLine": 106
         }
       }
     ]

@@ -69,6 +69,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var isGestureEnabled: Bool = false
     @Published var showCameraDeniedAlert: Bool = false
     @Published var showBluetoothDeniedAlert: Bool = false
+    @Published var goToSportsActivityScreen: Bool = false
     
     @State var isShowingCamera = false
     @Published var selectedTheme: AppTheme = .dark
@@ -144,6 +145,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     }
     
     func syncHeartRateToHealthKit(completion: (() -> Void)? = nil) {
+        defer { completion?() }
         for entry in self.heartRateManager.dayData {
             for (index, bpm) in entry.heartRates.enumerated() where bpm > 0 {
                 if let date = entry.timeForHeartRate(at: index) {
@@ -418,23 +420,6 @@ extension QCCentralManager: CBCentralManagerDelegate {
                 completion?()
             }
         })
-    }
-    
-
-    
-
-    func setGestureControlSchedule(enabled: Bool) {
-        
-        let model = QCFlipWristInfoModel()
-//        model.isOn = true
-//        model.beginTime = "00:00"
-//        model.endTime = "23:59"
-//
-//        QCSDKCmdCreator.setFlipWristInfo(model) {
-//            print("Gesture control set successfully")
-//        } fail: {
-//            print("Failed to set gesture control")
-//        }
     }
 
     

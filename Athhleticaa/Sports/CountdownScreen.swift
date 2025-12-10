@@ -13,7 +13,6 @@ struct CountdownScreen: View {
     @State private var opacity: Double = 1.0
     var onFinish: (() -> Void)? = nil
     @ObservedObject var ringManager: QCCentralManager
-    @State private var goToSportsActivityScreen = false
 
     var body: some View {
         ZStack {
@@ -31,9 +30,9 @@ struct CountdownScreen: View {
         .statusBar(hidden: true)
         .navigationBarBackButtonHidden(true)
         .interactiveDismissDisabled(true)
-        .navigationDestination(isPresented: $goToSportsActivityScreen) {
-            SportActivityScreen(ringManager: ringManager)
-        }
+//        .navigationDestination(isPresented: $goToSportsActivityScreen) {
+//            SportActivityScreen(ringManager: ringManager)
+//        }
     }
 
     private func startCountdown() {
@@ -44,7 +43,7 @@ struct CountdownScreen: View {
                 timer.invalidate()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     onFinish?()
-                    goToSportsActivityScreen = true
+                    ringManager.goToSportsActivityScreen = true
                 }
             } else {
                 count -= 1

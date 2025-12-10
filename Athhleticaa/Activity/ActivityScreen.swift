@@ -88,7 +88,7 @@ struct ActivityScreenView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         ActivityRow(title: "Steps", value: Double(pedometerManager.stepsDataDetails?.totalSteps ?? 0), goal: 8000, color: .orange)
                         ActivityRow(title: "Distance (Km)", value: Double(pedometerManager.stepsDataDetails?.distance ?? 0) / 1000, goal: 6.0, color: .blue)
-                        ActivityRow(title: "Calories (Kcal)", value: pedometerManager.stepsDataDetails?.calories ?? 0, goal: 3000, color: .red)
+                        ActivityRowCalorie(title: "Calories (Kcal)", value: Int(pedometerManager.stepsDataDetails?.calories ?? 0), goal: 3000, color: .red)
                     }
                     Spacer()
                     ZStack {
@@ -167,6 +167,28 @@ struct ActivityRow: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 Text("\(String(format: "%.2f", value)) / \(String(format: "%.0f", goal))")
+                    .font(.headline)
+            }
+        }
+    }
+}
+
+struct ActivityRowCalorie: View {
+    var title: String
+    var value: Int
+    var goal: Int
+    var color: Color
+
+    var body: some View {
+        HStack {
+            Text("•")
+                .font(.system(size: 46, weight: .bold))
+                .foregroundStyle(color)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                Text("\(value) / \(goal)")
                     .font(.headline)
             }
         }

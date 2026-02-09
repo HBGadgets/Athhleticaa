@@ -5,7 +5,7 @@
 //  Created by Dipanshu Kashyap on 05/11/25.
 //
 
-import SwiftUICore
+import SwiftUI
 import Charts
 import SleepChartKit
 

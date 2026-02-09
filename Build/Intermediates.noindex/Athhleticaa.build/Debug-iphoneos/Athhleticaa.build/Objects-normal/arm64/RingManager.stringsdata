@@ -1,5 +1,5 @@
 {
-  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/RingManager.swift",
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/RingManager.swift",
   "tables": {
     "Localizable": [
       {
@@ -7,7 +7,7 @@
         "key": "Select Date",
         "location": {
           "startingColumn": 18,
-          "startingLine": 699
+          "startingLine": 752
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Choose Date",
         "location": {
           "startingColumn": 17,
-          "startingLine": 705
+          "startingLine": 758
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Confirm",
         "location": {
           "startingColumn": 22,
-          "startingLine": 740
+          "startingLine": 793
         }
       }
     ]

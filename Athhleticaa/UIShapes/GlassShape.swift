@@ -5,7 +5,7 @@
 //  Created by Dipanshu Kashyap on 03/11/25.
 //
 
-import SwiftUICore
+import SwiftUI
 
 struct GlassShape: View {
     @Environment(\.colorScheme) var colorScheme

@@ -168,13 +168,12 @@ struct HeartRateScreenView: View {
                             if !isMeasuring {
                                 // Start measuring
                                 isMeasuring = true
+                                animateHeart = true
                                 ringManager.heartRateManager.heartRate = nil
                                 ringManager.heartRateManager.measureHeartRate() {
                                     isMeasuring = false
                                     animateHeart = false
                                 }
-        //                        ringManager.measureHeartRate()
-                                animateHeart = true
                             } else {
                                 // Stop measuring
                                 isMeasuring = false

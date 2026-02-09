@@ -82,6 +82,13 @@ struct ContentView: View {
         }
         .onAppear {
             ringManager.selectedTheme = (colorScheme == .dark) ? .dark : .light
+            NotificationPermissionManager.shared.requestPermissionIfNeeded { granted in
+                if granted {
+                    print("✅ Notification permission granted")
+                } else {
+                    print("⚠️ Notification permission denied")
+                }
+            }
          }
         .alert(
             "Couldn't get data",
@@ -93,5 +100,13 @@ struct ContentView: View {
                 Text("Please make sure the ring is binded and accessible to the phone")
             }
         )
+        .alert(
+            "Low Battery",
+            isPresented: $ringManager.showLowBatteryAlert
+        ) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(ringManager.lowBatteryMessage)
+        }
     }
 }

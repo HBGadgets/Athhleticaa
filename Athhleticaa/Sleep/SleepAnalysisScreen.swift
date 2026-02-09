@@ -5,7 +5,7 @@
 //  Created by Dipanshu Kashyap on 02/11/25.
 //
 
-import SwiftUICore
+import SwiftUI
 import SwiftUI
 import Charts
 

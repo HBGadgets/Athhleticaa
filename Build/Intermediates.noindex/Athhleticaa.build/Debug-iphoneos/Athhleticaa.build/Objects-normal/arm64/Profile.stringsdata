@@ -1,5 +1,5 @@
 {
-  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ProfilePage/Profile.swift",
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/ProfilePage/Profile.swift",
   "tables": {
     "Localizable": [
       {
@@ -7,7 +7,7 @@
         "key": "Confirmation",
         "location": {
           "startingColumn": 20,
-          "startingLine": 148
+          "startingLine": 155
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 20,
-          "startingLine": 152
+          "startingLine": 159
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Ring is glowing green",
         "location": {
           "startingColumn": 22,
-          "startingLine": 144
+          "startingLine": 151
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Ring data will be synced to Apple Health",
         "location": {
           "startingColumn": 22,
-          "startingLine": 150
+          "startingLine": 157
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 24,
-          "startingLine": 153
+          "startingLine": 160
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 24,
-          "startingLine": 154
+          "startingLine": 161
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 22,
-          "startingLine": 159
+          "startingLine": 166
         }
       }
     ]

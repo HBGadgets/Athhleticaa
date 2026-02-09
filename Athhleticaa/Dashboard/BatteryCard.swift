@@ -5,7 +5,7 @@
 //  Created by Dipanshu Kashyap on 01/11/25.
 //
 
-import SwiftUICore
+import SwiftUI
 
 
 // MARK: - Battery

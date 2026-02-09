@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import SwiftUICore
+import SwiftUI
 
 struct HRVModel: Identifiable, Hashable {
     let id = UUID()

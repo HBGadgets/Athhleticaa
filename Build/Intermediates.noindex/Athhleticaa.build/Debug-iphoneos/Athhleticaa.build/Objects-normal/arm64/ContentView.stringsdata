@@ -1,5 +1,5 @@
 {
-  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/ContentView.swift",
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/ContentView.swift",
   "tables": {
     "Localizable": [
       {
@@ -7,7 +7,15 @@
         "key": "Couldn't get data",
         "location": {
           "startingColumn": 13,
-          "startingLine": 87
+          "startingLine": 94
+        }
+      },
+      {
+        "comment": "",
+        "key": "Low Battery",
+        "location": {
+          "startingColumn": 13,
+          "startingLine": 104
         }
       },
       {
@@ -31,7 +39,7 @@
         "key": "OK",
         "location": {
           "startingColumn": 24,
-          "startingLine": 90
+          "startingLine": 97
         }
       },
       {
@@ -39,7 +47,15 @@
         "key": "Please make sure the ring is binded and accessible to the phone",
         "location": {
           "startingColumn": 22,
-          "startingLine": 93
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 107
         }
       }
     ]

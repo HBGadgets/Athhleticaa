@@ -115,6 +115,13 @@ struct DeviceInfoView: View {
                         .onTapGesture {
                             showThemeSheet = true
                         }
+//                    MonitoringItem(
+//                        title: "Low battery notification",
+//                        subtitle: "Notify when battery is low",
+//                        isEnabled: $ringManager.lowBatteryAlert
+//                    ) {
+//                        ringManager.setHRVSchedule(enabled: ringManager.HRVMonitoring)
+//                    }
 //                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
 //                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
                     DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")

@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import SwiftUICore
+import SwiftUI
 
 // MARK: - Swift Model (Pure Swift)
 struct HeartRateData: Identifiable, Hashable {
@@ -237,39 +237,31 @@ class HeartRateManager: ObservableObject {
     
     func measureHeartRate(completion: (() -> Void)? = nil) {
         print("🌟 Start Heart Rate measurement 🌟")
-        
-        QCSDKCmdCreator.setTime(Date(),
-            success: { _ in
-                // Use QCMeasuringTypeHR for heart rate
-            let type = QCMeasuringType.heartRate
-                
-                QCSDKManager.shareInstance().startToMeasuring(
-                    withOperateType: type,
-                    measuringHandle: { result in
-                        if let value = result as? NSNumber {
-                            print("💓 Current Heart Rate: \(value.intValue) BPM")
-                        }
-                    },
-                    completedHandle: { [weak self] success, result, error in
-                        DispatchQueue.main.async {
-                            if success, let hrValue = result as? NSNumber {
-                                self?.heartRate = hrValue.intValue
-                                print("✅ Heart Rate Measurement Complete: \(hrValue.intValue) BPM")
-                                completion?()
-                            } else {
-                                print("❌ Heart Rate measurement failed: \(error?.localizedDescription ?? "unknown error")")
-                                completion?()
-                            }
-                        }
+
+        let type = QCMeasuringType.heartRate
+
+        QCSDKManager.shareInstance().startToMeasuring(
+            withOperateType: type,
+            measuringHandle: { [weak self] result in
+                if let value = result as? NSNumber {
+                    DispatchQueue.main.async {
+                        self?.heartRate = value.intValue
+                        print("💓 Real-time HR: \(value.intValue)")
                     }
-                )
+                }
             },
-            failed: {
-                print("❌ Failed to set time before Heart Rate measurement")
-                completion?()
+            completedHandle: { success, result, error in
+                DispatchQueue.main.async {
+                    if success, let hrValue = result as? NSNumber {
+                        self.heartRate = hrValue.intValue
+                        print("✅ Measurement finished: \(hrValue)")
+                    } else {
+                        print("❌ Measurement failed: \(error?.localizedDescription ?? "unknown")")
+                    }
+                    completion?()
+                }
             }
         )
-        completion?()
     }
 
     // MARK: - Public API

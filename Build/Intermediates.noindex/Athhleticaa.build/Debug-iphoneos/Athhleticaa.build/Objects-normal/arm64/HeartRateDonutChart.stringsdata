@@ -1,5 +1,5 @@
 {
-  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/Athhleticaa/HeartRate/HeartRateDonutChart.swift",
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/HeartRate/HeartRateDonutChart.swift",
   "tables": {
     "Localizable": [
       {
@@ -8,6 +8,14 @@
         "location": {
           "startingColumn": 35,
           "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ readings",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 35
         }
       },
       {

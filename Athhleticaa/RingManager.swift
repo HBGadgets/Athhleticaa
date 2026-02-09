@@ -8,7 +8,7 @@
 import Foundation
 import CoreBluetooth
 import Combine
-import SwiftUICore
+import SwiftUI
 
 @objcMembers
 class SchedualHeartRateModel: NSObject, Identifiable {
@@ -66,6 +66,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var stressMonitoring: Bool = true
     @Published var HRVMonitoring: Bool = true
     @Published var heartRateMonitoring: Bool = true
+    @Published var lowBatteryAlert: Bool = true
     @Published var isGestureEnabled: Bool = false
     @Published var showCameraDeniedAlert: Bool = false
     @Published var showBluetoothDeniedAlert: Bool = false
@@ -106,6 +107,13 @@ final class QCCentralManager: NSObject, ObservableObject {
     private var scanTimeout: TimeInterval = 15
     private var connectTimeout: TimeInterval = 6
     
+    // MARK: - Low battery handling
+    private let lowBatteryThreshold = 2   // SDK range: 0–8
+    private var hasShownLowBatteryAlert = false
+    @Published var showLowBatteryAlert: Bool = false
+    @Published var lowBatteryMessage: String = ""
+
+    
     // Replace these constants with the SDK-provided strings (or ensure they are defined in your bridging header)
     private let serviceUUIDs: [CBUUID] = [
         CBUUID(string: QCBANDSDKSERVERUUID1),
@@ -127,9 +135,11 @@ final class QCCentralManager: NSObject, ObservableObject {
         // 💡 Set up real-time battery monitoring
         QCSDKManager.shareInstance().currentBatteryInfo = { [weak self] battery, charging in
             DispatchQueue.main.async {
-                self?.batteryLevel = Int(battery)
-                self?.isCharging = charging
-                print("🔋 Live battery update: \(battery)% — charging: \(charging)")
+                self?.handleBatteryUpdate(
+                    level: Int(battery),
+                    charging: charging
+                )
+                print("🔋 Live battery update: \(battery) — charging: \(charging)")
             }
         }
     }
@@ -155,6 +165,32 @@ final class QCCentralManager: NSObject, ObservableObject {
             }
         }
     }
+    
+    private func handleBatteryUpdate(level: Int, charging: Bool) {
+        batteryLevel = level
+        isCharging = charging
+
+        // Reset alert if device is charging or battery recovered
+        if charging || level > lowBatteryThreshold {
+            hasShownLowBatteryAlert = false
+            return
+        }
+
+        // Trigger only once per low-battery event
+        guard !hasShownLowBatteryAlert else { return }
+
+        hasShownLowBatteryAlert = true
+        triggerLowBatteryWarning(level: level)
+    }
+
+    private func triggerLowBatteryWarning(level: Int) {
+        lowBatteryMessage = "Battery is critically low (\(level)/8). Please charge your ring."
+        showLowBatteryAlert = true
+
+        // Optional: also trigger system notification
+        triggerLocalNotification(level: level)
+    }
+
     
     func scan(withTimeout timeout: Int) {
         scanTimeout = TimeInterval(max(0, timeout))
@@ -253,9 +289,10 @@ final class QCCentralManager: NSObject, ObservableObject {
     func readBattery(completion: (() -> Void)? = nil) {
         QCSDKCmdCreator.readBatterySuccess({ [weak self] battery, charging in
             DispatchQueue.main.async {
-                self?.batteryLevel = Int(battery)
-                self?.isCharging = charging
-                print("🔋 Battery level: \(battery), charging: \(charging)")
+                self?.handleBatteryUpdate(
+                    level: Int(battery),
+                    charging: charging
+                )
                 completion?()
             }
         }, failed: {
@@ -263,6 +300,22 @@ final class QCCentralManager: NSObject, ObservableObject {
             completion?()
         })
     }
+    
+    private func triggerLocalNotification(level: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "Ring Battery Low"
+        content.body = "Battery level is \(level)/8. Please charge your device."
+        content.sound = .default
+
+        let request = UNNotificationRequest(
+            identifier: "LOW_BATTERY_WARNING",
+            content: content,
+            trigger: nil
+        )
+
+        UNUserNotificationCenter.current().add(request)
+    }
+
 
     // MARK: - Private helpers
     private func startScanTimeout() {

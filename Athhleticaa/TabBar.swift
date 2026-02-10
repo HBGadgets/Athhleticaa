@@ -24,6 +24,24 @@ struct TabBar: View {
                 .fill(.ultraThinMaterial)
                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
         )
+        
+        .alert(
+            "Low Battery",
+            isPresented: Binding(
+                get: {
+                    ringManager.showLowBatteryAlert && ringManager.lowBatteryAlert
+                },
+                set: { _ in
+                    
+                }
+            )
+        ) {
+            Button("OK", role: .cancel) {
+                ringManager.showLowBatteryAlert = false
+            }
+        } message: {
+            Text(ringManager.lowBatteryMessage)
+        }
     }
 
     @ViewBuilder

@@ -12,14 +12,6 @@
       },
       {
         "comment": "",
-        "key": "Low Battery",
-        "location": {
-          "startingColumn": 13,
-          "startingLine": 104
-        }
-      },
-      {
-        "comment": "",
         "key": "Please wait...",
         "location": {
           "startingColumn": 30,
@@ -48,14 +40,6 @@
         "location": {
           "startingColumn": 22,
           "startingLine": 100
-        }
-      },
-      {
-        "comment": "",
-        "key": "OK",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 107
         }
       }
     ]

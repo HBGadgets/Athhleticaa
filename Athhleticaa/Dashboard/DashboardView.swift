@@ -70,9 +70,9 @@ struct DashboardView: View {
                             HRVCard(ringManager: ringManager)
                         }
                         
-                        NavigationLink(destination: SportsHistoryScreen(ringManager: ringManager)) {
-                            SportsCard(ringManager: ringManager)
-                        }
+//                        NavigationLink(destination: SportsHistoryScreen(ringManager: ringManager)) {
+//                            SportsCard(ringManager: ringManager)
+//                        }
                     }
                 }
                 .padding()
@@ -119,6 +119,7 @@ struct DashboardView: View {
         } message: {
             Text("Connect the app with ring first")
         }
+        
         .onAppear() {
             ringManager.selectedDate = Date()
         }

@@ -1,5 +1,24 @@
 {
   "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/TabBar.swift",
-  "tables": {},
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Low Battery",
+        "location": {
+          "startingColumn": 13,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 39
+        }
+      }
+    ]
+  },
   "version": 1
 }

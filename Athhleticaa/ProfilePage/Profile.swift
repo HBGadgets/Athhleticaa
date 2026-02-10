@@ -115,13 +115,13 @@ struct DeviceInfoView: View {
                         .onTapGesture {
                             showThemeSheet = true
                         }
-//                    MonitoringItem(
-//                        title: "Low battery notification",
-//                        subtitle: "Notify when battery is low",
-//                        isEnabled: $ringManager.lowBatteryAlert
-//                    ) {
-//                        ringManager.setHRVSchedule(enabled: ringManager.HRVMonitoring)
-//                    }
+                    DeviceMenuItemWithToggle(
+                        icon: "battery.25percent",
+                        color: .orange,
+                        title: "Low battery prompt",
+                        ringManager: ringManager,
+                        isEnabled: $ringManager.lowBatteryAlert
+                    )
 //                    DeviceMenuItem(icon: "thermometer.variable", color: .blue, title: "Temperature Unit")
 //                    DeviceMenuItem(icon: "battery.25percent", color: .red, title: "Low Battery Prompt")
                     DeviceMenuItem(icon: "heart.text.square", color: .red, title: "Apple Health")
@@ -230,5 +230,45 @@ struct DeviceMenuItem: View {
             .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
         }
         
+    }
+}
+
+struct DeviceMenuItemWithToggle: View {
+    @Environment(\.colorScheme) var colorScheme
+    var icon: String
+    var color: Color
+    var title: String
+    @ObservedObject var ringManager: QCCentralManager
+    @Binding var isEnabled: Bool
+
+    var body: some View {
+        ZStack {
+            HStack {
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(color)
+                    .padding(8)
+                    .background(color.opacity(0.1))
+                    .clipShape(Circle())
+
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(colorScheme == .light ? Color.black : Color.white)
+
+                Spacer()
+                Toggle("", isOn: $isEnabled)
+                    .labelsHidden()
+                    .onChange(of: isEnabled) { newValue in
+                        // Persist and update via manager
+                        ringManager.setLowBatteryPrompt(enabled: newValue)
+                    }
+            }
+            .padding()
+            .background(colorScheme == .light ? Color.white : Color(.systemGray6))
+            .cornerRadius(16)
+            .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 0.5)
+        }
     }
 }

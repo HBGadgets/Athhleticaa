@@ -108,10 +108,11 @@ final class QCCentralManager: NSObject, ObservableObject {
     private var connectTimeout: TimeInterval = 6
     
     // MARK: - Low battery handling
-    private let lowBatteryThreshold = 2   // SDK range: 0–8
+    private let lowBatteryThreshold = 33   // SDK range: 0–8
     private var hasShownLowBatteryAlert = false
     @Published var showLowBatteryAlert: Bool = false
     @Published var lowBatteryMessage: String = ""
+    private let lowBatteryAlertKey = "QCLowBatteryAlertEnabled"
 
     
     // Replace these constants with the SDK-provided strings (or ensure they are defined in your bridging header)
@@ -131,6 +132,15 @@ final class QCCentralManager: NSObject, ObservableObject {
             CBConnectPeripheralOptionNotifyOnConnectionKey: true
         ]
         centralManager = CBCentralManager(delegate: self, queue: .main, options: options)
+        
+        if UserDefaults.standard.object(forKey: lowBatteryAlertKey) != nil {
+            self.lowBatteryAlert = UserDefaults.standard.bool(forKey: lowBatteryAlertKey)
+        } else {
+            // default to true and persist
+            self.lowBatteryAlert = true
+            UserDefaults.standard.set(true, forKey: lowBatteryAlertKey)
+            UserDefaults.standard.synchronize()
+        }
         
         // 💡 Set up real-time battery monitoring
         QCSDKManager.shareInstance().currentBatteryInfo = { [weak self] battery, charging in
@@ -182,6 +192,26 @@ final class QCCentralManager: NSObject, ObservableObject {
         hasShownLowBatteryAlert = true
         triggerLowBatteryWarning(level: level)
     }
+    
+    func setLowBatteryPrompt(enabled: Bool) {
+            // update published state
+            DispatchQueue.main.async {
+                self.lowBatteryAlert = enabled
+                // persist
+                UserDefaults.standard.set(enabled, forKey: self.lowBatteryAlertKey)
+                UserDefaults.standard.synchronize()
+
+                // Reset internal alert state when enabling; clear visible alert when disabling
+                if enabled {
+                    self.hasShownLowBatteryAlert = false
+                } else {
+                    self.showLowBatteryAlert = false
+                    self.hasShownLowBatteryAlert = false
+                }
+
+                print("🔔 Low battery prompt set to: \(enabled)")
+            }
+        }
 
     private func triggerLowBatteryWarning(level: Int) {
         lowBatteryMessage = "Battery is critically low (\(level)/8). Please charge your ring."

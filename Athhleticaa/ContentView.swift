@@ -100,13 +100,5 @@ struct ContentView: View {
                 Text("Please make sure the ring is binded and accessible to the phone")
             }
         )
-        .alert(
-            "Low Battery",
-            isPresented: $ringManager.showLowBatteryAlert
-        ) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text(ringManager.lowBatteryMessage)
-        }
     }
 }

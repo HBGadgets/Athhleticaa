@@ -1,0 +1,32 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/RingManager.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Select Date",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 842
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose Date",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 848
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirm",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 883
+        }
+      }
+    ]
+  },
+  "version": 1
+}

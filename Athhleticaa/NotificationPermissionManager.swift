@@ -23,7 +23,7 @@ final class NotificationPermissionManager {
                 completion?(true)
 
             case .notDetermined:
-                center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+                center.requestAuthorization(options: [.alert, .sound, .badge, .timeSensitive]) { granted, _ in
                     DispatchQueue.main.async {
                         completion?(granted)
                     }

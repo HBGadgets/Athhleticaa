@@ -9,6 +9,7 @@ import Foundation
 import CoreBluetooth
 import Combine
 import SwiftUI
+import OSLog
 
 @objcMembers
 class SchedualHeartRateModel: NSObject, Identifiable {
@@ -93,6 +94,8 @@ final class QCCentralManager: NSObject, ObservableObject {
     @Published var distanceValueChart: String? = nil
     @Published var caloriesValueChart: String? = nil
     
+    private let logger = Logger(subsystem: "com.hbgadgets.athletica", category: "BLE")
+    
     // MARK: - Private core bluetooth + sdk refs
     private var centralManager: CBCentralManager!
     private var sdkManager = QCSDKManager.shareInstance()
@@ -108,7 +111,7 @@ final class QCCentralManager: NSObject, ObservableObject {
     private var connectTimeout: TimeInterval = 6
     
     // MARK: - Low battery handling
-    private let lowBatteryThreshold = 33   // SDK range: 0–8
+    private let lowBatteryThreshold = 23
     private var hasShownLowBatteryAlert = false
     @Published var showLowBatteryAlert: Bool = false
     @Published var lowBatteryMessage: String = ""
@@ -129,7 +132,8 @@ final class QCCentralManager: NSObject, ObservableObject {
         super.init()
         let options: [String: Any] = [
             CBCentralManagerOptionShowPowerAlertKey: true,
-            CBConnectPeripheralOptionNotifyOnConnectionKey: true
+            CBConnectPeripheralOptionNotifyOnConnectionKey: true,
+            CBCentralManagerOptionRestoreIdentifierKey: "hbgadgets.ios.Athhleticaa"
         ]
         centralManager = CBCentralManager(delegate: self, queue: .main, options: options)
         
@@ -152,6 +156,40 @@ final class QCCentralManager: NSObject, ObservableObject {
                 print("🔋 Live battery update: \(battery) — charging: \(charging)")
             }
         }
+    }
+    
+    func scheduleLowBatteryNotification(level: Int) {
+
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Ring Battery Low"
+        content.body = "Your ring battery is at \(level)%. Please charge it."
+        content.sound = .default
+
+        // 🔑 Option A: Fire immediately
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: 1,
+            repeats: false
+        )
+
+        let identifier = "ring.lowbattery.\(level)"
+
+        let request = UNNotificationRequest(
+            identifier: identifier,
+            content: content,
+            trigger: trigger
+        )
+
+        center.add(request)
+    }
+
+    func shouldNotifyLowBattery(level: Int) -> Bool {
+        let lastLevel = UserDefaults.standard.integer(forKey: "lastNotifiedBattery")
+        if level >= lastLevel { return false }
+
+        UserDefaults.standard.set(level, forKey: "lastNotifiedBattery")
+        return true
     }
     
     deinit {
@@ -214,7 +252,7 @@ final class QCCentralManager: NSObject, ObservableObject {
         }
 
     private func triggerLowBatteryWarning(level: Int) {
-        lowBatteryMessage = "Battery is critically low (\(level)/8). Please charge your ring."
+        lowBatteryMessage = "Battery is critically low (\(level)). Please charge your ring."
         showLowBatteryAlert = true
 
         // Optional: also trigger system notification
@@ -332,18 +370,32 @@ final class QCCentralManager: NSObject, ObservableObject {
     }
     
     private func triggerLocalNotification(level: Int) {
-        let content = UNMutableNotificationContent()
-        content.title = "Ring Battery Low"
-        content.body = "Battery level is \(level)/8. Please charge your device."
-        content.sound = .default
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized ||
+                  settings.authorizationStatus == .provisional else {
+                print("⚠️ Notifications not authorized — skipping low battery alert")
+                return
+            }
 
-        let request = UNNotificationRequest(
-            identifier: "LOW_BATTERY_WARNING",
-            content: content,
-            trigger: nil
-        )
+            let content = UNMutableNotificationContent()
+            content.title = "Ring Battery Low"
+            content.body = "Battery level is \(level)%. Please charge your device."
+            content.sound = .default
+            content.interruptionLevel = .timeSensitive
 
-        UNUserNotificationCenter.current().add(request)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let request = UNNotificationRequest(
+                identifier: "low-battery-alert",
+                content: content,
+                trigger: trigger
+            )
+
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("❌ Notification error: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 
 
@@ -669,25 +721,28 @@ extension QCCentralManager: CBCentralManagerDelegate {
                                             self.hrvManager.fetchHRV(day: 0) {
                                                 self.dashboardHRVData = self.hrvManager.hrvData
         //                                        self.syncHRVToHealthKit(hrv: self.hrvManager.hrvData ?? HRVModel(date: "0", values: [0], interval: 0))
-                                                if let firstTime = self.heartRateManager.dayData.first?.timeForHeartRate(at: self.heartRateManager.dayData.first?.lastNonZeroHeartRateIndex ?? 0
-                                                ) {
+                                                if let firstEntry = self.heartRateManager.dayData.first,
+                                                   let firstTime = firstEntry.timeForHeartRate(
+                                                        at: firstEntry.lastNonZeroHeartRateIndex ?? 0
+                                                   ) {
+
                                                     let formatter = DateFormatter()
                                                     formatter.dateFormat = "h:mm a"
                                                     print("=============>>>>>First heart rate time:", formatter.string(from: firstTime))
-                                                    self.getBloodOxygenScheduleStatus() {
-                                                        self.getStressScheduleStatus() {
-                                                            self.getHRVScheduleStatus() {
-                                                                self.getHeartRateScheduleStatus() {
-                                                                    self.sleepManagerNew.getSleep() {
-                                                                        self.sportsManager.updateData()
-                                                                    }
+                                                }
+                                                self.getBloodOxygenScheduleStatus() {
+                                                    self.getStressScheduleStatus() {
+                                                        self.getHRVScheduleStatus() {
+                                                            self.getHeartRateScheduleStatus() {
+                                                                self.sleepManagerNew.getSleep() {
+                                                                    self.sportsManager.updateData()
+                                                                    self.dataLoaded = true
+                                                                    completion?()
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
-                                                self.dataLoaded = true
-                                                completion?()
                                             }
                                         }
                                     }
@@ -711,18 +766,23 @@ extension QCCentralManager: CBCentralManagerDelegate {
         startToReconnect()
     }
     
+    
     // If you enable restoration, implement willRestoreState here.
-//    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-//        if let restored = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
-//            for pr in restored {
-//                if let lastUUID = UserDefaults.standard.string(forKey: lastConnectedKey),
-//                   lastUUID == pr.identifier.uuidString {
-//                    connectedPeripheral = pr
-//                    break
-//                }
-//            }
-//        }
-//    }
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
+        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
+            self.connectedPeripheral = peripherals.first
+            
+            // Also restore any peripherals that were mid-connection
+            for peripheral in peripherals {
+                connectingPeripherals[peripheral.identifier] = peripheral
+            }
+            logger.info("♻️ BLE restored in background")
+        }
+        
+        // You can also restore scan state if needed
+        // dict[CBCentralManagerRestoredStateScanServicesKey]
+        // dict[CBCentralManagerRestoredStateScanOptionsKey]
+    }
 }
 
 // MARK: - Advertisement helpers (mac extraction)

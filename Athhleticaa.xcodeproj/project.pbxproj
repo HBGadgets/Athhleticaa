@@ -8,10 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		283557002EB7834A0059177E /* SleepChartKit in Frameworks */ = {isa = PBXBuildFile; productRef = 283556FF2EB7834A0059177E /* SleepChartKit */; };
+		286E61682F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */; };
+		286E61692F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		28A92DC82F5AD5FC00EBCF00 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				286E61692F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		20EF40C71C829245ECF5B5A8 /* Pods-Athhleticaa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athhleticaa.debug.xcconfig"; path = "Target Support Files/Pods-Athhleticaa/Pods-Athhleticaa.debug.xcconfig"; sourceTree = "<group>"; };
 		281D04C02EAA4FDC00FC7FF5 /* Athhleticaa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Athhleticaa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Athhleticaa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		428CCEF7937DF3E075649B38 /* Pods-Athhleticaa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athhleticaa.release.xcconfig"; path = "Target Support Files/Pods-Athhleticaa/Pods-Athhleticaa.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -24,11 +43,37 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		286E615D2F5AF3EA0024DFB1 /* Exceptions for "Athhleticaa" folder in "Embed Frameworks" phase from "Athhleticaa" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			attributesByRelativePath = {
+				ABParTool.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				DFUnits.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				GRDFUSDK.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				JLDialUnit.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				JL_BLEKit.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				QCBandSDK.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+				ZipZap.framework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+			};
+			buildPhase = 28A92DC82F5AD5FC00EBCF00 /* Embed Frameworks */;
+			membershipExceptions = (
+				ABParTool.framework,
+				DFUnits.framework,
+				GRDFUSDK.framework,
+				JL_BLEKit.framework,
+				JLDialUnit.framework,
+				QCBandSDK.framework,
+				ZipZap.framework,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		281D04C22EAA4FDC00FC7FF5 /* Athhleticaa */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				286ACA9A2EAA8F4B00DC5CAC /* Exceptions for "Athhleticaa" folder in "Athhleticaa" target */,
+				286E615D2F5AF3EA0024DFB1 /* Exceptions for "Athhleticaa" folder in "Embed Frameworks" phase from "Athhleticaa" target */,
 			);
 			path = Athhleticaa;
 			sourceTree = "<group>";
@@ -41,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				283557002EB7834A0059177E /* SleepChartKit in Frameworks */,
+				286E61682F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +98,8 @@
 			children = (
 				281D04C22EAA4FDC00FC7FF5 /* Athhleticaa */,
 				281D04C12EAA4FDC00FC7FF5 /* Products */,
+				B0C4DCD25CEADEEFF9242D4E /* Pods */,
+				A3A421820706FAEC530329AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +111,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A3A421820706FAEC530329AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0C4DCD25CEADEEFF9242D4E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20EF40C71C829245ECF5B5A8 /* Pods-Athhleticaa.debug.xcconfig */,
+				428CCEF7937DF3E075649B38 /* Pods-Athhleticaa.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -70,9 +135,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 281D04CB2EAA4FDF00FC7FF5 /* Build configuration list for PBXNativeTarget "Athhleticaa" */;
 			buildPhases = (
+				14EAE5FF9C176558C9824331 /* [CP] Check Pods Manifest.lock */,
 				281D04BC2EAA4FDC00FC7FF5 /* Sources */,
 				281D04BD2EAA4FDC00FC7FF5 /* Frameworks */,
 				281D04BE2EAA4FDC00FC7FF5 /* Resources */,
+				28A92DC82F5AD5FC00EBCF00 /* Embed Frameworks */,
+				5644D4BB7AE1238831A80C81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +203,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14EAE5FF9C176558C9824331 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Athhleticaa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5644D4BB7AE1238831A80C81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Athhleticaa/Pods-Athhleticaa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Athhleticaa/Pods-Athhleticaa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Athhleticaa/Pods-Athhleticaa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		281D04BC2EAA4FDC00FC7FF5 /* Sources */ = {
@@ -270,6 +384,7 @@
 		};
 		281D04CC2EAA4FDF00FC7FF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20EF40C71C829245ECF5B5A8 /* Pods-Athhleticaa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -277,7 +392,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 722X8GNR7M;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -304,6 +421,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.2;
+				NEW_SETTING = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = hbgadgets.ios.Athhleticaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -316,6 +434,7 @@
 		};
 		281D04CD2EAA4FDF00FC7FF5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 428CCEF7937DF3E075649B38 /* Pods-Athhleticaa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -323,7 +442,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 722X8GNR7M;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -350,6 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.2;
+				NEW_SETTING = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = hbgadgets.ios.Athhleticaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,0 +1,12 @@
+{
+  "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-fqyfloomadzldheosmmzyphirkmz/SourcePackages/checkouts/SleepChartKit/Sources/SleepChartKit/Components/SleepChartView.swift" : {
+    "abi-baseline-json" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit.abi.json",
+    "const-values" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-primary.swiftconstvalues",
+    "dependencies" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-primary.d",
+    "diagnostics" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-primary.dia",
+    "objc-header" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit-Swift.h",
+    "swiftdoc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit.swiftdoc",
+    "swiftmodule" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit.swiftmodule",
+    "swiftsourceinfo" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/SleepChartKit.build/Release-iphoneos/SleepChartKit.build/Objects-normal/arm64/SleepChartKit.swiftsourceinfo"
+  }
+}

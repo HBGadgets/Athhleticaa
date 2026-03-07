@@ -14,7 +14,9 @@ struct AthhleticaaApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                DeciderScreen()
+            }
         }
     }
 }

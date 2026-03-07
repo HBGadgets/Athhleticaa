@@ -1,0 +1,58 @@
+//
+//  TabBarPro.swift
+//  Athhleticaa
+//
+//  Created by Dipanshu Kashyap on 07/03/26.
+//
+
+import SwiftUI
+
+struct TabBarPro: View {
+    @ObservedObject var ringManagerPro: RingManagerPro
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        HStack(spacing: 24) {
+            ForEach(0..<5) { index in
+                tabButton(for: index)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        .background(
+            Capsule()
+                .fill(.ultraThinMaterial)
+                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
+        )
+    }
+
+    @ViewBuilder
+    func tabButton(for index: Int) -> some View {
+        let icons = ["house.fill", "heart.fill", "shoeprints.fill", "moon.fill", "person.crop.circle"]
+        let isSelected = ringManagerPro.selectedTab == index
+
+        Button {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+//                ringManager.selectedTab = index
+            }
+        } label: {
+            ZStack {
+                if isSelected {
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: 44, height: 44)
+                        .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                }
+                colorScheme == .dark ?
+                Image(systemName: icons[index])
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.white)
+                :
+                Image(systemName: icons[index])
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(isSelected ? .white : .black)
+            }
+        }
+    }
+}
+
+

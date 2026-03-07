@@ -1,0 +1,31 @@
+//
+//  SleepAnalysisScreen.swift
+//  Athhleticaa
+//
+//  Created by Dipanshu Kashyap on 02/11/25.
+//
+
+import SwiftUI
+import SwiftUI
+import Charts
+
+
+struct SleepScreenViewPro: View {
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var ringManagerPro: RingManagerPro
+    @State private var goToPro = false
+    @State private var goToNonPro = false
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                SettingItem(
+                    title: "Profile screen",
+                )
+                .onTapGesture {
+                    goToPro = true
+                }
+            }
+        }
+    }
+}

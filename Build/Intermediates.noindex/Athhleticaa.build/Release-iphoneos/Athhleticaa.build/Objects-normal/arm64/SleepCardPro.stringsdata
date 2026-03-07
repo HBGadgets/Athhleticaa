@@ -1,0 +1,16 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/SleepCardPro.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Sleep",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 44
+        }
+      }
+    ]
+  },
+  "version": 1
+}

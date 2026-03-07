@@ -1,0 +1,64 @@
+//
+//  HRVCard.swift
+//  Athhleticaa
+//
+//  Created by Dipanshu Kashyap on 05/11/25.
+//
+
+import SwiftUI
+import Charts
+import SleepChartKit
+
+
+// MARK: - Sleep
+struct HRVCardPro: View {
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var ringManagerPro: RingManagerPro
+    
+    var formattedToday: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: Date())
+    }
+    
+    var body: some View {
+        ZStack {
+            GeometryReader { geo in
+                Image("HRVCardImage")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped() // ✅ crops inside bounds
+                    .overlay(
+                        Color.black.opacity(0.5)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    )
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .allowsHitTesting(false) // so image doesn’t block taps
+
+            // Content
+            VStack(alignment: HorizontalAlignment.leading, spacing: 8) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("HRV")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .fontWidth(.expanded)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .cornerRadius(16)
+            Color.black.opacity(0.1)
+                .ignoresSafeArea()
+                .allowsHitTesting(true)
+        }
+        .frame(height: 250)
+        
+    }
+}

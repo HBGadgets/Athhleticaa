@@ -350,6 +350,11 @@ SWIFT_CLASS("_TtC11Athhleticaa16QCCentralManager")
 - (void)centralManager:(CBCentralManager * _Nonnull)central willRestoreState:(NSDictionary<NSString *, id> * _Nonnull)dict;
 @end
 
+SWIFT_CLASS("_TtC11Athhleticaa14RingManagerPro")
+@interface RingManagerPro : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 SWIFT_CLASS("_TtC11Athhleticaa22SchedualHeartRateModel")
 @interface SchedualHeartRateModel : NSObject
 @property (nonatomic, copy) NSString * _Nonnull timeString;

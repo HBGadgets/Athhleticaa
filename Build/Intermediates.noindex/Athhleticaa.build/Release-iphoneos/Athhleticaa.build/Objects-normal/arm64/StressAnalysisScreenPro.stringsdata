@@ -1,0 +1,24 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Stress/StressAnalysisScreenPro.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Stress Analysis Screen",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Stress",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 45
+        }
+      }
+    ]
+  },
+  "version": 1
+}

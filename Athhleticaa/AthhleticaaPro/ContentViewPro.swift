@@ -10,27 +10,7 @@ import CoreBluetooth
 
 struct ContentViewPro: View {
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var ringManagerPro = RingManagerPro()
-//    @State private var showAlert = false
-//    @State private var timeoutTask: Task<Void, Never>? = nil
-    
-//    private func startTimeout() {
-//        cancelTimeout()
-//        timeoutTask = Task {
-//            try? await Task.sleep(nanoseconds: 7 * 1_000_000_000)
-//            // Only show alert if data not loaded and ring not connected
-//            if !ringManagerPro.dataLoaded && ringManagerPro.connectedPeripheral == nil {
-//                await MainActor.run {
-//                    showAlert = true
-//                }
-//            }
-//        }
-//    }
-//
-//    private func cancelTimeout() {
-//        timeoutTask?.cancel()
-//        timeoutTask = nil
-//    }
+    @StateObject var ringManagerPro = RingManagerPro.shared
     
     var body: some View {
         ZStack {
@@ -76,6 +56,7 @@ struct ContentViewPro: View {
 //                        .allowsHitTesting(true)
 //                }
         }
+        .environmentObject(ringManagerPro)
         .onAppear {
             ringManagerPro.selectedTheme = (colorScheme == .dark) ? .dark : .light
             NotificationPermissionManager.shared.requestPermissionIfNeeded { granted in

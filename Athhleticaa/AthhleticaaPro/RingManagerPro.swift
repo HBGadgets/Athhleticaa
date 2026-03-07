@@ -8,6 +8,9 @@
 import SwiftUI
 
 final class RingManagerPro: NSObject, ObservableObject {
+
+    static let shared = RingManagerPro()
+
     @Published var selectedTab: Int = 0
     @Published private(set) var connectedPeripheral: CBPeripheral?
     @Published var errorMessage: String?
@@ -15,11 +18,41 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var selectedDate = Date()
     @Published var selectedTheme: AppTheme = .dark
     
+    @Published var profile: UserProfile?
+
+    override init() {
+        super.init()
+        profile = UserProfileStorage.load()
+    }
+    
     func callAllFunctions() {
         
     }
-}
+    
+    func syncUserProfileToDevice() {
 
+        guard let profile else { return }
+
+        let info = VPSyncPersonalInfo()
+
+        info.status = Int32(profile.height)
+        info.weight = Int32(profile.weight)
+        info.age = Int32(profile.age)
+        info.sex = Int32(profile.gender)
+        info.targetStep = 10000
+        info.targetSleepDuration = 8
+        
+        VPPeripheralManage.shareVPPeripheralManager()
+            .veepooSDKSynchronousPersonalInformation(info) { (settingResult: UInt) in
+            
+            if settingResult == 0 {
+                print("Personal info sync success")
+            } else {
+                print("Personal info sync failed:", settingResult)
+            }
+        }
+    }
+}
 
 struct WeeklyCalendarViewPro: View {
     @Environment(\.colorScheme) var colorScheme

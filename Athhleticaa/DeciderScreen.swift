@@ -11,6 +11,7 @@ struct DeciderScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var goToPro = false
     @State private var goToNonPro = false
+    @State private var showUserInfoSheet = false
     
     var body: some View {
         ScrollView {
@@ -20,7 +21,12 @@ struct DeciderScreen: View {
                 )
                 .onTapGesture {
                     print("go to pro tapped")
-                    goToPro = true
+                    
+                    if UserProfileStorage.load() == nil {
+                        showUserInfoSheet = true
+                    } else {
+                        goToPro = true
+                    }
                 }
                 
                 SettingItem(
@@ -39,6 +45,11 @@ struct DeciderScreen: View {
         .navigationDestination(isPresented: $goToNonPro) {
             ContentViewNonPro()
         }
+        .sheet(isPresented: $showUserInfoSheet) {
+                    NavigationStack {
+                        UserInformationScreenView()
+                    }
+                }
     }
 }
 

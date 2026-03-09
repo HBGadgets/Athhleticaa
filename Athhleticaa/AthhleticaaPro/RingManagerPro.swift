@@ -18,39 +18,58 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var selectedDate = Date()
     @Published var selectedTheme: AppTheme = .dark
     
-    @Published var profile: UserProfile?
 
     override init() {
         super.init()
-        profile = UserProfileStorage.load()
     }
     
     func callAllFunctions() {
         
     }
     
-    func syncUserProfileToDevice() {
+    // MARK: - Start Custom Scan
+    func startScanning() {
+        VPCustomScanManage.sharedInstance.manager = self
+        VPCustomScanManage.sharedInstance.initDelegate()
+        VPCustomScanManage.sharedInstance.startScanDevices()
+        print("Started scanning...")
+    }
+    
+    // MARK: - Device Connected Callback
+    func onDeviceConnected(_ peripheral: CBPeripheral) {
+        DispatchQueue.main.async {
+            self.connectedPeripheral = peripheral
+        }
 
-        guard let profile else { return }
+        print("Device connected:", peripheral.name ?? "Unknown")
+
+        let profile = UserProfileStorage.load()
+        if let profile {
+            syncUserProfileToDevice(profileArg: profile)
+        }
+    }
+    
+    // MARK: - Sync Profile
+    func syncUserProfileToDevice(profileArg: UserProfile) {
 
         let info = VPSyncPersonalInfo()
 
-        info.status = Int32(profile.height)
-        info.weight = Int32(profile.weight)
-        info.age = Int32(profile.age)
-        info.sex = Int32(profile.gender)
+        info.status = Int32(profileArg.height)
+        info.weight = Int32(profileArg.weight)
+        info.age = Int32(profileArg.age)
+        info.sex = Int32(profileArg.gender)
         info.targetStep = 10000
-        info.targetSleepDuration = 8
-        
+        info.targetSleepDuration = 8 * 60
+
         VPPeripheralManage.shareVPPeripheralManager()
-            .veepooSDKSynchronousPersonalInformation(info) { (settingResult: UInt) in
-            
-            if settingResult == 0 {
-                print("Personal info sync success")
-            } else {
-                print("Personal info sync failed:", settingResult)
+            .veepooSDKSynchronousPersonalInformation(info) { result in
+
+                if result == 0 {
+                    print("✅ Personal info sync success")
+                } else {
+                    print("❌ Personal info sync failed:", result)
+                }
             }
-        }
     }
 }
 

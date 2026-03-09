@@ -34,6 +34,7 @@ class UserProfileStorage {
 
     static func load() -> UserProfile? {
         guard let data = UserDefaults.standard.data(forKey: key) else { return nil }
+        print("userProfile load")
         return try? JSONDecoder().decode(UserProfile.self, from: data)
     }
 }

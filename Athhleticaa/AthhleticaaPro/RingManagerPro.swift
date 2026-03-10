@@ -19,33 +19,94 @@ final class RingManagerPro: NSObject, ObservableObject {
 
     @Published var scannedDevices: [VPPeripheralModel] = []
     @Published var connectedPeripheral: CBPeripheral?
+    private let lastDeviceKey = "last_connected_device"
+    @Published var dataLoaded: Bool = false
 
     override init() {
         super.init()
-        initSDK()
+        self.initSDK()
     }
     
     func callAllFunctions() {
-        
+        guard VPBleCentralManage.sharedBleManager().isConnected else {
+            print("Device not connected")
+            return
+        }
+          
+        self.dataLoaded = false
+          
+        // Sync historical data from device
+        VPBleCentralManage.sharedBleManager().peripheralManage
+            .veepooSdkStartReadDeviceAllData { [weak self] readState, totalDay, currentDay, progress in
+                switch readState {
+                case .start:
+                    print("Starting data sync")
+                case .reading:
+                    print("Syncing day \(currentDay)/\(totalDay) - \(progress)%")
+                case .complete:
+                    print("Data sync complete")
+                    DispatchQueue.main.async {
+                        self?.dataLoaded = true
+                    }
+                default:
+                    break
+                }
+            }
     }
     
     func initSDK() {
-        let veepooBleManager = VPBleCentralManage.sharedBleManager()
-        veepooBleManager!.isLogEnable = true  // Enable logging for debugging
-          
-        // Set peripheral manage (required for SDK operations)
-        veepooBleManager!.peripheralManage = VPPeripheralManage.shareVPPeripheralManager()
-          
-        // Monitor Bluetooth state
-        veepooBleManager!.vpBleCentralManageChangeBlock = { state in
+        self.dataLoaded = false
+        let manager = VPBleCentralManage.sharedBleManager()
+        manager!.isLogEnable = true
+        manager!.peripheralManage = VPPeripheralManage.shareVPPeripheralManager()
+        
+        manager!.vpBleCentralManageChangeBlock = { [weak self] state in
             switch state {
             case .poweredOn:
-                // Bluetooth is ready, you can start scanning now
-                print("Bluetooth powered on - ready to scan")
+                print("Bluetooth powered on")
+                self?.autoReconnectIfNeeded()
             case .poweredOff:
                 print("Bluetooth is turned off")
             default:
                 break
+            }
+        }
+          
+        // Add connection state monitoring
+        manager!.vpBleConnectStateChangeBlock = { [weak self] connectState in
+            switch connectState {
+            case .connectStateConnect:
+                // Connection established, peripheral should be available
+                if let peripheral = manager!.peripheralModel.peripheral {
+                    self?.onDeviceConnected(peripheral)
+                }
+            case .connectStateVerifyPasswordSuccess:
+                print("Password verified - ready for operations")
+                if let profile = UserProfileStorage.load() {
+                    self?.syncUserProfileToDevice(profileArg: profile)
+                } else {
+                    print("couldn't load profile")
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    func autoReconnectIfNeeded() {
+
+        guard let lastAddress = UserDefaults.standard.string(forKey: lastDeviceKey) else {
+            return
+        }
+
+        startScanning()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self else { return }
+
+            if let device = self.scannedDevices.first(where: { $0.deviceAddress == lastAddress }) {
+                print("Auto reconnecting to", lastAddress)
+                self.connectDevice(device)
             }
         }
     }
@@ -80,20 +141,11 @@ final class RingManagerPro: NSObject, ObservableObject {
     }
     
     func connectDevice(_ peripheralModel: VPPeripheralModel) {
-        // Stop scanning first
         VPBleCentralManage.sharedBleManager().veepooSDKStopScanDevice()
           
-        // Use SDK connection instead of custom
         VPBleCentralManage.sharedBleManager()
             .veepooSDKConnectDevice(peripheralModel) { [weak self] connectState in
                 self?.handleConnectEvent(connectState: connectState)
-                  
-                if connectState == .BleVerifyPasswordSuccess {
-                    // Get the connected peripheral
-                    if let peripheral = VPBleCentralManage.sharedBleManager().peripheralModel.peripheral {
-                        self?.onDeviceConnected(peripheral)
-                    }
-                }
             }
     }
     
@@ -130,16 +182,17 @@ final class RingManagerPro: NSObject, ObservableObject {
             self.connectedPeripheral = peripheral
         }
 
-        print("Device connected:", peripheral.name ?? "Unknown")
-
-        let profile = UserProfileStorage.load()
-        if let profile {
-            syncUserProfileToDevice(profileArg: profile)
+        // Save device address
+        if let address = VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress {
+            UserDefaults.standard.set(address, forKey: lastDeviceKey)
         }
+
+        print("Device connected:", peripheral.name ?? "Unknown")
     }
     
     // MARK: - Sync Profile
     func syncUserProfileToDevice(profileArg: UserProfile) {
+        print("sync user profile ran")
 
         let info = VPSyncPersonalInfo()
 
@@ -152,13 +205,14 @@ final class RingManagerPro: NSObject, ObservableObject {
 
         VPPeripheralManage.shareVPPeripheralManager()
             .veepooSDKSynchronousPersonalInformation(info) { result in
-
-                if result == 0 {
+                print("got result of syncing personal information")
+                if result == 1 {
                     print("✅ Personal info sync success")
                 } else {
-                    print("❌ Personal info sync failed:", result)
+                    print("❌ Personal info sync failed:", result.words)
                 }
             }
+        self.dataLoaded = true
     }
 }
 

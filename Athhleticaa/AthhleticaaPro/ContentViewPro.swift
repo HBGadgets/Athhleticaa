@@ -11,6 +11,26 @@ import CoreBluetooth
 struct ContentViewPro: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var ringManagerPro = RingManagerPro.shared
+    @State private var showAlert = false
+    @State private var timeoutTask: Task<Void, Never>? = nil
+    
+    private func startTimeout() {
+        cancelTimeout()
+        timeoutTask = Task {
+            try? await Task.sleep(nanoseconds: 7 * 1_000_000_000)
+            // Only show alert if data not loaded and ring not connected
+            if !ringManagerPro.dataLoaded && ringManagerPro.connectedPeripheral == nil {
+                await MainActor.run {
+                    showAlert = true
+                }
+            }
+        }
+    }
+
+    private func cancelTimeout() {
+        timeoutTask?.cancel()
+        timeoutTask = nil
+    }
     
     var body: some View {
         ZStack {
@@ -35,26 +55,26 @@ struct ContentViewPro: View {
                 TabBarPro(ringManagerPro: ringManagerPro)
                     .padding(.bottom, -10)
             }
-//                if !ringManagerPro.dataLoaded && (ringManagerPro.connectedPeripheral != nil) {
-//                    VStack(spacing: 20) {
-//                        ProgressView("Syncing data")
-//                            .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
-//                            .scaleEffect(1.2)
-//                        Text("Please wait...")
-//                    }
-//                    .padding(20)
-//                    .background(.ultraThinMaterial)
-//                    .cornerRadius(16)
-//                    .onAppear {
-//                        startTimeout()
-//                    }
-//                    .onDisappear {
-//                        cancelTimeout()
-//                    }
-//                    Color.black.opacity(0.1)
-//                        .ignoresSafeArea()
-//                        .allowsHitTesting(true)
-//                }
+            if !ringManagerPro.dataLoaded && (ringManagerPro.connectedPeripheral != nil) {
+                VStack(spacing: 20) {
+                    ProgressView("Syncing data")
+                        .progressViewStyle(CircularProgressViewStyle(tint: colorScheme == .dark ? .white : .black))
+                        .scaleEffect(1.2)
+                    Text("Please wait...")
+                }
+                .padding(20)
+                .background(.ultraThinMaterial)
+                .cornerRadius(16)
+                .onAppear {
+                    startTimeout()
+                }
+                .onDisappear {
+                    cancelTimeout()
+                }
+                Color.black.opacity(0.1)
+                    .ignoresSafeArea()
+                    .allowsHitTesting(true)
+            }
         }
         .environmentObject(ringManagerPro)
         .onAppear {
@@ -67,15 +87,15 @@ struct ContentViewPro: View {
                 }
             }
          }
-//        .alert(
-//            "Couldn't get data",
-//            isPresented: $showAlert, // must be a Binding<Bool>
-//            actions: {
-//                Button("OK", role: .cancel) { }
-//            },
-//            message: {
-//                Text("Please make sure the ring is binded and accessible to the phone")
-//            }
-//        )
+        .alert(
+            "Couldn't get data",
+            isPresented: $showAlert, // must be a Binding<Bool>
+            actions: {
+                Button("OK", role: .cancel) { }
+            },
+            message: {
+                Text("Please make sure the ring is binded and accessible to the phone")
+            }
+        )
     }
 }

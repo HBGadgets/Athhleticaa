@@ -109,9 +109,9 @@ struct DashboardViewPro: View {
         .onAppear() {
             ringManagerPro.selectedDate = Date()
         }
-//        .navigationDestination(isPresented: $goToScanScreen) {
-//            ScanningPage(ringManagerPro: ringManagerPro)
-//        }
+        .navigationDestination(isPresented: $goToScanScreen) {
+            ScanningScreenPro(ringManager: ringManagerPro)
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }

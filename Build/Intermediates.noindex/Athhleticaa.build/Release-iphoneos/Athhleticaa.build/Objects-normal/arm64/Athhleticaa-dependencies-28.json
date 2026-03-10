@@ -420,7 +420,7 @@
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Foundation.framework\/Modules\/module.modulemap",
     "clangModulePath" : "\/Users\/dipanshukashyap\/Library\/Developer\/Xcode\/DerivedData\/ModuleCache.noindex\/Foundation-ETWYW8G1M18UVTIF4HIMR0EQ3.pcm",
-    "isBridgingHeaderDependency" : true,
+    "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Foundation"
   },
@@ -493,13 +493,6 @@
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "OpenGLES"
-  },
-  {
-    "clangModuleMapPath" : "\/Users\/dipanshukashyap\/Desktop\/Athhleticaa\/Athhleticaa\/QCBandSDK.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/dipanshukashyap\/Desktop\/Athhleticaa\/Build\/Intermediates.noindex\/SwiftExplicitPrecompiledModules\/QCBandSDK-BK05ROJWQLVJR3BJ81L1LQRTB.pcm",
-    "isBridgingHeaderDependency" : true,
-    "isFramework" : false,
-    "moduleName" : "QCBandSDK"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/QuartzCore.framework\/Modules\/module.modulemap",
@@ -577,13 +570,6 @@
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UserNotifications"
-  },
-  {
-    "clangModuleMapPath" : "\/Users\/dipanshukashyap\/Desktop\/Athhleticaa\/Athhleticaa\/VeepooBleSDK.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/dipanshukashyap\/Desktop\/Athhleticaa\/Build\/Intermediates.noindex\/SwiftExplicitPrecompiledModules\/VeepooBleSDK-1AS0Z0MCHC2ORCPU2KUNYNASS.pcm",
-    "isBridgingHeaderDependency" : true,
-    "isFramework" : false,
-    "moduleName" : "VeepooBleSDK"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/xpc.modulemap",

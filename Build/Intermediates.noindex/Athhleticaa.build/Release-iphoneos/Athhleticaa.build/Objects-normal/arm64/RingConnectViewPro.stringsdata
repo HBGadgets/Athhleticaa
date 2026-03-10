@@ -1,0 +1,40 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/RingConnectViewPro.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "• Connected",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "Device not connected",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 69
+        }
+      }
+    ]
+  },
+  "version": 1
+}

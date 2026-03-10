@@ -12,27 +12,116 @@ final class RingManagerPro: NSObject, ObservableObject {
     static let shared = RingManagerPro()
 
     @Published var selectedTab: Int = 0
-    @Published private(set) var connectedPeripheral: CBPeripheral?
     @Published var errorMessage: String?
     @Published var selectedDayOffset: Int = 0
     @Published var selectedDate = Date()
     @Published var selectedTheme: AppTheme = .dark
-    
+
+    @Published var scannedDevices: [VPPeripheralModel] = []
+    @Published var connectedPeripheral: CBPeripheral?
 
     override init() {
         super.init()
+        initSDK()
     }
     
     func callAllFunctions() {
         
     }
     
-    // MARK: - Start Custom Scan
+    func initSDK() {
+        let veepooBleManager = VPBleCentralManage.sharedBleManager()
+        veepooBleManager!.isLogEnable = true  // Enable logging for debugging
+          
+        // Set peripheral manage (required for SDK operations)
+        veepooBleManager!.peripheralManage = VPPeripheralManage.shareVPPeripheralManager()
+          
+        // Monitor Bluetooth state
+        veepooBleManager!.vpBleCentralManageChangeBlock = { state in
+            switch state {
+            case .poweredOn:
+                // Bluetooth is ready, you can start scanning now
+                print("Bluetooth powered on - ready to scan")
+            case .poweredOff:
+                print("Bluetooth is turned off")
+            default:
+                break
+            }
+        }
+    }
+    
     func startScanning() {
-        VPCustomScanManage.sharedInstance.manager = self
-        VPCustomScanManage.sharedInstance.initDelegate()
-        VPCustomScanManage.sharedInstance.startScanDevices()
-        print("Started scanning...")
+
+        print("BLE Scan Started")
+
+        scannedDevices.removeAll()
+
+        VPBleCentralManage.sharedBleManager()
+            .veepooSDKStartScanDeviceAndReceiveScanningDevice { [weak self] peripheralModel in
+
+                guard let device = peripheralModel else {
+                    print("Received nil device")
+                    return
+                }
+
+                print("Found:", device.deviceName, device.deviceAddress)
+
+                self?.addDevice(device)
+            }
+    }
+    
+    private func addDevice(_ peripheralModel: VPPeripheralModel) {
+        // Deduplicate by deviceAddress
+        if !scannedDevices.contains(where: { $0.deviceAddress == peripheralModel.deviceAddress }) {
+            DispatchQueue.main.async {
+                self.scannedDevices.append(peripheralModel)
+            }
+        }
+    }
+    
+    func connectDevice(_ peripheralModel: VPPeripheralModel) {
+        // Stop scanning first
+        VPBleCentralManage.sharedBleManager().veepooSDKStopScanDevice()
+          
+        // Use SDK connection instead of custom
+        VPBleCentralManage.sharedBleManager()
+            .veepooSDKConnectDevice(peripheralModel) { [weak self] connectState in
+                self?.handleConnectEvent(connectState: connectState)
+                  
+                if connectState == .BleVerifyPasswordSuccess {
+                    // Get the connected peripheral
+                    if let peripheral = VPBleCentralManage.sharedBleManager().peripheralModel.peripheral {
+                        self?.onDeviceConnected(peripheral)
+                    }
+                }
+            }
+    }
+    
+    func handleConnectEvent(connectState: DeviceConnectState) {
+
+        switch connectState {
+
+        case .BlePoweredOff:
+            print("Bluetooth Off")
+
+        case .BleConnecting:
+            print("Connecting...")
+
+        case .BleConnectSuccess:
+            print("Connected")
+
+        case .BleConnectFailed:
+            print("Connect Failed")
+
+        case .BleVerifyPasswordSuccess:
+            print("Password Verified")
+
+        case .BleVerifyPasswordFailure:
+            print("Password Failed")
+
+        case .BleConnectTimeout:
+            print("Connection Timeout")
+        }
     }
     
     // MARK: - Device Connected Callback

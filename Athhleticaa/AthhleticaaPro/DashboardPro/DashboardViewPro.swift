@@ -24,10 +24,11 @@ struct DashboardViewPro: View {
     var body: some View {
         VStack {
             ScrollView {
+                
                 VStack(spacing: 16) {
-//                    if ((ringManagerProPro.connectedPeripheral == nil)) {
-//                        RingConnectViewPro(ringManagerPro: ringManagerPro)
-//                    }
+                    if ((ringManagerPro.connectedPeripheral == nil)) {
+                        RingConnectViewPro(ringManagerPro: ringManagerPro)
+                    }
                     NavigationLink(destination: HeartRateScreenViewPro(ringManagerPro: ringManagerPro)) {
                         HeartRateCardPro(ringManagerPro: ringManagerPro)
                     }

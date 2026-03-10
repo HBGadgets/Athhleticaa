@@ -34,24 +34,22 @@ final class RingManagerPro: NSObject, ObservableObject {
         }
           
         self.dataLoaded = false
-          
-        // Sync historical data from device
-        VPBleCentralManage.sharedBleManager().peripheralManage
-            .veepooSdkStartReadDeviceAllData { [weak self] readState, totalDay, currentDay, progress in
-                switch readState {
-                case .start:
-                    print("Starting data sync")
-                case .reading:
-                    print("Syncing day \(currentDay)/\(totalDay) - \(progress)%")
-                case .complete:
-                    print("Data sync complete")
-                    DispatchQueue.main.async {
-                        self?.dataLoaded = true
-                    }
-                default:
-                    break
+        
+        VPBleCentralManage.sharedBleManager().peripheralManage.veepooSdkStartReadDeviceAllData {[weak self] (readDeviceBaseDataState, totalDay, currentReadDayNumber, readCurrentDayProgress) in
+            switch readDeviceBaseDataState {
+            case .start:
+                print("Starting data sync")
+            case .reading:
+                print("Syncing day")
+            case .complete:
+                print("Data sync complete")
+                DispatchQueue.main.async {
+                    self?.dataLoaded = true
                 }
+            default:
+                break
             }
+        }
     }
     
     func initSDK() {

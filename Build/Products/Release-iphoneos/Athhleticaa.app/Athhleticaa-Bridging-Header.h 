@@ -11,4 +11,3 @@
 #import <QCBandSDK/QCDFU_Utils.h>
 #import <VeepooBleSDK/VeepooBleSDK.h>
 #import "FMDB.h"
-#import "MBProgressHUD.h"

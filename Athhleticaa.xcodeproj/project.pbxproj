@@ -10,6 +10,7 @@
 		283557002EB7834A0059177E /* SleepChartKit in Frameworks */ = {isa = PBXBuildFile; productRef = 283556FF2EB7834A0059177E /* SleepChartKit */; };
 		286E61682F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */; };
 		286E61692F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 416BB247BAC24C44E892D6EF /* Pods_Athhleticaa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		288528452F6067CC0032E855 /* MJExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 288528442F6067CC0032E855 /* MJExtension */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				288528452F6067CC0032E855 /* MJExtension in Frameworks */,
 				283557002EB7834A0059177E /* SleepChartKit in Frameworks */,
 				286E61682F5AF5CC0024DFB1 /* Pods_Athhleticaa.framework in Frameworks */,
 			);
@@ -152,6 +154,7 @@
 			name = Athhleticaa;
 			packageProductDependencies = (
 				283556FF2EB7834A0059177E /* SleepChartKit */,
+				288528442F6067CC0032E855 /* MJExtension */,
 			);
 			productName = Athhleticaa;
 			productReference = 281D04C02EAA4FDC00FC7FF5 /* Athhleticaa.app */;
@@ -183,6 +186,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				283556FE2EB7834A0059177E /* XCRemoteSwiftPackageReference "SleepChartKit" */,
+				288528432F6067CC0032E855 /* XCRemoteSwiftPackageReference "MJExtension" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 281D04C12EAA4FDC00FC7FF5 /* Products */;
@@ -514,6 +518,14 @@
 				kind = branch;
 			};
 		};
+		288528432F6067CC0032E855 /* XCRemoteSwiftPackageReference "MJExtension" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoderMJLee/MJExtension";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -521,6 +533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 283556FE2EB7834A0059177E /* XCRemoteSwiftPackageReference "SleepChartKit" */;
 			productName = SleepChartKit;
+		};
+		288528442F6067CC0032E855 /* MJExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 288528432F6067CC0032E855 /* XCRemoteSwiftPackageReference "MJExtension" */;
+			productName = MJExtension;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

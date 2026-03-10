@@ -1,0 +1,4 @@
+module MJExtension {
+umbrella header "/Users/dipanshukashyap/Library/Developer/Xcode/DerivedData/Athhleticaa-fqyfloomadzldheosmmzyphirkmz/SourcePackages/checkouts/MJExtension/MJExtension/MJExtension.h"
+export *
+}

@@ -1,6 +1,15 @@
 {
-  "originHash" : "7a64ba5c9f6f398286c9a1954c7e9e49da66c4c860a9f08ffb4302218c618ae0",
+  "originHash" : "01cf638d37a73c45c6ed9405c13f5183c9f64686f9f3111ee052632ca728a4c7",
   "pins" : [
+    {
+      "identity" : "mjextension",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CoderMJLee/MJExtension",
+      "state" : {
+        "revision" : "03ceefbcb51be045e0b4d252442a2fb2939d52ae",
+        "version" : "3.4.2"
+      }
+    },
     {
       "identity" : "sleepchartkit",
       "kind" : "remoteSourceControl",

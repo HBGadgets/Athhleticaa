@@ -23,6 +23,12 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var dataLoaded: Bool = false
     @Published private(set) var batteryLevel: Int?
     @Published var isCharging: Bool = false
+    
+    // MARK: Classes initialisation
+    @Published var activityManager = ActivityManagerPro()
+    
+    // MARK: Dashboard Variables
+    @Published var dashboardStepsData: StepsDataString?
 
     override init() {
         super.init()
@@ -85,6 +91,11 @@ final class RingManagerPro: NSObject, ObservableObject {
 
                 // Start battery monitoring AFTER verification
                 self?.startBatteryMonitoring()
+                self?.activityManager.readOneDayActivityData { data in
+                    DispatchQueue.main.async {
+                        self?.dashboardStepsData = data
+                    }
+                }
 
                 if let profile = UserProfileStorage.load() {
                     self?.syncUserProfileToDevice(profileArg: profile)

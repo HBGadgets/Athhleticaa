@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ActivityCardPro: View {
     @Environment(\.colorScheme) var colorScheme
-    var calories: Int
-    var steps: Int
-    var distance: Double
+    var calories: String
+    var steps: String
+    var distance: String
     
     var formattedToday: String {
         let formatter = DateFormatter()
@@ -53,7 +53,7 @@ struct ActivityCardPro: View {
                         Image(systemName: "flame")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
-                        Text("\(calories)")
+                        Text(calories)
                             .font(.title)
                             .foregroundColor(.white)
                             .fontWidth(.expanded)
@@ -69,7 +69,7 @@ struct ActivityCardPro: View {
                         Image(systemName: "figure.walk")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
-                        Text("\(steps)")
+                        Text(steps)
                             .font(.title)
                             .foregroundColor(.white)
                             .fontWidth(.expanded)
@@ -85,7 +85,7 @@ struct ActivityCardPro: View {
                         Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
-                        Text(String(format: "%.2f", distance))
+                        Text(distance)
                             .font(.title)
                             .foregroundColor(.white)
                             .fontWidth(.expanded)

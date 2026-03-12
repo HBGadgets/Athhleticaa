@@ -12,26 +12,10 @@
       },
       {
         "comment": "",
-        "key": "%lld",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 56
-        }
-      },
-      {
-        "comment": "",
         "key": "Kcal",
         "location": {
           "startingColumn": 30,
           "startingLine": 60
-        }
-      },
-      {
-        "comment": "",
-        "key": "%lld",
-        "location": {
-          "startingColumn": 30,
-          "startingLine": 72
         }
       },
       {

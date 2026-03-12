@@ -36,9 +36,9 @@ struct DashboardViewPro: View {
                     // MARK: - Steps
                     NavigationLink(destination: ActivityScreenViewPro(ringManagerPro: ringManagerPro)) {
                         ActivityCardPro(
-                            calories: 0,
-                            steps: 0,
-                            distance: 0
+                            calories: ringManagerPro.dashboardStepsData?.calories ?? "0",
+                            steps: ringManagerPro.dashboardStepsData?.totalSteps ?? "0",
+                            distance: ringManagerPro.dashboardStepsData?.distance ?? "0"
                         )
                     }
                     

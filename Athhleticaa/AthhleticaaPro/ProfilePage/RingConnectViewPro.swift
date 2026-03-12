@@ -44,13 +44,13 @@ struct RingConnectViewPro: View {
                         Text("• Connected")
                             .foregroundStyle(.green)
                         
-//                        HStack {
-//                            Text("Battery: \(ringManagerPro.batteryLevel ?? 0)%")
-//                            if (ringManagerPro.isCharging) {
-//                                Image(systemName: "bolt.fill")
-//                                    .foregroundStyle(.green)
-//                            }
-//                        }
+                        HStack {
+                            Text("Battery: \(ringManagerPro.batteryLevel ?? 0)%")
+                            if (ringManagerPro.isCharging) {
+                                Image(systemName: "bolt.fill")
+                                    .foregroundStyle(.green)
+                            }
+                        }
                         
 //                        Button("Unbind") {
 //                            ringManagerPro.disconnect()

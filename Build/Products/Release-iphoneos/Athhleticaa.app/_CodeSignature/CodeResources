@@ -14,7 +14,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		WGcbu9FBVwrou+ypqOWay/Mee4E=
+		r5zR6kEi7T49zeFvFk80ZWYTmh4=
 		</data>
 		<key>Athhleticaa-Bridging-Header.h </key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Frameworks/ABParTool.framework/ABParTool</key>
 		<data>
-		o2wRiPX55pIsgeiOP0Wevap3c6A=
+		U8eF9JWYkd4VsI+5z9Lr2tK9d7E=
 		</data>
 		<key>Frameworks/ABParTool.framework/Info.plist</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Frameworks/DFUnits.framework/DFUnits</key>
 		<data>
-		tkrS8g1Y/QvZAiA1P6w4b5beGzo=
+		xMsHElAW1jDFR/cW1ylJoZkJ9n4=
 		</data>
 		<key>Frameworks/DFUnits.framework/Info.plist</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/FMDB.framework/FMDB</key>
 		<data>
-		QQ2I/0NLRr9AJ1mbZ4Yq38dZUkI=
+		x7N3yWGg34cViDVipBy6BO2eDdg=
 		</data>
 		<key>Frameworks/FMDB.framework/FMDB_Privacy.bundle/Info.plist</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/GRDFUSDK.framework/GRDFUSDK</key>
 		<data>
-		z4kxRpDMZHpIftKGPmyIiwMZdhk=
+		RbIxkfPFAz4JldC6fwLa7lbTI5M=
 		</data>
 		<key>Frameworks/GRDFUSDK.framework/Info.plist</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/JLDialUnit.framework/JLDialUnit</key>
 		<data>
-		jqqUbl/Tm7E2tg7ourNq4+wt3LU=
+		OJthGvYKmqSA4S0eXrZbk+srhV8=
 		</data>
 		<key>Frameworks/JLDialUnit.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Frameworks/JL_BLEKit.framework/JL_BLEKit</key>
 		<data>
-		GO7u9MgEf3qiTVJFbMb4Z6j1lU8=
+		oaAWsp6frDO5k2GWYJFU58dQ8Tk=
 		</data>
 		<key>Frameworks/JL_BLEKit.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Frameworks/MJExtension.framework/MJExtension</key>
 		<data>
-		vFqAYKdqcdUAwm6S/MNE+pDmtRQ=
+		JUvzDDxToGZpZCmz2pi+9Hcv3VI=
 		</data>
 		<key>Frameworks/MJExtension.framework/MJExtension.bundle/Info.plist</key>
 		<data>
@@ -126,7 +126,7 @@
 		</data>
 		<key>Frameworks/Pods_Athhleticaa.framework/Pods_Athhleticaa</key>
 		<data>
-		K++EHPE51CAiBOyhefnZYJ2VFrE=
+		ebtwsLGa0e+HSDHsDcTW9V4uktY=
 		</data>
 		<key>Frameworks/Pods_Athhleticaa.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -138,7 +138,7 @@
 		</data>
 		<key>Frameworks/QCBandSDK.framework/QCBandSDK</key>
 		<data>
-		JzNeqWeay2h2WULJ4fGEcfPJ+KM=
+		m+s913MTy32M5ZKOPWP02T8Ddbc=
 		</data>
 		<key>Frameworks/QCBandSDK.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -150,7 +150,7 @@
 		</data>
 		<key>Frameworks/ZipZap.framework/ZipZap</key>
 		<data>
-		a0Siwbd1DGNxVsAUo2lWa6+XvVM=
+		1TXn4q8wh+kUuNGSLtS9WhSJO/c=
 		</data>
 		<key>Frameworks/ZipZap.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -197,7 +197,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AEEvt0uhlB+Dzq8VuQcls9sjgSFUq6YVYHcdFOo6MuQ=
+			91MQyIWmfUT+7gFLWGO3alPl3jOFvfd2GYTHYEGKmpc=
 			</data>
 		</dict>
 		<key>Athhleticaa-Bridging-Header.h </key>
@@ -211,7 +211,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yr10pd2zt/PgU1PNgHoXtN+M9+ZG02rd+B4uDv8Au3o=
+			wOiYI9XLJ15zM96iWsYIEh5UVwAfRrX+UkOAJNusFkY=
 			</data>
 		</dict>
 		<key>Frameworks/ABParTool.framework/Info.plist</key>
@@ -232,7 +232,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EgB3gOKfN3zF/rPSoqjUspR0xF7qXaK8NPOlxkyCQo0=
+			BbK4YeH6rsU/Ewozld4dJkBYihghAC7pkMp6PsT/USQ=
 			</data>
 		</dict>
 		<key>Frameworks/DFUnits.framework/Info.plist</key>
@@ -253,7 +253,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			S8pwvDkYNfYn4P7PdLNDppKEsBylyIILdvheNCoLPHY=
+			Gd5f3RQjCX6YuABk1sB/hiFPwsscAk3t3GTC6co+zag=
 			</data>
 		</dict>
 		<key>Frameworks/FMDB.framework/FMDB_Privacy.bundle/Info.plist</key>
@@ -288,7 +288,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fbphtCqhyTIUWsqDvlOj+YyT42iaDnWXNP6BwIOAzSw=
+			ydMC11lPLhOcGkQMQrNo/U23gBhvOOpzT8HlDqrihKc=
 			</data>
 		</dict>
 		<key>Frameworks/GRDFUSDK.framework/Info.plist</key>
@@ -316,7 +316,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			U/sGw4N6lPo/9CzLgTUfPFXfi7QYhjUgaZUMc/2+l3A=
+			jQXsP0r6DmyNwZbM64HIt93a5iDXjybHLXLyM4wOdQs=
 			</data>
 		</dict>
 		<key>Frameworks/JLDialUnit.framework/_CodeSignature/CodeResources</key>
@@ -337,7 +337,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8B0f1FgbSJpOwV9EMJEezUG7AwIp0By94I2I4gsSCmA=
+			UCPXzNXFsGCY4hQb2eJrJwZMevnr0qhmmnAzuGH3rVc=
 			</data>
 		</dict>
 		<key>Frameworks/JL_BLEKit.framework/_CodeSignature/CodeResources</key>
@@ -358,7 +358,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ue12CIVUwGHxr8SkmxPpEhEuznf6+0hTgDNqBXIDNL8=
+			EVgoeSlTwr0QqdA2+qFeh9wrsVV4e1hC06UCPttZCuo=
 			</data>
 		</dict>
 		<key>Frameworks/MJExtension.framework/MJExtension.bundle/Info.plist</key>
@@ -393,7 +393,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AySKF0u7SSqmxDWP5L0ZPEM6HsfgHSEFK/xhB8TEfyI=
+			GbQo5KFqAXiQRQnuHNeK2aWkEMP00idaG6/UHnjSKfI=
 			</data>
 		</dict>
 		<key>Frameworks/Pods_Athhleticaa.framework/_CodeSignature/CodeResources</key>
@@ -414,7 +414,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			judtRO1NDoZTfRLZWc7HBpwAysFhdSkpGuKsncnz2co=
+			0dvq6VGOlYCt1yYRe/aEWjvPk9719WDoASzjpbuPAwU=
 			</data>
 		</dict>
 		<key>Frameworks/QCBandSDK.framework/_CodeSignature/CodeResources</key>
@@ -435,7 +435,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hzJJcLCnlaCKOYtzNG/vOts50x668tlBn5Nk5sK9Md4=
+			A2ZmVE+eaxrvLcCn86EcKRnlQfK/XpIF6huNY4vUsqA=
 			</data>
 		</dict>
 		<key>Frameworks/ZipZap.framework/_CodeSignature/CodeResources</key>

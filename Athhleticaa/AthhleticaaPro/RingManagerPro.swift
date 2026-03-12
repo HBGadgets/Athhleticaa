@@ -21,6 +21,8 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var connectedPeripheral: CBPeripheral?
     private let lastDeviceKey = "last_connected_device"
     @Published var dataLoaded: Bool = false
+    @Published private(set) var batteryLevel: Int?
+    @Published var isCharging: Bool = false
 
     override init() {
         super.init()
@@ -80,6 +82,10 @@ final class RingManagerPro: NSObject, ObservableObject {
                 }
             case .connectStateVerifyPasswordSuccess:
                 print("Password verified - ready for operations")
+
+                // Start battery monitoring AFTER verification
+                self?.startBatteryMonitoring()
+
                 if let profile = UserProfileStorage.load() {
                     self?.syncUserProfileToDevice(profileArg: profile)
                 } else {
@@ -212,95 +218,54 @@ final class RingManagerPro: NSObject, ObservableObject {
             }
         self.dataLoaded = true
     }
-}
+    
+    func startBatteryMonitoring() {
+        VPPeripheralManage.shareVPPeripheralManager()
+            .veepooSDKReadDeviceBatteryAndChargeInfo { [weak self] isPercent, chargeState, lowBat, battery in
 
-struct WeeklyCalendarViewPro: View {
-    @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var ringManagerPro: RingManagerPro
-    var fromScreen: String
-    @Environment(\.dismiss) private var dismiss
+                guard let self else { return }
 
+                // Convert battery to percentage
+                let percent: Int
 
-    // MARK: - Limit range: last 7 days including today
-    private var dateRange: ClosedRange<Date> {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let sevenDaysAgo = calendar.date(byAdding: .day, value: -6, to: today)! // include today
-        return sevenDaysAgo...today
-    }
-
-    var body: some View {
-        VStack(spacing: 24) {
-            Text("Select Date")
-                .font(.headline)
-                .padding(.top)
-
-            // MARK: - Native DatePicker
-            DatePicker(
-                "Choose Date",
-                selection: $ringManagerPro.selectedDate,
-                in: dateRange,
-                displayedComponents: .date
-            )
-            .datePickerStyle(GraphicalDatePickerStyle())
-            .accentColor(.orange)
-
-            // MARK: - Confirm Button
-            Button(action: {
-                let dayOffset = calculateDayOffset(from: ringManagerPro.selectedDate)
-                ringManagerPro.selectedDayOffset = dayOffset
-
-                if fromScreen == "ActivityScreenPro" {
-//                    ringManagerPro.pedometerManager.stepsDataDetails = nil
-//                    ringManagerPro.pedometerManager.getPedometerDataDetails(day: dayOffset)
-                    dismiss()
-                } else if fromScreen == "HeartRateScreenPro" {
-//                    ringManagerPro.heartRateManager.fetchTodayHeartRate(dayIndex: dayOffset)
-                    dismiss()
-                } else if fromScreen == "SleepAnalysisScreenPro" {
-//                    ringManager.sleepManager.sleepSegments.removeAll()
-//                    ringManager.sleepManager.getSleep(day: dayOffset)
-                    dismiss()
-                } else if fromScreen == "StressAnalysisScreenPro" {
-//                    ringManager.stressManager.fetchStressData(day: dayOffset)
-                    dismiss()
-                } else if fromScreen == "BloodOxygenScreenPro" {
-//                    ringManager.bloodOxygenManager.fetchBloodOxygenData(dayIndex: dayOffset)
-                    dismiss()
-                } else if fromScreen == "HRVScreenPro" {
-//                    ringManager.hrvManager.fetchHRV(day: dayOffset)
-                    dismiss()
+                if isPercent {
+                    percent = Int(battery)              // Already 0–100
+                } else {
+                    // Convert 0–4 bars → percentage
+                    percent = Self.convertBatteryBarsToPercent(Int(battery))
                 }
-            }) {
-                Text("Confirm")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-            }
-        }
-        .padding()
-//        .onAppear {
-//            // Preselect currently selected offset or today if invalid
-//            let calendar = Calendar.current
-//            let today = calendar.startOfDay(for: Date())
-//            let preselected = calendar.date(byAdding: .day, value: -ringManager.selectedDayOffset, to: today) ?? today
-//            if dateRange.contains(preselected) {
-//                ringManager.selectedDate = preselected
-//            } else {
-//                ringManager.selectedDate = today
-//            }
-//        }
-    }
 
-    // MARK: - Helper: Calculate offset between today and selected date
-    private func calculateDayOffset(from date: Date) -> Int {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let selected = calendar.startOfDay(for: date)
-        let diff = calendar.dateComponents([.day], from: selected, to: today).day ?? 0
-        return max(diff, 0)
+                // Map charge state
+                let charging = Self.isChargingState(chargeState)
+
+                DispatchQueue.main.async {
+                    self.batteryLevel = percent
+                    self.isCharging = charging
+                }
+
+                print("Battery level:", percent, "%")
+                print("Charging:", charging)
+            }
+    }
+    
+    private static func isChargingState(_ state: VPDeviceChargeState) -> Bool {
+        switch state {
+        case .charging:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private static func convertBatteryBarsToPercent(_ bars: Int) -> Int {
+        switch bars {
+        case 0: return 5
+        case 1: return 25
+        case 2: return 50
+        case 3: return 75
+        case 4: return 100
+        default: return 0
+        }
     }
 }
+

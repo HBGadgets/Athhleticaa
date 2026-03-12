@@ -20,6 +20,14 @@
       },
       {
         "comment": "",
+        "key": "Battery: %lld%%",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
         "key": "Device not connected",
         "location": {
           "startingColumn": 30,

@@ -1,32 +1,5 @@
 {
   "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/RingManagerPro.swift",
-  "tables": {
-    "Localizable": [
-      {
-        "comment": "",
-        "key": "Select Date",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 234
-        }
-      },
-      {
-        "comment": "",
-        "key": "Choose Date",
-        "location": {
-          "startingColumn": 17,
-          "startingLine": 240
-        }
-      },
-      {
-        "comment": "",
-        "key": "Confirm",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 275
-        }
-      }
-    ]
-  },
+  "tables": {},
   "version": 1
 }

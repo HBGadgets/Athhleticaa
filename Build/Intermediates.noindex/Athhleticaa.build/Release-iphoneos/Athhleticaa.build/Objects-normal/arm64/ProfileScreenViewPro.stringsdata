@@ -1,5 +1,64 @@
 {
   "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ProfileScreenViewPro.swift",
-  "tables": {},
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Confirmation",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 117
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ring not connected",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 121
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ring is glowing green",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 113
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ring data will be synced to Apple Health",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 119
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 123
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connect the app with ring first",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 128
+        }
+      }
+    ]
+  },
   "version": 1
 }

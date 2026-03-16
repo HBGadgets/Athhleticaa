@@ -26,9 +26,13 @@ final class RingManagerPro: NSObject, ObservableObject {
     
     // MARK: Classes initialisation
     @Published var activityManager = ActivityManagerPro()
+    @Published var heartRateManager = HeartRateManagerPro()
+    @Published var bloodOxygenManager = BloodOxygenManagerPro()
+    @Published var hrvManager = HrvManagerPro()
     
     // MARK: Dashboard Variables
     @Published var dashboardStepsData: StepsDataString?
+    @Published var dashboardHeartData: [HeartAndHealthData]? = []
 
     override init() {
         super.init()
@@ -36,28 +40,33 @@ final class RingManagerPro: NSObject, ObservableObject {
     }
     
     func callAllFunctions() {
+        self.dataLoaded = false
         guard VPBleCentralManage.sharedBleManager().isConnected else {
             print("Device not connected")
             return
         }
-          
-        self.dataLoaded = false
         
-        VPBleCentralManage.sharedBleManager().peripheralManage.veepooSdkStartReadDeviceAllData {[weak self] (readDeviceBaseDataState, totalDay, currentReadDayNumber, readCurrentDayProgress) in
-            switch readDeviceBaseDataState {
-            case .start:
-                print("Starting data sync")
-            case .reading:
-                print("Syncing day")
-            case .complete:
-                print("Data sync complete")
-                DispatchQueue.main.async {
-                    self?.dataLoaded = true
+        VPBleCentralManage.sharedBleManager().peripheralManage.veepooSdkStartReadDeviceAllData { (readDeviceBaseDataState, totalDay, currentReadDayNumber, readCurrentDayProgress) in
+                    switch readDeviceBaseDataState {
+                    case .start:
+                        print("Starting data sync")
+                    case .reading:
+                        let progressString = "\(currentReadDayNumber)/\(totalDay) - \(readCurrentDayProgress)%"
+                        print("Syncing: \(progressString)")
+                    case .complete:
+                        print("Data sync complete")
+                        DispatchQueue.main.async {
+//                            self.activityManager.readOneDayActivityData { data in
+//                                self.dashboardStepsData = data
+//                                self.dataLoaded = true
+//                            }
+                            self.dataLoaded = true
+                        }
+                    default:
+                        break
+                    }
                 }
-            default:
-                break
-            }
-        }
+        
     }
     
     func initSDK() {
@@ -91,11 +100,7 @@ final class RingManagerPro: NSObject, ObservableObject {
 
                 // Start battery monitoring AFTER verification
                 self?.startBatteryMonitoring()
-                self?.activityManager.readOneDayActivityData { data in
-                    DispatchQueue.main.async {
-                        self?.dashboardStepsData = data
-                    }
-                }
+                self?.callAllFunctions()
 
                 if let profile = UserProfileStorage.load() {
                     self?.syncUserProfileToDevice(profileArg: profile)
@@ -106,6 +111,14 @@ final class RingManagerPro: NSObject, ObservableObject {
                 break
             }
         }
+    }
+    
+    func disConnect() {
+        let manager = VPBleCentralManage.sharedBleManager()
+        manager?.veepooSDKDisconnectDevice()
+        connectedPeripheral = nil
+        // remove stored last-connected
+        UserDefaults.standard.removeObject(forKey: lastDeviceKey)
     }
     
     func autoReconnectIfNeeded() {
@@ -227,7 +240,6 @@ final class RingManagerPro: NSObject, ObservableObject {
                     print("❌ Personal info sync failed:", result.words)
                 }
             }
-        self.dataLoaded = true
     }
     
     func startBatteryMonitoring() {
@@ -259,6 +271,25 @@ final class RingManagerPro: NSObject, ObservableObject {
             }
     }
     
+    //MARK: Get data
+    func waitForHeartData(day: Int, retries: Int = 5) {
+        
+        heartRateManager.readHeartRateDataByDay(day: day) { data in
+            
+            if let data, data.count > 5 {
+                self.dashboardHeartData = data
+                self.dataLoaded = true
+            } else if retries > 0 {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.waitForHeartData(day: day, retries: retries - 1)
+                }
+            }
+        }
+    }
+    
+    
+    
     private static func isChargingState(_ state: VPDeviceChargeState) -> Bool {
         switch state {
         case .charging:
@@ -279,4 +310,3 @@ final class RingManagerPro: NSObject, ObservableObject {
         }
     }
 }
-

@@ -9,6 +9,38 @@
           "startingColumn": 22,
           "startingLine": 33
         }
+      },
+      {
+        "comment": "",
+        "key": "No data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "---",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "90 BPM",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "Range 90-110",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 50
+        }
       }
     ]
   },

@@ -85,7 +85,7 @@ struct ActivityCardPro: View {
                         Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
-                        Text(distance)
+                        Text(String(format: "%.2f", Double(distance) ?? 0))
                             .font(.title)
                             .foregroundColor(.white)
                             .fontWidth(.expanded)

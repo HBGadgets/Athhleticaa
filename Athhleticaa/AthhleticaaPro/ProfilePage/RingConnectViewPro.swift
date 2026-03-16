@@ -52,11 +52,11 @@ struct RingConnectViewPro: View {
                             }
                         }
                         
-//                        Button("Unbind") {
-//                            ringManagerPro.disconnect()
-//                        }
-//                        .backgroundStyle(.blue)
-//                        .buttonStyle(.borderedProminent)
+                        Button("Unbind") {
+                            ringManagerPro.disConnect()
+                        }
+                        .backgroundStyle(.blue)
+                        .buttonStyle(.borderedProminent)
                     }
                     .padding()
                 } else {

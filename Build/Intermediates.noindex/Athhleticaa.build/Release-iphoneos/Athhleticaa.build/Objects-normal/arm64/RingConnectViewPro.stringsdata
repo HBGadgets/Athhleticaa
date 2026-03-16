@@ -20,6 +20,14 @@
       },
       {
         "comment": "",
+        "key": "Unbind",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 55
+        }
+      },
+      {
+        "comment": "",
         "key": "Battery: %lld%%",
         "location": {
           "startingColumn": 34,

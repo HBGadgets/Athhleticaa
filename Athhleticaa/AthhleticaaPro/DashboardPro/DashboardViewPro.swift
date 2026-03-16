@@ -105,9 +105,21 @@ struct DashboardViewPro: View {
         } message: {
             Text("Connect the app with ring first")
         }
-        
-        .onAppear() {
-            ringManagerPro.selectedDate = Date()
+        .onChange(of: ringManagerPro.dataLoaded) { loaded in
+            if loaded {
+//                ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) { boole in
+//                    if (boole == true) {
+//                        ringManagerPro.hrvManager.readHrvData() { boole in
+//                            if (boole == true) {
+//                                print("done")
+//                            }
+//                        }
+//                    }
+//                }
+                ringManagerPro.heartRateManager.readHeartRateDataByDay(day: 0) { data in
+                    ringManagerPro.dashboardHeartData = data
+                }
+            }
         }
         .navigationDestination(isPresented: $goToScanScreen) {
             ScanningScreenPro(ringManager: ringManagerPro)

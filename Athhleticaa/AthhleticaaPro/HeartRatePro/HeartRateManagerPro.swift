@@ -18,6 +18,7 @@ struct HeartAndHealthData: Identifiable {
 class HeartRateManagerPro: ObservableObject {
     
     @Published var heartData: [HeartAndHealthData] = []
+    @Published var detailData = []
     
     var heartDict = [String : [String: String]]()
     
@@ -34,8 +35,7 @@ class HeartRateManagerPro: ObservableObject {
     }
     
     
-    func readHeartRateDataByDay(day: Int,
-                                completion: @escaping ([HeartAndHealthData]?) -> Void) {
+    func readHeartRateDataByDay(day: Int, completion: @escaping ([HeartAndHealthData]?) -> Void) {
 
         let heartOnedayData = VPDataBaseOperation.veepooSDKGetOriginalChangeHalfHourData(withDate: day.getOneDayDateString(), andTableID: VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress)
         
@@ -76,17 +76,4 @@ class HeartRateManagerPro: ObservableObject {
             completion(sorted)
         }
     }
-    
-//    func obtainOneDayHeartData() {
-//        let heartOnedayData = VPDataBaseOperation.veepooSDKGetOriginalChangeHalfHourData(withDate: 0.getOneDayDateString(), andTableID: VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress)
-//        
-//        if heartOnedayData == nil {
-//            heartDict = [String : [String: String]]()
-//        }else {
-//            heartDict = heartOnedayData as! [String : [String : String]]
-//        }
-//        print("Heart rate data count \(heartDict.count)")
-//        
-//        print("heart rate dictionary \(heartDict)")
-//    }
 }

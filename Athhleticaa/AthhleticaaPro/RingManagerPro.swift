@@ -29,10 +29,12 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var heartRateManager = HeartRateManagerPro()
     @Published var bloodOxygenManager = BloodOxygenManagerPro()
     @Published var hrvManager = HrvManagerPro()
+    @Published var detailDataManager = DetailDataManagerPro()
     
     // MARK: Dashboard Variables
     @Published var dashboardStepsData: StepsDataString?
     @Published var dashboardHeartData: [HeartAndHealthData]? = []
+    @Published var dashboardDetailsData: [RawHealthData]? = []
 
     override init() {
         super.init()

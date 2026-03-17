@@ -116,8 +116,8 @@ struct DashboardViewPro: View {
 //                        }
 //                    }
 //                }
-                ringManagerPro.heartRateManager.readHeartRateDataByDay(day: 0) { data in
-                    ringManagerPro.dashboardHeartData = data
+                ringManagerPro.detailDataManager.readDetailDataByDay(day: 0) { data in
+                    ringManagerPro.dashboardDetailsData = data
                 }
             }
         }

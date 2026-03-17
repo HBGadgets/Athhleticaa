@@ -4,10 +4,18 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "%lld items  got and last BPM is %@ at %@",
+        "key": "%@ BPM",
         "location": {
-          "startingColumn": 26,
-          "startingLine": 32
+          "startingColumn": 38,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld BPM",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 45
         }
       }
     ]

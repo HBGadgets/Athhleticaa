@@ -29,9 +29,36 @@ struct HeartRateScreenViewPro: View {
             VStack(spacing: 20) {
                 // MARK: - Heart Rate Section
                 if let dataList = ringManagerPro.dashboardDetailsData {
-                    Text("\(dataList.count) items  got and last BPM is \(dataList.last?.heartRate) at \(dataList.last?.time)")
+                    
+                    if let time = ringManagerPro.timeChartHeartRate {
+                        HStack {
+                            if let hb = ringManagerPro.heartRateValueChart {
+                                Text("\(hb) BPM")
+                            }
+                            Text(time, format: .dateTime.hour().minute().hour(.twoDigits(amPM: .abbreviated)))
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    } else {
+                        HStack {
+                            Text("\(ringManagerPro.dashboardDetailsData?.last?.heartRate ?? 0) BPM")
+                            Text({
+                                if let data = ringManagerPro.dashboardDetailsData,
+                                   let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                                   return time.toAMPM
+                                } else {
+                                    return "--:--"
+                                }
+                            }())
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    }
                     HeartRateHealthChartViewPro(
-                        data: ringManagerPro.dashboardDetailsData ?? []
+                        data: ringManagerPro.dashboardDetailsData ?? [],
+                        ringManagerPro: ringManagerPro
                     )
                     .padding(10)
                     .frame(maxWidth: .infinity, minHeight: 250)
@@ -46,3 +73,17 @@ struct HeartRateScreenViewPro: View {
         }
     }
 }
+
+extension String {
+    var toAMPM: String {
+        let parts = self.split(separator: ":")
+        guard parts.count == 2,
+              let hour = Int(parts[0]),
+              let minute = Int(parts[1]) else { return self }
+        let suffix = hour < 12 ? "AM" : "PM"
+        let displayHour = hour == 0 ? 12 : (hour > 12 ? hour - 12 : hour)
+        return String(format: "%d:%02d %@", displayHour, minute, suffix)
+    }
+}
+
+

@@ -7,15 +7,31 @@
         "key": "Scan Devices",
         "location": {
           "startingColumn": 26,
-          "startingLine": 36
+          "startingLine": 85
         }
       },
       {
         "comment": "",
         "key": "RSSI %lld",
         "location": {
+          "startingColumn": 30,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Please wait...",
+        "location": {
           "startingColumn": 26,
-          "startingLine": 30
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connecting...",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 71
         }
       }
     ]

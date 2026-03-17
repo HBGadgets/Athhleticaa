@@ -35,6 +35,24 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var dashboardStepsData: StepsDataString?
     @Published var dashboardHeartData: [HeartAndHealthData]? = []
     @Published var dashboardDetailsData: [RawHealthData]? = []
+    
+    //MARK: - interactive chart variables
+    @Published var lastHapticDate: Date? = nil
+    @Published var timeChartBloodOxygen: Date? = nil
+    @Published var timeChartHeartRate: Date? = nil
+    @Published var timeChartStress: Date? = nil
+    @Published var timeChartHrv: Date? = nil
+    @Published var timeChartSteps: Date? = nil
+    @Published var timeChartDistance: Date? = nil
+    @Published var timeChartCalories: Date? = nil
+    
+    @Published var spo2ValueChart: String? = nil
+    @Published var heartRateValueChart: String? = nil
+    @Published var stressValueChart: String? = nil
+    @Published var hrvValueChart: String? = nil
+    @Published var stepsValueChart: String? = nil
+    @Published var distanceValueChart: String? = nil
+    @Published var caloriesValueChart: String? = nil
 
     override init() {
         super.init()
@@ -136,7 +154,9 @@ final class RingManagerPro: NSObject, ObservableObject {
 
             if let device = self.scannedDevices.first(where: { $0.deviceAddress == lastAddress }) {
                 print("Auto reconnecting to", lastAddress)
-                self.connectDevice(device)
+                self.connectDevice(device) { connected in
+                    print("connect state:", connected)
+                }
             }
         }
     }
@@ -170,12 +190,20 @@ final class RingManagerPro: NSObject, ObservableObject {
         }
     }
     
-    func connectDevice(_ peripheralModel: VPPeripheralModel) {
+    func connectDevice(_ peripheralModel: VPPeripheralModel,
+                       completion: @escaping (DeviceConnectState) -> Void) {
+
         VPBleCentralManage.sharedBleManager().veepooSDKStopScanDevice()
-          
+
         VPBleCentralManage.sharedBleManager()
             .veepooSDKConnectDevice(peripheralModel) { [weak self] connectState in
+
                 self?.handleConnectEvent(connectState: connectState)
+
+                // ✅ forward EVERY state
+                DispatchQueue.main.async {
+                    completion(connectState)
+                }
             }
     }
     

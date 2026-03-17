@@ -54,7 +54,8 @@ struct HeartRateCardPro: View {
                 
                 if let dataList = ringManagerPro.dashboardDetailsData {
                         HeartRateHealthChartViewPro(
-                            data: dataList
+                            data: dataList,
+                            ringManagerPro: ringManagerPro
                         )
                         .padding(.horizontal, 10)
                         .frame(maxWidth: .infinity)

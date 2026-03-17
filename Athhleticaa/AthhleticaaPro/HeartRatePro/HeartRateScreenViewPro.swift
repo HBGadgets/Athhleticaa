@@ -28,13 +28,13 @@ struct HeartRateScreenViewPro: View {
         ScrollView {
             VStack(spacing: 20) {
                 // MARK: - Heart Rate Section
-                if let dataList = ringManagerPro.dashboardHeartData {
-                    Text("\(ringManagerPro.dashboardHeartData?.count) items  got and last BPM is \(ringManagerPro.dashboardHeartData?.last?.heartRate) at \(ringManagerPro.dashboardHeartData?.last?.time)")
+                if let dataList = ringManagerPro.dashboardDetailsData {
+                    Text("\(dataList.count) items  got and last BPM is \(dataList.last?.heartRate) at \(dataList.last?.time)")
                     HeartRateHealthChartViewPro(
-                        data: ringManagerPro.dashboardHeartData ?? []
+                        data: ringManagerPro.dashboardDetailsData ?? []
                     )
                     .padding(10)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, minHeight: 250)
                     .background(Color(colorScheme == .light ? .white : Color(.systemGray6)))
                     .cornerRadius(16)
                     .shadow(color: .gray.opacity(0.15), radius: 5, x: 0, y: 2)

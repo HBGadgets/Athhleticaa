@@ -4,7 +4,7 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "%@ items  got and last BPM is %@ at %@",
+        "key": "%lld items  got and last BPM is %@ at %@",
         "location": {
           "startingColumn": 26,
           "startingLine": 32

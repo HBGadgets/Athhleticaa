@@ -28,7 +28,7 @@
       },
       {
         "comment": "",
-        "key": "90 BPM",
+        "key": "%lld BPM",
         "location": {
           "startingColumn": 30,
           "startingLine": 44

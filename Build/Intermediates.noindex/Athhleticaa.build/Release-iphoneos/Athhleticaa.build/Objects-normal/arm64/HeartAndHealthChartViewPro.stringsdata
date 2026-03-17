@@ -4,50 +4,58 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Time",
+        "key": "No heart rate data",
         "location": {
-          "startingColumn": 27,
-          "startingLine": 37
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
-        "location": {
-          "startingColumn": 27,
-          "startingLine": 38
+          "startingColumn": 22,
+          "startingLine": 34
         }
       },
       {
         "comment": "",
         "key": "Time",
         "location": {
-          "startingColumn": 27,
-          "startingLine": 43
+          "startingColumn": 35,
+          "startingLine": 41
         }
       },
       {
         "comment": "",
         "key": "BPM",
         "location": {
-          "startingColumn": 27,
-          "startingLine": 44
+          "startingColumn": 35,
+          "startingLine": 42
         }
       },
       {
         "comment": "",
-        "key": "Selected Time",
+        "key": "Time",
         "location": {
-          "startingColumn": 40,
-          "startingLine": 59
+          "startingColumn": 35,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "Selected",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 62
         }
       },
       {
         "comment": "",
         "key": "%lld",
         "location": {
-          "startingColumn": 30,
-          "startingLine": 88
+          "startingColumn": 38,
+          "startingLine": 84
         }
       }
     ]

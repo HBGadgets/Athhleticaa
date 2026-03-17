@@ -41,15 +41,14 @@ class DetailDataManagerPro: ObservableObject {
         return 0
     }
     
-    func lastPPGValue(_ any: Any?) -> Int {
+    func avgPPGValue(_ any: Any?) -> Int {
         guard let arr = any as? NSArray else { return 0 }
         
-        var lastValid = 0
+        var validValues: [Int] = []
         for i in 0..<arr.count {
             let elem = arr.object(at: i)
             
             var v: Int? = nil
-            
             if let n = elem as? NSNumber {
                 v = n.intValue
             } else if let s = elem as? String {
@@ -57,10 +56,12 @@ class DetailDataManagerPro: ObservableObject {
             }
             
             if let val = v, val > 0 {
-                lastValid = val
+                validValues.append(val)
             }
         }
-        return lastValid
+        
+        guard !validValues.isEmpty else { return 0 }
+        return validValues.reduce(0, +) / validValues.count
     }
     
     func readDetailDataByDay(day: Int, completion: @escaping ([RawHealthData]?) -> Void) {
@@ -74,18 +75,10 @@ class DetailDataManagerPro: ObservableObject {
                 andTableID: deviceID
             ) as? [String: [String: Any]]
         else { completion([]); return ; }
-        
-        print("raw data ========>>>>>> \(raw)")
 
         var results: [RawHealthData] = []
 
         for (time, values) in raw {
-            
-            if let ppgRaw = values["ppgs"] {
-                    print("⚡ \(time) ppgs type: \(type(of: ppgRaw))")
-                } else {
-                    print("⚡ \(time) ppgs is NIL")
-                }
             
             let heartValue = intValue(values["heartValue"])
 
@@ -93,7 +86,7 @@ class DetailDataManagerPro: ObservableObject {
             if heartValue > 0 {
                 finalHeartRate = heartValue
             } else {
-                finalHeartRate = lastPPGValue(values["ppgs"])
+                finalHeartRate = avgPPGValue(values["ppgs"])
             }
 
             let model = RawHealthData(
@@ -124,7 +117,6 @@ class DetailDataManagerPro: ObservableObject {
 
                 return m1 < m2
             }
-            print("sorted =====>>>> \(sortedData)")
             completion(sortedData)
         }
     }

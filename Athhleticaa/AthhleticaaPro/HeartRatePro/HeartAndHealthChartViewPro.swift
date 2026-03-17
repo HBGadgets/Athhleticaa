@@ -13,6 +13,7 @@ struct HeartRateHealthChartViewPro: View {
     let data: [RawHealthData]
     @State private var selectedIndex: Int? = nil
     @ObservedObject var ringManagerPro: RingManagerPro
+    @State private var cursorMinutes: Int? = nil
 
     var validPoints: [(index: Int, minutes: Int, value: Int)] {
         return data.enumerated().compactMap { index, item in
@@ -55,11 +56,10 @@ struct HeartRateHealthChartViewPro: View {
                     )
                     
 
-                    if let selectedIndex,
-                       let selected = validPoints.first(where: { $0.index == selectedIndex }) {
-                        RuleMark(x: .value("Selected Time", selected.minutes))
-                            .foregroundStyle(.yellow)
-                    }
+                    if let cursor = cursorMinutes {
+                            RuleMark(x: .value("Selected Time", cursor))
+                                .foregroundStyle(.yellow)
+                        }
                 }
                 .chartXScale(domain: 0...1439)
                 .chartYScale(domain: 0...150)
@@ -99,10 +99,23 @@ struct HeartRateHealthChartViewPro: View {
                         Rectangle()
                             .fill(.clear)
                             .contentShape(Rectangle())
+//                            .gesture(
+//                                DragGesture()
+//                                    .onChanged { value in
+//                                        if let mins: Int = proxy.value(atX: value.location.x) {
+//                                            let nearest = validPoints.min {
+//                                                abs($0.minutes - mins) < abs($1.minutes - mins)
+//                                            }
+//                                            selectedIndex = nearest?.index
+//                                        }
+//                                    }
+//                            )
                             .gesture(
                                 DragGesture()
                                     .onChanged { value in
                                         if let mins: Int = proxy.value(atX: value.location.x) {
+                                            let clamped = max(0, min(1439, mins))
+                                            cursorMinutes = clamped  // cursor follows finger freely
                                             let nearest = validPoints.min {
                                                 abs($0.minutes - mins) < abs($1.minutes - mins)
                                             }

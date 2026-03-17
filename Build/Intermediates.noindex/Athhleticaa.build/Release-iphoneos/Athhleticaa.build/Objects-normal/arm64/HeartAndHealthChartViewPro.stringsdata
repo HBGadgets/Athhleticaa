@@ -7,20 +7,12 @@
         "key": "No heart rate data",
         "location": {
           "startingColumn": 22,
-          "startingLine": 32
+          "startingLine": 33
         }
       },
       {
         "comment": "",
         "key": "Time",
-        "location": {
-          "startingColumn": 35,
-          "startingLine": 38
-        }
-      },
-      {
-        "comment": "",
-        "key": "BPM",
         "location": {
           "startingColumn": 35,
           "startingLine": 39
@@ -28,15 +20,15 @@
       },
       {
         "comment": "",
-        "key": "Time",
+        "key": "BPM",
         "location": {
           "startingColumn": 35,
-          "startingLine": 45
+          "startingLine": 40
         }
       },
       {
         "comment": "",
-        "key": "BPM",
+        "key": "Time",
         "location": {
           "startingColumn": 35,
           "startingLine": 46
@@ -44,9 +36,17 @@
       },
       {
         "comment": "",
+        "key": "BPM",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
         "key": "Selected Time",
         "location": {
-          "startingColumn": 44,
+          "startingColumn": 48,
           "startingLine": 60
         }
       },

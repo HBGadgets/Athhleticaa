@@ -76,10 +76,10 @@ final class RingManagerPro: NSObject, ObservableObject {
                     case .complete:
                         print("Data sync complete")
                         DispatchQueue.main.async {
-//                            self.activityManager.readOneDayActivityData { data in
-//                                self.dashboardStepsData = data
-//                                self.dataLoaded = true
-//                            }
+                            self.activityManager.readOneDayActivityData { data in
+                                self.dashboardStepsData = data
+                                self.dataLoaded = true
+                            }
                             self.dataLoaded = true
                         }
                     default:

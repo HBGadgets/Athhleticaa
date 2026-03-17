@@ -35,13 +35,13 @@ struct HeartRateCardPro: View {
                     .foregroundColor(Color.white)
                     .fontWidth(.expanded)
                     
-                if let dataList = ringManagerPro.dashboardDetailsData {
+                if let data = ringManagerPro.dashboardDetailsData?.last?.heartRate {
                     HStack {
                         Image(systemName: "heart.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text("\(dataList.last?.heartRate ?? 0) BPM")
+                        Text("\(data) BPM")
                             .font(.headline)
                             .fontWidth(.expanded)
                         
@@ -64,7 +64,14 @@ struct HeartRateCardPro: View {
                 } else {
                     Text("No data")
                 }
-                Text("---")
+                Text({
+                    if let data = ringManagerPro.dashboardDetailsData,
+                       let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                       return time.toAMPM
+                    } else {
+                        return "--:--"
+                    }
+                }())
                 .font(.headline)
                 .fontWidth(.expanded)
             }

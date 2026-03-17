@@ -1,0 +1,23 @@
+Target dependency graph (11 targets)
+Target 'Athhleticaa' in project 'Athhleticaa'
+➜ Implicit dependency on target 'Pods-Athhleticaa' in project 'Pods' via file 'Pods_Athhleticaa.framework' in build phase 'Link Binary'
+➜ Explicit dependency on target 'MJExtension' in project 'MJExtension'
+➜ Explicit dependency on target 'SleepChartKit' in project 'SleepChartKit'
+Target 'SleepChartKit' in project 'SleepChartKit'
+➜ Explicit dependency on target 'SleepChartKit' in project 'SleepChartKit'
+Target 'SleepChartKit' in project 'SleepChartKit' (no dependencies)
+Target 'MJExtension' in project 'MJExtension'
+➜ Explicit dependency on target 'MJExtension' in project 'MJExtension'
+➜ Explicit dependency on target 'MJExtension_MJExtension' in project 'MJExtension'
+Target 'MJExtension' in project 'MJExtension'
+➜ Explicit dependency on target 'MJExtension_MJExtension' in project 'MJExtension'
+Target 'MJExtension_MJExtension' in project 'MJExtension' (no dependencies)
+Target 'Pods-Athhleticaa' in project 'Pods'
+➜ Explicit dependency on target 'FMDB' in project 'Pods'
+➜ Explicit dependency on target 'MJExtension' in project 'Pods'
+Target 'MJExtension' in project 'Pods'
+➜ Explicit dependency on target 'MJExtension-MJExtension' in project 'Pods'
+Target 'MJExtension-MJExtension' in project 'Pods' (no dependencies)
+Target 'FMDB' in project 'Pods'
+➜ Explicit dependency on target 'FMDB-FMDB_Privacy' in project 'Pods'
+Target 'FMDB-FMDB_Privacy' in project 'Pods' (no dependencies)

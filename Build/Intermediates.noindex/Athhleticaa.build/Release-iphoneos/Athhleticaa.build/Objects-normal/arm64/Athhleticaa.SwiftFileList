@@ -1,9 +1,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityCharts.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityInfoScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityScreen.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRV/HrvManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/PedometerManager.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDataDetailScreenView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDonutChart.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDotChart.swift
@@ -19,7 +17,6 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/SportsCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/StressCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HeartRate/HeartRateChartView.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DetailDataManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HeartRate/HeartRateDataDetailsScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HeartRate/HeartRateDonutChart.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HeartRate/HeartRateInfoScreen.swift
@@ -60,12 +57,11 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/ContentViewNonPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HealthKitManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/QCBlePeripheral.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartAndHealthChartViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/RingManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/TabBar.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityManagerPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood\ Oxygen/BloodOxygenManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood\ Oxygen/BloodOxygenManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood\ Oxygen/BloodOxygenScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/ActivityCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/BloodOxygenCardPro.swift
@@ -75,7 +71,10 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/SleepCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/SportsCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/StressCardPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartAndHealthChartViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRV/HrvManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRV/HRVScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ProfileScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/RingConnectViewPro.swift
@@ -86,6 +85,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserInformationScreenView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserProfileStorage.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ContentViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DetailDataManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/RingManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/TabBarPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/WeeklyCalenderViewPro.swift

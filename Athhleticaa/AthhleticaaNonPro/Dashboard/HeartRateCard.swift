@@ -61,19 +61,19 @@ struct HeartRateCard: View {
                 } else {
                     Text("No data")
                 }
-//                Text({
-//                    if let data = ringManager.heartRateManager.dayData.first,
-//                       let index = data.lastNonZeroHeartRateIndex,
-//                       let date = data.timeForHeartRate(at: index) {
-//                        let formatter = DateFormatter()
-//                        formatter.dateFormat = "h:mm a"
-//                        return formatter.string(from: date)
-//                    } else {
-//                        return "--:--"
-//                    }
-//                }())
-//                .font(.headline)
-//                .fontWidth(.expanded)
+                Text({
+                    if let data = ringManager.heartRateManager.dayData.first,
+                       let index = data.lastNonZeroHeartRateIndex,
+                       let date = data.timeForHeartRate(at: index) {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "h:mm a"
+                        return formatter.string(from: date)
+                    } else {
+                        return "--:--"
+                    }
+                }())
+                .font(.headline)
+                .fontWidth(.expanded)
             }
             .padding()
             .foregroundColor(.white)

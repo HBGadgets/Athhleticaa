@@ -20,14 +20,6 @@
       },
       {
         "comment": "",
-        "key": "---",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 67
-        }
-      },
-      {
-        "comment": "",
         "key": "%lld BPM",
         "location": {
           "startingColumn": 30,

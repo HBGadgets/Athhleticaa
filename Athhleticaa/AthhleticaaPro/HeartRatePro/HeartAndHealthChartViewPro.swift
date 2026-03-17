@@ -31,7 +31,7 @@ struct HeartRateHealthChartViewPro: View {
         Group {
             if validPoints.isEmpty {
                 Text("No heart rate data")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 Chart(validPoints, id: \.index) { point in
@@ -99,17 +99,6 @@ struct HeartRateHealthChartViewPro: View {
                         Rectangle()
                             .fill(.clear)
                             .contentShape(Rectangle())
-//                            .gesture(
-//                                DragGesture()
-//                                    .onChanged { value in
-//                                        if let mins: Int = proxy.value(atX: value.location.x) {
-//                                            let nearest = validPoints.min {
-//                                                abs($0.minutes - mins) < abs($1.minutes - mins)
-//                                            }
-//                                            selectedIndex = nearest?.index
-//                                        }
-//                                    }
-//                            )
                             .gesture(
                                 DragGesture()
                                     .onChanged { value in

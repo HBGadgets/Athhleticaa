@@ -177,5 +177,3 @@ class SleepManagerNew: ObservableObject {
         return sleepSegments
     }
 }
-
-

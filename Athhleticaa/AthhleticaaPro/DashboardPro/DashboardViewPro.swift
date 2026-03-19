@@ -118,7 +118,10 @@ struct DashboardViewPro: View {
 //                }
                 ringManagerPro.detailDataManager.readDetailDataByDay(day: 0) { data in
                     ringManagerPro.dashboardDetailsData = data
-                    ringManagerPro.sleepDataManager.readSleepDataForToday()
+                    ringManagerPro.sleepDataManager.readSleepDataForToday() {
+                        ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
+                        ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
+                    }
                 }
             }
         }

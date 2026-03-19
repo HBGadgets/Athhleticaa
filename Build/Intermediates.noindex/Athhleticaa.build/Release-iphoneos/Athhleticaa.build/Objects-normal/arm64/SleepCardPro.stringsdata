@@ -7,7 +7,47 @@
         "key": "Sleep",
         "location": {
           "startingColumn": 34,
-          "startingLine": 44
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "...",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sleep score",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Data",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 83
+        }
+      },
+      {
+        "comment": "",
+        "key": "Wear smart ring during sleep to get sleep data",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 85
         }
       }
     ]

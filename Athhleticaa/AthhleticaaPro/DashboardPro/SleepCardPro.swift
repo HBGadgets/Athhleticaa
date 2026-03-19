@@ -10,7 +10,6 @@ import Charts
 import SleepChartKit
 
 
-// MARK: - Sleep
 struct SleepCardPro: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManagerPro: RingManagerPro
@@ -51,6 +50,48 @@ struct SleepCardPro: View {
                         Image(systemName: "chevron.right")
                             .foregroundColor(.white)
                     }
+                    
+                    HStack(alignment: .center) {
+                        if ringManagerPro.dashboardSleepSummary?.score != 0 {
+                            let summary = ringManagerPro.dashboardSleepSummary
+                                    
+                            TotalSleepRingView(totalMinutes: summary?.totalMinutes ?? 0)
+                            
+                            Spacer()
+                            
+                            VStack {
+                                Image(systemName: "moon.stars.fill")
+                                    .font(.system(size: 70, weight: .semibold))
+                                if let summaryScore = summary?.score {
+                                    Text("\(summaryScore)")
+                                        .font(.headline)
+                                        .fontWidth(.expanded)
+                                } else {
+                                    Text("...")
+                                        .font(.headline)
+                                }
+                                
+                                Text("Sleep score")
+                                    .font(.subheadline)
+                            }
+                            .foregroundColor(.white)
+                        } else {
+                            HStack {
+                                Image(systemName: "moon.stars.fill")
+                                    .font(.system(size: 50, weight: .semibold))
+                                VStack {
+                                    Text("No Data")
+                                        .font(.system(size: 20, weight: .bold))
+                                    Text("Wear smart ring during sleep to get sleep data")
+                                        .font(.system(size: 10, weight: .semibold))
+                                }
+                                
+                            }.foregroundColor(.white)
+                        }
+                    }
+                    .padding(.horizontal, 40)
+                    
+                    Spacer()
                 }
             }
             .frame(maxWidth: .infinity)

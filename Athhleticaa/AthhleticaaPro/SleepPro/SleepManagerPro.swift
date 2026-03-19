@@ -144,16 +144,18 @@ class SleepManagerPro: ObservableObject {
     
     func buildScore(from sleep: VPAccurateSleepModel) -> Int? {
         
-        let scores = [
+        let rawScores = [
             Int(sleep.sleepEfficiencyScore),
-            Int(sleep.deepScore),
             Int(sleep.sleepTimeScore),
             Int(sleep.fallAsleepScore)
         ].compactMap { $0 }
         
-        guard !scores.isEmpty else { return nil }
+        guard !rawScores.isEmpty else { return nil }
         
-        let avg = scores.reduce(0, +) / scores.count
+        // Convert each score from 0–5 → 0–100
+        let normalized = rawScores.map { $0 * 20 }
+        
+        let avg = normalized.reduce(0, +) / normalized.count
         return avg
     }
     

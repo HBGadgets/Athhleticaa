@@ -23,6 +23,20 @@ struct RawHealthData: Identifiable {
     let stress: Int
 }
 
+struct Stat {
+    let min: Double
+    let max: Double
+    let avg: Double
+}
+
+struct RawHealthDataStat {
+    let heart: Stat?
+    let systolic: Stat?
+    let diastolic: Stat?
+    let met: Stat?
+    let stress: Stat?
+}
+
 class DetailDataManagerPro: ObservableObject {
     
     @Published var detailData: [RawHealthData] = []
@@ -62,6 +76,39 @@ class DetailDataManagerPro: ObservableObject {
         
         guard !validValues.isEmpty else { return 0 }
         return validValues.reduce(0, +) / validValues.count
+    }
+    
+    func calculateStats<T: BinaryInteger>(_ values: [T]) -> Stat? {
+        let valid = values.map { Double($0) }.filter { $0 > 0 }
+        guard !valid.isEmpty else { return nil }
+        
+        let minVal = valid.min()!
+        let maxVal = valid.max()!
+        let avgVal = valid.reduce(0, +) / Double(valid.count)
+        
+        return Stat(min: minVal, max: maxVal, avg: avgVal)
+    }
+
+    func calculateStatsDouble(_ values: [Double]) -> Stat? {
+        let valid = values.filter { $0 > 0 }
+        guard !valid.isEmpty else { return nil }
+        
+        let minVal = valid.min()!
+        let maxVal = valid.max()!
+        let avgVal = valid.reduce(0, +) / Double(valid.count)
+        
+        return Stat(min: minVal, max: maxVal, avg: avgVal)
+    }
+    
+    func computeStats(from data: [RawHealthData]) -> RawHealthDataStat {
+        
+        let heartStats = calculateStats(data.map { $0.heartRate })
+        let systolicStats = calculateStats(data.map { $0.systolic })
+        let diastolicStats = calculateStats(data.map { $0.diastolic })
+        let metStats = calculateStatsDouble(data.map { $0.met })
+        let stressStats = calculateStats(data.map { $0.stress })
+        
+        return RawHealthDataStat(heart: heartStats, systolic: systolicStats, diastolic: diastolicStats, met: metStats, stress: stressStats)
     }
     
     func readDetailDataByDay(day: Int, completion: @escaping ([RawHealthData]?) -> Void) {
@@ -117,6 +164,7 @@ class DetailDataManagerPro: ObservableObject {
 
                 return m1 < m2
             }
+            print(sortedData)
             completion(sortedData)
         }
     }

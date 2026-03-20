@@ -9,6 +9,38 @@
           "startingColumn": 30,
           "startingLine": 45
         }
+      },
+      {
+        "comment": "",
+        "key": "Daily Average",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Daily Range",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 76
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld-%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 78
+        }
       }
     ]
   },

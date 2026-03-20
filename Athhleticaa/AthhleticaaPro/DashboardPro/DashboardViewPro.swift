@@ -48,9 +48,9 @@ struct DashboardViewPro: View {
 
                     NavigationLink(destination: StressAnalysisScreenViewPro(ringManagerPro: ringManagerPro)) {
                         StressCardPro(
-                            averageStress: 0,
-                            rangeMin: 0,
-                            rangeMax: 0,
+                            averageStress: Int(ringManagerPro.dashboardRawHealthDataStats?.stress?.avg ?? 0),
+                            rangeMin: Int(ringManagerPro.dashboardRawHealthDataStats?.stress?.min ?? 0),
+                            rangeMax: Int(ringManagerPro.dashboardRawHealthDataStats?.stress?.max ?? 0),
                             ringManagerPro: ringManagerPro
                         )
                     }
@@ -107,23 +107,14 @@ struct DashboardViewPro: View {
         }
         .onChange(of: ringManagerPro.dataLoaded) { loaded in
             if loaded {
-//                ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) { boole in
-//                    if (boole == true) {
-//                        ringManagerPro.hrvManager.readHrvData() { boole in
-//                            if (boole == true) {
-//                                print("done")
-//                            }
-//                        }
-//                    }
-//                }
                 ringManagerPro.detailDataManager.readDetailDataByDay(day: 0) { data in
                     ringManagerPro.dashboardDetailsData = data
+                    ringManagerPro.dashboardRawHealthDataStats = ringManagerPro.detailDataManager.computeStats(
+                        from: data ?? []
+                    )
                     ringManagerPro.sleepDataManager.readSleepDataForToday() {
                         ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
                         ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
-                        for sleep in ringManagerPro.dashboardSleepSegments {
-                            print(sleep)
-                        }
                     }
                 }
             }

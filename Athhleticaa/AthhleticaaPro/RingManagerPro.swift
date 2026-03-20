@@ -38,6 +38,7 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var dashboardDetailsData: [RawHealthData]? = []
     @Published var dashboardSleepSegments: [SleepSegmentPro] = []
     @Published var dashboardSleepSummary: Summary?
+    @Published var dashboardRawHealthDataStats: RawHealthDataStat?
     
     //MARK: - interactive chart variables
     @Published var lastHapticDate: Date? = nil

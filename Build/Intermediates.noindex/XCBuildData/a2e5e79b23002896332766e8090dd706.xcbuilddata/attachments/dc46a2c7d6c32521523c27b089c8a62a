@@ -1,4 +1,5 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityCharts.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityInfoScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/PedometerManager.swift
@@ -59,10 +60,10 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/QCBlePeripheral.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/RingManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/TabBar.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityManagerPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood\ Oxygen/BloodOxygenManagerPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood\ Oxygen/BloodOxygenScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityManagerPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/BloodOxygenPro/BloodOxygenManagerPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/BloodOxygenPro/BloodOxygenScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/ActivityCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/BloodOxygenCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/DashboardViewPro.swift
@@ -74,14 +75,15 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartAndHealthChartViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRV/HrvManagerPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRV/HRVScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ProfileScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/RingConnectViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ScanningScreenPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Sleep/SleepScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Sports/SportActivityScreenViewPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Stress/StressAnalysisScreenPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRVPro/HrvManagerPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRVPro/HRVScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/ProfileScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/RingConnectViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/ScanningScreenPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/SleepPro/SleepManagerPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/SleepPro/SleepScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/SportsPro/SportActivityScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressAnalysisScreenPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserInformationScreenView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserProfileStorage.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ContentViewPro.swift

@@ -11,7 +11,7 @@ import SwiftUI
 struct StressCardPro: View {
     @Environment(\.colorScheme) var colorScheme
 //    var lastStress: Double
-    var averageStress: Double
+    var averageStress: Int
     var rangeMin: Int
     var rangeMax: Int
     @ObservedObject var ringManagerPro: RingManagerPro
@@ -49,6 +49,53 @@ struct StressCardPro: View {
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
+                
+//                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    StressRingView(stress: ringManagerPro.dashboardDetailsData?.last?.stress ?? 0)
+                    
+                    Spacer()
+                    
+                    VStack {
+                        VStack(spacing: 4) {
+                            Text("Daily Average")
+                                .font(.subheadline)
+                            Text("\(Int(averageStress))")
+                                .font(.title3.bold())
+                                .fontWidth(.expanded)
+                            Text(stressLevelText(for: averageStress))
+                                .font(.footnote)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack(spacing: 4) {
+                            Text("Daily Range")
+                                .font(.subheadline)
+                            Text("\(rangeMin)-\(rangeMax)")
+                                .font(.title3.bold())
+                                .fontWidth(.expanded)
+                            Text(stressLevelText(for: averageStress))
+                                .font(.footnote)
+                        }
+                    }
+                    Spacer()
+                }
+                
+                Spacer()
+                Text({
+                    if let data = ringManagerPro.dashboardDetailsData,
+                       let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                       return time.toAMPM
+                    } else {
+                        return "--:--"
+                    }
+                }())
+                .font(.headline)
+                .fontWidth(.expanded)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 250)
@@ -60,7 +107,7 @@ struct StressCardPro: View {
         
     }
     
-    private func stressLevelText(for value: Double) -> String {
+    private func stressLevelText(for value: Int) -> String {
         switch value {
         case 0...29: return "Low"
         case 30...59: return "Normal"

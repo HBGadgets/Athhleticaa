@@ -318,22 +318,22 @@
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/GlassShape.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/GlassShape.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityManagerPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityManagerPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityManagerPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityManagerPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityManagerPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Activity/ActivityScreenViewPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityScreenViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityScreenViewPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityScreenViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood Oxygen/BloodOxygenManagerPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/BloodOxygenPro/BloodOxygenManagerPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenManagerPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenManagerPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenManagerPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/Blood Oxygen/BloodOxygenScreenViewPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/BloodOxygenPro/BloodOxygenScreenViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenScreenViewPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenScreenViewPro.o"
@@ -413,17 +413,17 @@
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateScreenViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ProfileScreenViewPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/ProfileScreenViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ProfileScreenViewPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ProfileScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ProfileScreenViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/RingConnectViewPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/RingConnectViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/RingConnectViewPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/RingConnectViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/RingConnectViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePage/ScanningScreenPro.swift" : {
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ProfilePagePro/ScanningScreenPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ScanningScreenPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ScanningScreenPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ScanningScreenPro.o"
@@ -452,6 +452,11 @@
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressAnalysisScreenPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressAnalysisScreenPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressAnalysisScreenPro.o"
+  },
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressManagerPro.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressManagerPro.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressManagerPro.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressManagerPro.o"
   },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/TabBarPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/TabBarPro.o",

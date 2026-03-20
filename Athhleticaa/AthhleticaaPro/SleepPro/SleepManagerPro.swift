@@ -177,9 +177,9 @@ class SleepManagerPro: ObservableObject {
                 let sleepData = sleep as! VPAccurateSleepModel
                 
                 summaryOfToday = buildSummary(from: sleepData)
-                    print("SUMMARY =>", summaryOfToday)
+//                    print("SUMMARY =>", summaryOfToday)
                 // 睡眠曲线解析
-                print(sleepData.parseSleepLine())
+//                print(sleepData.parseSleepLine())
                 
                 let parsed = sleepData.parseSleepLine()
 

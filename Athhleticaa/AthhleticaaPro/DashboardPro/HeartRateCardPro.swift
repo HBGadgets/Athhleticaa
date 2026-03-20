@@ -35,19 +35,19 @@ struct HeartRateCardPro: View {
                     .foregroundColor(Color.white)
                     .fontWidth(.expanded)
                     
-                if let data = ringManagerPro.dashboardDetailsData?.last?.heartRate {
+                if let data = ringManagerPro.dashboardLatestValues {
                     HStack {
                         Image(systemName: "heart.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text("\(data) BPM")
+                        Text("\(data.heart?.value ?? 0) BPM")
                             .font(.headline)
                             .fontWidth(.expanded)
                         
                         Spacer()
                         
-                        Text("Range 90-110")
+                        Text("Range \(Int(ringManagerPro.dashboardRawHealthDataStats?.heart?.min ?? 0))-\(Int(ringManagerPro.dashboardRawHealthDataStats?.heart?.max ?? 0))")
                             .fontWidth(.expanded)
                     }
                 }
@@ -66,7 +66,7 @@ struct HeartRateCardPro: View {
                 }
                 Text({
                     if let data = ringManagerPro.dashboardDetailsData,
-                       let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                       let time = ringManagerPro.dashboardLatestValues?.heart?.time {
                        return time.toAMPM
                     } else {
                         return "--:--"

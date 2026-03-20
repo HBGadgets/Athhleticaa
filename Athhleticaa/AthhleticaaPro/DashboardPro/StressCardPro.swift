@@ -55,7 +55,7 @@ struct StressCardPro: View {
                 HStack {
                     Spacer()
                     
-                    StressRingView(stress: ringManagerPro.dashboardDetailsData?.last?.stress ?? 0)
+                    StressRingView(stress: ringManagerPro.dashboardLatestValues?.stress?.value ?? 0)
                     
                     Spacer()
                     
@@ -88,7 +88,7 @@ struct StressCardPro: View {
                 Spacer()
                 Text({
                     if let data = ringManagerPro.dashboardDetailsData,
-                       let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                       let time = ringManagerPro.dashboardLatestValues?.stress?.time {
                        return time.toAMPM
                     } else {
                         return "--:--"

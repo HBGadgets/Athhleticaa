@@ -28,7 +28,7 @@
       },
       {
         "comment": "",
-        "key": "Range 90-110",
+        "key": "Range %lld-%lld",
         "location": {
           "startingColumn": 30,
           "startingLine": 50

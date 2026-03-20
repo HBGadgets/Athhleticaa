@@ -67,8 +67,8 @@ struct HeartRateScreenViewPro: View {
                         .frame(width: 38, height: 38)
                         .foregroundColor(.red)
                     
-                    if let heartRate = ringManagerPro.dashboardDetailsData?.last?.heartRate {
-                        Text("\(ringManagerPro.dashboardDetailsData?.last?.heartRate ?? 0)")
+                    if let heartRate = ringManagerPro.dashboardLatestValues?.heart {
+                        Text("\(heartRate.value)")
                             .font(.system(size: 44, weight: .bold))
                             .fontWidth(.expanded)
 
@@ -216,10 +216,10 @@ struct HeartRateScreenViewPro: View {
                         .padding(.top)
                     } else {
                         HStack {
-                            Text("\(ringManagerPro.dashboardDetailsData?.last?.heartRate ?? 0) BPM")
+                            Text("\(ringManagerPro.dashboardLatestValues?.heart?.value ?? 0) BPM")
                             Text({
                                 if let data = ringManagerPro.dashboardDetailsData,
-                                   let time = ringManagerPro.dashboardDetailsData?.last?.time {
+                                   let time = ringManagerPro.dashboardLatestValues?.heart?.time {
                                    return time.toAMPM
                                 } else {
                                     return "--:--"

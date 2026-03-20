@@ -112,6 +112,7 @@ struct DashboardViewPro: View {
                     ringManagerPro.dashboardRawHealthDataStats = ringManagerPro.detailDataManager.computeStats(
                         from: data ?? []
                     )
+                    ringManagerPro.dashboardLatestValues = ringManagerPro.detailDataManager.getLatestValues(from: data ?? [])
                     ringManagerPro.sleepDataManager.readSleepDataForToday() {
                         ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
                         ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary

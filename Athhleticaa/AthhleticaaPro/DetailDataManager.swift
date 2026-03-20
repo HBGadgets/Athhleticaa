@@ -37,11 +37,75 @@ struct RawHealthDataStat {
     let stress: Stat?
 }
 
+struct LatestValue<T> {
+    let value: T
+    let time: String
+}
+
+struct LatestHealthValues {
+    let heart: LatestValue<Int>?
+    let systolic: LatestValue<Int>?
+    let diastolic: LatestValue<Int>?
+    let met: LatestValue<Double>?
+    let stress: LatestValue<Int>?
+}
+
 class DetailDataManagerPro: ObservableObject {
     
     @Published var detailData: [RawHealthData] = []
     
     var heartDict = [String : [String: String]]()
+    
+    func getLatestValues(from data: [RawHealthData]) -> LatestHealthValues {
+        
+        return LatestHealthValues(
+            heart: lastNonZero(
+                from: data,
+                value: { $0.heartRate },
+                isValid: { $0 > 0 }
+            ),
+            
+            systolic: lastNonZero(
+                from: data,
+                value: { $0.systolic },
+                isValid: { $0 > 0 }
+            ),
+            
+            diastolic: lastNonZero(
+                from: data,
+                value: { $0.diastolic },
+                isValid: { $0 > 0 }
+            ),
+            
+            met: lastNonZero(
+                from: data,
+                value: { $0.met },
+                isValid: { $0 > 0 }
+            ),
+            
+            stress: lastNonZero(
+                from: data,
+                value: { $0.stress },
+                isValid: { $0 > 0 }
+            )
+        )
+    }
+    
+    func lastNonZero<T: Comparable>(
+        from data: [RawHealthData],
+        value: (RawHealthData) -> T,
+        isValid: (T) -> Bool
+    ) -> LatestValue<T>? {
+        
+        for item in data.reversed() {
+            let v = value(item)
+            if isValid(v) {
+                return LatestValue(value: v, time: item.time)
+            }
+        }
+        
+        return nil
+    }
     
     func intValue(_ any: Any?) -> Int {
         if let int = any as? Int { return int }

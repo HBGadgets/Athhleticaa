@@ -42,7 +42,7 @@ struct DashboardViewPro: View {
                         )
                     }
                     
-                    NavigationLink(destination: SleepScreenViewPro(ringManagerPro: ringManagerPro)) {
+                    NavigationLink(destination: SleepScreenViewPro(sleepManagerPro: ringManagerPro.sleepDataManager, ringManagerPro: ringManagerPro)) {
                         SleepCardPro(ringManagerPro: ringManagerPro)
                     }
 
@@ -121,6 +121,9 @@ struct DashboardViewPro: View {
                     ringManagerPro.sleepDataManager.readSleepDataForToday() {
                         ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
                         ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
+                        for sleep in ringManagerPro.dashboardSleepSegments {
+                            print(sleep)
+                        }
                     }
                 }
             }

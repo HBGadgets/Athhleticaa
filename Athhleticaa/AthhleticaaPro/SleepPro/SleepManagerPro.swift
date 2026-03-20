@@ -25,7 +25,7 @@ struct SleepSegmentPro: Identifiable {
 }
 
 enum SleepTypePro: Int {
-    case awake = 4
+    case awake = 3
     case light = 1
     case deep = 0
     case rem = 2
@@ -160,14 +160,14 @@ class SleepManagerPro: ObservableObject {
     }
     
     func readSleepDataForToday(retries: Int = 5, completion: (() -> Void)? = nil) {
-        let date = (-1).getOneDayDateString()
+        let date = (0).getOneDayDateString()
 
         let sleepArray = VPDataBaseOperation.veepooSDKGetAccurateSleepData(withDate: date, andTableID: VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress)
         
         var summaryOfToday: Summary?
 
         if let sleepArray {
-            print("sleep data =====>>>> \(sleepArray)")
+//            print("sleep data =====>>>> \(sleepArray)")
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm"
             formatter.locale = Locale(identifier: "en_US_POSIX")  // ← add this

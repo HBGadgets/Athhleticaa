@@ -43,7 +43,7 @@ struct ContentViewPro: View {
                 case 2:
                     ActivityScreenViewPro(ringManagerPro: ringManagerPro)
                 case 3:
-                    SleepScreenViewPro(ringManagerPro: ringManagerPro)
+                    SleepScreenViewPro(sleepManagerPro: ringManagerPro.sleepDataManager, ringManagerPro: ringManagerPro)
                 case 4:
                     ProfileScreenViewPro(ringManagerPro: ringManagerPro)
                 default:

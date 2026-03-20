@@ -24,9 +24,9 @@ struct RawHealthData: Identifiable {
 }
 
 struct Stat {
-    let min: Double
-    let max: Double
-    let avg: Double
+    let min: Int
+    let max: Int
+    let avg: Int
 }
 
 struct RawHealthDataStat {
@@ -86,7 +86,7 @@ class DetailDataManagerPro: ObservableObject {
         let maxVal = valid.max()!
         let avgVal = valid.reduce(0, +) / Double(valid.count)
         
-        return Stat(min: minVal, max: maxVal, avg: avgVal)
+        return Stat(min: Int(minVal), max: Int(maxVal), avg: Int(avgVal))
     }
 
     func calculateStatsDouble(_ values: [Double]) -> Stat? {
@@ -97,7 +97,7 @@ class DetailDataManagerPro: ObservableObject {
         let maxVal = valid.max()!
         let avgVal = valid.reduce(0, +) / Double(valid.count)
         
-        return Stat(min: minVal, max: maxVal, avg: avgVal)
+        return Stat(min: Int(minVal), max: Int(maxVal), avg: Int(avgVal))
     }
     
     func computeStats(from data: [RawHealthData]) -> RawHealthDataStat {
@@ -164,7 +164,6 @@ class DetailDataManagerPro: ObservableObject {
 
                 return m1 < m2
             }
-            print(sortedData)
             completion(sortedData)
         }
     }

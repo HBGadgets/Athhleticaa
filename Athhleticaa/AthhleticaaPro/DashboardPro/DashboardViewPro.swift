@@ -29,7 +29,7 @@ struct DashboardViewPro: View {
                     if ((ringManagerPro.connectedPeripheral == nil)) {
                         RingConnectViewPro(ringManagerPro: ringManagerPro)
                     }
-                    NavigationLink(destination: HeartRateScreenViewPro(ringManagerPro: ringManagerPro)) {
+                    NavigationLink(destination: HeartRateScreenViewPro(ringManagerPro: ringManagerPro, detailDataManager: ringManagerPro.detailDataManager)) {
                         HeartRateCardPro(ringManagerPro: ringManagerPro)
                     }
 
@@ -115,6 +115,10 @@ struct DashboardViewPro: View {
                     ringManagerPro.sleepDataManager.readSleepDataForToday() {
                         ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
                         ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
+                        
+                        ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) {
+                            print("got blood oxygen data")
+                        }
                     }
                 }
             }

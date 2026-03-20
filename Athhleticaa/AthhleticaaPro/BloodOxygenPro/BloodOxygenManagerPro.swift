@@ -12,7 +12,7 @@ class BloodOxygenManagerPro: ObservableObject {
     @Published var bloodOxygenDict: [String: [String: String]] = [:]
 
     /// Reads blood oxygen data for a given day and returns whether parsing succeeded.
-    func readBloodOxygenData(day: Int, completion: @escaping (Bool?) -> Void) {
+    func readBloodOxygenData(day: Int, completion: @escaping () -> Void) {
         let raw = VPDataBaseOperation.veepooSDKGetDeviceOxygenData(
             withDate: day.getOneDayDateString(),
             andTableID: VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress
@@ -25,7 +25,7 @@ class BloodOxygenManagerPro: ObservableObject {
 
         guard let anyArray = raw as? [Any] else {
             // If SDK returns nil or unexpected type, report failure gracefully
-            completion(false)
+            completion()
             return
         }
 
@@ -73,6 +73,6 @@ class BloodOxygenManagerPro: ObservableObject {
         }
 
         self.bloodOxygenDict = result
-        completion(!result.isEmpty)
+        completion()
     }
 }

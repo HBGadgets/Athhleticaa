@@ -39,7 +39,7 @@ struct ContentViewPro: View {
                 case 0:
                     DashboardViewPro(ringManagerPro: ringManagerPro)
                 case 1:
-                    HeartRateScreenViewPro(ringManagerPro: ringManagerPro)
+                    HeartRateScreenViewPro(ringManagerPro: ringManagerPro, detailDataManager: ringManagerPro.detailDataManager)
                 case 2:
                     ActivityScreenViewPro(ringManagerPro: ringManagerPro)
                 case 3:

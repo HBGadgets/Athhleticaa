@@ -24,6 +24,9 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published private(set) var batteryLevel: Int?
     @Published var isCharging: Bool = false
     
+    @Published var heartRateTestState: VPTestHeartState?
+    @Published var heartRate: Int?
+    
     // MARK: Classes initialisation
     @Published var activityManager = ActivityManagerPro()
     @Published var heartRateManager = HeartRateManagerPro()

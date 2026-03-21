@@ -62,6 +62,10 @@ struct DashboardViewPro: View {
                     NavigationLink(destination: HRVScreenViewPro(ringManagerPro: ringManagerPro)) {
                         HRVCardPro(ringManagerPro: ringManagerPro)
                     }
+                    
+                    NavigationLink(destination: ECGScreenViewPro(ringManagerPro: ringManagerPro)) {
+                        ECGCardPro(ringManagerPro: ringManagerPro)
+                    }
                 }
                 .padding()
                 .padding(.bottom, 70)
@@ -119,6 +123,8 @@ struct DashboardViewPro: View {
                         
                         ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) {
                             print("got blood oxygen data")
+//                            ringManagerPro.ecgManagerPro.startECGTest()
+                            ringManagerPro.ecgManagerPro.getECGHistory(day: 0)
                         }
                     }
                 }

@@ -1,0 +1,56 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGScreenViewPro.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "ECG test",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld bpm",
+        "location": {
+          "startingColumn": 64,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "-- bpm",
+        "location": {
+          "startingColumn": 101,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Measuring...",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 78
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap to start measurement",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 78
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 99
+        }
+      }
+    ]
+  },
+  "version": 1
+}

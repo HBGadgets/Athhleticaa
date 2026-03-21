@@ -18,7 +18,7 @@ class BloodOxygenManagerPro: ObservableObject {
             andTableID: VPBleCentralManage.sharedBleManager().peripheralModel.deviceAddress
         )
         
-        print("raw blood oxygen data for date: \(day.getOneDayDateString()) ======>>>>> \(raw)")
+//        print("raw blood oxygen data for date: \(day.getOneDayDateString()) ======>>>>> \(raw)")
 
         // Reset first
         bloodOxygenDict.removeAll()

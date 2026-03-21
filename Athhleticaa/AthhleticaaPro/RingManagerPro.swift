@@ -34,6 +34,7 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var hrvManager = HrvManagerPro()
     @Published var detailDataManager = DetailDataManagerPro()
     @Published var sleepDataManager = SleepManagerPro()
+    @Published var ecgManagerPro = ECGManagerPro()
     
     // MARK: Dashboard Variables
     @Published var dashboardStepsData: StepsDataString?

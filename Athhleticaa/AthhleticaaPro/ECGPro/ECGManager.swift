@@ -8,7 +8,28 @@
 class ECGManagerPro: ObservableObject {
     
     
-    func startECGTest() {
+    func startECGTest(ringManagerPro: RingManagerPro) {
+        
+        VPBleCentralManage.sharedBleManager()?
+            .peripheralManage.veepooSDKPTTTest(true, valueBlock: { (valueModel) in
+                ringManagerPro.vpttTestModel = valueModel
+            }, signal: { (signals) in
+                guard let signalArray = signals else { return }
+                if let existingModel = ringManagerPro.vpECGTestDataModel {
+                    // Add converted voltages to the model's filterSignals
+                    let currentSignals = existingModel.filterSignals as? [NSNumber] ?? []
+                    let newSignals = currentSignals + signalArray
+                    existingModel.filterSignals = newSignals
+                } else {
+                    // Create new model if none exists
+                    let newModel = VPECGTestDataModel()
+                    newModel.filterSignals = signalArray
+                    newModel.ecgType = "11"
+                    newModel.type = "4"
+                    ringManagerPro.vpECGTestDataModel = newModel
+                }
+                
+            })
         
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSDKTestECGStart(true) { testECGState, testProgress, testModel in
             switch testECGState {
@@ -16,19 +37,26 @@ class ECGManagerPro: ObservableObject {
                 print("ECG test starting")
             case .testing:
                 print("ECG testing, progress: \(testProgress)%")
-                print("average hrv: \(testModel?.aveHrv)")
-                print("average heartRate: \(testModel?.aveHrv)")
+                // Update UI with real-time data
+                if let model = testModel {
+                    DispatchQueue.main.async {
+                        ringManagerPro.vpECGTestDataModel = model
+                    }
+                }
             case .complete:
                 print("ECG test completed")
-                // Process testModel for ECG data
-                print("ecg data ===>>> \(testModel?.ecgType)")
+                // Final update with complete data
+                if let model = testModel {
+                    DispatchQueue.main.async {
+                        ringManagerPro.vpECGTestDataModel = model
+                    }
+                }
             case .noFunction:
                 print("Device does not support ECG")
             default:
                 break
             }
         }
-        
     }
     
     func getECGHistory(day: Int) {
@@ -69,3 +97,4 @@ class ECGManagerPro: ObservableObject {
         }
     }
 }
+

@@ -4,10 +4,82 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Ring not connected",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 134
+        }
+      },
+      {
+        "comment": "",
+        "key": "No ECG data",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duration: %@s",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heart Rate: %@ bpm",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 78
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 79
+        }
+      },
+      {
+        "comment": "",
+        "key": "QRT: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 80
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heart Rate: %d bpm",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 91
+        }
+      },
+      {
+        "comment": "",
+        "key": "HRV: %d",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 92
+        }
+      },
+      {
+        "comment": "",
+        "key": "QRT: %d",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
         "key": "ECG test",
         "location": {
           "startingColumn": 30,
-          "startingLine": 46
+          "startingLine": 48
         }
       },
       {
@@ -15,7 +87,7 @@
         "key": "%lld bpm",
         "location": {
           "startingColumn": 64,
-          "startingLine": 63
+          "startingLine": 65
         }
       },
       {
@@ -23,7 +95,7 @@
         "key": "-- bpm",
         "location": {
           "startingColumn": 101,
-          "startingLine": 63
+          "startingLine": 65
         }
       },
       {
@@ -31,7 +103,7 @@
         "key": "Measuring...",
         "location": {
           "startingColumn": 44,
-          "startingLine": 78
+          "startingLine": 106
         }
       },
       {
@@ -39,7 +111,7 @@
         "key": "Tap to start measurement",
         "location": {
           "startingColumn": 61,
-          "startingLine": 78
+          "startingLine": 106
         }
       },
       {
@@ -47,7 +119,31 @@
         "key": "HRV",
         "location": {
           "startingColumn": 22,
-          "startingLine": 99
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 135
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan for ring",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 136
+        }
+      },
+      {
+        "comment": "",
+        "key": "Connect the app with ring first",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 141
         }
       }
     ]

@@ -26,6 +26,8 @@ final class RingManagerPro: NSObject, ObservableObject {
     
     @Published var heartRateTestState: VPTestHeartState?
     @Published var heartRate: Int?
+    @Published var vpttTestModel: VPPttValueModel?
+    @Published var vpECGTestDataModel: VPECGTestDataModel?
     
     // MARK: Classes initialisation
     @Published var activityManager = ActivityManagerPro()

@@ -165,7 +165,7 @@ struct HeartRateScreenViewPro: View {
                         if ringManagerPro.connectedPeripheral != nil {
                             // Start measurement
                             ringManagerPro.heartRateManager.readLiveHeartRate(ringManagerPro: ringManagerPro)
-                            isMeasuring = true
+//                            isMeasuring = true
                             // Cancel any existing timer
                             stopWorkItem?.cancel()
                             

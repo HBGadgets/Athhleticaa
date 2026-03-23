@@ -14,6 +14,8 @@ struct ECGScreenViewPro: View {
     @State private var currentHeartRate: Int? = nil
     @State private var animateHeart = false
     @State private var showCalendar = false
+    @State private var showNavigationError = false
+    @State private var goToScanScreen = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -64,15 +66,41 @@ struct ECGScreenViewPro: View {
                             .font(.headline)
                             .foregroundColor(.gray)
                     }
+                    
+                    if let currentData = ringManagerPro.vpECGTestDataModel {
+                        ECGWaveformView(ecgData: currentData)
+                            .frame(height: 200)
+                            .background(Color.black)
+                            .cornerRadius(10)
+                            .padding()
+                          
+                        Text("Duration: \(currentData.duration ?? "0")s")
+                        Text("Heart Rate: \(currentData.aveHeart ?? "--") bpm")
+                        Text("HRV: \(currentData.aveHrv ?? "--")")
+                        Text("QRT: \(currentData.aveQT ?? "--")")
+                    } else {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(height: 200)
+                            .overlay(Text("No ECG data"))
+                    }
+                    
+                    if let currentData = ringManagerPro.vpttTestModel {
+                          
+//                        Text("Duration: \(currentData.duration ?? "0")s")
+                        Text("Heart Rate: \(currentData.heart) bpm")
+                        Text("HRV: \(currentData.hrv)")
+                        Text("QRT: \(currentData.qt)")
+                    }
 
                     Button(action: {
                         if ringManagerPro.connectedPeripheral != nil {
                             // Start measurement
-                            ringManagerPro.ecgManagerPro.startECGTest()
+                            ringManagerPro.ecgManagerPro.startECGTest(ringManagerPro: ringManagerPro)
                             // Cancel any existing timer
                             
                         } else {
-//                            showNavigationError = true
+                            showNavigationError = true
                         }
                     }) {
                         Text(isMeasuring ? "Measuring..." : "Tap to start measurement")
@@ -100,5 +128,17 @@ struct ECGScreenViewPro: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $goToScanScreen) {
+            ScanningScreenPro()
+        }
+        .alert("Ring not connected", isPresented: $showNavigationError) {
+            Button("Cancel", role: .cancel) {}
+            Button("Scan for ring") {
+                goToScanScreen = true
+            }
+            .keyboardShortcut(.defaultAction)
+        } message: {
+            Text("Connect the app with ring first")
+        }
     }
 }

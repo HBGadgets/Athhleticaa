@@ -281,8 +281,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import AVFoundation;
 @import CoreBluetooth;
+@import CoreFoundation;
 @import Foundation;
 @import ObjectiveC;
+@import SpriteKit;
 @import UserNotifications;
 #endif
 
@@ -320,6 +322,16 @@ SWIFT_CLASS("_TtC11Athhleticaa15CameraViewModel")
 - (void)captureOutput:(AVCapturePhotoOutput * _Nonnull)output didFinishProcessingPhoto:(AVCapturePhoto * _Nonnull)photo error:(NSError * _Nullable)error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class SKView;
+@class NSCoder;
+SWIFT_CLASS("_TtC11Athhleticaa8ECGScene")
+@interface ECGScene : SKScene
+- (void)didMoveToView:(SKView * _Nonnull)view;
+- (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class UNUserNotificationCenter;

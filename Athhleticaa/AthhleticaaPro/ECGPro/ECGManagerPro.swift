@@ -53,6 +53,21 @@ class ECGManagerPro: ObservableObject {
         }
     }
     
+    func stopECGTest() {
+        
+        VPBleCentralManage.sharedBleManager()?
+            .peripheralManage.veepooSDKPTTTest(false, valueBlock: { (valueModel) in
+//                ringManagerPro.vpttTestModel = valueModel
+                print("vpttesting stopped")
+            }, signal: { (signals) in
+                
+            })
+        
+        VPBleCentralManage.sharedBleManager().peripheralManage.veepooSDKTestECGStart(false) { testECGState, testProgress, testModel in
+            print("ecg test stopped")
+        }
+    }
+    
     func getECGHistory(day: Int) {
         print("get ecg history function ran")
         
@@ -91,4 +106,3 @@ class ECGManagerPro: ObservableObject {
         }
     }
 }
-

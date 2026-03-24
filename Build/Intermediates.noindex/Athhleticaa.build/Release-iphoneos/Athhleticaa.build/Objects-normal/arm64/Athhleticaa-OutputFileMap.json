@@ -393,20 +393,25 @@
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/DetailDataManager.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/DetailDataManager.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGManager.swift" : {
-    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManager.o",
-    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManager.bc",
-    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManager.o"
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGManagerPro.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.o"
   },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGScreenViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormView.swift" : {
-    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormView.o",
-    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormView.bc",
-    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormView.o"
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormViewPro.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewPro.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewPro.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewPro.o"
+  },
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGtakingScreenViewPro.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGtakingScreenViewPro.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGtakingScreenViewPro.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGtakingScreenViewPro.o"
   },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HRVPro/HRVScreenViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HRVScreenViewPro.o",

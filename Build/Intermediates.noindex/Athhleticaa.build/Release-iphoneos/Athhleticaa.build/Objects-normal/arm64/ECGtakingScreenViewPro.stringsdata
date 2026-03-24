@@ -1,5 +1,5 @@
 {
-  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGScreenViewPro.swift",
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGtakingScreenViewPro.swift",
   "tables": {
     "Localizable": [
       {
@@ -7,15 +7,23 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 16,
-          "startingLine": 75
+          "startingLine": 62
         }
       },
       {
         "comment": "",
-        "key": "Quick measurement",
+        "key": "Measuring...",
         "location": {
-          "startingColumn": 22,
-          "startingLine": 54
+          "startingColumn": 36,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap to start measurement",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 44
         }
       },
       {
@@ -23,7 +31,7 @@
         "key": "ECG",
         "location": {
           "startingColumn": 22,
-          "startingLine": 65
+          "startingLine": 55
         }
       },
       {
@@ -31,7 +39,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 76
+          "startingLine": 63
         }
       },
       {
@@ -39,7 +47,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 20,
-          "startingLine": 77
+          "startingLine": 64
         }
       },
       {
@@ -47,7 +55,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 18,
-          "startingLine": 82
+          "startingLine": 69
         }
       }
     ]

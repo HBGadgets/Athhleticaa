@@ -78,26 +78,26 @@ final class RingManagerPro: NSObject, ObservableObject {
         }
         
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSdkStartReadDeviceAllData { (readDeviceBaseDataState, totalDay, currentReadDayNumber, readCurrentDayProgress) in
-                    switch readDeviceBaseDataState {
-                    case .start:
-                        print("Starting data sync")
-                    case .reading:
-                        let progressString = "\(currentReadDayNumber)/\(totalDay) - \(readCurrentDayProgress)%"
-                        print("Syncing: \(progressString)")
-                    case .complete:
-                        print("Data sync complete")
-                        DispatchQueue.main.async {
-                            self.activityManager.readOneDayActivityData { data in
-                                self.dashboardStepsData = data
-                                self.dataLoaded = true
-                            }
-                            self.dataLoaded = true
-                        }
-                    default:
-                        break
+            switch readDeviceBaseDataState {
+            case .start:
+                print("Starting data sync")
+            case .reading:
+                let progressString = "\(currentReadDayNumber)/\(totalDay) - \(readCurrentDayProgress)%"
+                print("Syncing: \(progressString)")
+            case .complete:
+                print("Data sync complete")
+                DispatchQueue.main.async {
+                    self.activityManager.readOneDayActivityData { data in
+                        self.dashboardStepsData = data
+                        self.dataLoaded = true
                     }
+                    self.dataLoaded = true
                 }
-        
+            default:
+                break
+            }
+        }
+    
     }
     
     func initSDK() {

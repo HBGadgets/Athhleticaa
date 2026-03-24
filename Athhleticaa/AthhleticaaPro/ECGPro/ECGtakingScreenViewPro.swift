@@ -1,13 +1,13 @@
 //
-//  ECGScreenViewPro.swift
+//  ECGtakingScreenViewPro.swift
 //  Athhleticaa
 //
-//  Created by Dipanshu Kashyap on 21/03/26.
+//  Created by Dipanshu Kashyap on 24/03/26.
 //
 
 import SwiftUI
 
-struct ECGScreenViewPro: View {
+struct ECGtakingScreenViewPro: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManagerPro: RingManagerPro
     @State private var isMeasuring = false
@@ -25,40 +25,30 @@ struct ECGScreenViewPro: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                HStack {
-                    Button(action: {
-                        showCalendar.toggle()
-                    }) {
-                        Text(ringManagerPro.selectedDate, formatter: dateFormatter)
-                            .font(.headline)
-                            .foregroundStyle(Color(colorScheme == .light ? .black : .white))
-                    }
-                    .sheet(isPresented: $showCalendar) {
-                        WeeklyCalendarViewPro(ringManagerPro: ringManagerPro, fromScreen: "HRVScreenPro")
-                            .presentationDetents([.height(500)])
-                            .presentationDragIndicator(.visible)
-                    }
-
-                    Image(systemName: "chevron.down")
-                        .foregroundStyle(Color(colorScheme == .light ? .black : .white))
-                }
-            }
-            .padding()
+        ZStack {
+            ECGGrid()
+            ECGWaveformView(ringManagerPro: ringManagerPro)
         }
+        .padding()
         .safeAreaInset(edge: .bottom) {
             Button(action: {
-                goToMeasurementView = true
+                if ringManagerPro.connectedPeripheral != nil {
+                    // Start measurement
+                    ringManagerPro.ecgManagerPro.startECGTest(ringManagerPro: ringManagerPro)
+                    // Cancel any existing timer
+                    
+                } else {
+                    showNavigationError = true
+                }
             }) {
-                Text("Quick measurement")
+                Text(isMeasuring ? "Measuring..." : "Tap to start measurement")
                     .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.red.opacity(0.1))
+                    .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
                     .cornerRadius(8)
-                    .padding(.horizontal)
             }
+            .disabled(isMeasuring) // prevent rapid taps
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -68,9 +58,6 @@ struct ECGScreenViewPro: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $goToScanScreen) {
             ScanningScreenPro()
-        }
-        .navigationDestination(isPresented: $goToMeasurementView) {
-            ECGtakingScreenViewPro(ringManagerPro: ringManagerPro)
         }
         .alert("Ring not connected", isPresented: $showNavigationError) {
             Button("Cancel", role: .cancel) {}

@@ -15,20 +15,14 @@ class ECGManagerPro: ObservableObject {
                 ringManagerPro.vpttTestModel = valueModel
             }, signal: { (signals) in
                 guard let signalArray = signals else { return }
-                if let existingModel = ringManagerPro.vpECGTestDataModel {
-                    // Add converted voltages to the model's filterSignals
-                    let currentSignals = existingModel.filterSignals as? [NSNumber] ?? []
-                    let newSignals = currentSignals + signalArray
-                    existingModel.filterSignals = newSignals
-                } else {
-                    // Create new model if none exists
+                DispatchQueue.main.async {
                     let newModel = VPECGTestDataModel()
                     newModel.filterSignals = signalArray
                     newModel.ecgType = "11"
                     newModel.type = "4"
+                    
                     ringManagerPro.vpECGTestDataModel = newModel
                 }
-                
             })
         
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSDKTestECGStart(true) { testECGState, testProgress, testModel in

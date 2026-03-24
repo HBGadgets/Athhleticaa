@@ -26,26 +26,29 @@ struct ECGtakingScreenViewPro: View {
     
     var body: some View {
         ZStack {
+            ECGGrid()
             ECGWaveformView(ringManagerPro: ringManagerPro)
         }
         .padding()
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 if ringManagerPro.connectedPeripheral != nil {
-                    if isMeasuring {
-                        // Add stop functionality
-                        ringManagerPro.ecgManagerPro.stopECGTest()
-                        isMeasuring = false
-                    } else {
-                        ringManagerPro.ecgManagerPro.startECGTest(ringManagerPro: ringManagerPro)
-                        isMeasuring = true
-                    }
+                    // Start measurement
+                    ringManagerPro.ecgManagerPro.startECGTest(ringManagerPro: ringManagerPro)
+                    // Cancel any existing timer
+                    
                 } else {
                     showNavigationError = true
                 }
             }) {
-                Text(isMeasuring ? "Stop Measurement" : "Tap to start measurement")
+                Text(isMeasuring ? "Measuring..." : "Tap to start measurement")
+                    .foregroundStyle(Color(colorScheme == .light ? .black : .white))
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
+                    .cornerRadius(8)
             }
+            .disabled(isMeasuring) // prevent rapid taps
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

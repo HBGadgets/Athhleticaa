@@ -7,23 +7,23 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 16,
-          "startingLine": 59
+          "startingLine": 62
         }
       },
       {
         "comment": "",
-        "key": "Stop Measurement",
+        "key": "Measuring...",
         "location": {
           "startingColumn": 36,
-          "startingLine": 47
+          "startingLine": 44
         }
       },
       {
         "comment": "",
         "key": "Tap to start measurement",
         "location": {
-          "startingColumn": 57,
-          "startingLine": 47
+          "startingColumn": 53,
+          "startingLine": 44
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "ECG",
         "location": {
           "startingColumn": 22,
-          "startingLine": 52
+          "startingLine": 55
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 60
+          "startingLine": 63
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 20,
-          "startingLine": 61
+          "startingLine": 64
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 18,
-          "startingLine": 66
+          "startingLine": 69
         }
       }
     ]

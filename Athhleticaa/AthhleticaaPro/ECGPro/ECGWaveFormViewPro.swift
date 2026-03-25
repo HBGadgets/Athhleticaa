@@ -22,7 +22,7 @@ struct ECGWaveformView: View {
                 let width = geo.size.width
                 let height = geo.size.height
                 
-                let stepX = width
+                let stepX = width / CGFloat(signals.count - 1)
                 let midY = height / 2
                 
                 let verticalScale: CGFloat = 40 // tweak for amplitude
@@ -30,7 +30,7 @@ struct ECGWaveformView: View {
                 for i in signals.indices {
                     let x = CGFloat(i) * stepX
                     let y = midY - (signals[i] * verticalScale)
-                    
+
                     if i == 0 {
                         path.move(to: CGPoint(x: x, y: y))
                     } else {
@@ -41,22 +41,41 @@ struct ECGWaveformView: View {
             .stroke(Color.red, lineWidth: 2)
         }
         .onChange(of: ringManagerPro.vpECGTestDataModel) { oldData, newData in
+            
+            print("got raw ecgModel")
             guard let newData else { return }
+            print("got ecgModel")
             appendSignals(newData)
         }
         
     }
     
     private func appendSignals(_ ecgData: VPECGTestDataModel) {
-        guard let raw = ecgData.filterSignals as? [NSNumber],
+        print("append signals ran")
+
+        guard let filterSignals = ecgData.filterSignals,
               let ecgType = ecgData.ecgType,
-              let testType = ecgData.type else { return }
-          
+              let testType = ecgData.type
+        else {
+            print("missing data")
+            return
+        }
+
         let gain = ecgData.getGainValue()
         print("ECG Type: \(ecgType), Test Type: \(testType), Gain: \(gain)")
-          
-        let newValues: [CGFloat] = raw.compactMap {
-            let adcValue = CGFloat($0.floatValue)
+
+        let rawValues: [CGFloat] = filterSignals.compactMap { element in
+            if let num = element as? NSNumber {
+                return CGFloat(num.floatValue)
+            }
+            if let str = element as? NSString, let value = Double(str as String) {
+                return CGFloat(value)
+            }
+            print("Unhandled signal element type:", type(of: element))
+            return nil
+        }
+
+        let newValues: [CGFloat] = rawValues.map { adcValue in
             let voltage = VPECGTestDataModel.convertToMv(
                 withValue: adcValue,
                 ecgType: ecgType,
@@ -66,17 +85,13 @@ struct ECGWaveformView: View {
             print("ADC: \(adcValue) -> Voltage: \(voltage) mV")
             return voltage
         }
-          
-        // Print signal range
+
         if !newValues.isEmpty {
-            let minVal = newValues.min() ?? 0
-            let maxVal = newValues.max() ?? 0
-            print("Signal range: \(minVal) to \(maxVal) mV")
+            print("Signal range: \(newValues.min() ?? 0) to \(newValues.max() ?? 0) mV")
         }
-          
-//        signals.append(contentsOf: newValues)
+
         signals = newValues
-          
+
         if signals.count > maxPoints {
             signals.removeFirst(signals.count - maxPoints)
         }

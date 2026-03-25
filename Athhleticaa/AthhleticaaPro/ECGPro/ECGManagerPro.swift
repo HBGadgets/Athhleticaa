@@ -7,7 +7,6 @@
 
 class ECGManagerPro: ObservableObject {
     
-    
     func startECGTest(ringManagerPro: RingManagerPro) {
         
         VPBleCentralManage.sharedBleManager()?
@@ -15,14 +14,6 @@ class ECGManagerPro: ObservableObject {
                 ringManagerPro.vpttTestModel = valueModel
             }, signal: { (signals) in
                 guard let signalArray = signals else { return }
-                DispatchQueue.main.async {
-                    let newModel = VPECGTestDataModel()
-                    newModel.filterSignals = signalArray
-                    newModel.ecgType = "11"
-                    newModel.type = "4"
-                    
-                    ringManagerPro.vpECGTestDataModel = newModel
-                }
             })
         
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSDKTestECGStart(true) { testECGState, testProgress, testModel in
@@ -34,8 +25,15 @@ class ECGManagerPro: ObservableObject {
                 // Update UI with real-time data
                 if let model = testModel {
                     DispatchQueue.main.async {
-                        ringManagerPro.vpECGTestDataModel = model
+                        let newModel = VPECGTestDataModel()
+                        newModel.filterSignals = model.filterSignals
+                        newModel.ecgType = model.ecgType
+                        newModel.type = model.type
+                        // copy other fields as needed
+
+                        ringManagerPro.vpECGTestDataModel = newModel
                     }
+                    print(testModel?.originalSignals as Any)
                 }
             case .complete:
                 print("ECG test completed")
@@ -57,7 +55,6 @@ class ECGManagerPro: ObservableObject {
         
         VPBleCentralManage.sharedBleManager()?
             .peripheralManage.veepooSDKPTTTest(false, valueBlock: { (valueModel) in
-//                ringManagerPro.vpttTestModel = valueModel
                 print("vpttesting stopped")
             }, signal: { (signals) in
                 

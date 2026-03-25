@@ -7,39 +7,49 @@
 
 import SwiftUI
 
+struct WaveformShape: Shape {
+    var signals: [CGFloat]
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        guard signals.count > 1 else { return path }
+
+        let width = rect.width
+        let height = rect.height
+
+        let stepX = width / CGFloat(signals.count - 1)
+        let midY = height / 2
+
+        let verticalScale: CGFloat = 40 // tweak for amplitude
+
+        for i in signals.indices {
+            let x = CGFloat(i) * stepX
+            let y = midY - (signals[i] * verticalScale)
+
+            if i == 0 {
+                path.move(to: CGPoint(x: x, y: y))
+            } else {
+                path.addLine(to: CGPoint(x: x, y: y))
+            }
+        }
+
+        return path
+    }
+}
+
 struct ECGWaveformView: View {
     
     @ObservedObject var ringManagerPro: RingManagerPro
     
     @State private var signals: [CGFloat] = []
+    @State private var drawProgress: CGFloat = 0
+    private let sampleRate: Double = 500
     private let maxPoints = 1500   // ~3 sec at 500Hz
     
     var body: some View {
-        GeometryReader { geo in
-            Path { path in
-                guard signals.count > 1 else { return }
-                
-                let width = geo.size.width
-                let height = geo.size.height
-                
-                let stepX = width / CGFloat(signals.count - 1)
-                let midY = height / 2
-                
-                let verticalScale: CGFloat = 40 // tweak for amplitude
-                
-                for i in signals.indices {
-                    let x = CGFloat(i) * stepX
-                    let y = midY - (signals[i] * verticalScale)
-
-                    if i == 0 {
-                        path.move(to: CGPoint(x: x, y: y))
-                    } else {
-                        path.addLine(to: CGPoint(x: x, y: y))
-                    }
-                }
-            }
-            .stroke(Color.red, lineWidth: 2)
-        }
+        WaveformShape(signals: signals)
+            .trim(from: 0, to: drawProgress)
+            .stroke(Color.red, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
         .onChange(of: ringManagerPro.vpECGTestDataModel) { oldData, newData in
             
             print("got raw ecgModel")
@@ -52,6 +62,7 @@ struct ECGWaveformView: View {
     
     private func appendSignals(_ ecgData: VPECGTestDataModel) {
         print("append signals ran")
+        let oldCount = signals.count
 
         guard let filterSignals = ecgData.filterSignals,
               let ecgType = ecgData.ecgType,
@@ -90,10 +101,31 @@ struct ECGWaveformView: View {
             print("Signal range: \(newValues.min() ?? 0) to \(newValues.max() ?? 0) mV")
         }
 
-        signals = newValues
+        signals.append(contentsOf: newValues)
 
         if signals.count > maxPoints {
             signals.removeFirst(signals.count - maxPoints)
+        }
+
+        // Animate the waveform drawing from left to right
+        let newCount = signals.count
+        guard !newValues.isEmpty, newCount > 1 else { return }
+
+        // How many points were effectively added after any trimming
+        let added = max(0, newCount - oldCount)
+        guard added > 0 else { return }
+
+        if oldCount <= 1 {
+            // First draw: animate the whole line
+            withAnimation(nil) { drawProgress = 0 }
+            let duration = Double(newCount) / sampleRate
+            withAnimation(.linear(duration: duration)) { drawProgress = 1 }
+        } else {
+            // Incremental reveal based on the number of new samples
+            let startProgress = max(0, 1 - CGFloat(added) / CGFloat(newCount))
+            withAnimation(nil) { drawProgress = startProgress }
+            let duration = Double(added) / sampleRate
+            withAnimation(.linear(duration: duration)) { drawProgress = 1 }
         }
     }
 }

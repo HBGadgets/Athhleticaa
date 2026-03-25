@@ -33,7 +33,6 @@ class ECGManagerPro: ObservableObject {
 
                         ringManagerPro.vpECGTestDataModel = newModel
                     }
-                    print(testModel?.originalSignals as Any)
                 }
             case .complete:
                 print("ECG test completed")

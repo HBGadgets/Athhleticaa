@@ -15,54 +15,58 @@ struct ECGWaveformView: View {
     private let maxPoints = 1500
     @State private var drawProgress: CGFloat = 0
 
-    // Drive progress independently from a continuous timer
+    // Previous line fade
+    @State private var previousSignals: [CGFloat] = []
+    @State private var previousLineOpacity: Double = 0
+
     private let animationTimer = Timer.publish(every: 1 / 60, on: .main, in: .common).autoconnect()
     @State private var animationStartDate: Date?
-    
+
     @State private var pendingData: VPECGTestDataModel?
     @State private var lastCycleIndex: Int = 0
     let cycleDuration: TimeInterval = 4
 
     var body: some View {
         GeometryReader { geo in
-            Path { path in
-                guard signals.count > 1 else { return }
+            ZStack {
+                // ── Previous line (fades out) ──────────────────────────────
+                if previousSignals.count > 1 {
+                    ecgPath(for: previousSignals, in: geo.size)
+                        .trim(from: 0, to: 1)               // always fully drawn
+                        .stroke(Color.red, lineWidth: 2)
+                        .opacity(previousLineOpacity)
+                }
 
-                let width = geo.size.width
-                let height = geo.size.height
-                let stepX = width / CGFloat(signals.count - 1)
-                let midY = height / 2
-                let verticalScale: CGFloat = 40
-
-                for i in signals.indices {
-                    let x = CGFloat(i) * stepX
-                    let y = midY - (signals[i] * verticalScale)
-
-                    if i == 0 {
-                        path.move(to: CGPoint(x: x, y: y))
-                    } else {
-                        path.addLine(to: CGPoint(x: x, y: y))
-                    }
+                // ── Current line (draws in) ────────────────────────────────
+                if signals.count > 1 {
+                    ecgPath(for: signals, in: geo.size)
+                        .trim(from: 0, to: drawProgress)
+                        .stroke(Color.red, lineWidth: 2)
                 }
             }
-            .trim(from: 0, to: drawProgress)
-            .stroke(Color.red, lineWidth: 2)
         }
         .onAppear {
             animationStartDate = Date()
         }
-        // Tick at ~60 fps and advance progress on a 4-second loop
         .onReceive(animationTimer) { now in
             guard let start = animationStartDate else { return }
             let elapsed = now.timeIntervalSince(start)
-            drawProgress = CGFloat(elapsed.truncatingRemainder(dividingBy: 4) / 4)
-            
-            // Detect cycle index (integer increments every 4 sec)
+            drawProgress = CGFloat(elapsed.truncatingRemainder(dividingBy: cycleDuration) / cycleDuration)
+
             let currentCycle = Int(elapsed / cycleDuration)
 
-            // When a new cycle starts → animation finished
             if currentCycle > lastCycleIndex {
                 lastCycleIndex = currentCycle
+
+                // Save current line as the "previous" and trigger fade-out
+                if !signals.isEmpty {
+                    previousSignals = signals
+                    previousLineOpacity = 1.0
+
+                    withAnimation(.easeOut(duration: cycleDuration * 0.5)) {
+                        previousLineOpacity = 0
+                    }
+                }
 
                 if let data = pendingData {
                     appendSignals(data)
@@ -75,45 +79,45 @@ struct ECGWaveformView: View {
         }
     }
 
+    // ── Helpers ───────────────────────────────────────────────────────────────
+
+    /// Builds the ECG Path for any signal array inside the given size.
+    private func ecgPath(for data: [CGFloat], in size: CGSize) -> Path {
+        Path { path in
+            guard data.count > 1 else { return }
+
+            let stepX = size.width / CGFloat(data.count - 1)
+            let midY = size.height / 2
+            let verticalScale: CGFloat = 40
+
+            for i in data.indices {
+                let x = CGFloat(i) * stepX
+                let y = midY - (data[i] * verticalScale)
+                i == 0 ? path.move(to: CGPoint(x: x, y: y))
+                       : path.addLine(to: CGPoint(x: x, y: y))
+            }
+        }
+    }
+
     private func appendSignals(_ ecgData: VPECGTestDataModel) {
         guard let filterSignals = ecgData.filterSignals,
               let ecgType = ecgData.ecgType,
-              let testType = ecgData.type else {
-            return
-        }
+              let testType = ecgData.type else { return }
 
         let gain = ecgData.getGainValue()
 
         let rawValues: [CGFloat] = filterSignals.compactMap { element in
-            if let num = element as? NSNumber {
-                return CGFloat(num.floatValue)
-            }
-            if let str = element as? NSString, let value = Double(str as String) {
-                return CGFloat(value)
-            }
+            if let num = element as? NSNumber { return CGFloat(num.floatValue) }
+            if let str = element as? NSString, let value = Double(str as String) { return CGFloat(value) }
             return nil
         }
 
-        let newValues: [CGFloat] = rawValues.map { adcValue in
-            VPECGTestDataModel.convertToMv(
-                withValue: adcValue,
-                ecgType: ecgType,
-                testType: testType,
-                gain: gain
-            )
+        let newValues: [CGFloat] = rawValues.map {
+            VPECGTestDataModel.convertToMv(withValue: $0, ecgType: ecgType, testType: testType, gain: gain)
         }
 
         guard !newValues.isEmpty else { return }
-
-        // Only update the data — never touch drawProgress or start a new animation
-        
         print("newValues count ====>>>> \(newValues.count)")
-        
-//        signals = newValues
-//        if signals.count > maxPoints {
-//            signals.removeFirst(signals.count - maxPoints)
-//        }
-        
         signals = newValues.suffix(1500)
     }
 }

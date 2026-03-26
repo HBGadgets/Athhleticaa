@@ -18,6 +18,10 @@ struct ECGWaveformView: View {
     // Drive progress independently from a continuous timer
     private let animationTimer = Timer.publish(every: 1 / 60, on: .main, in: .common).autoconnect()
     @State private var animationStartDate: Date?
+    
+    @State private var pendingData: VPECGTestDataModel?
+    @State private var lastCycleIndex: Int = 0
+    let cycleDuration: TimeInterval = 4
 
     var body: some View {
         GeometryReader { geo in
@@ -52,10 +56,22 @@ struct ECGWaveformView: View {
             guard let start = animationStartDate else { return }
             let elapsed = now.timeIntervalSince(start)
             drawProgress = CGFloat(elapsed.truncatingRemainder(dividingBy: 4) / 4)
+            
+            // Detect cycle index (integer increments every 4 sec)
+            let currentCycle = Int(elapsed / cycleDuration)
+
+            // When a new cycle starts → animation finished
+            if currentCycle > lastCycleIndex {
+                lastCycleIndex = currentCycle
+
+                if let data = pendingData {
+                    appendSignals(data)
+                    pendingData = nil
+                }
+            }
         }
         .onChange(of: ringManagerPro.vpECGTestDataModel) { _, newData in
-            guard let newData else { return }
-            appendSignals(newData)
+            pendingData = newData
         }
     }
 
@@ -90,10 +106,15 @@ struct ECGWaveformView: View {
         guard !newValues.isEmpty else { return }
 
         // Only update the data — never touch drawProgress or start a new animation
-        signals = newValues
-        if signals.count > maxPoints {
-            signals.removeFirst(signals.count - maxPoints)
-        }
+        
+        print("newValues count ====>>>> \(newValues.count)")
+        
+//        signals = newValues
+//        if signals.count > maxPoints {
+//            signals.removeFirst(signals.count - maxPoints)
+//        }
+        
+        signals = newValues.suffix(1500)
     }
 }
 

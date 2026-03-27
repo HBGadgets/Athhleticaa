@@ -17,6 +17,7 @@ struct ECGtakingScreenViewPro: View {
     @State private var showNavigationError = false
     @State private var goToScanScreen = false
     @State private var goToMeasurementView = false
+    @State private var handRemoved = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -28,6 +29,20 @@ struct ECGtakingScreenViewPro: View {
         ZStack {
             ECGGrid()
             ECGWaveformView(ringManagerPro: ringManagerPro)
+            if handRemoved {
+                VStack(spacing: 20) {
+                    Text("Ensure your fingers are on electrode")
+                }
+                .padding(20)
+                .background(.ultraThinMaterial)
+                .cornerRadius(16)
+                Color.black.opacity(0.1)
+                    .ignoresSafeArea()
+                    .allowsHitTesting(true)
+            }
+        }
+        .onChange(of: ringManagerPro.handRemovedFromElectrode) { _, newValue in
+            handRemoved = newValue
         }
         .padding()
         .safeAreaInset(edge: .bottom) {

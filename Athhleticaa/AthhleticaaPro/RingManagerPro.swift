@@ -23,6 +23,7 @@ final class RingManagerPro: NSObject, ObservableObject {
     @Published var dataLoaded: Bool = false
     @Published private(set) var batteryLevel: Int?
     @Published var isCharging: Bool = false
+    @Published var handRemovedFromElectrode: Bool = false
     
     @Published var heartRateTestState: VPTestHeartState?
     @Published var heartRate: Int?

@@ -22,6 +22,9 @@ class ECGManagerPro: ObservableObject {
                 print("ECG test starting")
             case .testing:
                 print("ECG testing, progress: \(testProgress)%")
+                DispatchQueue.main.async {
+                    ringManagerPro.handRemovedFromElectrode = false
+                }
                 // Update UI with real-time data
                 if let model = testModel {
                     DispatchQueue.main.async {
@@ -44,6 +47,13 @@ class ECGManagerPro: ObservableObject {
                 }
             case .noFunction:
                 print("Device does not support ECG")
+                
+            case .notLead:  // 导联脱落
+                print("Hand removed from electrode")
+                DispatchQueue.main.async {
+                    ringManagerPro.handRemovedFromElectrode = true
+                }
+                
             default:
                 break
             }

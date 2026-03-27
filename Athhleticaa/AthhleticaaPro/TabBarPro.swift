@@ -20,7 +20,7 @@ struct TabBarPro: View {
         .padding(.vertical, 12)
         .background(
             Capsule()
-                .fill(.ultraThinMaterial)
+                .modifier(GlassCardModifier(cornerRadius: 100))
                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
         )
     }

@@ -29,13 +29,16 @@ struct ECGtakingScreenViewPro: View {
         ZStack {
             ECGGrid()
             ECGWaveformView(ringManagerPro: ringManagerPro)
+            ECGTopLeftInfoViewPro(vPPttValueModel: ringManagerPro.vpttTestModel)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(12)
             if handRemoved {
                 VStack(spacing: 20) {
                     Text("Ensure your fingers are on electrode")
                 }
                 .padding(20)
-                .background(.ultraThinMaterial)
                 .cornerRadius(16)
+                .modifier(GlassCardModifier(cornerRadius: 16))
                 Color.black.opacity(0.1)
                     .ignoresSafeArea()
                     .allowsHitTesting(true)

@@ -65,8 +65,8 @@ struct ContentViewNonPro: View {
                     Text("Please wait...")
                 }
                 .padding(20)
-                .background(.ultraThinMaterial)
-                .cornerRadius(16)
+                .modifier(GlassCardModifier(cornerRadius: 16))
+//                .cornerRadius(16)
                 .onAppear {
                     startTimeout()
                 }

@@ -13,7 +13,6 @@ class ECGManagerPro: ObservableObject {
             .peripheralManage.veepooSDKPTTTest(true, valueBlock: { (valueModel) in
                 ringManagerPro.vpttTestModel = valueModel
             }, signal: { (signals) in
-                guard let signalArray = signals else { return }
             })
         
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSDKTestECGStart(true) { testECGState, testProgress, testModel in
@@ -24,6 +23,7 @@ class ECGManagerPro: ObservableObject {
                 print("ECG testing, progress: \(testProgress)%")
                 DispatchQueue.main.async {
                     ringManagerPro.handRemovedFromElectrode = false
+                    ringManagerPro.ecgTestProgress = Int(testProgress)
                 }
                 // Update UI with real-time data
                 if let model = testModel {

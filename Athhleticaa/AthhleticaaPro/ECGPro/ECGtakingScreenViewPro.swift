@@ -16,6 +16,7 @@ struct ECGtakingScreenViewPro: View {
     @State private var goToScanScreen = false
     @State private var goToMeasurementView = false
     @State private var handRemoved = false
+    @State private var buttonTitle = "Tap to start measurement"
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -61,13 +62,40 @@ struct ECGtakingScreenViewPro: View {
                     showNavigationError = true
                 }
             }) {
-                Text("Tap to start measurement")
-                    .foregroundStyle(Color(colorScheme == .light ? .black : .white))
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.red.opacity(0.1))
-                    .cornerRadius(8)
+                ZStack(alignment: .leading) {
+
+                    // Base background
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.red.opacity(0.1))
+
+                    // 🔥 Progress fill layer
+                    GeometryReader { geo in
+                        let progress = CGFloat(ringManagerPro.ecgTestProgress ?? 0) / 100.0
+
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.red.opacity(0.5))
+                            .frame(width: geo.size.width * progress)
+                            .animation(.easeInOut(duration: 0.2), value: progress)
+                    }
+
+                    // Text
+                    Text(buttonTitle)
+                        .foregroundStyle(colorScheme == .light ? .black : .white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                }
+                .frame(height: 50)
             }
+            .padding()
+        }
+        .onChange(of: ringManagerPro.ecgTestProgress) { oldValue, newValue in
+            if (newValue != nil) {
+                buttonTitle = "Measuring \(newValue!)%"
+            }
+        }
+        .onDisappear() {
+            ringManagerPro.ecgTestProgress = nil
+            ringManagerPro.ecgManagerPro.stopECGTest()
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

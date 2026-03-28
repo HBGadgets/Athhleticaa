@@ -123,7 +123,9 @@ struct ECGtakingScreenViewPro: View {
                 }
                 .frame(height: 50)
             }
+            .disabled(ringManagerPro.ecgTestProgress != nil)
             .padding()
+            
         }
         .onAppear() {
             testCompleted = ringManagerPro.ecgTestCompleted
@@ -188,6 +190,7 @@ struct ECGtakingScreenViewPro: View {
                     ringManagerPro.ecgTestProgress = nil
                     ringManagerPro.vpttTestModel = nil
                     ringManagerPro.vpECGTestDataModel = nil
+                    ringManagerPro.ecgTestCompleted = false
                     dismiss()
                 }) {
                     Image(systemName: "xmark")

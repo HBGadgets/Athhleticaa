@@ -1,0 +1,16 @@
+{
+  "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGHeartRateInfoCard.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Heart Rate",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 24
+        }
+      }
+    ]
+  },
+  "version": 1
+}

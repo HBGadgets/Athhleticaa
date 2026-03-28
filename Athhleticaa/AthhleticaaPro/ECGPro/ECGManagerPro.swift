@@ -114,6 +114,52 @@ class ECGManagerPro: ObservableObject {
             print("No ECG data found for today")
         }
     }
+    
+    func getHeartRatesFromECGData(from array: [Any]?) -> [Int] {
+        guard let array = array else { return [] }
+        
+        return array.compactMap { element in
+            if let num = element as? NSNumber {
+                return num.intValue
+            }
+            if let str = element as? NSString {
+                return Int(str as String)
+            }
+            return nil
+        }
+    }
+    
+    func computeHeartStats(from values: [Int]) -> ECGHeartStats? {
+        guard !values.isEmpty else { return nil }
+        
+        let filtered = values.filter { $0 > 0 } // remove invalid 0s
+        guard !filtered.isEmpty else { return nil }
+        
+        let minHR = filtered.min()!
+        let maxHR = filtered.max()!
+        
+        let total = Double(filtered.count)
+        
+        let normalCount = filtered.filter { $0 >= 60 && $0 <= 100 }.count
+        let fastCount   = filtered.filter { $0 > 100 }.count
+        let slowCount   = filtered.filter { $0 < 60 }.count
+        
+        return ECGHeartStats(
+            min: minHR,
+            max: maxHR,
+            normalPercent: Double(normalCount) / total * 100,
+            fastPercent: Double(fastCount) / total * 100,
+            slowPercent: Double(slowCount) / total * 100
+        )
+    }
+}
+
+struct ECGHeartStats {
+    let min: Int
+    let max: Int
+    let normalPercent: Double
+    let fastPercent: Double
+    let slowPercent: Double
 }
 
 struct ecgFields: Identifiable, Hashable {

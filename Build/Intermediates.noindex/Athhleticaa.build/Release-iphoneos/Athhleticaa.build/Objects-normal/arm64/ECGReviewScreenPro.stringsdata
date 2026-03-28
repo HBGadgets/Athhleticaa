@@ -1,16 +1,5 @@
 {
   "source": "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGReviewScreenPro.swift",
-  "tables": {
-    "Localizable": [
-      {
-        "comment": "",
-        "key": "ECG Review Screen",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 15
-        }
-      }
-    ]
-  },
+  "tables": {},
   "version": 1
 }

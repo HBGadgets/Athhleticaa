@@ -1,17 +1,16 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityCharts.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGManagerPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityInfoScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/ActivityScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Activity/PedometerManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDataDetailScreenView.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGHeartRateInfoCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDonutChart.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenDotChart.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenManager.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormViewCompleted.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Blood\ Oxygen/BloodOxygenScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/ActivityCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/BatteryCard.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGTopLeftInfoViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/BloodOxygenCard.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/DashboardView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/Dashboard/HeartRateCard.swift
@@ -61,6 +60,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/HealthKitManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/QCBlePeripheral.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/RingManager.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGReviewScreenPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaNonPro/TabBar.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ActivityPro/ActivityScreenViewPro.swift
@@ -69,12 +69,17 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/ActivityCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/BloodOxygenCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/DashboardViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/ECGCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/HeartRateCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/HRVCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/SleepCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/SportsCardPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/StressCardPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGManagerPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGtakingScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGTopLeftInfoViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartAndHealthChartViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/HeartRatePro/HeartRateScreenViewPro.swift
@@ -87,7 +92,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/SleepPro/SleepScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/SportsPro/SportActivityScreenViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressAnalysisScreenPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGScreenViewPro.swift
+/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/StressPro/StressManagerPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserInformationScreenView.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/UserInformation/UserProfileStorage.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ContentViewPro.swift
@@ -96,8 +101,6 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/TabBarPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/WeeklyCalenderViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaApp.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/DashboardPro/ECGCardPro.swift
-/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormViewPro.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/DeciderScreen.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/NotificationPermissionManager.swift
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/DerivedSources/GeneratedAssetSymbols.swift

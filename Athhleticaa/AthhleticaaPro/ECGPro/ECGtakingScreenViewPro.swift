@@ -17,6 +17,7 @@ struct ECGtakingScreenViewPro: View {
     @State private var goToMeasurementView = false
     @State private var handRemoved = false
     @State private var buttonTitle = "Tap to start measurement"
+    @State private var testCompleted = false
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -24,17 +25,51 @@ struct ECGtakingScreenViewPro: View {
         return formatter
     }
     
+    private func safeInt32(from value: Any?) -> Int32? {
+        switch value {
+        case let v as Int32: return v
+        case let v as Int: return Int32(v)
+        case let v as Double: return Int32(v)
+        case let v as Float: return Int32(v)
+        case let v as String: return Int32(v)
+        case .none: return nil
+        default: return nil
+        }
+    }
+    
     var body: some View {
         ZStack {
             ECGGrid()
-            ECGWaveformView(ringManagerPro: ringManagerPro)
-            ECGTopLeftInfoViewPro(
-                bpm: ringManagerPro.vpttTestModel?.heart,
-                hrv: ringManagerPro.vpttTestModel?.hrv,
-                qtc: ringManagerPro.vpttTestModel?.qt
-            )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(12)
+
+            // Waveform layer
+            Group {
+                if testCompleted {
+                    let model = ringManagerPro.vpECGTestDataModel ?? VPECGTestDataModel()
+                    ECGWaveformViewCompleted(vpECGTestDataModel: model)
+                } else {
+                    ECGWaveformView(ringManagerPro: ringManagerPro)
+                }
+            }
+
+            // Top-left info
+            Group {
+                if testCompleted {
+                    ECGTopLeftInfoViewPro(
+                        bpm: safeInt32(from: ringManagerPro.vpECGTestDataModel?.aveHeart),
+                        hrv: safeInt32(from: ringManagerPro.vpECGTestDataModel?.aveHrv),
+                        qtc: safeInt32(from: ringManagerPro.vpECGTestDataModel?.aveQT)
+                    )
+                } else {
+                    ECGTopLeftInfoViewPro(
+                        bpm: ringManagerPro.vpttTestModel?.heart,
+                        hrv: ringManagerPro.vpttTestModel?.hrv,
+                        qtc: ringManagerPro.vpttTestModel?.qt
+                    )
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(12)
+
             if handRemoved {
                 VStack(spacing: 20) {
                     Text("Ensure your fingers are on electrode")
@@ -42,6 +77,7 @@ struct ECGtakingScreenViewPro: View {
                 .padding(20)
                 .cornerRadius(16)
                 .modifier(GlassCardModifier(cornerRadius: 16))
+
                 Color.black.opacity(0.1)
                     .ignoresSafeArea()
                     .allowsHitTesting(true)
@@ -54,21 +90,15 @@ struct ECGtakingScreenViewPro: View {
         .safeAreaInset(edge: .bottom) {
             Button(action: {
                 if ringManagerPro.connectedPeripheral != nil {
-                    // Start measurement
                     ringManagerPro.ecgManagerPro.startECGTest(ringManagerPro: ringManagerPro)
-                    // Cancel any existing timer
-                    
                 } else {
                     showNavigationError = true
                 }
             }) {
                 ZStack(alignment: .leading) {
-
-                    // Base background
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.red.opacity(0.1))
 
-                    // 🔥 Progress fill layer
                     GeometryReader { geo in
                         let progress = CGFloat(ringManagerPro.ecgTestProgress ?? 0) / 100.0
 
@@ -78,7 +108,6 @@ struct ECGtakingScreenViewPro: View {
                             .animation(.easeInOut(duration: 0.2), value: progress)
                     }
 
-                    // Text
                     Text(buttonTitle)
                         .foregroundStyle(colorScheme == .light ? .black : .white)
                         .frame(maxWidth: .infinity)
@@ -88,10 +117,14 @@ struct ECGtakingScreenViewPro: View {
             }
             .padding()
         }
-        .onChange(of: ringManagerPro.ecgTestProgress) { oldValue, newValue in
-            if (newValue != nil) {
-                buttonTitle = "Measuring \(newValue!)%"
+        .onChange(of: ringManagerPro.ecgTestProgress) { _, newValue in
+            if let value = newValue {
+                buttonTitle = "Measuring \(value)%"
+                if value >= 100 { testCompleted = true }
             }
+        }
+        .onChange(of: ringManagerPro.ecgTestCompleted) { _, newValue in
+            testCompleted = newValue
         }
         .onDisappear() {
             ringManagerPro.ecgTestProgress = nil
@@ -117,3 +150,4 @@ struct ECGtakingScreenViewPro: View {
         }
     }
 }
+

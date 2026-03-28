@@ -7,7 +7,7 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 16,
-          "startingLine": 109
+          "startingLine": 142
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Ensure your fingers are on electrode",
         "location": {
           "startingColumn": 26,
-          "startingLine": 40
+          "startingLine": 75
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "ECG",
         "location": {
           "startingColumn": 22,
-          "startingLine": 102
+          "startingLine": 135
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 110
+          "startingLine": 143
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 20,
-          "startingLine": 111
+          "startingLine": 144
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 18,
-          "startingLine": 116
+          "startingLine": 149
         }
       }
     ]

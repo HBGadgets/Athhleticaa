@@ -20,10 +20,10 @@ struct ECGTopLeftInfoViewPro: View {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .center) {
             HStack(alignment: .center, spacing: 12) {
                 Text(bpm.map(String.init) ?? "--")
-                    .font(.system(size: 70, weight: .bold, design: .rounded))
+                    .font(.system(size: 65, weight: .bold, design: .rounded))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .monospacedDigit()
@@ -31,12 +31,13 @@ struct ECGTopLeftInfoViewPro: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.red)
-                        .font(.system(size: 12))
+                        .font(.system(size: 15))
 
                     Text("bpm")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 15, weight: .medium))
                 }
             }
+            .padding(.bottom, 7)
 
             HStack {
                 Text("QTc \(qtc.map(String.init) ?? "---")")

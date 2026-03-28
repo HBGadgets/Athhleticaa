@@ -43,12 +43,15 @@ class ECGManagerPro: ObservableObject {
                 if let model = testModel {
                     DispatchQueue.main.async {
                         ringManagerPro.vpECGTestDataModel = model
+                        ringManagerPro.ecgTestCompleted = true
                     }
+                    
+                    print(model.originalSignals as Any)
                 }
             case .noFunction:
                 print("Device does not support ECG")
                 
-            case .notLead:  // 导联脱落
+            case .notLead:
                 print("Hand removed from electrode")
                 DispatchQueue.main.async {
                     ringManagerPro.handRemovedFromElectrode = true
@@ -111,4 +114,16 @@ class ECGManagerPro: ObservableObject {
             print("No ECG data found for today")
         }
     }
+}
+
+struct ecgFields: Identifiable, Hashable {
+    let id = UUID()
+    let date: String
+    let heartRates: [Int]
+    let secondInterval: Int
+    let serverID: Int
+    let updateTime: Int
+    let isSync: Bool
+    let deviceID: String
+    let deviceType: String
 }

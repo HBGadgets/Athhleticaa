@@ -18,6 +18,9 @@ struct ECGtakingScreenViewPro: View {
     @State private var handRemoved = false
     @State private var buttonTitle = "Tap to start measurement"
     @State private var testCompleted = false
+    @State private var showTestCompletedAlert = false
+    @State private var goToECGTestReviewScreen = false
+    @Environment(\.dismiss) private var dismiss
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -69,6 +72,11 @@ struct ECGtakingScreenViewPro: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding(12)
+            
+            Text("25 mm/s, 10 mm/mV, 500Hz")
+                .padding()
+                .font(.system(size: 12))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
             if handRemoved {
                 VStack(spacing: 20) {
@@ -117,27 +125,27 @@ struct ECGtakingScreenViewPro: View {
             }
             .padding()
         }
+        .onAppear() {
+            testCompleted = ringManagerPro.ecgTestCompleted
+        }
         .onChange(of: ringManagerPro.ecgTestProgress) { _, newValue in
             if let value = newValue {
                 buttonTitle = "Measuring \(value)%"
-                if value >= 100 { testCompleted = true }
+                if value >= 100 {
+                    testCompleted = true
+                    showTestCompletedAlert = true
+                }
             }
         }
         .onChange(of: ringManagerPro.ecgTestCompleted) { _, newValue in
             testCompleted = newValue
         }
-        .onDisappear() {
-            ringManagerPro.ecgTestProgress = nil
-            ringManagerPro.ecgManagerPro.stopECGTest()
-        }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("ECG").font(.headline)
-            }
-        }
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $goToScanScreen) {
             ScanningScreenPro()
+        }
+        .navigationDestination(isPresented: $goToECGTestReviewScreen) {
+            ECGReviewScreenPro(vpECGTestDataModel: ringManagerPro.vpECGTestDataModel ?? VPECGTestDataModel())
         }
         .alert("Ring not connected", isPresented: $showNavigationError) {
             Button("Cancel", role: .cancel) {}
@@ -148,6 +156,47 @@ struct ECGtakingScreenViewPro: View {
         } message: {
             Text("Connect the app with ring first")
         }
+        .alert("ECG Test Completed", isPresented: $showTestCompletedAlert) {
+            Button("Cancel", role: .cancel) {
+                
+            }
+            Button("Review") {
+                goToECGTestReviewScreen = true
+            }
+            .keyboardShortcut(.defaultAction)
+        } message: {
+            Text("ECG test completed, you can review results")
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("ECG").font(.headline)
+            }
+            
+            if (testCompleted) {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        goToECGTestReviewScreen = true
+                    }) {
+                        Text("Review")
+                    }
+                }
+            }
+            
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    ringManagerPro.ecgManagerPro.stopECGTest()
+                    ringManagerPro.ecgTestProgress = nil
+                    ringManagerPro.vpttTestModel = nil
+                    ringManagerPro.vpECGTestDataModel = nil
+                    dismiss()
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.title2)
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .interactiveDismissDisabled(true)
     }
 }
 

@@ -16,8 +16,6 @@ struct ECGWaveformViewCompleted: View {
     private let mmPerMv:      CGFloat = 10   // amplitude gain
     private let samplingRate: CGFloat = 500  // Hz
     
-//    @State private var samplesPerScreen: Int = 2000
-    
     /// Horizontal distance (pts) between consecutive 500 Hz samples.
     private var pointsPerSample: CGFloat { mmPerSecond / samplingRate * pointsPerMm }
  
@@ -34,26 +32,14 @@ struct ECGWaveformViewCompleted: View {
                 .frame(width: totalWidth, height: geo.size.height)
             }
             .onAppear {
-//                updateLayout(width: geo.size.width)
                 appendSignals(vpECGTestDataModel)
             }
-//            .onChange(of: geo.size.width) { _, newWidth in
-//                updateLayout(width: newWidth)
-//            }
         }
     }
     
     private var totalWidth: CGFloat {
         CGFloat(signals.count) * pointsPerSample
     }
- 
-    // ── Layout ────────────────────────────────────────────────────────────
- 
-    /// Recomputes how many 500 Hz samples fit across `width` points at
-    /// 25 mm/s and derives the matching sweep cycle duration.
-//    private func updateLayout(width: CGFloat) {
-//        samplesPerScreen = max(1, Int(width / pointsPerSample))
-//    }
  
     // ── Drawing ───────────────────────────────────────────────────────────
  

@@ -403,10 +403,10 @@
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.o"
   },
-  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGStreamService.swift" : {
-    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGStreamService.o",
-    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGStreamService.bc",
-    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGStreamService.o"
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGTopLeftInfoViewPro.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGTopLeftInfoViewPro.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGTopLeftInfoViewPro.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGTopLeftInfoViewPro.o"
   },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGWaveFormViewPro.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewPro.o",

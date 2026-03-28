@@ -7,7 +7,7 @@
         "key": "Ring not connected",
         "location": {
           "startingColumn": 16,
-          "startingLine": 80
+          "startingLine": 81
         }
       },
       {
@@ -15,23 +15,15 @@
         "key": "Ensure your fingers are on electrode",
         "location": {
           "startingColumn": 26,
-          "startingLine": 37
-        }
-      },
-      {
-        "comment": "",
-        "key": "Measuring...",
-        "location": {
-          "startingColumn": 36,
-          "startingLine": 62
+          "startingLine": 39
         }
       },
       {
         "comment": "",
         "key": "Tap to start measurement",
         "location": {
-          "startingColumn": 53,
-          "startingLine": 62
+          "startingColumn": 22,
+          "startingLine": 64
         }
       },
       {
@@ -39,7 +31,7 @@
         "key": "ECG",
         "location": {
           "startingColumn": 22,
-          "startingLine": 73
+          "startingLine": 74
         }
       },
       {
@@ -47,7 +39,7 @@
         "key": "Cancel",
         "location": {
           "startingColumn": 20,
-          "startingLine": 81
+          "startingLine": 82
         }
       },
       {
@@ -55,7 +47,7 @@
         "key": "Scan for ring",
         "location": {
           "startingColumn": 20,
-          "startingLine": 82
+          "startingLine": 83
         }
       },
       {
@@ -63,7 +55,7 @@
         "key": "Connect the app with ring first",
         "location": {
           "startingColumn": 18,
-          "startingLine": 87
+          "startingLine": 88
         }
       }
     ]

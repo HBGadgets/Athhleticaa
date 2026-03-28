@@ -10,9 +10,7 @@ import SwiftUI
 struct ECGtakingScreenViewPro: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var ringManagerPro: RingManagerPro
-    @State private var isMeasuring = false
     @State private var currentHeartRate: Int? = nil
-    @State private var animateHeart = false
     @State private var showCalendar = false
     @State private var showNavigationError = false
     @State private var goToScanScreen = false
@@ -29,7 +27,11 @@ struct ECGtakingScreenViewPro: View {
         ZStack {
             ECGGrid()
             ECGWaveformView(ringManagerPro: ringManagerPro)
-            ECGTopLeftInfoViewPro(vPPttValueModel: ringManagerPro.vpttTestModel)
+            ECGTopLeftInfoViewPro(
+                bpm: ringManagerPro.vpttTestModel?.heart,
+                hrv: ringManagerPro.vpttTestModel?.hrv,
+                qtc: ringManagerPro.vpttTestModel?.qt
+            )
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding(12)
             if handRemoved {
@@ -59,14 +61,13 @@ struct ECGtakingScreenViewPro: View {
                     showNavigationError = true
                 }
             }) {
-                Text(isMeasuring ? "Measuring..." : "Tap to start measurement")
+                Text("Tap to start measurement")
                     .foregroundStyle(Color(colorScheme == .light ? .black : .white))
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(isMeasuring ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
+                    .background(Color.red.opacity(0.1))
                     .cornerRadius(8)
             }
-            .disabled(isMeasuring) // prevent rapid taps
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

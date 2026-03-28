@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ECGTopLeftInfoViewPro: View {
-    var vPPttValueModel: VPPttValueModel?
+    var bpm: Int32?
+    var hrv: Int32?
+    var qtc: Int32?
 
     var body: some View {
         content
@@ -20,30 +22,28 @@ struct ECGTopLeftInfoViewPro: View {
     private var content: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(alignment: .center, spacing: 12) {
-                Text(vPPttValueModel.map { String($0.heart) } ?? "-")
-                    .font(.system(size: 90, weight: .bold, design: .rounded))
+                Text(bpm.map(String.init) ?? "--")
+                    .font(.system(size: 70, weight: .bold, design: .rounded))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .monospacedDigit()
 
                 VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(.red)
-                            .font(.system(size: 20))
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                        .font(.system(size: 12))
 
-                        Text("bpm")
-                            .font(.system(size: 20, weight: .medium))
-                    }
+                    Text("bpm")
+                        .font(.system(size: 12, weight: .medium))
                 }
             }
 
             HStack {
-                Text("QTc \(vPPttValueModel.map { String($0.qt) } ?? "-")")
-                    .font(.system(size: 22, weight: .medium))
+                Text("QTc \(qtc.map(String.init) ?? "---")")
+                    .font(.system(size: 15, weight: .medium))
 
-                Text("HRV \(vPPttValueModel.map { String($0.hrv) } ?? "-")")
-                    .font(.system(size: 22, weight: .medium))
+                Text("HRV \(hrv.map(String.init) ?? "--")")
+                    .font(.system(size: 15, weight: .medium))
             }
         }
     }

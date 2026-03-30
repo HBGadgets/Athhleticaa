@@ -3,11 +3,9 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityScreen.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/PedometerManager.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenDataDetailScreenView.o
-/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHeartRateInfoCard.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenDonutChart.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenDotChart.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenManager.o
-/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewCompleted.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BloodOxygenScreen.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityCard.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/BatteryCard.o
@@ -44,6 +42,7 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManager.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepManagerNew.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepSummaryChartView.o
+/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHRVInfoCard.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/CountdownScreen.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivityClass.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportActivityScreen.o
@@ -60,7 +59,6 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HealthKitManager.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/QCBlePeripheral.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/RingManager.o
-/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGReviewScreenPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/TabBar.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityManagerPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ActivityScreenViewPro.o
@@ -75,10 +73,13 @@
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SleepCardPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/SportsCardPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/StressCardPro.o
+/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHeartRateInfoCard.o
+/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGReviewScreenPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGScreenViewPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGtakingScreenViewPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGTopLeftInfoViewPro.o
+/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewCompleted.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGWaveFormViewPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartAndHealthChartViewPro.o
 /Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/HeartRateManagerPro.o

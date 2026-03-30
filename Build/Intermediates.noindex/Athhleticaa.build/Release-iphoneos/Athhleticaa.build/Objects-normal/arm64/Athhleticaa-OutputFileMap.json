@@ -398,6 +398,11 @@
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.bc",
     "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGManagerPro.o"
   },
+  "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGHRVInfoCard.swift" : {
+    "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHRVInfoCard.o",
+    "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHRVInfoCard.bc",
+    "object" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHRVInfoCard.o"
+  },
   "/Users/dipanshukashyap/Desktop/Athhleticaa/Athhleticaa/AthhleticaaPro/ECGPro/ECGReviewScreenPro/ECGHeartRateInfoCard.swift" : {
     "index-unit-output-path" : "/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHeartRateInfoCard.o",
     "llvm-bc" : "/Users/dipanshukashyap/Desktop/Athhleticaa/Build/Intermediates.noindex/Athhleticaa.build/Release-iphoneos/Athhleticaa.build/Objects-normal/arm64/ECGHeartRateInfoCard.bc",

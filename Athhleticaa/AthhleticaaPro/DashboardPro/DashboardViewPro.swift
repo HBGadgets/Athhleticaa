@@ -118,13 +118,21 @@ struct DashboardViewPro: View {
                     )
                     ringManagerPro.dashboardLatestValues = ringManagerPro.detailDataManager.getLatestValues(from: data ?? [])
                     ringManagerPro.sleepDataManager.readSleepDataForToday() {
-                        ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
-                        ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
-                        
-                        ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) {
-                            print("got blood oxygen data")
-//                            ringManagerPro.ecgManagerPro.startECGTest()
-                            ringManagerPro.ecgManagerPro.getECGHistory(day: 0)
+                        print("➡️ Sleep finished (success or fail)")
+
+                        DispatchQueue.main.async {
+                            ringManagerPro.dashboardSleepSegments = ringManagerPro.sleepDataManager.sleepSegments
+                            ringManagerPro.dashboardSleepSummary = ringManagerPro.sleepDataManager.sleepSummary
+
+                            print("➡️ Starting blood oxygen")
+
+                            ringManagerPro.bloodOxygenManager.readBloodOxygenData(day: 0) {
+                                print("✅ got blood oxygen data")
+
+                                print("➡️ Calling ECG history")
+                                ringManagerPro.ecgManagerPro.getECGHistory(day: 0)
+                                print("✅ Finished ECG history call")
+                            }
                         }
                     }
                 }

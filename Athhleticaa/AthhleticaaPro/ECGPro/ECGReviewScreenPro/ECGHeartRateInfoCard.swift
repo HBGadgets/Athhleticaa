@@ -11,6 +11,7 @@ struct ECGHeartRateInfoCard: View {
     var vpECGTestDataModel: VPECGTestDataModel
     @State private var ecgHeartStats: ECGHeartStats?
     @StateObject var ecgManager = ECGManagerPro()
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -19,10 +20,10 @@ struct ECGHeartRateInfoCard: View {
             HStack(spacing: 10) {
                 Image(systemName: "heart.fill")
                     .foregroundStyle(.red)
-                    .font(.system(size: 22))
+                    .font(.system(size: 15))
                 
                 Text("Heart Rate")
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(.red)
             }
             
@@ -62,8 +63,10 @@ struct ECGHeartRateInfoCard: View {
         }
         .padding(20)
         .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color(.systemGray6))
+            RoundedRectangle(cornerRadius: 20)
+                .fill(
+                    Color(colorScheme == .light ? .white : Color(.systemGray2))
+                )
         )
         .padding()
         .onAppear() {
@@ -77,15 +80,14 @@ struct ECGHeartRateInfoCard: View {
         VStack(spacing: 6) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(value)
-                    .font(.system(size: 34, weight: .semibold))
+                    .font(.system(size: 20, weight: .semibold))
                 
                 Text(unit)
-                    .font(.system(size: 20))
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 15))
             }
             
             Text(label)
-                .font(.system(size: 16))
+                .font(.system(size: 12))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -95,14 +97,14 @@ struct ECGHeartRateInfoCard: View {
     func percentageBlock(value: String, label: String, sublabel: String) -> some View {
         VStack(spacing: 6) {
             Text(value)
-                .font(.system(size: 34, weight: .semibold))
+                .font(.system(size: 20, weight: .semibold))
             
             Text(label)
-                .font(.system(size: 18))
+                .font(.system(size: 12))
                 .foregroundStyle(.secondary)
             
             Text(sublabel)
-                .font(.system(size: 14))
+                .font(.system(size: 12))
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)

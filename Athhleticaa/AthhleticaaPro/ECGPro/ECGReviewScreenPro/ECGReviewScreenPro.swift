@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ECGReviewScreenPro: View {
     var vpECGTestDataModel: VPECGTestDataModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack {
@@ -23,6 +24,9 @@ struct ECGReviewScreenPro: View {
             Text(vpECGTestDataModel.result8)
             Text(vpECGTestDataModel.multipleDiagnosisTempStr)
         }
+        .background(
+            Color(colorScheme == .light ? Color(.systemGray2) : .black)
+        )
         .onAppear() {
             for heartrate in vpECGTestDataModel.muHearts {
                 print(type(of: heartrate))

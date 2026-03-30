@@ -79,7 +79,18 @@ final class RingManagerPro: NSObject, ObservableObject {
             print("Device not connected")
             return
         }
-        
+          
+        // Set up offline ECG completion callback
+        VPBleCentralManage.sharedBleManager().peripheralManage.deviceTestOffStoreECGDidFinishBlock = {[weak self] in
+            print("Offline ECG measurement completed, triggering data sync")
+            self?.startDataSync()
+        }
+          
+        // Start general data sync immediately
+        startDataSync()
+    }
+      
+    private func startDataSync() {
         VPBleCentralManage.sharedBleManager().peripheralManage.veepooSdkStartReadDeviceAllData { (readDeviceBaseDataState, totalDay, currentReadDayNumber, readCurrentDayProgress) in
             switch readDeviceBaseDataState {
             case .start:
@@ -100,7 +111,6 @@ final class RingManagerPro: NSObject, ObservableObject {
                 break
             }
         }
-    
     }
     
     func initSDK() {

@@ -147,9 +147,9 @@ class ECGManagerPro: ObservableObject {
         return ECGHeartStats(
             min: minHR,
             max: maxHR,
-            normalPercent: Double(normalCount) / total * 100,
-            fastPercent: Double(fastCount) / total * 100,
-            slowPercent: Double(slowCount) / total * 100
+            normalPercent: normalCount / Int(total) * 100,
+            fastPercent: fastCount / Int(total) * 100,
+            slowPercent: slowCount / Int(total) * 100
         )
     }
 }
@@ -157,9 +157,9 @@ class ECGManagerPro: ObservableObject {
 struct ECGHeartStats {
     let min: Int
     let max: Int
-    let normalPercent: Double
-    let fastPercent: Double
-    let slowPercent: Double
+    let normalPercent: Int
+    let fastPercent: Int
+    let slowPercent: Int
 }
 
 struct ecgFields: Identifiable, Hashable {

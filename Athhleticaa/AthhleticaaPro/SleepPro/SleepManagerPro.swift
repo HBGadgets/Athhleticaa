@@ -204,14 +204,18 @@ class SleepManagerPro: ObservableObject {
             }
             
             self.sleepSummary = summaryOfToday
-            completion?()
+            DispatchQueue.main.async {
+                completion?()
+            }
         } else if retries > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.readSleepDataForToday(retries: retries - 1)
+                self.readSleepDataForToday(retries: retries - 1, completion: completion)
             }
         } else {
             print("❌ sleep data still nil after retries")
-            completion?()
+            DispatchQueue.main.async {
+                completion?()
+            }
         }
     }
     
